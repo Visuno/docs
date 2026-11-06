@@ -1,0 +1,106 @@
+---
+title: Status pill
+description: One live line for what an agent is doing right now, fading between its states and resizing to fit them.
+---
+
+import { Preview } from '@/components/preview';
+import { StatusPillExample } from '@/components/examples/status-pill';
+
+A status pill shows a single line of what the agent is up to. Its `state` picks the glyph and
+colour — `thinking`, `reading` and `working` shimmer while they run — and a new `state`, `label`,
+`file` or `action` fades the old line out before the new one arrives. The `bar` variant is taller
+and draws a `progress` track along its bottom.
+
+<Preview>
+  <StatusPillExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + status-pill.css -->
+<div class="dm-spl">
+  <div class="dm-spl-pill" aria-live="polite">
+    <div class="dm-spl-in">
+      <span class="dm-g"><!-- glyph --></span>
+      <span class="dm-shim">Reading repository</span>
+      <span class="dm-m">2 of 4</span>
+    </div>
+  </div>
+</div>
+
+<!-- bar variant with a progress track -->
+<div class="dm-spl dm-bar">
+  <div class="dm-spl-pill" aria-live="polite">
+    <div class="dm-spl-in">
+      <span class="dm-g"><!-- glyph --></span>
+      <span class="dm-shim">Writing tests</span>
+    </div>
+    <div class="dm-spl-track"><div class="dm-spl-fill" style="width:80%"></div></div>
+  </div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { StatusPill } from './status-pill/StatusPill';
+
+<StatusPill state="reading" label="Reading repository" meta="2 of 4" />
+<StatusPill state="working" label="Editing" file={{ name: 'PricingCard.tsx', type: 'tsx' }} />
+<StatusPill state="waiting" label="Needs your review" action={{ label: 'Open', onClick: open }} />
+<StatusPill variant="bar" state="working" label="Writing tests" progress={80} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [StatusPillComponent] -->
+<dm-status-pill state="reading" label="Reading repository" meta="2 of 4" />
+<dm-status-pill state="working" label="Editing" [file]="{ name: 'PricingCard.tsx', type: 'tsx' }" />
+<dm-status-pill state="waiting" label="Needs your review" [action]="{ label: 'Open', onClick: open }" />
+<dm-status-pill variant="bar" state="working" label="Writing tests" [progress]="80" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/status_pill.dart';
+
+const StatusPill(state: StatusPillState.reading, label: 'Reading repository', meta: '2 of 4'),
+const StatusPill(state: StatusPillState.working, label: 'Editing', file: StatusFile('PricingCard.tsx', type: 'tsx')),
+StatusPill(state: StatusPillState.waiting, label: 'Needs your review', action: StatusAction('Open', onClick: open)),
+const StatusPill(variant: StatusPillVariant.bar, state: StatusPillState.working, label: 'Writing tests', progress: 80),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `label` | `string` | What the agent is doing, in a few words. Required. |
+| `state` | `idle \| thinking \| reading \| working \| waiting \| done` | Picks the glyph and colour. `thinking`, `reading` and `working` shimmer while they run. |
+| `meta` | `string` | Quiet detail after the label, like "2 of 4". Changing only this does not restart the pill. |
+| `file` | `{ name: string; type?: string }` | A file chip after the label. |
+| `action` | `{ label: string; onClick: () => void }` | A button at the end, for when the agent needs the person. |
+| `progress` | `number` | 0 to 100, drawn as a track along the bottom of the `bar` variant. |
+| `variant` | `pill \| bar` | `pill` hugs its content; `bar` is taller and leaves room for the progress track. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The pill
+sits on a surface with the shared shadow, so it picks up the theme's surface and token colours; in
+Soft it is rounder, and in dark it reads against the dark stage.

@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/black.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/*
+ * Visuno component tokens + core, imported last and unlayered so component styles
+ * (e.g. .dm-bdg-dot border-radius) win over Tailwind/Fumadocs preflight resets
+ * inside the live <Preview> stages. Each component's own CSS is imported by its
+ * React module; this provides the shared tokens and base.
+ */
+@import '../visuno/designme.css';
+
+/* Docs-only helper: a gentle cross-fade when a live-example badge changes state. */
+.dm-anim {
+  transition: background 0.3s var(--dm-ease), color 0.3s var(--dm-ease),
+    box-shadow 0.3s var(--dm-ease);
+}
+
+/* Docs-only: let the run-cost bar fill glide with the rAF ramp (the component's
+ * own CSS only transitions the fill color, so width would otherwise snap). */
+.dm-rc-smooth .dm-rc-fill {
+  transition: width 0.12s linear, background 0.4s;
+}
+
+/*
+ * Modern code boxes to suit the black & white layout: rounded corners, a hairline
+ * border, slightly more breathing room, and crisp monospace. Keeps the default
+ * Shiki syntax colors; only the container is restyled.
+ */
+figure[data-rehype-pretty-code-figure],
+.fd-codeblock,
+pre.shiki {
+  border-radius: 12px;
+  border: 1px solid var(--color-fd-border);
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.04);
+}
+
+.fd-codeblock pre,
+pre.shiki {
+  font-size: 13px;
+  line-height: 1.6;
+  padding-block: 14px;
+}
+
+.fd-codeblock code,
+pre.shiki code {
+  font-family: var(--dm-mono, ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace);
+  font-variant-ligatures: none;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}

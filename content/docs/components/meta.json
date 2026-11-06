@@ -1,0 +1,25 @@
+{
+  "title": "Components",
+  "pages": [
+    "status-pill",
+    "step-loader",
+    "thinking-states",
+    "thinking",
+    "reasoning-trail",
+    "agent-phases",
+    "action-log",
+    "context-meter",
+    "browser-session",
+    "web-search",
+    "trace-view",
+    "run-queue",
+    "run-cost",
+    "toast",
+    "progress",
+    "segmented-control",
+    "tooltip",
+    "badge",
+    "buttons",
+    "stat-cards"
+  ]
+}

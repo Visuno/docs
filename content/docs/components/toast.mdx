@@ -1,0 +1,104 @@
+---
+title: Toast
+description: One toast at a time — a new one rises in while the last one slips away.
+---
+
+import { Preview } from '@/components/preview';
+import { ToastExample } from '@/components/examples/toast';
+
+A toast is a short message on a surface. Its `tone` picks the icon and colour — `loading` spins —
+and it takes a `title`, an optional `description` and an optional `action` button. Pass a new `id`
+to slide a new toast in and the old one away; keep the same `id` to change the text in place.
+
+<Preview>
+  <ToastExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + toast.css -->
+<div class="dm-tst-slot" aria-live="polite">
+  <div class="dm-tst-t dm-tst-in" role="status">
+    <span class="dm-g"><!-- tone icon --></span>
+    <div class="dm-tx"><b>Deploy succeeded</b><span>Live in production.</span></div>
+    <div class="dm-acts">
+      <button class="dm-pill dm-sm dm-ghost">Undo</button>
+      <button class="dm-ib" aria-label="Dismiss"><!-- x --></button>
+    </div>
+  </div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { Toast, type ToastData } from './toast/Toast';
+
+const [toast, setToast] = useState<ToastData | null>(null);
+
+setToast({ id: 1, tone: 'success', title: 'Deploy succeeded', description: 'Live in production.' });
+setToast({
+  id: 2,
+  tone: 'error',
+  title: 'Build failed',
+  action: { label: 'Retry', onClick: retry, variant: 'primary' },
+});
+
+<Toast toast={toast} onDismiss={() => setToast(null)} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ToastComponent] -->
+toast: ToastData | null = {
+  id: 1, tone: 'success', title: 'Deploy succeeded', description: 'Live in production.'
+};
+
+<dm-toast [toast]="toast" (dismiss)="toast = null" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/toast.dart';
+
+ToastData? toast = const ToastData(
+  id: 1, tone: ToastTone.success, title: 'Deploy succeeded', description: 'Live in production.',
+);
+
+Toast(toast: toast, onDismiss: (id) => setState(() => toast = null)),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `toast` | `ToastData \| null` | The toast to show, or `null` for none. |
+| `onDismiss` | `(id) => void` | Called by the close button. The toast leaves either way. |
+| `toast.id` | `string \| number` | A new id slides a new toast in and the old one away. Keep it to change text in place. |
+| `toast.tone` | `success \| error \| info \| loading` | Picks the icon and its colour. `loading` spins. |
+| `toast.title` | `string` | The bold first line. |
+| `toast.description` | `string` | The quieter line under the title. Crossfades when it changes. |
+| `toast.action` | `{ label; onClick; variant?: ghost \| primary \| ink; busy? }` | A button before the close button, like Undo or Retry. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
+sits on a surface with the toast shadow and its tone tints come from the theme tokens, so it reads
+against the dark stage; in Soft the card and its buttons are rounder.

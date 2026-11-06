@@ -1,0 +1,122 @@
+---
+title: Browser session
+description: The agent browsing the web for you step by step, in a small browser frame with the steps it takes, and Pause and Take over.
+---
+
+import { Preview } from '@/components/preview';
+import { BrowserSessionExample } from '@/components/examples/browser-session';
+
+A browser session shows the agent browsing the web for you: a small browser frame with the page it
+is on, the steps it takes under it, and Pause and Take over. When a step waits for you — a cookie
+banner in the way, say — it shows why and a button to let the agent go on. Take over hands the page
+to you: its frame turns the accent colour, its controls become usable, and the button reads Hand
+back.
+
+<Preview>
+  <BrowserSessionExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + browser-session.css -->
+<div class="bws panel">
+  <div class="bws-h">
+    <div class="bws-ht"><b>Pricing research</b><span class="muted bws-st"></span></div>
+    <div class="bws-ctl">
+      <button class="ib bws-pause" aria-label="Pause"><svg class="i s"><use href="#i-pause"/></svg></button>
+      <button class="pill line sm bws-take" aria-pressed="false">Take over</button>
+    </div>
+  </div>
+  <div class="bws-win"><div class="bws-bar"></div><div class="bws-vp"></div></div>
+  <ol class="bws-steps" aria-label="Steps"></ol>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { BrowserSession } from './browser-session/BrowserSession';
+
+<BrowserSession
+  title="Pricing research"
+  url="northwind.app/pricing"
+  steps={[
+    { label: 'Click "Pricing"', state: 'done' },
+    { label: 'Read the plans table', state: 'waiting', detail: 'A cookie banner covers the table' },
+  ]}
+  ask={{ label: 'Allow closing it', onAllow: allow }}
+>
+  <div className="dm-bws-pg">{/* the page, drawn as a wireframe */}</div>
+</BrowserSession>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [BrowserSessionComponent] -->
+<dm-browser-session
+  title="Pricing research"
+  url="northwind.app/pricing"
+  [steps]="steps"
+  [ask]="cookieAsk"
+>
+  <ng-template #page>
+    <div class="dm-bws-pg"><!-- the page, drawn as a wireframe --></div>
+  </ng-template>
+</dm-browser-session>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/browser_session.dart';
+
+BrowserSession(
+  title: 'Pricing research',
+  url: 'northwind.app/pricing',
+  steps: const [
+    BrowserStep(label: 'Click "Pricing"', state: BrowserStepState.done),
+    BrowserStep(label: 'Read the plans table', state: BrowserStepState.waiting, detail: 'A cookie banner covers the table'),
+  ],
+  ask: BrowserAsk(label: 'Allow closing it', onAllow: allow),
+  page: const PricingWireframe(),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | What the agent is browsing for, like "Pricing research". |
+| `url` | `string` | The address bar: the page's address, or the search being typed. |
+| `search` | `boolean` | Marks `url` as a search, with a magnifier instead of the padlock. |
+| `steps` | `BrowserStep[]` | The steps the agent takes. Each has a `label`, a `state` of `queued`, `running`, `waiting` or `done`, and an optional `detail`. |
+| `cursor` | `object` | The agent's own pointer, in pixels from the page's top left. Hidden while you have control. |
+| `ask` | `object` | While a step waits: the button that lets the agent go on. Has a `label` and `onAllow`. |
+| `paused` / `defaultPaused` | `boolean` | Pause holds the agent where it is. Leave `paused` out to let the button toggle it. |
+| `inControl` / `defaultInControl` | `boolean` | Take over hands the page to you. Leave `inControl` out to let the button toggle it. |
+| `seconds` | `number` | Seconds to show as m:ss. Leave it out to let the clock count while browsing. |
+| `status` | `string` | The line under the title. Defaults to a status word, then the clock. |
+| `summary` | `string` | Shown under the steps once every step is done. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The page
+is drawn small, with real words where they matter and grey lines for the rest; a price the agent has
+taken is marked in the accent fill. While you have control the frame turns the accent colour. In
+Blueprint the frame and chips are squared off.

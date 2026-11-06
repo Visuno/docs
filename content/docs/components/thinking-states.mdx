@@ -1,0 +1,97 @@
+---
+title: Thinking States
+description: Six animated indicators, each a small mark beside a status line that steps through what an agent is doing, with an optional elapsed-seconds counter.
+---
+
+import { Preview } from '@/components/preview';
+import { ThinkingStatesExample } from '@/components/examples/thinking-states';
+
+A thinking state is a small animated mark beside a status line. Pick one of six marks with
+`variant`; give it `steps` and, with more than one, they take turns every `interval` unless you
+drive the index with `current`. An elapsed-seconds counter sits at the end of the line and counts
+by itself unless you set `seconds` or hide it with `seconds={false}`.
+
+<Preview>
+  <ThinkingStatesExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + thinking-states.css -->
+<div class="ths" data-v="orbit">
+  <div class="ths-row">
+    <span class="ths-mk" aria-hidden="true"></span>
+    <span class="ths-l" aria-hidden="true">
+      <span class="ths-tx shim">Thinking</span>
+      <span class="ths-car" hidden></span>
+    </span>
+    <span class="ths-t num" aria-hidden="true">0s</span>
+  </div>
+  <span class="ths-sr" role="status" aria-live="polite">Thinking</span>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { ThinkingStates } from './thinking-states/ThinkingStates';
+
+const steps = ['Thinking', 'Reading 3 files', 'Planning the change'];
+
+<ThinkingStates variant="orbit" steps={steps} />
+<ThinkingStates variant="stream" steps={steps} interval={2600} />
+<ThinkingStates variant="scan" steps={steps} seconds={false} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ThinkingStatesComponent] -->
+<dm-thinking-states variant="orbit" [steps]="steps" />
+<dm-thinking-states variant="stream" [steps]="steps" [interval]="2600" />
+<dm-thinking-states variant="scan" [steps]="steps" [seconds]="false" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/thinking_states.dart';
+
+const steps = ['Thinking', 'Reading 3 files', 'Planning the change'];
+
+ThinkingStates(variant: ThinkingVariant.orbit, steps: steps),
+ThinkingStates(variant: ThinkingVariant.stream, steps: steps, interval: 2600),
+ThinkingStates(variant: ThinkingVariant.scan, steps: steps, seconds: false),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `variant` | `orbit \| morph \| scan \| stream \| matrix \| stack` | Which indicator to draw. `orbit` by default. |
+| `steps` | `string[]` | The status lines. With more than one they take turns unless `current` is set. |
+| `current` | `number` | Index of the line to show. Leave it out to let the lines take turns by themselves. |
+| `interval` | `number` | Milliseconds each line shows for when they take turns. `2600` by default. |
+| `seconds` | `number \| false` | Seconds shown at the end of the line. Counts by itself when left out; `false` hides it. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The
+marks and the typed line use the active theme's accent and text colors; the counter is set in the
+numeric style. Motion is paused for readers who prefer reduced motion — the line is shown whole
+rather than typed.
