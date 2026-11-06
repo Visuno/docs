@@ -1,12 +1,13 @@
 {
   "title": "Components",
   "pages": [
+    "---Agent status---",
     "status-pill",
-    "step-loader",
-    "thinking-states",
     "thinking",
+    "thinking-states",
     "reasoning-trail",
     "agent-phases",
+    "step-loader",
     "action-log",
     "context-meter",
     "browser-session",
@@ -15,11 +16,14 @@
     "run-queue",
     "run-cost",
     "toast",
-    "progress",
+    "---Charts and tables---",
+    "stat-cards",
+    "---Dates---",
     "segmented-control",
-    "tooltip",
-    "badge",
+    "---Forms and inputs---",
     "buttons",
-    "stat-cards"
+    "badge",
+    "progress",
+    "tooltip"
   ]
 }
