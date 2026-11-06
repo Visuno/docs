@@ -1,0 +1,143 @@
+---
+title: Agent run timeline
+description: Every model and tool step of a run on one time axis — a Gantt chart with a playhead, the time each step takes, and the cost as it adds up.
+---
+
+import { Preview } from '@/components/preview';
+import { AgentRunTimelineExample } from '@/components/examples/agent-run-timeline';
+
+An agent run timeline draws one run as a Gantt chart. Every step is a bar on a shared time axis:
+the model thinking or writing (purple), a tool like a file read or a test run (teal), or an app the
+agent works in, such as Figma or GitHub (orange), each with its own mark. A playhead marks now while
+the run streams and the lanes it has passed take a faint wash; the step at work breathes a ring round
+its icon and its bar carries a bright leading edge. A failed step hatches red and tags its label, and
+a retry hangs a dashed line off the end of the step it retries. The key under the title counts how
+long each kind has run, and the footer adds up the total time, cost, steps and retries. Once the run
+is done the playhead stops at the finish and turns green.
+
+<Preview>
+  <AgentRunTimelineExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + agent-run-timeline.css, then the component script -->
+<div class="card wide bare" data-c="agent-run-timeline">
+  <div class="stage-in">
+    <div class="art panel">
+      <div class="art-h">
+        <div class="art-hd"><div class="art-t">Run 4821, update the pricing page</div><div class="art-s muted num">Starting</div></div>
+        <span class="art-tag tag"><span class="spin" aria-hidden="true"></span>Running</span>
+      </div>
+      <div class="art-key num" role="list" aria-label="Time by kind of step"></div>
+      <div class="art-grid">
+        <div class="art-axis" aria-hidden="true"><span></span><div class="art-ticks"></div><span></span></div>
+        <div class="art-past" aria-hidden="true"></div>
+        <div class="art-rows"></div>
+        <div class="art-head" aria-hidden="true"><i></i><span class="art-now num">0.0s</span></div>
+      </div>
+      <div class="art-f muted num"></div>
+    </div>
+  </div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { AgentRunTimeline, type TimelineStep } from './agent-run-timeline/AgentRunTimeline';
+
+const steps: TimelineStep[] = [
+  { label: 'Plan the change', icon: 'spark', kind: 'model', start: 0, duration: 1.6, cost: 0.03 },
+  { label: 'Read 6 files', icon: 'file-text', kind: 'tool', start: 1.6, duration: 2.2, cost: 0.02 },
+  { label: 'Search Figma', brand: 'figma', kind: 'app', start: 1.9, duration: 1.4, cost: 0.01 },
+  { label: 'Run tests', icon: 'term', kind: 'tool', start: 6.5, duration: 1.5, failed: true, tag: '2 failed' },
+  { label: 'Run tests again', icon: 'refresh', kind: 'tool', start: 8.1, duration: 1.9, retry: true },
+];
+
+<AgentRunTimeline title="Run 4821, update the pricing page" steps={steps} time={6.3} span={12} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```ts
+// imports: [AgentRunTimelineComponent]
+steps: TimelineStep[] = [
+  { label: 'Plan the change', icon: 'spark', kind: 'model', start: 0, duration: 1.6, cost: 0.03 },
+  { label: 'Read 6 files', icon: 'file-text', kind: 'tool', start: 1.6, duration: 2.2, cost: 0.02 },
+  { label: 'Search Figma', brand: 'figma', kind: 'app', start: 1.9, duration: 1.4, cost: 0.01 },
+  { label: 'Run tests', icon: 'term', kind: 'tool', start: 6.5, duration: 1.5, failed: true, tag: '2 failed' },
+  { label: 'Run tests again', icon: 'refresh', kind: 'tool', start: 8.1, duration: 1.9, retry: true },
+];
+```
+
+```html
+<dm-agent-run-timeline
+  title="Run 4821, update the pricing page"
+  [steps]="steps"
+  [time]="6.3"
+  [span]="12"
+></dm-agent-run-timeline>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/agent_run_timeline.dart';
+
+AgentRunTimeline(
+  title: 'Run 4821, update the pricing page',
+  time: 6.3,
+  span: 12,
+  steps: const [
+    TimelineStep(label: 'Plan the change', icon: Icons.auto_awesome, kind: StepKind.model, start: 0, duration: 1.6, cost: 0.03),
+    TimelineStep(label: 'Read 6 files', icon: Icons.description_outlined, kind: StepKind.tool, start: 1.6, duration: 2.2, cost: 0.02),
+    TimelineStep(label: 'Search Figma', brand: StepBrand.figma, kind: StepKind.app, start: 1.9, duration: 1.4, cost: 0.01),
+    TimelineStep(label: 'Run tests', icon: Icons.terminal, kind: StepKind.tool, start: 6.5, duration: 1.5, failed: true, tag: '2 failed'),
+    TimelineStep(label: 'Run tests again', icon: Icons.refresh, kind: StepKind.tool, start: 8.1, duration: 1.9, retry: true),
+  ],
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | The run's name, shown over the status line. |
+| `steps` | `TimelineStep[]` | The steps of the run, each a bar on the shared axis. |
+| `time` | `number` | Seconds into the run. Bars grow up to it and the playhead sits on it. Leave it out once the run has finished. |
+| `span` | `number` | Seconds the axis covers. Defaults to the end of the last step, rounded up to a multiple of 4. |
+| `ticks` | `number[]` | Labels on the axis, in seconds. Defaults to quarters of the span. |
+| `status` | `string` | The line under the title. Defaults to the steps running now, then "Finished in 11.7s". |
+| `stats` | `TimelineStat[]` | The figures in the footer once the run is done. Defaults to the total time, cost, steps and retries, which count up while it plays. |
+| `kindLabels` | `{ model?; tool?; app? }` | The names of the kinds in the key. Defaults to Model, Tools and Apps. |
+| `bare` | `boolean` | Sits flat in a chat thread (the default). Set false to give it a card of its own. |
+
+A `TimelineStep` has a `label`, an optional `icon` or `brand` (an app's own mark, like `figma`,
+`github` or `slack`), a `kind` (`model`, `tool` or `app`, which picks its colour), a `start` and
+`duration` in seconds, an optional `color`, `cost`, and — for a step that failed — `failed`, a `tag`
+and a `note`, and `retry` to hang a dashed line off the step it retries. A `TimelineStat` has a
+`value`, a `label` and an optional `icon`.
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). Each kind
+keeps its colour from the chart palette — purple for the model, teal for tools, orange for apps — and
+the playhead runs in the accent, turning green at the finish. In Blueprint the bars square off and a
+running bar switches from a sweeping sheen to a marching stripe; a failed bar is red and hatched in
+every theme.

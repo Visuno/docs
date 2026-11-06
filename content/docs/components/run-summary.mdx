@@ -1,0 +1,145 @@
+---
+title: Run summary
+description: What the agent did, what changed and what needs you.
+---
+
+import { Preview } from '@/components/preview';
+import { RunSummaryExample } from '@/components/examples/run-summary';
+
+A run summary closes out an agent run: a title glyph and a quiet subtitle, a line on what the run
+did, and `stats` that count up from zero. Under them, `changes` list the files the run touched and
+`needs` carry what is still on the person, each with an optional action button. "Undo all" greys out
+the changes and swaps the glyph; leave `undone` out to let the button toggle it, or control it.
+
+<Preview>
+  <RunSummaryExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + run-summary.css -->
+<div class="dm-rsu dm-panel">
+  <div class="dm-rsu-h">
+    <span class="dm-rsu-g"><!-- check icon --></span>
+    <div>
+      <div class="dm-rsu-t">Run complete</div>
+      <div class="dm-rsu-s dm-muted">Finished in 12m 40s</div>
+    </div>
+  </div>
+  <p class="dm-rsu-title">Pricing cards now use spacing tokens</p>
+  <div class="dm-rsu-stats">
+    <span><b class="dm-num">6</b> files</span>
+    <span><b class="dm-num">14</b> steps</span>
+  </div>
+  <div class="dm-rsu-acts">
+    <button class="dm-pill dm-primary dm-sm">Open changes</button>
+    <button class="dm-pill dm-ghost dm-sm">Undo all</button>
+  </div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { RunSummary } from './run-summary/RunSummary';
+
+<RunSummary
+  subtitle="Finished in 12m 40s"
+  summary="Pricing cards now use spacing tokens"
+  stats={[
+    { label: 'files', value: 6 },
+    { label: 'cost', value: 0.84, prefix: '$', decimals: 2 },
+  ]}
+  changes={[{ file: 'PricingCard.tsx', added: 24, removed: 18 }]}
+  needs={[
+    {
+      key: 'badge',
+      text: 'The yearly badge overlaps the price on mobile',
+      action: { label: 'Review', onClick: review },
+    },
+  ]}
+  onOpenChanges={open}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [RunSummaryComponent] -->
+stats: RunStat[] = [
+  { label: 'files', value: 6 },
+  { label: 'cost', value: 0.84, prefix: '$', decimals: 2 },
+];
+
+<dm-run-summary
+  subtitle="Finished in 12m 40s"
+  summary="Pricing cards now use spacing tokens"
+  [stats]="stats"
+  [changes]="changes"
+  [needs]="needs"
+  (openChanges)="open()"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/run_summary.dart';
+
+RunSummary(
+  subtitle: 'Finished in 12m 40s',
+  summary: 'Pricing cards now use spacing tokens',
+  stats: const [
+    RunStat(label: 'files', value: 6),
+    RunStat(label: 'cost', value: 0.84, prefix: '\$', decimals: 2),
+  ],
+  changes: const [RunChange(file: 'PricingCard.tsx', added: 24, removed: 18)],
+  needs: [
+    RunNeed(
+      key: 'badge',
+      text: 'The yearly badge overlaps the price on mobile',
+      action: RunNeedAction(label: 'Review', onClick: review),
+    ),
+  ],
+  onOpenChanges: open,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | The title while the changes stand. Defaults to `Run complete`. |
+| `undoneTitle` | `string` | The title once the changes are undone. Defaults to `Changes undone`. |
+| `subtitle` | `string` | The quiet line under the title, like `Finished in 12m 40s`. |
+| `summary` | `ReactNode` | One line on what the run did. |
+| `stats` | `RunStat[]` | `{ label; value; prefix?; suffix?; decimals? }` — each counts up from zero. |
+| `changes` | `RunChange[]` | `{ file; added; removed }` — the files the run changed, under "What changed". |
+| `needs` | `RunNeed[]` | `{ key; text; action?: { label; onClick; busy? } }` — what is left for the person. |
+| `undone` | `boolean` | Whether the changes are undone. Leave it out to let "Undo all" toggle it. |
+| `onUndoneChange` | `(undone) => void` | Fires when "Undo all" / "Redo" toggles the state. |
+| `onDetails` | `() => void` | Adds a button in the corner that opens the run's details. |
+| `onOpenChanges` | `() => void` | The main button, "Open changes". |
+| `bare` | `boolean` | Sits flat in a chat thread (the default). Set `false` to give it a card of its own. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The glyph,
+the `+`/`−` diffs and the "Needs you" dot all take their colour from the theme tokens (`--dm-ok`,
+`--dm-add`, `--dm-del`, `--dm-warn-mark`), so the summary reads the same against any surface; in Soft
+the card and its pills are rounder.

@@ -1,0 +1,108 @@
+---
+title: Toast stack
+description: Agent notifications that stack into a deck and fan out on hover.
+---
+
+import { Preview } from '@/components/preview';
+import { ToastStackExample } from '@/components/examples/toast-stack';
+
+A toast stack collects notifications into a deck: the newest sits in front, older ones peek out
+behind it. Hover the deck — or move the focus into it — and it fans out into a readable list; move
+away and it folds back up. Each toast takes an `icon`, a `tone` for the badge colour, a `title`, an
+optional `detail` line and a `time`. Pass the toasts oldest-first; dismiss one with its close button.
+
+<Preview>
+  <ToastStackExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + toast-stack.css -->
+<div class="dm-tsk-stack" aria-live="polite">
+  <div class="dm-tsk-c">
+    <span class="dm-g"><!-- tone icon --></span>
+    <div class="dm-tx"><b>Tests passed</b><span>42 of 42 in 38s</span></div>
+    <span class="dm-t">now</span>
+    <button class="dm-ib" aria-label="Dismiss"><!-- x --></button>
+  </div>
+</div>
+<!-- the deck fans out on hover; toast-stack.js lays out, stacks and dismisses -->
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { ToastStack, type StackToast } from './toast-stack/ToastStack';
+
+const [toasts, setToasts] = useState<StackToast[]>([
+  { id: 1, icon: 'ok', tone: 'ok', title: 'Tests passed', detail: '42 of 42 in 38s', time: '2m' },
+  { id: 2, icon: 'pr', tone: 'merge', title: 'PR #412 is ready', detail: 'Use shared spacing tokens', time: 'now' },
+]);
+
+<ToastStack toasts={toasts} onDismiss={(id) => setToasts((t) => t.filter((x) => x.id !== id))} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ToastStackComponent] -->
+toasts: StackToast[] = [
+  { id: 1, icon: 'ok', tone: 'ok', title: 'Tests passed', detail: '42 of 42 in 38s', time: '2m' },
+  { id: 2, icon: 'pr', tone: 'merge', title: 'PR #412 is ready', time: 'now' },
+];
+
+<dm-toast-stack [toasts]="toasts" (dismiss)="toasts = toasts.filter(t => t.id !== $event)" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/toast_stack.dart';
+
+List<StackToast> toasts = const [
+  StackToast(id: 1, icon: Icons.check_circle_outline, tone: ToastStackTone.ok, title: 'Tests passed', detail: '42 of 42 in 38s', time: '2m'),
+  StackToast(id: 2, icon: Icons.merge, tone: ToastStackTone.merge, title: 'PR #412 is ready', time: 'now'),
+];
+
+ToastStack(
+  toasts: toasts,
+  onDismiss: (id) => setState(() => toasts = toasts.where((t) => t.id != id).toList()),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `toasts` | `StackToast[]` | Oldest first. The last one sits in front. |
+| `onDismiss` | `(id) => void` | Called when a toast's close button is pressed. Remove it from `toasts` and it slides away. |
+| `expanded` | `boolean` | Fans the stack out. Leave it out to fan it while the pointer is over it. |
+| `max` | `number` | How many toasts stay mounted. Older ones drop off the back. Defaults to `6`. |
+| `toast.id` | `string \| number` | Identity of the toast; a new one rises in, a removed one slides away. |
+| `toast.icon` | `IconName` | The icon in the round badge. |
+| `toast.tone` | `neutral \| ok \| warn \| bad \| merge \| blue \| purple \| …` | Colours the badge. Defaults to `neutral`. |
+| `toast.title` | `string` | The bold first line. |
+| `toast.detail` | `string` | The quiet line under the title. |
+| `toast.time` | `string` | A short time like `now` or `2m`, shown until the close button takes its place. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). Each toast
+sits on a surface with the toast shadow and its badge tint comes from the theme tokens, so the deck
+reads against the dark stage; in Soft the cards are rounder. The fan-out and the arrival and dismiss
+motion are tuned down when the viewer prefers reduced motion.

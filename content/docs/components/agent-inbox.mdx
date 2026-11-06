@@ -1,0 +1,112 @@
+---
+title: Agent inbox
+description: Every run that needs you, is running or is done, in one list.
+---
+
+import { Preview } from '@/components/preview';
+import { AgentInboxExample } from '@/components/examples/agent-inbox';
+
+The agent inbox puts every run in one list, grouped by what it needs: **Needs you**, **Running** and
+**Done**. A running run shows a live clock; one that waits for you offers **Approve**, and one that
+failed turns red and offers **Retry**. When a run changes group it glides to its new place, an empty
+group goes away, and the line beside the title says what is left.
+
+<Preview>
+  <AgentInboxExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + agent-inbox.css -->
+<div class="aib panel">
+  <div class="aib-h"><b>Inbox</b><span class="muted aib-st" aria-live="polite"></span></div>
+  <div class="aib-gs"></div>
+</div>
+<!-- agent-inbox.js fills the groups and drives the clocks and the glide -->
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { AgentInbox, type InboxRun } from './agent-inbox/AgentInbox';
+
+const runs: InboxRun[] = [
+  { id: 'pub', title: 'Publish the pricing page', agent: 'Design agent', group: 'needs', detail: 'Waiting for your approval' },
+  { id: 'tok', title: 'Export tokens to CSS', agent: 'Build agent', group: 'needs', failed: true, detail: 'Failed: rate limited', why: 'Figma answered 429. Safe to retry' },
+  { id: 'cards', title: 'Rework the plan cards', agent: 'Design agent', group: 'running', detail: 'Editing frame 3 of 6', seconds: 102 },
+  { id: 'copy', title: 'Rewrite plan descriptions', agent: 'Copy agent', group: 'done', ended: '12m ago' },
+];
+
+<AgentInbox runs={runs} onApprove={(id) => start(id)} onRetry={(id) => retry(id)} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [AgentInboxComponent] -->
+runs: InboxRun[] = [
+  { id: 'pub', title: 'Publish the pricing page', agent: 'Design agent', group: 'needs', detail: 'Waiting for your approval' },
+  { id: 'cards', title: 'Rework the plan cards', agent: 'Design agent', group: 'running', detail: 'Editing frame 3 of 6', seconds: 102 },
+];
+
+<dm-agent-inbox [runs]="runs" (approve)="start($event)" (retry)="retry($event)" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/agent_inbox.dart';
+
+final runs = <InboxRun>[
+  const InboxRun(id: 'pub', title: 'Publish the pricing page', agent: 'Design agent', group: InboxGroup.needs, detail: 'Waiting for your approval'),
+  const InboxRun(id: 'cards', title: 'Rework the plan cards', agent: 'Design agent', group: InboxGroup.running, detail: 'Editing frame 3 of 6', seconds: 102),
+];
+
+AgentInbox(
+  runs: runs,
+  onApprove: (id) => start(id),
+  onRetry: (id) => retry(id),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `runs` | `InboxRun[]` | Every run to show, each in its group. |
+| `onApprove` | `(id) => void` | Adds Approve to the runs that need you and haven't failed. |
+| `onRetry` | `(id) => void` | Adds Retry to the runs that failed. |
+| `title` | `string` | The inbox's name. Defaults to `"Inbox"`. |
+| `status` | `string` | The line beside the title. Defaults to `"2 need you"`, then `"2 running"`, then `"All clear · 4 done today"`. |
+| `run.id` | `string` | Keeps a run's row when it moves group. |
+| `run.title` | `string` | What the run is for, like "Publish the pricing page". |
+| `run.agent` | `string` | Which agent runs it. Its first letter marks the row. |
+| `run.color` | `string` | The mark's fill, like `var(--dm-av-l)`. Defaults to the accent. |
+| `run.group` | `needs \| running \| done` | Which part of the inbox the run sits in. |
+| `run.detail` | `string` | The line under the title: why it needs you, or what it is doing now. |
+| `run.failed` | `boolean` | Turns the row red and offers Retry instead of Approve. |
+| `run.why` | `string` | More on the failure, in a tooltip on its detail line. |
+| `run.seconds` | `number` | How long a running run has gone. Its clock counts on from here. |
+| `run.ended` | `string` | When a finished run ended, like "12m ago". |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The panel
+sits on a surface with the card shadow; a failed run tints with the bad tokens, the running clock and
+the Approve pill use the accent, and the avatar marks take the shared `--dm-av-*` colours with their
+own ink. In Soft the panel and its rows are rounder.

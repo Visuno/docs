@@ -1,0 +1,125 @@
+---
+title: Agent lanes
+description: Several agents working in parallel, each with its own lane and hand-offs.
+---
+
+import { Preview } from '@/components/preview';
+import { AgentLanesExample } from '@/components/examples/agent-lanes';
+
+Agent lanes show several agents working side by side, each in its own lane and hue — its badge, its
+step track, its `Working` tag and its stretch of the relay line that joins the badges. A working lane
+breathes, shimmers and fills its next step; a `handoff` opens a line between two lanes and runs a
+light down the relay line from the sender's badge to the taker's, and the stretch it crossed stays
+lit. Each `lane` takes a `name`, an `icon`, a `tone`, a `status`, the `activity` it is on, how many
+`steps` the track is cut into and how many are `done`, and an optional `log` the row opens to.
+
+<Preview>
+  <AgentLanesExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + agent-lanes.css -->
+<div class="aln panel" data-c="agent-lanes">
+  <div class="aln-h">
+    <span class="aln-ic"><!-- users --></span>
+    <span class="aln-t">3 agents working</span>
+    <span class="aln-m muted num">0:00</span>
+    <span class="aln-ct num">0 of 9 steps</span>
+    <button class="pill soft sm aln-pause"><!-- pause -->Pause all</button>
+  </div>
+  <div class="aln-rows"><!-- lanes are built by agent-lanes.js --></div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { AgentLanes, type AgentLane, type AgentHandoff } from './agent-lanes/AgentLanes';
+
+const lanes: AgentLane[] = [
+  { key: 'researcher', name: 'Researcher', icon: 'search', tone: 'blue', status: 'done', activity: 'Noted 3 patterns', done: 3 },
+  { key: 'designer', name: 'Designer', icon: 'edit', tone: 'purple', status: 'working', activity: 'Exporting frames', done: 2 },
+  { key: 'reviewer', name: 'Reviewer', icon: 'eye', tone: 'green', status: 'waiting', activity: 'Waiting for the designer' },
+];
+
+const handoff: AgentHandoff = { from: 'researcher', to: 'designer', what: 'the brief' };
+
+<AgentLanes lanes={lanes} handoff={handoff} onPausedChange={setPaused} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [AgentLanesComponent] -->
+lanes: AgentLane[] = [
+  { key: 'researcher', name: 'Researcher', icon: 'search', tone: 'blue', status: 'done', activity: 'Noted 3 patterns', done: 3 },
+  { key: 'designer', name: 'Designer', icon: 'edit', tone: 'purple', status: 'working', activity: 'Exporting frames', done: 2 },
+  { key: 'reviewer', name: 'Reviewer', icon: 'eye', tone: 'green', status: 'waiting', activity: 'Waiting for the designer' },
+];
+handoff: AgentHandoff = { from: 'researcher', to: 'designer', what: 'the brief' };
+
+<dm-agent-lanes [lanes]="lanes" [handoff]="handoff" [pauseWired]="true" (pausedChange)="paused = $event" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/agent_lanes.dart';
+
+AgentLanes(
+  lanes: const [
+    AgentLane(key: 'researcher', name: 'Researcher', icon: Icons.search, tone: LaneTone.blue, status: LaneStatus.done, activity: 'Noted 3 patterns', done: 3),
+    AgentLane(key: 'designer', name: 'Designer', icon: Icons.edit_outlined, tone: LaneTone.purple, status: LaneStatus.working, activity: 'Exporting frames', done: 2),
+    AgentLane(key: 'reviewer', name: 'Reviewer', icon: Icons.visibility_outlined, tone: LaneTone.green, status: LaneStatus.waiting, activity: 'Waiting for the designer'),
+  ],
+  handoff: const AgentHandoff(from: 'researcher', to: 'designer', what: 'the brief'),
+  onPausedChange: (v) => setState(() => paused = v),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `lanes` | `AgentLane[]` | The agents, each in its own lane and hue. |
+| `title` | `string` | Header text. Defaults to "N agents working", "All agents paused" or "All N agents finished". |
+| `seconds` | `number` | Seconds to show as `m:ss`. Leave it out to let the header count while agents work. |
+| `paused` | `boolean` | Whether every agent is paused. Working lanes then show `Paused` and the clock stops. |
+| `onPausedChange` | `(paused) => void` | Adds the Pause all / Resume button, until every lane is done. |
+| `handoff` | `AgentHandoff` | The hand-off to show. Clear it and its line slides away; the stretch it crossed stays lit. |
+| `expanded` | `string[]` | Keys of the lanes that are open. Leave it out to let each row toggle itself. |
+| `bare` | `boolean` | Sits flat in a chat thread (the default). Set `false` to give it a card of its own. |
+| `lane.name` | `string` | The agent's name, like "Researcher". |
+| `lane.icon` | `IconName` | The glyph on the agent's badge. |
+| `lane.tone` | `blue \| purple \| green \| orange \| red \| yellow \| pink \| teal` | The lane's hue. Defaults to `blue`. |
+| `lane.status` | `queued \| waiting \| working \| paused \| done` | `working` breathes and fills its next step; `done` fills the badge with its hue. |
+| `lane.activity` | `string` | What the agent is on, or what it waits for. Crossfades on change and shimmers while working. |
+| `lane.steps` | `number` | How many steps the track is cut into. Defaults to `3`. |
+| `lane.done` | `number` | How many steps are finished. The next one fills while the agent works. |
+| `lane.progress` | `number` | How far through the step in hand, 0 to 1. Leave it out and that step fills part way. |
+| `lane.log` | `{ text; time? }[]` | What the agent did, shown when the lane is opened. New entries slide in. |
+| `handoff` | `{ from; to; what }` | One agent passing work to another down the relay line. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). Each lane's
+hue comes from the theme's agent palette tokens (`--dm-pb`, `--dm-pl`, `--dm-pm` …) with a livelier
+"mark" variant for its track, line and finished badge, so the lanes stay 3:1 against the surface; in
+dark mode the agent colours are light already and are used as they are. In the Soft style the lanes
+are rounder and the tracks are hatched rather than washed.
