@@ -48,6 +48,22 @@ pre.shiki code {
   font-variant-ligatures: none;
 }
 
+/* Theme-aware wordmark: dark-ink logo in light mode, light logo in dark mode.
+ * Both images are in the DOM; CSS shows one off the .dark class on <html>. */
+.visuno-logo {
+  display: inline-flex;
+  align-items: center;
+}
+.visuno-logo-light-ink {
+  display: none;
+}
+html.dark .visuno-logo-dark-ink {
+  display: none;
+}
+html.dark .visuno-logo-light-ink {
+  display: inline-block;
+}
+
 html {
   scrollbar-gutter: stable;
 }

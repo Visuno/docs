@@ -1,0 +1,315 @@
+/*
+ * Landing-page styles. All page chrome (text, borders, surfaces) uses Fumadocs
+ * theme tokens (--color-fd-*) so every string keeps strong contrast on the page
+ * background in both light and dark mode — no light text on white. The Visuno
+ * --dm-* tokens and data-style="soft" are confined to the live component stages
+ * (.vh-card, .vh-sc-stage), where they belong.
+ */
+
+.visuno-home {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: clamp(40px, 7vw, 88px) 20px 72px;
+  color: var(--color-fd-foreground);
+  font-family: var(--dm-sans, Inter, ui-sans-serif, system-ui, sans-serif);
+}
+
+/* ---- Hero ---------------------------------------------------------------- */
+.vh-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .vh-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 56px;
+  }
+}
+
+.vh-hero-copy {
+  animation: vh-rise 0.6s var(--dm-ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
+}
+
+.vh-h1 {
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--color-fd-foreground);
+}
+
+.vh-sub {
+  margin: 14px 0 0;
+  max-width: 34em;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--color-fd-muted-foreground);
+}
+
+.vh-actions {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.vh-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 15px;
+  border-radius: 9px;
+  background: var(--color-fd-primary);
+  color: var(--color-fd-primary-foreground);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+.vh-cta:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+.vh-cta svg {
+  transition: transform 0.18s ease;
+}
+.vh-cta:hover svg {
+  transform: translateX(2px);
+}
+
+/* Hero mark — the Visuno logo (no text) */
+.vh-mark {
+  display: grid;
+  place-items: center;
+  animation: vh-rise 0.7s 0.08s var(--dm-ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
+}
+.vh-mark-img {
+  width: min(360px, 72%);
+  height: auto;
+  filter: drop-shadow(0 18px 44px hsla(258, 70%, 50%, 0.22));
+  animation: vh-float 6s ease-in-out infinite;
+}
+@media (min-width: 900px) {
+  .vh-mark-img {
+    width: min(420px, 100%);
+  }
+}
+
+/* ---- Frameworks ---------------------------------------------------------- */
+.vh-frameworks {
+  margin-top: clamp(44px, 6vw, 72px);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (min-width: 720px) {
+  .vh-frameworks {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.vh-fw {
+  border: 1px solid var(--color-fd-border);
+  border-radius: 12px;
+  background: var(--color-fd-card);
+  padding: 14px 16px;
+  transition: border-color 0.2s ease;
+}
+.vh-fw:hover {
+  border-color: var(--color-fd-muted-foreground);
+}
+.vh-fw-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-fd-foreground);
+}
+.vh-fw-note {
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--color-fd-muted-foreground);
+}
+
+/* ---- Library ------------------------------------------------------------- */
+.vh-lib {
+  margin-top: clamp(48px, 7vw, 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.vh-lib-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-fd-border);
+}
+.vh-lib-n {
+  font-family: var(--dm-mono, ui-monospace, monospace);
+  font-size: 13px;
+  color: var(--color-fd-muted-foreground);
+}
+.vh-lib-title {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--color-fd-foreground);
+}
+.vh-lib-blurb {
+  font-size: 13.5px;
+  color: var(--color-fd-muted-foreground);
+}
+@media (max-width: 640px) {
+  .vh-lib-blurb {
+    display: none;
+  }
+}
+
+/* Showcase grid: every component advertised as a live preview card */
+.vh-sc-grid {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 560px) {
+  .vh-sc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 900px) {
+  .vh-sc-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.vh-sc {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 14px;
+  background: var(--color-fd-card);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--color-fd-foreground);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+.vh-sc:hover {
+  border-color: var(--color-fd-primary);
+  box-shadow: 0 8px 28px hsla(0, 0%, 0%, 0.07);
+  transform: translateY(-2px);
+}
+.vh-sc-stage {
+  position: relative;
+  height: 188px;
+  /* a fixed, strictly-clipped viewport: live demos animate (text/lists appear,
+   * numbers roll) and their content can grow or shrink, but the stage box never
+   * changes size and nothing leaks past its edges. */
+  display: block;
+  overflow: hidden;
+  contain: strict;
+  padding: 18px;
+  background: var(--dm-stage, #fafafa);
+  border-bottom: 1px solid var(--color-fd-border);
+  /* the live demo is non-interactive so the whole card stays one link */
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+}
+/* The scaled viewport fills the stage's padding box and clips its own content,
+ * so inner growth is absorbed here instead of resizing or overflowing the card.
+ * It is centered horizontally and anchored to the top, so a demo that grows
+ * taller extends downward under the fade rather than pushing out the top. */
+.vh-sc-inner {
+  position: absolute;
+  inset: 18px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+/* The demo itself is scaled down and pinned to the viewport width; its own
+ * height is free to animate, but the clip above keeps it inside the stage. */
+.vh-sc-inner > * {
+  flex: 0 0 auto;
+  width: 100%;
+  transform: scale(0.82);
+  transform-origin: top center;
+}
+.vh-sc-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 11px 14px;
+}
+.vh-sc-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-fd-foreground);
+}
+.vh-sc-view {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12.5px;
+  color: var(--color-fd-muted-foreground);
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+.vh-sc:hover .vh-sc-view {
+  color: var(--color-fd-primary);
+  transform: translateX(2px);
+}
+
+/* ---- Footer -------------------------------------------------------------- */
+.vh-footer {
+  margin-top: clamp(56px, 8vw, 96px);
+  padding-top: 22px;
+  border-top: 1px solid var(--color-fd-border);
+  font-size: 13.5px;
+  color: var(--color-fd-muted-foreground);
+}
+.vh-footer-link {
+  color: var(--color-fd-foreground);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---- Motion -------------------------------------------------------------- */
+@keyframes vh-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes vh-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vh-hero-copy,
+  .vh-mark,
+  .vh-mark-img {
+    animation: none;
+  }
+  .vh-cta,
+  .vh-sc,
+  .vh-sc-view {
+    transition: none;
+  }
+}
