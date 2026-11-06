@@ -22,6 +22,19 @@ jobs:
         with:
           path: docs
 
+      # Mint a short-lived token from the Visuno GitHub App so CI can read the
+      # private components repo. Requires two secrets on this repo (or the org):
+      #   VISUNO_DOCS_APP_ID          - the App's numeric ID
+      #   VISUNO_DOCS_APP_PRIVATE_KEY - the App's PEM private key
+      - name: Get components access token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.VISUNO_DOCS_APP_ID }}
+          private-key: ${{ secrets.VISUNO_DOCS_APP_PRIVATE_KEY }}
+          owner: Visuno
+          repositories: components
+
       # The prebuild script expects ../components/react next to the docs repo.
       - name: Check out reference components
         uses: actions/checkout@v4
@@ -29,6 +42,7 @@ jobs:
           repository: Visuno/components
           ref: main
           path: components
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
