@@ -1,3 +1,11 @@
 {
-  "pages": ["index", "components"]
+  "title": "Library",
+  "pages": [
+    "index",
+    "components",
+    "---Resources---",
+    "faq",
+    "changelog",
+    "roadmap"
+  ]
 }
