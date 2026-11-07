@@ -1,0 +1,127 @@
+---
+title: Composer
+description: Message input with attachments, what to work on, a mode and dictation.
+---
+
+import { Preview } from '@/components/preview';
+import { ComposerExample } from '@/components/examples/composer';
+
+The composer is the box you write to the agent in — not a plain field but a small component on a
+surface. Text grows as you type; attachments load as chips above it and hold Send until they are
+ready (a failed one shows in red with a Try again button). Two menus set what the agent works on
+(`contexts`) and what it may do (`modes`), a microphone swaps the toolbar for a dictation bar, and
+Send fires `onSubmit` and clears the box. `value`, `attachments`, `context` and `mode` are
+controllable — leave the matching input out to let the composer keep that piece itself.
+
+<Preview>
+  <ComposerExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + composer.css; core.js wires the behaviour -->
+<div data-c="composer">
+  <div class="cpx">
+    <div class="cpx-thread" aria-live="polite"></div>
+    <div class="cpx-box" data-mode="idle">
+      <div class="cpx-att"></div>
+      <textarea class="cpx-ta" rows="1" aria-label="Message"
+        placeholder="Ask the design agent, or attach a frame"></textarea>
+      <!-- toolbar: attach, context chip, mode chip, dictate, send -->
+    </div>
+  </div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { Composer } from './composer/Composer';
+
+<Composer
+  contexts={[
+    { value: 'pricing', label: 'Pricing v4', detail: 'Figma, 6 frames', icon: 'figma' },
+    { value: 'marketing', label: 'Marketing site', detail: 'Code, main branch', icon: 'code' },
+  ]}
+  defaultContext="pricing"
+  onSubmit={({ text, attachments }) => send(text, attachments)}
+  onDictate={startListening}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ComposerComponent] -->
+<dm-composer
+  [contexts]="contexts"
+  defaultContext="pricing"
+  (send)="onSend($event)"
+  (dictate)="startListening()"
+/>
+```
+
+```ts
+contexts: ComposerOption[] = [
+  { value: 'pricing', label: 'Pricing v4', detail: 'Figma, 6 frames', icon: 'figma' },
+  { value: 'marketing', label: 'Marketing site', detail: 'Code, main branch', icon: 'term' },
+];
+onSend(m: ComposerMessage) { /* m.text, m.attachments */ }
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/composer.dart';
+
+Composer(
+  contexts: const [
+    ComposerOption(value: 'pricing', label: 'Pricing v4', detail: 'Figma, 6 frames', icon: Icons.dashboard_outlined),
+    ComposerOption(value: 'marketing', label: 'Marketing site', detail: 'Code, main branch', icon: Icons.terminal),
+  ],
+  defaultContext: 'pricing',
+  onSubmit: (m) => send(m.text, m.attachments),
+  onDictate: startListening,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `value` / `defaultValue` | `string` | The text in the box. Leave `value` out to let the composer keep it. |
+| `onValueChange` | `(value) => void` | Called as the text changes. |
+| `placeholder` | `string` | The placeholder text. Becomes `Listening…` while dictating. |
+| `onSubmit` | `({ text, attachments }) => void` | Called when the person sends. The box clears itself afterwards. |
+| `busy` / `onStop` | `boolean` / `() => void` | The agent is answering: Send turns into Stop, which calls `onStop`. |
+| `thread` | `ReactNode` | The conversation shown above the box. |
+| `attachments` / `defaultAttachments` | `ComposerAttachment[]` | Chips above the text. `loading` holds Send; `error` shows red with Try again. |
+| `onAttachmentsChange` | `(attachments) => void` | Called when a chip is removed. |
+| `addOptions` / `onAdd` | `ComposerOption[]` / `(value) => void` | What the attach menu offers, and the pick. |
+| `onRetry` | `(key) => void` | Called by Try again on a failed attachment. |
+| `contexts` / `context` / `onContextChange` | `ComposerOption[]` / `string` | What the agent works on. The chip only shows when there are some. |
+| `modes` / `mode` / `onModeChange` | `ComposerOption[]` / `string` | What the agent may do. Defaults to Ask, Edit and Plan. |
+| `onDictate` | `() => void` | Called by the microphone. The mic button only shows when this is set. |
+| `dictating` / `dictationSeconds` | `boolean` / `number` | Swaps the toolbar for the dictation bar and the clock it shows. |
+| `onDictationEnd` | `(keep) => void` | Called by Cancel (`false`, text goes back) or Done (`true`, text stays). |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The box
+sits on a surface with a soft shadow and the shared tokens drive its chips, menus and the accent
+Send button, so it reads against the stage; in Soft the box and its pills are rounder.

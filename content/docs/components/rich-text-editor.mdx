@@ -1,0 +1,130 @@
+---
+title: Rich text editor
+description: A minimal editor with an inline AI menu that streams a suggestion to accept or discard.
+---
+
+import { Preview } from '@/components/preview';
+import { RichTextEditorExample } from '@/components/examples/rich-text-editor';
+
+A minimal editor for a draft an agent helps with: a formatting toolbar (heading, bold, italic,
+inline code, link, lists and quote), the text, and a quiet foot with the word count and undo. Select
+text and press **Ask AI** — or `⌘J`/`Ctrl+J`, or type `/` on a new line — and a suggestion streams in
+beside the text, the old words struck through and the new ones arriving word by word, to accept with
+`Tab` (or `Enter`) or discard with `Esc`. Pass your own `ai` to call a model; the default streams a
+canned demo.
+
+<Preview>
+  <RichTextEditorExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + rich-text-editor.css + rich-text-editor.js -->
+<div class="rte" data-st="edit">
+  <div class="rte-tb" role="toolbar" aria-label="Formatting"><!-- toolbar buttons --></div>
+  <div class="rte-body" contenteditable="true" role="textbox" aria-multiline="true"
+       data-placeholder="Write a draft, or type / on a new line for AI"><p><br></p></div>
+  <div class="rte-ft"><!-- word count, undo/redo, review bar --></div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { RichTextEditor, type RichTextEditorHandle } from './rich-text-editor/RichTextEditor';
+
+const ref = useRef<RichTextEditorHandle>(null);
+
+<RichTextEditor
+  ref={ref}
+  defaultValue="<h2>Pricing launch</h2><p>New pricing goes live on March 3.</p>"
+  onValueChange={(html) => save(html)}
+  onSuggestion={({ action, accepted }) => track(action, accepted)}
+/>;
+
+// drive it from your own shortcuts or a command menu
+ref.current?.select('New pricing goes live on March 3.');
+ref.current?.ask('shorter');
+```
+
+Pass your model as `ai` to replace the demo writer — return a string, a promise, or an async
+iterable of chunks to stream the suggestion in as the model answers.
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [RichTextEditorComponent] -->
+<dm-rich-text-editor
+  [defaultValue]="'<h2>Pricing launch</h2><p>New pricing goes live on March 3.</p>'"
+  (valueChange)="onChange($event)"
+  (suggestion)="onSuggestion($event)"
+/>
+```
+
+```ts
+// drive it through the component instance (e.g. a @ViewChild)
+editor.select('New pricing goes live on March 3.');
+editor.askAi('shorter');
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/rich_text_editor.dart';
+
+final controller = RichTextEditorController();
+
+RichTextEditor(
+  controller: controller,
+  onChanged: (text) => save(text),
+  onSuggestion: (r) => track(r.action, r.accepted),
+);
+
+// drive it through the controller
+controller.type('New pricing goes live on March 3.');
+controller.select('New pricing goes live on March 3.');
+controller.ask('shorter');
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `value` / `defaultValue` | `string` | The text as HTML: paragraphs, one heading level (`h2`), lists, quotes, and inside them bold, italic, inline code and links. Anything else is cleaned out, as on paste. |
+| `onValueChange` / `onChange` | `(html) => void` | Called with the HTML after each change the person makes. Not while a suggestion is on screen. |
+| `placeholder` | `string` | Shown while the editor is empty. |
+| `label` | `string` | The text box's accessible name. Defaults to `Draft`. |
+| `hint` | `ReactNode` | The quiet hint beside the word count, on wide editors. |
+| `ai` | `RichTextAi \| false` | Writes the AI's suggestions. Defaults to a demo that streams canned text; pass your model call, or `false` to hide the AI. |
+| `aiActions` | `RichTextAiAction[]` | The AI menu. Defaults to Improve writing, Make shorter, Fix grammar and Continue writing. |
+| `onSuggestion` | `({ action, text, accepted }) => void` | Called when a suggestion is accepted or discarded. |
+| `ref` | `RichTextEditorHandle` | A handle to drive the editor: `focus`, `getHTML`, `getText`, `setHTML`, `select`, `type`, `newLine`, `format`, `openAi`, `ask`, `accept`, `discard`, `undo`, `redo`. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The editor
+keeps one height so it sits still, and its quiet text (word count, placeholder, struck words) comes up
+toward the foreground in dark mode to stay legible. The suggestion's new words use the accent tint with
+a blur-in that is reduced to an instant reveal under `prefers-reduced-motion`. In Soft the toolbar's
+active format and the suggestion pick up a hairline of the accent mark.
+
+<Callout>
+The Flutter port approximates the contenteditable surface (which the web uses natively): the body is a
+read-oriented rich view driven through a `RichTextEditorController`, with the same toolbar, word count
+and streamed Ask-AI flow. See the file header for the full list of approximations.
+</Callout>

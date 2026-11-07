@@ -1,0 +1,147 @@
+---
+title: Answer action bar
+description: Copy, regenerate, rate and listen to an answer from one row under it.
+---
+
+import { Preview } from '@/components/preview';
+import { AnswerActionBarExample } from '@/components/examples/answer-action-bar';
+
+Every action on an answer in one raised rail under it: **copy** it, **regenerate** it — which
+keeps each version and pages between them — give it a **thumbs** up or down (a down asks what was
+off, and the reason can write a new version that answers it), and **read it aloud**, which widens
+the button into a progress bar and a clock and lights each word as it is read. Pass `versions`
+oldest first; each version carries its own `meta`, its own `rating`, and an optional `changed`
+phrase that is highlighted as what moved from the version before.
+
+<Preview>
+  <AnswerActionBarExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + answer-action-bar.css -->
+<div class="aab">
+  <p class="msg aab-t" aria-live="polite"><!-- the answer, word by word --></p>
+  <div class="aab-row">
+    <div class="aab-bar" role="toolbar" aria-label="Answer actions">
+      <button class="ib aab-cp" aria-label="Copy"><!-- copy --></button>
+      <button class="ib aab-re" aria-label="Regenerate"><!-- refresh --></button>
+      <span class="aab-pg"><!-- prev · 1 / 2 · next --></span>
+      <span class="aab-sep" aria-hidden="true"></span>
+      <button class="ib aab-up" aria-label="Good answer" aria-pressed="false"><!-- up --></button>
+      <button class="ib aab-dn" aria-label="Bad answer" aria-pressed="false"><!-- down --></button>
+      <span class="aab-sep" aria-hidden="true"></span>
+      <button class="aab-rd" aria-label="Read aloud" aria-pressed="false"><!-- read aloud --></button>
+    </div>
+    <span class="aab-meta muted num"></span>
+  </div>
+  <p class="aab-st muted" aria-live="polite"></p>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { AnswerActionBar, type AnswerVersion } from './answer-action-bar/AnswerActionBar';
+
+const versions: AnswerVersion[] = [
+  { text: 'Pro is $24 a month, or $19 billed yearly. That saves 15%.', meta: 'Sonnet 5.5 · 6.2s' },
+  {
+    text: 'Pro is $24 a month, or $19 billed yearly, which saves 21%, or $60 a year.',
+    changed: '21%, or $60 a year',
+    meta: 'Sonnet 5.5 · 4.8s',
+  },
+];
+
+<AnswerActionBar
+  question="How much do people save on the yearly Pro plan?"
+  versions={versions}
+  onRegenerate={addVersion}
+  onCopy={(text) => {}}
+  onRate={(index, rating) => {}}
+  onReason={(index, reason) => {}}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [AnswerActionBarComponent] -->
+versions: AnswerVersion[] = [
+  { text: 'Pro is $24 a month, or $19 billed yearly. That saves 15%.', meta: 'Sonnet 5.5 · 6.2s' },
+];
+
+<dm-answer-action-bar
+  [question]="'How much do people save on the yearly Pro plan?'"
+  [versions]="versions"
+  (regenerateClick)="addVersion()"
+  (copyText)="onCopy($event)"
+  (rateChange)="onRate($event)"
+  (reason)="onReason($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/answer_action_bar.dart';
+
+AnswerActionBar(
+  question: 'How much do people save on the yearly Pro plan?',
+  versions: const [
+    AnswerVersion(
+      text: 'Pro is \$24 a month, or \$19 billed yearly. That saves 15%.',
+      meta: 'Sonnet 5.5 · 6.2s',
+    ),
+  ],
+  onRegenerate: addVersion,
+  onCopy: (text) {},
+  onRate: (index, rating) {},
+  onReason: (index, reason) {},
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `question` | `string` | The person's message the answer replies to, shown as a bubble above it. |
+| `versions` | `AnswerVersion[]` | Every version of the answer so far, oldest first. |
+| `version` / `defaultVersion` | `number` | Which version is showing. Leave `version` out to let the arrows page through them. |
+| `onVersionChange` | `(index) => void` | Called when the version shown changes. |
+| `streaming` | `boolean` | The newest version is still being written: paging and reading wait. |
+| `onRegenerate` | `() => void` | Called by the regenerate button. Add a version and show it to answer it. |
+| `onCopy` | `(text) => void` | Called with the plain text after it is copied. |
+| `onRate` | `(index, rating) => void` | Called when a thumb is pressed or pressed again to clear it. |
+| `reasons` | `string[]` | The reasons a thumbs down offers. Defaults to Wrong numbers, Too long, Not our tone, Missed the brief. |
+| `onReason` | `(index, reason) => void` | Called with the reason picked after a thumbs down. |
+| `status` | `string` | The quiet line under the bar, like "Writing a new version". It shimmers while streaming. |
+| `statusTone` | `warn \| ok` | `warn` turns the status amber; `ok` gives it a green check. |
+| `reading` / `defaultReading` | `idle \| playing \| paused` | Read aloud: `playing` lights each word in turn, `paused` keeps the place. |
+| `onReadingChange` | `(state) => void` | Called when read-aloud starts, pauses, resumes or ends. |
+| `secondsPerWord` | `number` | How long the built-in reading clock gives each word. Defaults to `0.28`. |
+| `bare` | `boolean` | Sits flat in a chat thread (the default). Set `false` to give it a card of its own. |
+| `AnswerVersion` | `{ text; changed?; meta?; rating? }` | One version: its `text`, the `changed` phrase that is highlighted, its quiet `meta`, and its own `rating`. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The rail
+is a surface pill with the shared shadow; the thumbs tint with the ok and bad tokens when pressed,
+the read-aloud button and the lit word pick up the accent tint, and the changed phrase is marked
+with the ok highlight — all from the theme tokens, so the bar reads against a light or a dark
+thread.

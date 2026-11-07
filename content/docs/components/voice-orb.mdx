@@ -1,0 +1,133 @@
+---
+title: Voice orb
+description: A hands-free voice chat, with an orb that shows who is talking.
+---
+
+import { Preview } from '@/components/preview';
+import { VoiceOrbExample } from '@/components/examples/voice-orb';
+
+A hands-free voice chat on a card. The orb is a lit glass sphere that swells with whoever is
+talking — the accent colour for you, violet for the agent — with what was said underneath and mute
+and end below. It draws what you pass through `state`, `level` and `caption`; it never opens the
+microphone itself. Talking while muted shows a notice, the way calls do.
+
+<Preview>
+  <VoiceOrbExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + voice-orb.css + voice-orb.js -->
+<div class="vor panel" data-m="idle">
+  <div class="vor-top"><span class="vor-dot"></span><span class="vor-st">Ready</span><span class="vor-t num muted">0:00</span></div>
+  <div class="vor-orb" aria-hidden="true"><i class="vor-pc"></i><i class="vor-core"><canvas class="vor-gl"></canvas></i></div>
+  <div class="vor-cap" aria-live="polite"><span class="vor-who muted"></span><p class="vor-tx hint">Talk to the agent about Pricing v4</p></div>
+  <div class="vor-f">
+    <button class="pill primary sm vor-go">Start talking</button>
+    <button class="ib fill vor-mute" aria-label="Mute" aria-pressed="false">…</button>
+    <span class="sp"></span>
+    <button class="pill sm vor-end">End</button>
+  </div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { VoiceOrb, type VoiceState } from './voice-orb/VoiceOrb';
+
+const [state, setState] = useState<VoiceState>('idle');
+
+<VoiceOrb
+  state={state}
+  level={level}            // 0..1, from your audio or a made-up curve
+  muted={muted}
+  onMutedChange={setMuted}
+  mutedNotice
+  caption={{ speaker: 'Agent', text: 'Yearly is now the default.', id: 't2' }}
+  hint="Talk to the agent about Pricing v4"
+  elapsed={seconds}
+  onStart={start}
+  onEnd={end}
+  onRestart={start}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [VoiceOrbComponent] -->
+<dm-voice-orb
+  [state]="state"
+  [level]="level"
+  [muted]="muted"
+  (mutedChange)="muted = $event"
+  [mutedNotice]="true"
+  [caption]="caption"
+  hint="Talk to the agent about Pricing v4"
+  [elapsed]="seconds"
+  (start)="start()"
+  (end)="end()"
+  (restart)="start()"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/voice_orb.dart';
+
+VoiceOrb(
+  state: state,                       // VoiceState.idle, listening, thinking, speaking, ended
+  level: level,                       // 0..1
+  muted: muted,
+  onMutedChange: (v) => setState(() => muted = v),
+  mutedNotice: true,
+  caption: const VoiceCaption(speaker: 'Agent', text: 'Yearly is now the default.', id: 't2'),
+  hint: 'Talk to the agent about Pricing v4',
+  elapsed: seconds,
+  onStart: start,
+  onEnd: end,
+  onRestart: start,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `state` | `idle \| listening \| thinking \| speaking \| ended` | Where the chat is. `muted` while `listening` shows as Muted. |
+| `level` | `number` | How loud whoever is talking is, 0 to 1. The orb swells with it. |
+| `muted` | `boolean` | Your microphone is off; the mute button is pressed and Listening reads as Muted. |
+| `onMutedChange` | `(muted) => void` | The mute button and the notice's Unmute call this. |
+| `mutedNotice` | `boolean` | Shows "You're muted" with an Unmute button, for when someone talks while muted. |
+| `caption` | `{ speaker; text; id? }` | What was said last and who said it. A new `id` (or speaker) starts a new line. |
+| `hint` | `string` | Shown before anything is said, like "Talk to the agent about Pricing v4". |
+| `elapsed` | `number` | Seconds since the chat started, shown top right. |
+| `onStart` / `onEnd` | `() => void` | Start talking, and End. |
+| `onRestart` | `() => void` | Start again, from the row shown once the chat has ended. |
+| `endedDetail` | `string` | The quiet line under "Voice chat ended". Defaults to the length and "Transcript saved". |
+| `labels` | `object` | Overrides for every bit of text (status words, buttons, notice). |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The orb's
+colours flow from the tokens: the accent is yours, `--dm-pl` (violet) is the agent, and the two are
+mixed in oklch so the step between them stays bright. The glass sphere is drawn on a canvas with
+WebGL where it can, falling back to layered gradients otherwise; with reduced motion it holds a
+single still frame and only redraws when the speaker changes.
