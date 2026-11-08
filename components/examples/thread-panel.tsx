@@ -14,7 +14,7 @@ const INITIAL: Thread[] = [
   {
     id: 'onboarding',
     title: 'Onboarding',
-    color: 'var(--dm-ok-mark)',
+    color: 'var(--vo-ok-mark)',
     messages: [
       { from: 'user', text: 'Why is the workspace step losing people?' },
       {
@@ -31,7 +31,7 @@ const INITIAL: Thread[] = [
   {
     id: 'tokens',
     title: 'Tokens',
-    color: 'var(--dm-warn-mark)',
+    color: 'var(--vo-warn-mark)',
     messages: [
       { from: 'user', text: 'Which colours are still hard-coded?' },
       {
@@ -44,7 +44,7 @@ const INITIAL: Thread[] = [
   {
     id: 'launch',
     title: 'Launch email',
-    color: 'var(--dm-faint)',
+    color: 'var(--vo-faint)',
     messages: [
       { from: 'user', text: 'Draft the launch email for Friday.' },
       {

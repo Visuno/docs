@@ -58,7 +58,7 @@ runs: InboxRun[] = [
   { id: 'cards', title: 'Rework the plan cards', agent: 'Design agent', group: 'running', detail: 'Editing frame 3 of 6', seconds: 102 },
 ];
 
-<dm-agent-inbox [runs]="runs" (approve)="start($event)" (retry)="retry($event)" />
+<vo-agent-inbox [runs]="runs" (approve)="start($event)" (retry)="retry($event)" />
 ```
 
 </Tab>
@@ -96,7 +96,7 @@ AgentInbox(
 | `run.id` | `string` | Keeps a run's row when it moves group. |
 | `run.title` | `string` | What the run is for, like "Publish the pricing page". |
 | `run.agent` | `string` | Which agent runs it. Its first letter marks the row. |
-| `run.color` | `string` | The mark's fill, like `var(--dm-av-l)`. Defaults to the accent. |
+| `run.color` | `string` | The mark's fill, like `var(--vo-av-l)`. Defaults to the accent. |
 | `run.group` | `needs \| running \| done` | Which part of the inbox the run sits in. |
 | `run.detail` | `string` | The line under the title: why it needs you, or what it is doing now. |
 | `run.failed` | `boolean` | Turns the row red and offers Retry instead of Approve. |
@@ -108,5 +108,5 @@ AgentInbox(
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The panel
 sits on a surface with the card shadow; a failed run tints with the bad tokens, the running clock and
-the Approve pill use the accent, and the avatar marks take the shared `--dm-av-*` colours with their
+the Approve pill use the accent, and the avatar marks take the shared `--vo-av-*` colours with their
 own ink. In Soft the panel and its rows are rounder.

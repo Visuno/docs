@@ -113,7 +113,7 @@ export function AgentPhasesExample() {
         }
       />
       {model.phase === 'done' && (
-        <button type="button" className="dm-pill dm-ghost dm-sm" onClick={replay}>
+        <button type="button" className="vo-pill vo-ghost vo-sm" onClick={replay}>
           Replay
         </button>
       )}

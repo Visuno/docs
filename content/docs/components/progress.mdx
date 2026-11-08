@@ -23,18 +23,18 @@ follow (Pause, Resume, Run again). An optional `meter` underneath warns in words
 
 ```html
 <!-- include core.css + progress.css -->
-<div class="dm-prg dm-panel" data-s="run">
-  <div class="dm-prg-h">
-    <span class="dm-prg-ring"><span class="dm-prg-pc dm-num">42%</span></span>
-    <div class="dm-prg-t">
+<div class="vo-prg vo-panel" data-s="run">
+  <div class="vo-prg-h">
+    <span class="vo-prg-ring"><span class="vo-prg-pc vo-num">42%</span></span>
+    <div class="vo-prg-t">
       <b>Indexing the docs</b>
-      <span class="dm-muted dm-prg-vt">Step 2 of 4, embedding</span>
+      <span class="vo-muted vo-prg-vt">Step 2 of 4, embedding</span>
     </div>
-    <span class="dm-tag dm-prg-st dm-run">Running</span>
-    <button class="dm-ib dm-prg-btn" aria-label="Pause">⏸</button>
+    <span class="vo-tag vo-prg-st vo-run">Running</span>
+    <button class="vo-ib vo-prg-btn" aria-label="Pause">⏸</button>
   </div>
-  <div class="dm-prg-seg"><i><b></b></i><i><b></b></i></div>
-  <div class="dm-prg-lin"><i style="width: 42%"></i></div>
+  <div class="vo-prg-seg"><i><b></b></i><i><b></b></i></div>
+  <div class="vo-prg-lin"><i style="width: 42%"></i></div>
 </div>
 ```
 
@@ -71,7 +71,7 @@ const steps = [
 
 ```html
 <!-- imports: [ProgressComponent] -->
-<dm-progress
+<vo-progress
   title="Indexing the docs"
   state="running"
   [steps]="steps"
@@ -82,7 +82,7 @@ const steps = [
   (resume)="onResume()"
   (retry)="onRetry()"
   (restart)="onRestart()"
-></dm-progress>
+></vo-progress>
 ```
 
 </Tab>

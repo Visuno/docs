@@ -52,7 +52,7 @@ export function ToastStackExample() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%', maxWidth: 420 }}>
       <ToastStack toasts={toasts} onDismiss={dismiss} />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <button type="button" className="dm-pill dm-soft dm-sm" onClick={add}>
+        <button type="button" className="vo-pill vo-soft vo-sm" onClick={add}>
           Send notification
         </button>
       </div>

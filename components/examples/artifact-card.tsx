@@ -95,7 +95,7 @@ export function ArtifactCardExample() {
           <button
             key={vrt.value}
             type="button"
-            className="dm-pill dm-soft dm-sm"
+            className="vo-pill vo-soft vo-sm"
             aria-pressed={variant === vrt.value}
             onClick={() => setVariant(vrt.value)}
           >

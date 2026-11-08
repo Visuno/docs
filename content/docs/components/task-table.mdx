@@ -40,7 +40,7 @@ away, and when the last task is gone the table says so.
     <tbody></tbody>
   </table></div>
 </div>
-<script type="module">import { DM } from './core.js'; DM.mount();</script>
+<script type="module">import { VO } from './core.js'; VO.mount();</script>
 ```
 
 </Tab>
@@ -52,9 +52,9 @@ import { TaskTable, type Task } from './task-table/TaskTable';
 
 const tasks: Task[] = [
   { id: '1', name: 'Audit pricing contrast', status: 'running',
-    agent: { name: 'Design', initials: 'DS', color: 'var(--dm-av-b)' }, cost: 0.42, updated: 2 },
+    agent: { name: 'Design', initials: 'DS', color: 'var(--vo-av-b)' }, cost: 0.42, updated: 2 },
   { id: '2', name: 'Export tokens to CSS', status: 'done',
-    agent: { name: 'Code', initials: 'CO', color: 'var(--dm-av-m)' }, cost: 0.18, updated: 14 },
+    agent: { name: 'Code', initials: 'CO', color: 'var(--vo-av-m)' }, cost: 0.18, updated: 14 },
 ];
 
 <TaskTable
@@ -72,10 +72,10 @@ const tasks: Task[] = [
 <!-- imports: [TaskTableComponent] -->
 tasks: Task[] = [
   { id: '1', name: 'Audit pricing contrast', status: 'running',
-    agent: { name: 'Design', initials: 'DS', color: 'var(--dm-av-b)' }, cost: 0.42, updated: 2 },
+    agent: { name: 'Design', initials: 'DS', color: 'var(--vo-av-b)' }, cost: 0.42, updated: 2 },
 ];
 
-<dm-task-table
+<vo-task-table
   [tasks]="tasks"
   (action)="run($event.action, $event.ids)"
   (selectedChange)="selected = $event"
@@ -123,12 +123,12 @@ TaskTable(
 | `empty` / `emptyAction` | `ReactNode` / `{ label; onClick }` | What shows when there are no tasks, and an optional button under it. |
 
 `Task.status` is one of `running`, `failed`, `queued`, `paused` or `done`. `Task.agent` is
-`{ name, initials, color }`, where `color` is an avatar token like `var(--dm-av-b)`.
+`{ name, initials, color }`, where `color` is an avatar token like `var(--vo-av-b)`.
 
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
 sits on a surface and every colour comes from the theme tokens: the status pills tint from the
-accent (Running), `--dm-ok` (Done) and `--dm-bad` (Failed), with Queued and Paused staying muted;
+accent (Running), `--vo-ok` (Done) and `--vo-bad` (Failed), with Queued and Paused staying muted;
 the checkbox fills with the accent and its tick springs in. The table reflows into a stacked layout
 inside a narrow card via a container query, so it reads on a phone as well as full width.

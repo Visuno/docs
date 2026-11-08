@@ -48,39 +48,39 @@ function stepsFor(phase: Phase): BrowserStep[] {
 function Page({ phase }: { phase: Phase }) {
   if (phase === 'search') {
     return (
-      <div className="dm-bws-pg">
-        <div className="dm-bws-q">northwind pricing</div>
-        <div className="dm-bws-res"><b>Northwind · Docs your team reads</b><span>northwind.app</span></div>
-        <div className="dm-bws-res"><b>Northwind review: is it worth it?</b><span>softwarenotes.io</span></div>
-        <div className="dm-bws-res"><b>Northwind alternatives</b><span>stackcompare.com</span></div>
+      <div className="vo-bws-pg">
+        <div className="vo-bws-q">northwind pricing</div>
+        <div className="vo-bws-res"><b>Northwind · Docs your team reads</b><span>northwind.app</span></div>
+        <div className="vo-bws-res"><b>Northwind review: is it worth it?</b><span>softwarenotes.io</span></div>
+        <div className="vo-bws-res"><b>Northwind alternatives</b><span>stackcompare.com</span></div>
       </div>
     );
   }
   if (phase === 'home') {
     return (
-      <div className="dm-bws-pg">
-        <div className="dm-bws-nav"><b>Northwind</b><span>Product</span><span>Pricing</span><span>Docs</span></div>
-        <div className="dm-bws-hd">Docs your team actually reads</div>
-        <span className="dm-bws-ln" style={{ width: '92%' }} />
-        <span className="dm-bws-ln" style={{ width: '68%' }} />
-        <span className="dm-bws-cta">Start free</span>
+      <div className="vo-bws-pg">
+        <div className="vo-bws-nav"><b>Northwind</b><span>Product</span><span>Pricing</span><span>Docs</span></div>
+        <div className="vo-bws-hd">Docs your team actually reads</div>
+        <span className="vo-bws-ln" style={{ width: '92%' }} />
+        <span className="vo-bws-ln" style={{ width: '68%' }} />
+        <span className="vo-bws-cta">Start free</span>
       </div>
     );
   }
   // pricing, blocked, reading and done all show the pricing page
   const hit = phase === 'reading' || phase === 'done';
   return (
-    <div className="dm-bws-pg">
-      <div className="dm-bws-nav"><b>Northwind</b><span>Product</span><span className="dm-on">Pricing</span><span>Docs</span></div>
-      <div className="dm-bws-hd">Plans and pricing</div>
-      <span className="dm-bws-ln" style={{ width: '78%' }} />
-      <div className="dm-bws-tb">
+    <div className="vo-bws-pg">
+      <div className="vo-bws-nav"><b>Northwind</b><span>Product</span><span className="vo-on">Pricing</span><span>Docs</span></div>
+      <div className="vo-bws-hd">Plans and pricing</div>
+      <span className="vo-bws-ln" style={{ width: '78%' }} />
+      <div className="vo-bws-tb">
         <div><span>Plan</span><span>Per seat, monthly</span></div>
-        <div><span>Starter</span><span className={'dm-num' + (hit ? ' dm-hit' : '')}>$8</span></div>
-        <div><span>Team</span><span className={'dm-num' + (hit ? ' dm-hit' : '')}>$16</span></div>
-        <div><span>Business</span><span className={'dm-num' + (hit ? ' dm-hit' : '')}>$32</span></div>
+        <div><span>Starter</span><span className={'vo-num' + (hit ? ' vo-hit' : '')}>$8</span></div>
+        <div><span>Team</span><span className={'vo-num' + (hit ? ' vo-hit' : '')}>$16</span></div>
+        <div><span>Business</span><span className={'vo-num' + (hit ? ' vo-hit' : '')}>$32</span></div>
       </div>
-      <span className="dm-bws-ln" style={{ width: '64%' }} />
+      <span className="vo-bws-ln" style={{ width: '64%' }} />
     </div>
   );
 }
@@ -135,7 +135,7 @@ export function BrowserSessionExample() {
         <Page phase={phase} />
       </BrowserSession>
       {phase === 'done' && (
-        <button type="button" className="dm-pill dm-ghost dm-sm" onClick={replay}>
+        <button type="button" className="vo-pill vo-ghost vo-sm" onClick={replay}>
           Replay
         </button>
       )}

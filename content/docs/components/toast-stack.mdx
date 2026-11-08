@@ -23,12 +23,12 @@ optional `detail` line and a `time`. Pass the toasts oldest-first; dismiss one w
 
 ```html
 <!-- include core.css + toast-stack.css -->
-<div class="dm-tsk-stack" aria-live="polite">
-  <div class="dm-tsk-c">
-    <span class="dm-g"><!-- tone icon --></span>
-    <div class="dm-tx"><b>Tests passed</b><span>42 of 42 in 38s</span></div>
-    <span class="dm-t">now</span>
-    <button class="dm-ib" aria-label="Dismiss"><!-- x --></button>
+<div class="vo-tsk-stack" aria-live="polite">
+  <div class="vo-tsk-c">
+    <span class="vo-g"><!-- tone icon --></span>
+    <div class="vo-tx"><b>Tests passed</b><span>42 of 42 in 38s</span></div>
+    <span class="vo-t">now</span>
+    <button class="vo-ib" aria-label="Dismiss"><!-- x --></button>
   </div>
 </div>
 <!-- the deck fans out on hover; toast-stack.js lays out, stacks and dismisses -->
@@ -60,7 +60,7 @@ toasts: StackToast[] = [
   { id: 2, icon: 'pr', tone: 'merge', title: 'PR #412 is ready', time: 'now' },
 ];
 
-<dm-toast-stack [toasts]="toasts" (dismiss)="toasts = toasts.filter(t => t.id !== $event)" />
+<vo-toast-stack [toasts]="toasts" (dismiss)="toasts = toasts.filter(t => t.id !== $event)" />
 ```
 
 </Tab>

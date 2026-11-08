@@ -24,19 +24,19 @@ waits, and the `status` beside the buttons shimmers.
 
 ```html
 <!-- include core.css + response-versions.css -->
-<div class="dm-rvx">
-  <div class="dm-bub">Write a headline for the pricing page</div>
-  <div class="dm-rvx-a">
-    <p class="dm-msg dm-rvx-t" aria-live="polite"><!-- words --></p>
-    <div class="dm-rvx-bar">
-      <div class="dm-rvx-pg">
-        <button class="dm-ib" aria-label="Previous version"><!-- chev-l --></button>
-        <span class="dm-rvx-n dm-num">1 / 1</span>
-        <button class="dm-ib" aria-label="Next version"><!-- chev-r --></button>
+<div class="vo-rvx">
+  <div class="vo-bub">Write a headline for the pricing page</div>
+  <div class="vo-rvx-a">
+    <p class="vo-msg vo-rvx-t" aria-live="polite"><!-- words --></p>
+    <div class="vo-rvx-bar">
+      <div class="vo-rvx-pg">
+        <button class="vo-ib" aria-label="Previous version"><!-- chev-l --></button>
+        <span class="vo-rvx-n vo-num">1 / 1</span>
+        <button class="vo-ib" aria-label="Next version"><!-- chev-r --></button>
       </div>
-      <button class="dm-ib dm-rvx-re" aria-label="Regenerate"><!-- refresh --></button>
-      <button class="dm-ib" aria-label="Copy"><!-- copy --></button>
-      <span class="dm-rvx-st dm-muted"></span>
+      <button class="vo-ib vo-rvx-re" aria-label="Regenerate"><!-- refresh --></button>
+      <button class="vo-ib" aria-label="Copy"><!-- copy --></button>
+      <span class="vo-rvx-st vo-muted"></span>
     </div>
   </div>
 </div>
@@ -71,7 +71,7 @@ const [version, setVersion] = useState(0);
 <!-- imports: [ResponseVersionsComponent] -->
 versions = ['Pricing that grows with your team.'];
 
-<dm-response-versions
+<vo-response-versions
   prompt="Write a headline for the pricing page"
   [versions]="versions"
   [version]="version"
@@ -123,4 +123,4 @@ ResponseVersions(
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The prompt
 bubble, the muted count and status, and the icon buttons all take their colour from the theme tokens;
 each new word fades in, the regenerate glyph turns a full circle, and copy flips to a check in the
-`--dm-ok` colour. Reduced motion drops the word fade, the spin and the status shimmer.
+`--vo-ok` colour. Reduced motion drops the word fade, the spin and the status shimmer.

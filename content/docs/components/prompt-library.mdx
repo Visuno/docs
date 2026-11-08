@@ -23,12 +23,12 @@ value; try it empty and each missing blank turns red and says what it needs.
 
 ```html
 <!-- include core.css + prompt-library.css -->
-<div class="dm-plb dm-panel" data-c="prompt-library">
-  <div class="dm-plb-list">
-    <div class="dm-plb-h">
-      <div class="dm-plb-ht"><b>Prompt library</b><span class="dm-muted">Shared with Visuno Studio</span></div>
+<div class="vo-plb vo-panel" data-c="prompt-library">
+  <div class="vo-plb-list">
+    <div class="vo-plb-h">
+      <div class="vo-plb-ht"><b>Prompt library</b><span class="vo-muted">Shared with Visuno Studio</span></div>
     </div>
-    <div class="dm-plb-rows"><!-- a .dm-plb-row button per saved prompt --></div>
+    <div class="vo-plb-rows"><!-- a .vo-plb-row button per saved prompt --></div>
   </div>
 </div>
 ```
@@ -79,7 +79,7 @@ prompts: SavedPrompt[] = [
   },
 ];
 
-<dm-prompt-library
+<vo-prompt-library
   [prompts]="prompts"
   subtitle="Shared with Visuno Studio"
   (usePrompt)="send($event.text)"
@@ -139,6 +139,6 @@ PromptLibrary(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
-sits on a surface, the prompt on a chip, and a filled blank takes the accent tint (`--dm-accent-bg`)
-while an empty one is outlined and a needed one turns `--dm-bad` — all from the theme tokens, so it
+sits on a surface, the prompt on a chip, and a filled blank takes the accent tint (`--vo-accent-bg`)
+while an empty one is outlined and a needed one turns `--vo-bad` — all from the theme tokens, so it
 reads in either mode; in Soft the card, fields and pills are rounder.

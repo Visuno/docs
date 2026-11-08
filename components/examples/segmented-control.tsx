@@ -36,12 +36,12 @@ export function SegmentedControlExample() {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 'var(--dm-6, 24px)',
+        gap: 'var(--vo-6, 24px)',
         width: '100%',
         maxWidth: 420,
       }}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--dm-3, 12px)' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--vo-3, 12px)' }}>
         <SegmentedControl
           label="Range"
           options={RANGE}
@@ -54,9 +54,9 @@ export function SegmentedControlExample() {
           role="tabpanel"
           aria-labelledby={`sgc-range-${range}`}
           style={{
-            padding: 'var(--dm-3, 12px) var(--dm-4, 16px)',
-            borderRadius: 'var(--dm-r, 12px)',
-            background: 'var(--dm-surface-2, rgba(128,128,128,0.08))',
+            padding: 'var(--vo-3, 12px) var(--vo-4, 16px)',
+            borderRadius: 'var(--vo-r, 12px)',
+            background: 'var(--vo-surface-2, rgba(128,128,128,0.08))',
             fontSize: 14,
           }}
         >
@@ -64,8 +64,8 @@ export function SegmentedControlExample() {
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--dm-2, 8px)' }}>
-        <span style={{ fontSize: 12, color: 'var(--dm-muted)' }}>As a radio group</span>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--vo-2, 8px)' }}>
+        <span style={{ fontSize: 12, color: 'var(--vo-muted)' }}>As a radio group</span>
         <SegmentedControl
           label="Density"
           as="radio"

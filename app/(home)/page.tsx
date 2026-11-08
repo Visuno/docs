@@ -37,7 +37,7 @@ export const metadata: Metadata = {
  * hero with a copy-ready install line and two live, self-animating components; the
  * frameworks we ship; and the full library — every component advertised as a live
  * preview card that links into its docs. Page chrome uses Fumadocs --color-fd-*
- * tokens for strong contrast in both themes; live stages use the Visuno --dm-*
+ * tokens for strong contrast in both themes; live stages use the Visuno --vo-*
  * system so the components look exactly as they ship.
  */
 

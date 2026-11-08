@@ -34,7 +34,7 @@ export function Preview({ children }: { children: ReactNode }) {
         data-theme={dark ? 'dark' : 'light'}
         data-style={soft ? 'soft' : undefined}
         className="grid min-h-45 place-items-center p-8"
-        style={{ background: 'var(--dm-stage)' }}
+        style={{ background: 'var(--vo-stage)' }}
       >
         {children}
       </div>

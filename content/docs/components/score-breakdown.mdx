@@ -72,7 +72,7 @@ factors: ScoreFactor[] = [
   { key: 'speed', label: 'Speed', weight: 20, earned: 11, note: 'Median reply 6.4s, target under 4s', improvable: true },
 ];
 
-<dm-score-breakdown
+<vo-score-breakdown
   [factors]="factors"
   title="Support agent quality"
   [previous]="77"
@@ -125,6 +125,6 @@ ScoreBreakdown(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The gauge
-segments and the row swatches use the chart palette (`--dm-c1`…`--dm-c6`); the band chip, the Weakest
-flag and the proposal card tint from the theme tokens (`--dm-ok`, `--dm-warn`, `--dm-surface`,
-`--dm-line`), so the breakdown reads on either background. In Soft the rows and buttons are rounder.
+segments and the row swatches use the chart palette (`--vo-c1`…`--vo-c6`); the band chip, the Weakest
+flag and the proposal card tint from the theme tokens (`--vo-ok`, `--vo-warn`, `--vo-surface`,
+`--vo-line`), so the breakdown reads on either background. In Soft the rows and buttons are rounder.

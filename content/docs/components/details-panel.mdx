@@ -60,9 +60,9 @@ const sections: DetailsPanelSection[] = [
         type: 'select',
         defaultValue: 'review',
         options: [
-          { value: 'progress', label: 'In progress', color: 'var(--dm-py)' },
-          { value: 'review', label: 'In review', color: 'var(--dm-accent)' },
-          { value: 'shipped', label: 'Shipped', color: 'var(--dm-ok)' },
+          { value: 'progress', label: 'In progress', color: 'var(--vo-py)' },
+          { value: 'review', label: 'In review', color: 'var(--vo-accent)' },
+          { value: 'shipped', label: 'Shipped', color: 'var(--vo-ok)' },
         ],
       },
       { key: 'tokens', label: 'Tokens', type: 'number', value: 184200 },
@@ -86,15 +86,15 @@ sections: DetailsPanelSection[] = [
     rows: [
       { key: 'status', label: 'Status', type: 'select', defaultValue: 'review',
         options: [
-          { value: 'progress', label: 'In progress', color: 'var(--dm-py)' },
-          { value: 'review', label: 'In review', color: 'var(--dm-accent)' },
+          { value: 'progress', label: 'In progress', color: 'var(--vo-py)' },
+          { value: 'review', label: 'In review', color: 'var(--vo-accent)' },
         ] },
       { key: 'tokens', label: 'Tokens', type: 'number', value: 184200 },
     ],
   },
 ];
 
-<dm-details-panel
+<vo-details-panel
   title="Pricing page redesign"
   kind="RUN"
   copyValue="run_8f2a"

@@ -10,9 +10,9 @@ import { HumanHandoff, type HandoffPerson, type HandoffStatus } from '@visuno/hu
  * "with Alex". Uses the real Visuno component; respects prefers-reduced-motion.
  */
 const PEOPLE: HandoffPerson[] = [
-  { name: 'Alex Rivera', initials: 'AR', color: 'var(--dm-av-m)', team: 'Billing', presence: 'Available', tone: 'ok' },
-  { name: 'Sam Ortiz', initials: 'SO', color: 'var(--dm-av-p)', team: 'Billing', presence: 'In a call' },
-  { name: 'Maya Chen', initials: 'MC', color: 'var(--dm-av-l)', team: 'Billing', presence: 'Out until 2pm', tone: 'warn' },
+  { name: 'Alex Rivera', initials: 'AR', color: 'var(--vo-av-m)', team: 'Billing', presence: 'Available', tone: 'ok' },
+  { name: 'Sam Ortiz', initials: 'SO', color: 'var(--vo-av-p)', team: 'Billing', presence: 'In a call' },
+  { name: 'Maya Chen', initials: 'MC', color: 'var(--vo-av-l)', team: 'Billing', presence: 'Out until 2pm', tone: 'warn' },
 ];
 
 const FACTS = [

@@ -50,8 +50,8 @@ label. The rows stagger in again whenever the search or the filter changes.
 import { AccountTable, type AccountTableAccount } from './account-table/AccountTable';
 
 const accounts: AccountTableAccount[] = [
-  { name: 'Northwind', color: 'var(--dm-av-b)', plan: 'Enterprise', seats: 120, health: 92, mrr: '$14,400', note: 'Expanding. Design team added 18 seats this month.' },
-  { name: 'Lumen Labs', color: 'var(--dm-av-l)', plan: 'Pro', seats: 14, health: 48, mrr: '$672', note: 'Usage fell 40% after their lead designer left.' },
+  { name: 'Northwind', color: 'var(--vo-av-b)', plan: 'Enterprise', seats: 120, health: 92, mrr: '$14,400', note: 'Expanding. Design team added 18 seats this month.' },
+  { name: 'Lumen Labs', color: 'var(--vo-av-l)', plan: 'Pro', seats: 14, health: 48, mrr: '$672', note: 'Usage fell 40% after their lead designer left.' },
 ];
 
 <AccountTable
@@ -67,12 +67,12 @@ const accounts: AccountTableAccount[] = [
 ```html
 <!-- imports: [AccountTableComponent] -->
 accounts: AccountTableAccount[] = [
-  { name: 'Northwind', color: 'var(--dm-av-b)', plan: 'Enterprise', seats: 120, health: 92, mrr: '$14,400', note: 'Expanding. Design team added 18 seats this month.' },
-  { name: 'Lumen Labs', color: 'var(--dm-av-l)', plan: 'Pro', seats: 14, health: 48, mrr: '$672', note: 'Usage fell 40% after their lead designer left.' },
+  { name: 'Northwind', color: 'var(--vo-av-b)', plan: 'Enterprise', seats: 120, health: 92, mrr: '$14,400', note: 'Expanding. Design team added 18 seats this month.' },
+  { name: 'Lumen Labs', color: 'var(--vo-av-l)', plan: 'Pro', seats: 14, health: 48, mrr: '$672', note: 'Usage fell 40% after their lead designer left.' },
 ];
 action: AccountTableAction = { label: 'Draft email', doneLabel: 'Draft ready', onClick: () => this.draft() };
 
-<dm-account-table [accounts]="accounts" [action]="action" (openChange)="onOpen($event)" />
+<vo-account-table [accounts]="accounts" [action]="action" (openChange)="onOpen($event)" />
 ```
 
 </Tab>

@@ -76,9 +76,9 @@ export function DetailsPanelExample() {
           type: 'select',
           defaultValue: 'review',
           options: [
-            { value: 'progress', label: 'In progress', color: 'var(--dm-py)' },
-            { value: 'review', label: 'In review', color: 'var(--dm-accent-mark, var(--dm-accent))' },
-            { value: 'shipped', label: 'Shipped', color: 'var(--dm-ok)' },
+            { value: 'progress', label: 'In progress', color: 'var(--vo-py)' },
+            { value: 'review', label: 'In review', color: 'var(--vo-accent-mark, var(--vo-accent))' },
+            { value: 'shipped', label: 'Shipped', color: 'var(--vo-ok)' },
           ],
         },
         {
@@ -87,9 +87,9 @@ export function DetailsPanelExample() {
           type: 'select',
           defaultValue: 'maya',
           options: [
-            { value: 'maya', label: 'Maya Kim', avatar: { initials: 'MK', color: 'var(--dm-av-l)' } },
-            { value: 'jon', label: 'Jon Ortiz', avatar: { initials: 'JO', color: 'var(--dm-av-m)' } },
-            { value: 'agent', label: 'Design agent', avatar: { initials: 'DA', color: 'var(--dm-av-b)' } },
+            { value: 'maya', label: 'Maya Kim', avatar: { initials: 'MK', color: 'var(--vo-av-l)' } },
+            { value: 'jon', label: 'Jon Ortiz', avatar: { initials: 'JO', color: 'var(--vo-av-m)' } },
+            { value: 'agent', label: 'Design agent', avatar: { initials: 'DA', color: 'var(--vo-av-b)' } },
           ],
         },
         {

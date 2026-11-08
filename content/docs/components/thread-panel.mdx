@@ -24,21 +24,21 @@ shimmers while the agent works on a reply.
 
 ```html
 <!-- include core.css + thread-panel.css -->
-<div class="dm-thp dm-panel">
-  <div class="dm-thp-tabs" role="tablist">
-    <button class="dm-thp-tab" role="tab" aria-selected="true">
-      <span class="dm-dot" style="color:var(--dm-ok-mark)"></span>Onboarding
+<div class="vo-thp vo-panel">
+  <div class="vo-thp-tabs" role="tablist">
+    <button class="vo-thp-tab" role="tab" aria-selected="true">
+      <span class="vo-dot" style="color:var(--vo-ok-mark)"></span>Onboarding
     </button>
     <!-- more tabs -->
-    <span class="dm-thp-ink"></span>
+    <span class="vo-thp-ink"></span>
   </div>
-  <div class="dm-thp-body" aria-live="polite">
-    <div class="dm-bub">Why is the workspace step losing people?</div>
-    <div class="dm-thp-ag">Moving the team-name step after the first project should help.</div>
+  <div class="vo-thp-body" aria-live="polite">
+    <div class="vo-bub">Why is the workspace step losing people?</div>
+    <div class="vo-thp-ag">Moving the team-name step after the first project should help.</div>
   </div>
-  <form class="dm-thp-in">
-    <input class="dm-thp-field" aria-label="Reply" placeholder="Reply to the agent" />
-    <button class="dm-thp-send" aria-label="Send" disabled><!-- up arrow --></button>
+  <form class="vo-thp-in">
+    <input class="vo-thp-field" aria-label="Reply" placeholder="Reply to the agent" />
+    <button class="vo-thp-send" aria-label="Send" disabled><!-- up arrow --></button>
   </form>
 </div>
 ```
@@ -54,7 +54,7 @@ const [threads, setThreads] = useState<Thread[]>([
   {
     id: 'onboarding',
     title: 'Onboarding',
-    color: 'var(--dm-ok-mark)',
+    color: 'var(--vo-ok-mark)',
     messages: [
       { from: 'user', text: 'Why is the workspace step losing people?' },
       { from: 'agent', text: 'Moving the team-name step after the first project should help.' },
@@ -84,7 +84,7 @@ threads: Thread[] = [
   {
     id: 'onboarding',
     title: 'Onboarding',
-    color: 'var(--dm-ok-mark)',
+    color: 'var(--vo-ok-mark)',
     messages: [
       { from: 'user', text: 'Why is the workspace step losing people?' },
       { from: 'agent', text: 'Moving the team-name step after the first project should help.' },
@@ -92,7 +92,7 @@ threads: Thread[] = [
   },
 ];
 
-<dm-thread-panel [threads]="threads" (sendMessage)="add($event)" />
+<vo-thread-panel [threads]="threads" (sendMessage)="add($event)" />
 ```
 
 </Tab>

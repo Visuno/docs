@@ -24,18 +24,18 @@ then settles when it turns `ready`. From there you can open the file in a reader
 
 ```html
 <!-- include core.css + artifact-card.css -->
-<div class="dm-afx">
-  <div class="dm-afx-w">
-    <div class="dm-afx-cp-card dm-afx-card">
-      <span class="dm-afx-ic"><!-- file icon --></span>
-      <div class="dm-afx-cp-tx">
-        <div class="dm-afx-cp-t">Pricing page review</div>
-        <div class="dm-afx-meta"><span class="dm-afx-fin">Report · v3 · edited just now</span></div>
+<div class="vo-afx">
+  <div class="vo-afx-w">
+    <div class="vo-afx-cp-card vo-afx-card">
+      <span class="vo-afx-ic"><!-- file icon --></span>
+      <div class="vo-afx-cp-tx">
+        <div class="vo-afx-cp-t">Pricing page review</div>
+        <div class="vo-afx-meta"><span class="vo-afx-fin">Report · v3 · edited just now</span></div>
       </div>
-      <div class="dm-afx-cp-act">
-        <button class="dm-ib dm-afx-copy" aria-label="Copy"><!-- copy --></button>
-        <button class="dm-ib dm-afx-dl" aria-label="Download"><!-- download --></button>
-        <button class="dm-pill dm-sm dm-accent dm-afx-open">Open</button>
+      <div class="vo-afx-cp-act">
+        <button class="vo-ib vo-afx-copy" aria-label="Copy"><!-- copy --></button>
+        <button class="vo-ib vo-afx-dl" aria-label="Download"><!-- download --></button>
+        <button class="vo-pill vo-sm vo-accent vo-afx-open">Open</button>
       </div>
     </div>
   </div>
@@ -75,7 +75,7 @@ versions: ArtifactVersion[] = [
   { title: 'Pricing page review', meta: 'edited just now', note: 'Fixes, ordered by impact', content: '# Pricing page review\n\n## Summary\n\n…' },
 ];
 
-<dm-artifact-card
+<vo-artifact-card
   variant="compact"
   [versions]="versions"
   kind="Report"

@@ -58,11 +58,11 @@ import { ContextMeter } from './context-meter/ContextMeter';
 
 ```html
 <!-- imports: [ContextMeterComponent] -->
-<dm-context-meter
+<vo-context-meter
   [limit]="200000"
   [parts]="parts"
   (compact)="summarise()"
-></dm-context-meter>
+></vo-context-meter>
 
 // parts: ContextPart[] = [
 //   { key: 'files', label: 'Files', tokens: 56200, items: 'PricingCard.tsx 18.2k, tokens.css 6.1k' },

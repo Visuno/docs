@@ -80,7 +80,7 @@ scopes: PermissionScope[] = [
   { key: 'publish', label: 'Publish library', detail: 'Affects 4 other files', risk: 'Risky' },
 ];
 
-<dm-permission-gate
+<vo-permission-gate
   [bare]="false"
   title="Allow the agent to edit Figma?"
   subtitle="It needs this to apply the pricing fixes"
@@ -144,6 +144,6 @@ PermissionGate(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The scopes,
-footer and result row all draw from the shared `--dm-*` tokens: the ticked box and primary button take
+footer and result row all draw from the shared `--vo-*` tokens: the ticked box and primary button take
 the accent, the risk tag and the follow-up tile the warn tint, and the allowed row the ok tint; in Soft
 the card, pills and tick boxes are rounder.

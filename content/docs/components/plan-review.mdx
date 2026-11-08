@@ -24,29 +24,29 @@ them; in `done` the footer offers **See changes**.
 
 ```html
 <!-- include core.css + plan-review.css -->
-<div class="dm-plx">
-  <div class="dm-plx-h">
-    <span class="dm-think dm-plx-mk"><i></i><i></i><i></i><i></i></span>
-    <div class="dm-plx-ht">
+<div class="vo-plx">
+  <div class="vo-plx-h">
+    <span class="vo-think vo-plx-mk"><i></i><i></i><i></i><i></i></span>
+    <div class="vo-plx-ht">
       <b>Plan: redesign the pricing page</b>
-      <span class="dm-muted dm-plx-st">5 steps, about 4 min</span>
+      <span class="vo-muted vo-plx-st">5 steps, about 4 min</span>
     </div>
   </div>
-  <ol class="dm-plx-list">
-    <li class="dm-plx-s">
-      <span class="dm-n">1</span>
-      <span class="dm-b">
-        <span class="dm-t" contenteditable="true" role="textbox">Read the pricing frames</span>
-        <span class="dm-d"><span></span></span>
+  <ol class="vo-plx-list">
+    <li class="vo-plx-s">
+      <span class="vo-n">1</span>
+      <span class="vo-b">
+        <span class="vo-t" contenteditable="true" role="textbox">Read the pricing frames</span>
+        <span class="vo-d"><span></span></span>
       </span>
-      <button class="dm-ib dm-plx-x" aria-label="Skip step"><!-- x --></button>
+      <button class="vo-ib vo-plx-x" aria-label="Skip step"><!-- x --></button>
     </li>
   </ol>
-  <button class="dm-plx-add"><!-- plus -->Add a step</button>
-  <div class="dm-plx-f">
-    <span class="dm-muted dm-plx-n">Click a step to edit it</span>
-    <button class="dm-pill dm-ghost dm-sm dm-plx-chg">Ask for changes</button>
-    <button class="dm-pill dm-primary dm-sm dm-plx-go">Approve plan</button>
+  <button class="vo-plx-add"><!-- plus -->Add a step</button>
+  <div class="vo-plx-f">
+    <span class="vo-muted vo-plx-n">Click a step to edit it</span>
+    <button class="vo-pill vo-ghost vo-sm vo-plx-chg">Ask for changes</button>
+    <button class="vo-pill vo-primary vo-sm vo-plx-go">Approve plan</button>
   </div>
 </div>
 ```
@@ -86,7 +86,7 @@ steps: PlanReviewStep[] = [
   { id: '3', text: 'Simplify the plan cards to one CTA each' },
 ];
 
-<dm-plan-review
+<vo-plan-review
   title="Plan: redesign the pricing page"
   [steps]="steps"
   phase="review"

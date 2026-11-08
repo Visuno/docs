@@ -24,19 +24,19 @@ change in the line below, and the legend shows and hides either series (one alwa
 
 ```html
 <!-- include core.css + radar-chart.css -->
-<div class="dm-rdx dm-panel">
-  <div class="dm-rdx-h">
-    <div class="dm-rdx-t"><b>Eval scores</b><span class="dm-muted">Run 48 against run 41</span></div>
-    <div class="dm-rdx-lg">
-      <button class="dm-rdx-k" aria-pressed="true"><i class="dm-c"></i>This run</button>
-      <button class="dm-rdx-k" aria-pressed="true"><i class="dm-b"></i>Baseline</button>
+<div class="vo-rdx vo-panel">
+  <div class="vo-rdx-h">
+    <div class="vo-rdx-t"><b>Eval scores</b><span class="vo-muted">Run 48 against run 41</span></div>
+    <div class="vo-rdx-lg">
+      <button class="vo-rdx-k" aria-pressed="true"><i class="vo-c"></i>This run</button>
+      <button class="vo-rdx-k" aria-pressed="true"><i class="vo-b"></i>Baseline</button>
     </div>
   </div>
-  <div class="dm-rdx-ch" role="group">
-    <svg class="dm-rdx-svg"><!-- rings, spokes, baseline + this run polygons --></svg>
-    <!-- one .dm-rdx-ax label per axis -->
+  <div class="vo-rdx-ch" role="group">
+    <svg class="vo-rdx-svg"><!-- rings, spokes, baseline + this run polygons --></svg>
+    <!-- one .vo-rdx-ax label per axis -->
   </div>
-  <div class="dm-rdx-ro" aria-live="polite"><span><!-- the note or the axis in hand --></span></div>
+  <div class="vo-rdx-ro" aria-live="polite"><span><!-- the note or the axis in hand --></span></div>
 </div>
 ```
 
@@ -74,7 +74,7 @@ axes: RadarAxis[] = [
   { label: 'Safety', value: 91, baseline: 90 },
 ];
 
-<dm-radar-chart [axes]="axes" subtitle="Run 48 against run 41" [pulse]="2" />
+<vo-radar-chart [axes]="axes" subtitle="Run 48 against run 41" [pulse]="2" />
 ```
 
 </Tab>
@@ -120,7 +120,7 @@ shown instead of `label` on a narrow card, and `value`/`baseline` are 0 to 100.
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). This run
-and the baseline take the chart palette tokens (`--dm-c1`, `--dm-c2`), the rings and spokes read from
+and the baseline take the chart palette tokens (`--vo-c1`, `--vo-c2`), the rings and spokes read from
 the line tokens, and the card, the "Weak" tag and the readout line come from the theme tokens. The
 baseline draws itself and this run's fill scales in from the middle on load; with
 `prefers-reduced-motion` the chart appears already drawn.

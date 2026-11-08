@@ -67,7 +67,7 @@ views = [
   { key: 'team', label: 'Teams', values: [4100, 3570, 2980, 1890, 1210], insight: 'Teams convert well.' },
 ];
 
-<dm-funnel-chart
+<vo-funnel-chart
   title="Signup to paid"
   [stages]="stages"
   [views]="views"
@@ -121,7 +121,7 @@ FunnelChart(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
-sits on a surface and the bars run from the first chart colour (`--dm-c1`, the accent) down to the
-next (`--dm-c2`), so each stage reads a shade apart; the biggest drop uses the bad tone and the
+sits on a surface and the bars run from the first chart colour (`--vo-c1`, the accent) down to the
+next (`--vo-c2`), so each stage reads a shade apart; the biggest drop uses the bad tone and the
 agent's note tints with the accent — all from the theme tokens. In the default style the bars carry
 a light accent edge on the track; in Soft they are flat fills.

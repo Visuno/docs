@@ -42,8 +42,8 @@ green once they have.
 import { HumanHandoff, type HandoffPerson } from './human-handoff/HumanHandoff';
 
 const billing: HandoffPerson[] = [
-  { name: 'Alex Rivera', color: 'var(--dm-av-m)', team: 'Billing', presence: 'Available', tone: 'ok' },
-  { name: 'Maya Chen', color: 'var(--dm-av-l)', team: 'Billing', presence: 'Out until 2pm', tone: 'warn' },
+  { name: 'Alex Rivera', color: 'var(--vo-av-m)', team: 'Billing', presence: 'Available', tone: 'ok' },
+  { name: 'Maya Chen', color: 'var(--vo-av-l)', team: 'Billing', presence: 'Out until 2pm', tone: 'warn' },
 ];
 
 <HumanHandoff
@@ -69,10 +69,10 @@ const billing: HandoffPerson[] = [
 ```html
 <!-- imports: [HumanHandoffComponent] -->
 billing: HandoffPerson[] = [
-  { name: 'Alex Rivera', color: 'var(--dm-av-m)', team: 'Billing', presence: 'Available', tone: 'ok' },
+  { name: 'Alex Rivera', color: 'var(--vo-av-m)', team: 'Billing', presence: 'Available', tone: 'ok' },
 ];
 
-<dm-human-handoff
+<vo-human-handoff
   reason="Refund over $500 needs a person"
   [assignee]="billing[0]"
   [people]="billing"
@@ -99,7 +99,7 @@ import 'components/human_handoff.dart';
 HumanHandoff(
   reason: 'Refund over \$500 needs a person',
   assignee: const HandoffPerson(
-    name: 'Alex Rivera', color: DmAvatar.mint, team: 'Billing',
+    name: 'Alex Rivera', color: VoAvatar.mint, team: 'Billing',
     presence: 'Available', tone: HandoffPresenceTone.ok,
   ),
   people: billing,
@@ -150,5 +150,5 @@ key, `tone` puts a green or orange dot before the presence.
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
 sits on a surface; the countdown bar, the presence dot and the foot row take their colours from the
-`--dm-*` tokens — amber from the warn tokens under five minutes or when the person is out, green from
+`--vo-*` tokens — amber from the warn tokens under five minutes or when the person is out, green from
 the ok tokens once they have it. The two columns stack when the card is narrow.

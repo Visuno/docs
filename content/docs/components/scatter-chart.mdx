@@ -24,16 +24,16 @@ ids to circle outliers, and an `onAsk` handler to add "Ask the agent why" to a s
 
 ```html
 <!-- include core.css + scatter-chart.css -->
-<div class="dm-cvq dm-panel">
-  <div class="dm-cvq-h">
-    <div class="dm-cvq-t"><b>Cost vs quality</b><span class="dm-muted">48 runs this week</span></div>
-    <div class="dm-cvq-lg"><!-- one legend key per series --></div>
+<div class="vo-cvq vo-panel">
+  <div class="vo-cvq-h">
+    <div class="vo-cvq-t"><b>Cost vs quality</b><span class="vo-muted">48 runs this week</span></div>
+    <div class="vo-cvq-lg"><!-- one legend key per series --></div>
   </div>
-  <div class="dm-cvq-pl" tabindex="0" role="group" aria-roledescription="scatter chart">
-    <svg class="dm-cvq-svg"><!-- gridlines, axes, medians, dots --></svg>
-    <div class="dm-cvq-tt"></div>
+  <div class="vo-cvq-pl" tabindex="0" role="group" aria-roledescription="scatter chart">
+    <svg class="vo-cvq-svg"><!-- gridlines, axes, medians, dots --></svg>
+    <div class="vo-cvq-tt"></div>
   </div>
-  <div class="dm-cvq-ft" aria-live="polite"><span class="dm-cvq-msg"></span></div>
+  <div class="vo-cvq-ft" aria-live="polite"><span class="vo-cvq-msg"></span></div>
 </div>
 ```
 
@@ -67,7 +67,7 @@ import { ScatterChart } from './scatter-chart/ScatterChart';
 
 ```html
 <!-- imports: [ScatterChartComponent] -->
-<dm-scatter-chart
+<vo-scatter-chart
   [runs]="runs"
   [series]="series"
   subtitle="48 runs this week, sized by tokens"
@@ -127,6 +127,6 @@ ScatterChart(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The dots
-take the chart palette (`--dm-c1`…`--dm-c6`); the gridlines, axes, median lines and the selection box
+take the chart palette (`--vo-c1`…`--vo-c6`); the gridlines, axes, median lines and the selection box
 are mixed from the line and foreground tokens, and the tooltip sits on the ink token — so the chart
 reads on either theme without any hard-coded colours.

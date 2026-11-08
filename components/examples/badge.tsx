@@ -8,15 +8,15 @@ import { Badge } from '@visuno/badge/Badge';
  * Uses the real Visuno React component.
  *
  * Animated, like the reference:
- *  - the "Running" badge pulses its dot (the component's `.dm-live` class).
+ *  - the "Running" badge pulses its dot (the component's `.vo-live` class).
  *  - a status badge auto-cycles through its states on a timer.
- *  - removable badges scale-and-fade out (`.dm-go` -> dm-bdgout keyframe) before
+ *  - removable badges scale-and-fade out (`.vo-go` -> vo-bdgout keyframe) before
  *    leaving the list, with an Undo to bring them back.
  */
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <span style={{ width: 76, flex: 'none', fontSize: 12, color: 'var(--dm-muted)' }}>
+      <span style={{ width: 76, flex: 'none', fontSize: 12, color: 'var(--vo-muted)' }}>
         {label}
       </span>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8 }}>
@@ -88,14 +88,14 @@ export function BadgeExample() {
         <Badge
           tone={cur.tone}
           dot={cur.dot}
-          className={cur.live ? 'dm-live dm-anim' : 'dm-anim'}
+          className={cur.live ? 'vo-live vo-anim' : 'vo-anim'}
         >
           {cur.label}
         </Badge>
       </Row>
 
       <Row label="Dot or icon">
-        <Badge tone="success" dot className="dm-live">
+        <Badge tone="success" dot className="vo-live">
           Running
         </Badge>
         <Badge dot>Idle</Badge>
@@ -110,14 +110,14 @@ export function BadgeExample() {
           <Badge
             key={b.label}
             tone={b.tone}
-            className={leaving === b.label ? 'dm-go' : undefined}
+            className={leaving === b.label ? 'vo-go' : undefined}
             onRemove={() => remove(b.label)}
           >
             {b.label}
           </Badge>
         ))}
         {items.length === 0 && (
-          <button type="button" className="dm-pill dm-ghost dm-sm" onClick={() => setItems(INITIAL)}>
+          <button type="button" className="vo-pill vo-ghost vo-sm" onClick={() => setItems(INITIAL)}>
             Undo
           </button>
         )}

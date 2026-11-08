@@ -12,10 +12,10 @@ import { ContextMeter, type ContextPart } from '@visuno/context-meter/ContextMet
 const LIMIT = 200000;
 
 const BASE: ContextPart[] = [
-  { key: 'files', label: 'Files', tokens: 56200, color: 'var(--dm-pb)', items: 'Pricing.fig export 31.9k, PricingCard.tsx 18.2k, tokens.css 6.1k' },
-  { key: 'tools', label: 'Tool output', tokens: 41800, color: 'var(--dm-pt)', items: 'Contrast check 17.4k, Figma frames 15.6k, grid audit 8.8k' },
-  { key: 'chat', label: 'Chat', tokens: 32100, color: 'var(--dm-pl)', items: '48 turns with Maya Kim since 09:12' },
-  { key: 'sys', label: 'Instructions', tokens: 6300, color: 'var(--dm-faint)', items: 'Studio guidelines 4.1k, pricing brief 2.2k' },
+  { key: 'files', label: 'Files', tokens: 56200, color: 'var(--vo-pb)', items: 'Pricing.fig export 31.9k, PricingCard.tsx 18.2k, tokens.css 6.1k' },
+  { key: 'tools', label: 'Tool output', tokens: 41800, color: 'var(--vo-pt)', items: 'Contrast check 17.4k, Figma frames 15.6k, grid audit 8.8k' },
+  { key: 'chat', label: 'Chat', tokens: 32100, color: 'var(--vo-pl)', items: '48 turns with Maya Kim since 09:12' },
+  { key: 'sys', label: 'Instructions', tokens: 6300, color: 'var(--vo-faint)', items: 'Studio guidelines 4.1k, pricing brief 2.2k' },
 ];
 
 const set = (parts: ContextPart[], key: string, tokens: number): ContextPart[] =>

@@ -48,8 +48,8 @@ open button on hover. Leave `open` and `filter` out to let the pill and chips dr
 import { SourceStack, type StackSource } from './source-stack/SourceStack';
 
 const sources: StackSource[] = [
-  { kind: 'web', title: 'Baymard: pricing page UX', host: 'baymard.com', relevance: 0.92, mark: 'B', color: 'var(--dm-pb)', onOpen: () => open(url) },
-  { kind: 'file', title: 'Q3 conversion export.csv', host: 'Drive', relevance: 0.84, mark: 'CSV', color: 'var(--dm-pm)' },
+  { kind: 'web', title: 'Baymard: pricing page UX', host: 'baymard.com', relevance: 0.92, mark: 'B', color: 'var(--vo-pb)', onOpen: () => open(url) },
+  { kind: 'file', title: 'Q3 conversion export.csv', host: 'Drive', relevance: 0.84, mark: 'CSV', color: 'var(--vo-pm)' },
 ];
 
 <SourceStack sources={sources}>
@@ -64,11 +64,11 @@ const sources: StackSource[] = [
 ```html
 <!-- imports: [SourceStackComponent] -->
 sources: StackSource[] = [
-  { kind: 'web', title: 'Baymard: pricing page UX', host: 'baymard.com', relevance: 0.92, mark: 'B', color: 'var(--dm-pb)', onOpen: () => this.open(url) },
-  { kind: 'file', title: 'Q3 conversion export.csv', host: 'Drive', relevance: 0.84, mark: 'CSV', color: 'var(--dm-pm)' },
+  { kind: 'web', title: 'Baymard: pricing page UX', host: 'baymard.com', relevance: 0.92, mark: 'B', color: 'var(--vo-pb)', onOpen: () => this.open(url) },
+  { kind: 'file', title: 'Q3 conversion export.csv', host: 'Drive', relevance: 0.84, mark: 'CSV', color: 'var(--vo-pm)' },
 ];
 
-<dm-source-stack
+<vo-source-stack
   [sources]="sources"
   message="Annual plans convert about 18% better when the monthly price is shown crossed out."
   (openChange)="onOpenChange($event)"
@@ -119,6 +119,6 @@ SourceStack(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The pill
-and rows ride the shared `--dm-*` tokens; the filter chips are white with a dimmed edge that steps up
-on the picked one, and the relevance bars fill with `--dm-accent-mark`. In Soft the chips and rows are
+and rows ride the shared `--vo-*` tokens; the filter chips are white with a dimmed edge that steps up
+on the picked one, and the relevance bars fill with `--vo-accent-mark`. In Soft the chips and rows are
 rounder. The entrance stagger and the one-time auto-open are skipped under reduced motion.

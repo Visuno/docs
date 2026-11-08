@@ -25,7 +25,7 @@ the newest line unless the reader has scrolled up.
 
 ```html
 <!-- include core.css + terminal-stream.css -->
-<div class="tmx panel dm-live" data-c="terminal-stream">
+<div class="tmx panel vo-live" data-c="terminal-stream">
   <div class="tmx-h">
     <span class="tmx-ic"><!-- term icon --></span>
     <span class="tmx-cwd">~/acme/web</span>
@@ -70,7 +70,7 @@ entries: TerminalEntry[] = [
   { command: 'npm test', status: 'ok', duration: '2.9 s', output: [{ text: 'Tests  24 passed (24)', tone: 'ok' }] },
 ];
 
-<dm-terminal-stream [cwd]="'~/acme/web'" [entries]="entries" (stop)="onStop()" (copy)="onCopy($event)" />
+<vo-terminal-stream [cwd]="'~/acme/web'" [entries]="entries" (stop)="onStop()" (copy)="onCopy($event)" />
 ```
 
 </Tab>

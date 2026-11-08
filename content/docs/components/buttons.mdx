@@ -23,15 +23,15 @@ text and flashes a check.
 
 ```html
 <!-- include core.css + buttons.css -->
-<button class="dm-pill dm-primary">Primary</button>
-<button class="dm-pill dm-accent">Accent</button>
-<button class="dm-pill dm-soft" aria-pressed="false">Preview</button>
-<button class="dm-pill dm-line">Line</button>
-<button class="dm-pill dm-ghost">Ghost</button>
+<button class="vo-pill vo-primary">Primary</button>
+<button class="vo-pill vo-accent">Accent</button>
+<button class="vo-pill vo-soft" aria-pressed="false">Preview</button>
+<button class="vo-pill vo-line">Line</button>
+<button class="vo-pill vo-ghost">Ghost</button>
 
 <!-- sizes -->
-<button class="dm-pill dm-accent dm-sm">Small</button>
-<button class="dm-pill dm-accent dm-btx-lg">Large</button>
+<button class="vo-pill vo-accent vo-sm">Small</button>
+<button class="vo-pill vo-accent vo-btx-lg">Large</button>
 ```
 
 </Tab>
@@ -59,15 +59,15 @@ import { Button, ButtonCopy } from './buttons/Buttons';
 
 ```html
 <!-- imports: [ButtonComponent, ButtonCopyComponent] -->
-<dm-button variant="primary">Primary</dm-button>
-<dm-button variant="soft" size="sm">Small</dm-button>
+<vo-button variant="primary">Primary</vo-button>
+<vo-button variant="soft" size="sm">Small</vo-button>
 
-<dm-button variant="primary" busyLabel="Publishing" doneLabel="Published" (click)="publish()">
+<vo-button variant="primary" busyLabel="Publishing" doneLabel="Published" (click)="publish()">
   Publish
-</dm-button>
-<dm-button variant="accent" [success]="true" (click)="save()">Save</dm-button>
+</vo-button>
+<vo-button variant="accent" [success]="true" (click)="save()">Save</vo-button>
 
-<dm-button-copy text="https://example.com" label="Copy link" />
+<vo-button-copy text="https://example.com" label="Copy link" />
 ```
 
 </Tab>

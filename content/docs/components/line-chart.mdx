@@ -23,16 +23,16 @@ the cursor, and use the legend to toggle a series off (one always stays on).
 
 ```html
 <!-- include core.css + line-chart.css -->
-<div class="dm-lnx dm-panel">
-  <div class="dm-lnx-h">
-    <div><span class="dm-muted">Active editors</span><b class="dm-num dm-lnx-v">0</b></div>
-    <div class="dm-lnx-lg">
-      <button class="dm-lnx-k dm-on"><i></i>This year</button>
-      <button class="dm-lnx-k dm-on"><i></i>Last year</button>
+<div class="vo-lnx vo-panel">
+  <div class="vo-lnx-h">
+    <div><span class="vo-muted">Active editors</span><b class="vo-num vo-lnx-v">0</b></div>
+    <div class="vo-lnx-lg">
+      <button class="vo-lnx-k vo-on"><i></i>This year</button>
+      <button class="vo-lnx-k vo-on"><i></i>Last year</button>
     </div>
   </div>
-  <div class="dm-lnx-ch"><svg class="dm-lnx-svg" viewBox="0 0 320 140" preserveAspectRatio="none"></svg></div>
-  <div class="dm-lnx-ax dm-muted dm-num"><span>Jan</span><span>Mar</span><span>May</span></div>
+  <div class="vo-lnx-ch"><svg class="vo-lnx-svg" viewBox="0 0 320 140" preserveAspectRatio="none"></svg></div>
+  <div class="vo-lnx-ax vo-muted vo-num"><span>Jan</span><span>Mar</span><span>May</span></div>
 </div>
 <!-- line-chart.js draws the lines and wires the hover readout + legend -->
 ```
@@ -67,7 +67,7 @@ series: LineChartSeries[] = [
   { key: 'last', label: 'Last year', values: [610, 660, 690, 800, 850, 960] },
 ];
 
-<dm-line-chart
+<vo-line-chart
   label="Active editors"
   [series]="series"
   [points]="['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']"
@@ -122,7 +122,7 @@ LineChart(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The first
-line and its fill use the accent; the rest take the chart palette (`--dm-c2`, `--dm-c3`, …). The grid
+line and its fill use the accent; the rest take the chart palette (`--vo-c2`, `--vo-c3`, …). The grid
 lines, the pointer rule and the dark tooltip pill all come from the theme tokens, so the chart reads
 on either background. In Flutter the lines are drawn with a `CustomPainter` and the draw-in and
 count-up run on an `AnimationController`.

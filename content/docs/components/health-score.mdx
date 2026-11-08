@@ -76,7 +76,7 @@ checks: HealthScoreCheck[] = [
 ];
 fix = async (check: HealthScoreCheck, i: number) => { await this.repair(check); };
 
-<dm-health-score
+<vo-health-score
   [checks]="checks"
   title="Design system health"
   [onFix]="fix"
@@ -130,5 +130,5 @@ HealthScore(
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card,
 rows, bars and gauge track all come from the theme tokens; the gauge fill follows the score (its green
-and red are the component's own `--dm-hs-ok` / `--dm-hs-bad`, the accent in between), and an open or
+and red are the component's own `--vo-hs-ok` / `--vo-hs-bad`, the accent in between), and an open or
 hovered row picks up the row tint. In Soft the card and the Fix pill are rounder.

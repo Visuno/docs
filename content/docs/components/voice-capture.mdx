@@ -24,21 +24,21 @@ keeps its height: the wave freezes as the whole recording and the words stay whe
 
 ```html
 <!-- include core.css + voice-capture.css -->
-<div class="dm-vcx dm-panel">
-  <div class="dm-vcx-top">
-    <span class="dm-vcx-dot"></span>
-    <span class="dm-vcx-st">Listening</span>
-    <span class="dm-vcx-t dm-num dm-muted">0:00</span>
+<div class="vo-vcx vo-panel">
+  <div class="vo-vcx-top">
+    <span class="vo-vcx-dot"></span>
+    <span class="vo-vcx-st">Listening</span>
+    <span class="vo-vcx-t vo-num vo-muted">0:00</span>
   </div>
-  <canvas class="dm-vcx-wave" aria-hidden="true"></canvas>
-  <p class="dm-vcx-tx" aria-live="polite"><!-- words arrive here --></p>
-  <div class="dm-vcx-acts">
-    <button class="dm-ib dm-fill" aria-label="Pause"><!-- pause --></button>
-    <span class="dm-sp"></span>
-    <button class="dm-pill dm-ghost dm-sm">Cancel</button>
-    <button class="dm-pill dm-primary dm-sm">Done</button>
+  <canvas class="vo-vcx-wave" aria-hidden="true"></canvas>
+  <p class="vo-vcx-tx" aria-live="polite"><!-- words arrive here --></p>
+  <div class="vo-vcx-acts">
+    <button class="vo-ib vo-fill" aria-label="Pause"><!-- pause --></button>
+    <span class="vo-sp"></span>
+    <button class="vo-pill vo-ghost vo-sm">Cancel</button>
+    <button class="vo-pill vo-primary vo-sm">Done</button>
   </div>
-  <div class="dm-pop dm-vcx-fix" role="menu"></div>
+  <div class="vo-pop vo-vcx-fix" role="menu"></div>
 </div>
 ```
 
@@ -75,7 +75,7 @@ words: Array<string | HeardWord> = [
   { text: 'toggle', alternatives: ['toggle', 'toddle', 'tunnel'] },
 ];
 
-<dm-voice-capture
+<vo-voice-capture
   [words]="words"
   (send)="onSend($event)"
   (fixWord)="onFix($event)"
@@ -125,6 +125,6 @@ VoiceCapture(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The panel
-sits on a surface; the recording dot uses the `--dm-bad` tone and pulses, unsure words are tinted
-with `--dm-hl` (and `--dm-hl-ok` once fixed), and the wave is drawn from the `--dm-fg2`, `--dm-faint`
-and `--dm-muted` tokens, so it reads in either theme. In Soft the panel and its buttons are rounder.
+sits on a surface; the recording dot uses the `--vo-bad` tone and pulses, unsure words are tinted
+with `--vo-hl` (and `--vo-hl-ok` once fixed), and the wave is drawn from the `--vo-fg2`, `--vo-faint`
+and `--vo-muted` tokens, so it reads in either theme. In Soft the panel and its buttons are rounder.

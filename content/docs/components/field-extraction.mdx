@@ -57,8 +57,8 @@ const fields: ExtractedField[] = [
 <FieldExtraction
   page={
     <>
-      <FieldZone field="no"><span className="dm-muted">Invoice no.</span> NW-2041</FieldZone>
-      <FieldZone field="due" className="dm-fex-smudge">Due by 1? Nov 2026</FieldZone>
+      <FieldZone field="no"><span className="vo-muted">Invoice no.</span> NW-2041</FieldZone>
+      <FieldZone field="due" className="vo-fex-smudge">Due by 1? Nov 2026</FieldZone>
     </>
   }
   fields={fields}
@@ -74,17 +74,17 @@ const fields: ExtractedField[] = [
 <Tab value="Angular">
 
 ```html
-<!-- imports: [FieldExtractionComponent, DmFieldZoneComponent] -->
-<dm-field-extraction
+<!-- imports: [FieldExtractionComponent, VoFieldZoneComponent] -->
+<vo-field-extraction
   [fields]="fields"
   [status]="status"
   sendLabel="Send to Sheets"
   (fix)="onFix($event.key, $event.value)"
   (onSend)="send()"
 >
-  <div dm-field-zone field="no"><span class="dm-muted">Invoice no.</span> NW-2041</div>
-  <div dm-field-zone field="due" class="dm-fex-smudge">Due by 1? Nov 2026</div>
-</dm-field-extraction>
+  <div vo-field-zone field="no"><span class="vo-muted">Invoice no.</span> NW-2041</div>
+  <div vo-field-zone field="due" class="vo-fex-smudge">Due by 1? Nov 2026</div>
+</vo-field-extraction>
 ```
 
 </Tab>

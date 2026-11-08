@@ -23,22 +23,22 @@ the changes and swaps the glyph; leave `undone` out to let the button toggle it,
 
 ```html
 <!-- include core.css + run-summary.css -->
-<div class="dm-rsu dm-panel">
-  <div class="dm-rsu-h">
-    <span class="dm-rsu-g"><!-- check icon --></span>
+<div class="vo-rsu vo-panel">
+  <div class="vo-rsu-h">
+    <span class="vo-rsu-g"><!-- check icon --></span>
     <div>
-      <div class="dm-rsu-t">Run complete</div>
-      <div class="dm-rsu-s dm-muted">Finished in 12m 40s</div>
+      <div class="vo-rsu-t">Run complete</div>
+      <div class="vo-rsu-s vo-muted">Finished in 12m 40s</div>
     </div>
   </div>
-  <p class="dm-rsu-title">Pricing cards now use spacing tokens</p>
-  <div class="dm-rsu-stats">
-    <span><b class="dm-num">6</b> files</span>
-    <span><b class="dm-num">14</b> steps</span>
+  <p class="vo-rsu-title">Pricing cards now use spacing tokens</p>
+  <div class="vo-rsu-stats">
+    <span><b class="vo-num">6</b> files</span>
+    <span><b class="vo-num">14</b> steps</span>
   </div>
-  <div class="dm-rsu-acts">
-    <button class="dm-pill dm-primary dm-sm">Open changes</button>
-    <button class="dm-pill dm-ghost dm-sm">Undo all</button>
+  <div class="vo-rsu-acts">
+    <button class="vo-pill vo-primary vo-sm">Open changes</button>
+    <button class="vo-pill vo-ghost vo-sm">Undo all</button>
   </div>
 </div>
 ```
@@ -80,7 +80,7 @@ stats: RunStat[] = [
   { label: 'cost', value: 0.84, prefix: '$', decimals: 2 },
 ];
 
-<dm-run-summary
+<vo-run-summary
   subtitle="Finished in 12m 40s"
   summary="Pricing cards now use spacing tokens"
   [stats]="stats"
@@ -140,6 +140,6 @@ RunSummary(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The glyph,
-the `+`/`−` diffs and the "Needs you" dot all take their colour from the theme tokens (`--dm-ok`,
-`--dm-add`, `--dm-del`, `--dm-warn-mark`), so the summary reads the same against any surface; in Soft
+the `+`/`−` diffs and the "Needs you" dot all take their colour from the theme tokens (`--vo-ok`,
+`--vo-add`, `--vo-del`, `--vo-warn-mark`), so the summary reads the same against any surface; in Soft
 the card and its pills are rounder.

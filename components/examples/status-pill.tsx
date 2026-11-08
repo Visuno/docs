@@ -14,7 +14,7 @@ import { StatusPill } from '@visuno/status-pill/StatusPill';
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-      <span style={{ width: 64, flex: 'none', fontSize: 12, color: 'var(--dm-muted)' }}>{label}</span>
+      <span style={{ width: 64, flex: 'none', fontSize: 12, color: 'var(--vo-muted)' }}>{label}</span>
       {children}
     </div>
   );

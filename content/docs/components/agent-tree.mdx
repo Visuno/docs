@@ -23,19 +23,19 @@ any tree view. A failed step can carry a `fix` — a button under its task that 
 
 ```html
 <!-- include core.css + agent-tree.css -->
-<div class="dm-atr dm-panel">
-  <div class="dm-atr-h">
-    <div class="dm-atr-ht"><b>Redesign the pricing page</b><span class="dm-muted dm-atr-st">Running · 0:14</span></div>
-    <span class="dm-atr-tot dm-num">$0.24</span>
+<div class="vo-atr vo-panel">
+  <div class="vo-atr-h">
+    <div class="vo-atr-ht"><b>Redesign the pricing page</b><span class="vo-muted vo-atr-st">Running · 0:14</span></div>
+    <span class="vo-atr-tot vo-num">$0.24</span>
   </div>
-  <div class="dm-atr-tree" role="tree" aria-label="Agents">
-    <div class="dm-atr-n dm-run" role="treeitem" aria-level="1" aria-expanded="true" style="--dm-lv:0">
-      <span class="dm-atr-tg"><!-- chev-d --></span>
-      <span class="dm-atr-g"><span class="dm-spin"></span></span>
-      <span class="dm-atr-t"><b>Orchestrator</b><span>Plans the work and hands it out</span></span>
-      <span class="dm-atr-c dm-num">$0.24</span>
+  <div class="vo-atr-tree" role="tree" aria-label="Agents">
+    <div class="vo-atr-n vo-run" role="treeitem" aria-level="1" aria-expanded="true" style="--vo-lv:0">
+      <span class="vo-atr-tg"><!-- chev-d --></span>
+      <span class="vo-atr-g"><span class="vo-spin"></span></span>
+      <span class="vo-atr-t"><b>Orchestrator</b><span>Plans the work and hands it out</span></span>
+      <span class="vo-atr-c vo-num">$0.24</span>
     </div>
-    <!-- child rows, folded under a .dm-atr-kids group -->
+    <!-- child rows, folded under a .vo-atr-kids group -->
   </div>
 </div>
 ```
@@ -74,7 +74,7 @@ root: AgentNode = {
   children: [ /* agents and their steps */ ],
 };
 
-<dm-agent-tree
+<vo-agent-tree
   [root]="root"
   title="Redesign the pricing page"
   [defaultCollapsed]="['res']"

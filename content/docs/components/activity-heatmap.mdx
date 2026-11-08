@@ -38,7 +38,7 @@ sideways, starting at the latest hours.
     <div class="hmx-grid"><!-- 168 cells filled in by the script --></div>
     <div class="hmx-f muted"><span class="hmx-ax">12am</span><!-- ... --></div>
   </div></div>
-  <div class="hmx-lg muted">Less<i style="--dm-a:.08"></i><i style="--dm-a:.85"></i>More</div>
+  <div class="hmx-lg muted">Less<i style="--vo-a:.08"></i><i style="--vo-a:.85"></i>More</div>
 </div>
 ```
 
@@ -68,7 +68,7 @@ series: ActivityHeatmapSeries[] = [
   { key: 'team', label: 'Team', values: teamValues, max: 25, unit: 'edits', note: 'Busiest 10am to 4pm on weekdays' },
 ];
 
-<dm-activity-heatmap [series]="series" defaultValue="agent" period="Last 4 weeks" />
+<vo-activity-heatmap [series]="series" defaultValue="agent" period="Last 4 weeks" />
 ```
 
 </Tab>

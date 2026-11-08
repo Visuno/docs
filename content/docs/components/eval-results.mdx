@@ -80,7 +80,7 @@ cases: EvalCase[] = [
     source: 'Billing table, Pro row', fix: { label: 'Use $24 and rerun', onClick: rerun } },
 ];
 
-<dm-eval-results
+<vo-eval-results
   title="Pricing copy evals"
   subtitle="Copy agent · 8 cases · run 2h ago"
   [cases]="cases"
@@ -147,6 +147,6 @@ EvalResults(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The panel
-sits on a surface with the card shadow; pass and fail take the `--dm-ok` and `--dm-bad` tokens for
-their glyphs and bar segments, and a failed case tints with `--dm-bad-bg`, so it all reads against
+sits on a surface with the card shadow; pass and fail take the `--vo-ok` and `--vo-bad` tokens for
+their glyphs and bar segments, and a failed case tints with `--vo-bad-bg`, so it all reads against
 the stage. In Soft the panel, pills and segmented control are rounder.

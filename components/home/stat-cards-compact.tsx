@@ -37,16 +37,16 @@ export function StatCardsCompact() {
         .sc-compact {
           width: 100%;
         }
-        .sc-compact .dm-scx-grid {
+        .sc-compact .vo-scx-grid {
           grid-template-columns: 1fr;
           gap: 10px;
         }
         /* keep the label on one line so "Agent runs" never breaks awkwardly */
-        .sc-compact .dm-scx-k {
+        .sc-compact .vo-scx-k {
           white-space: nowrap;
         }
         /* let the number and its change chip wrap gracefully if ever tight */
-        .sc-compact .dm-scx-v {
+        .sc-compact .vo-scx-v {
           flex-wrap: wrap;
           row-gap: 4px;
         }

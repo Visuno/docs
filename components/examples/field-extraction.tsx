@@ -26,26 +26,26 @@ const FIELDS: ExtractedField[] = [
 // the invoice on the left; the parts the fields come from are wrapped in FieldZone
 const Page = (
   <>
-    <div className="dm-fex-top">
+    <div className="vo-fex-top">
       <b>Northwind Studio</b>
-      <span className="dm-muted">Invoice</span>
+      <span className="vo-muted">Invoice</span>
     </div>
     <FieldZone field="no">
-      <span className="dm-muted">Invoice no.</span> <span className="dm-num">NW-2041</span>
+      <span className="vo-muted">Invoice no.</span> <span className="vo-num">NW-2041</span>
     </FieldZone>
     <FieldZone field="date">
-      <span className="dm-muted">Issued</span> <span className="dm-num">3 Oct 2026</span>
+      <span className="vo-muted">Issued</span> <span className="vo-num">3 Oct 2026</span>
     </FieldZone>
-    <div className="dm-fex-tb">
-      <div className="dm-fex-li"><span>Design system audit</span><span className="dm-num">$4,800.00</span></div>
-      <div className="dm-fex-li"><span>Pricing page redesign</span><span className="dm-num">$6,200.00</span></div>
-      <div className="dm-fex-li"><span>Agent setup, 2 seats</span><span className="dm-num">$480.00</span></div>
+    <div className="vo-fex-tb">
+      <div className="vo-fex-li"><span>Design system audit</span><span className="vo-num">$4,800.00</span></div>
+      <div className="vo-fex-li"><span>Pricing page redesign</span><span className="vo-num">$6,200.00</span></div>
+      <div className="vo-fex-li"><span>Agent setup, 2 seats</span><span className="vo-num">$480.00</span></div>
     </div>
-    <FieldZone field="total" className="dm-fex-tot">
-      <span>Total due</span><span className="dm-num">$11,480.00</span>
+    <FieldZone field="total" className="vo-fex-tot">
+      <span>Total due</span><span className="vo-num">$11,480.00</span>
     </FieldZone>
-    <FieldZone field="due" className="dm-fex-smudge">
-      <span className="dm-muted">Due by</span> <span className="dm-num">1? Nov 2026</span>
+    <FieldZone field="due" className="vo-fex-smudge">
+      <span className="vo-muted">Due by</span> <span className="vo-num">1? Nov 2026</span>
     </FieldZone>
   </>
 );
@@ -120,7 +120,7 @@ export function FieldExtractionExample() {
         onSend={onSend}
       />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <button type="button" className="dm-pill dm-soft dm-sm" onClick={replay}>
+        <button type="button" className="vo-pill vo-soft vo-sm" onClick={replay}>
           Replay
         </button>
       </div>

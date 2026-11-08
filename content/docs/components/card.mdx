@@ -57,15 +57,15 @@ import { Badge } from './badge/Badge';
   subtitle="Finished 4 minutes ago"
   action={<Badge tone="success">Live</Badge>}
   footer={<>
-    <button className="dm-pill dm-ghost dm-sm">Dismiss</button>
-    <button className="dm-pill dm-sm" data-variant="accent">Open run</button>
+    <button className="vo-pill vo-ghost vo-sm">Dismiss</button>
+    <button className="vo-pill vo-sm" data-variant="accent">Open run</button>
   </>}
 >
   <p>Drop anything in the body.</p>
 </Card>
 
 <Card interactive onClick={() => open()}>
-  <span className="dm-crd-t">Interactive card</span>
+  <span className="vo-crd-t">Interactive card</span>
 </Card>
 ```
 
@@ -75,16 +75,16 @@ import { Badge } from './badge/Badge';
 
 ```html
 <!-- imports: [CardComponent, BadgeComponent] -->
-<dm-card title="Nightly run" subtitle="Finished 4 minutes ago">
-  <dm-badge card-action tone="success">Live</dm-badge>
+<vo-card title="Nightly run" subtitle="Finished 4 minutes ago">
+  <vo-badge card-action tone="success">Live</vo-badge>
   <p>Drop anything in the body.</p>
-  <button card-footer class="dm-pill dm-ghost dm-sm">Dismiss</button>
-  <button card-footer class="dm-pill dm-sm" data-variant="accent">Open run</button>
-</dm-card>
+  <button card-footer class="vo-pill vo-ghost vo-sm">Dismiss</button>
+  <button card-footer class="vo-pill vo-sm" data-variant="accent">Open run</button>
+</vo-card>
 
-<dm-card [interactive]="true" (clicked)="open()">
-  <span class="dm-crd-t">Interactive card</span>
-</dm-card>
+<vo-card [interactive]="true" (clicked)="open()">
+  <span class="vo-crd-t">Interactive card</span>
+</vo-card>
 ```
 
 </Tab>
@@ -95,7 +95,7 @@ import { Badge } from './badge/Badge';
 import 'components/card.dart';
 import 'components/badge.dart';
 
-DmCard(
+VoCard(
   title: 'Nightly run',
   subtitle: 'Finished 4 minutes ago',
   action: const Badge('Live', tone: BadgeTone.success),
@@ -106,7 +106,7 @@ DmCard(
   child: const Text('Drop anything in the body.'),
 ),
 
-DmCard(
+VoCard(
   interactive: true,
   onTap: open,
   child: const Text('Interactive card'),

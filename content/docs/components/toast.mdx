@@ -22,13 +22,13 @@ to slide a new toast in and the old one away; keep the same `id` to change the t
 
 ```html
 <!-- include core.css + toast.css -->
-<div class="dm-tst-slot" aria-live="polite">
-  <div class="dm-tst-t dm-tst-in" role="status">
-    <span class="dm-g"><!-- tone icon --></span>
-    <div class="dm-tx"><b>Deploy succeeded</b><span>Live in production.</span></div>
-    <div class="dm-acts">
-      <button class="dm-pill dm-sm dm-ghost">Undo</button>
-      <button class="dm-ib" aria-label="Dismiss"><!-- x --></button>
+<div class="vo-tst-slot" aria-live="polite">
+  <div class="vo-tst-t vo-tst-in" role="status">
+    <span class="vo-g"><!-- tone icon --></span>
+    <div class="vo-tx"><b>Deploy succeeded</b><span>Live in production.</span></div>
+    <div class="vo-acts">
+      <button class="vo-pill vo-sm vo-ghost">Undo</button>
+      <button class="vo-ib" aria-label="Dismiss"><!-- x --></button>
     </div>
   </div>
 </div>
@@ -64,7 +64,7 @@ toast: ToastData | null = {
   id: 1, tone: 'success', title: 'Deploy succeeded', description: 'Live in production.'
 };
 
-<dm-toast [toast]="toast" (dismiss)="toast = null" />
+<vo-toast [toast]="toast" (dismiss)="toast = null" />
 ```
 
 </Tab>

@@ -66,7 +66,7 @@ export function DraftReviewExample() {
     <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
       <DraftReview
         subtitle="After the pricing review with Maya"
-        to={[{ name: 'Maya Kim', initials: 'MK', color: 'var(--dm-av-l)' }]}
+        to={[{ name: 'Maya Kim', initials: 'MK', color: 'var(--vo-av-l)' }]}
         subject="Pricing v4: what changed"
         body={BODY}
         attachments={attached ? [{ name: 'Pricing v4 summary.pdf', size: '240 KB' }] : []}

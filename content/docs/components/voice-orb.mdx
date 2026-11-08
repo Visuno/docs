@@ -66,7 +66,7 @@ const [state, setState] = useState<VoiceState>('idle');
 
 ```html
 <!-- imports: [VoiceOrbComponent] -->
-<dm-voice-orb
+<vo-voice-orb
   [state]="state"
   [level]="level"
   [muted]="muted"
@@ -127,7 +127,7 @@ VoiceOrb(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The orb's
-colours flow from the tokens: the accent is yours, `--dm-pl` (violet) is the agent, and the two are
+colours flow from the tokens: the accent is yours, `--vo-pl` (violet) is the agent, and the two are
 mixed in oklch so the step between them stays bright. The glass sphere is drawn on a canvas with
 WebGL where it can, falling back to layered gradients otherwise; with reduced motion it holds a
 single still frame and only redraws when the speaker changes.

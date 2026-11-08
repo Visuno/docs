@@ -24,18 +24,18 @@ touches work already done, the agent raises an amber heads-up with `actions` (li
 
 ```html
 <!-- include core.css + steering.css -->
-<div class="dm-ste dm-panel">
-  <div class="dm-ste-h">
+<div class="vo-ste vo-panel">
+  <div class="vo-ste-h">
     <b>Redesign the pricing page</b>
-    <span class="dm-muted dm-ste-st"><span aria-live="polite">Step 2 of 4</span> · <span class="dm-num">0:07</span></span>
+    <span class="vo-muted vo-ste-st"><span aria-live="polite">Step 2 of 4</span> · <span class="vo-num">0:07</span></span>
   </div>
-  <ol class="dm-ste-steps" aria-label="Steps">
-    <li class="dm-ste-s dm-done"><span class="dm-ste-g"><!-- ok --></span><span class="dm-ste-t"><b>Read Pricing v4</b><span>3 frames, 14 layers</span></span></li>
-    <li class="dm-ste-s dm-run"><span class="dm-ste-g"><span class="dm-spin"></span></span><span class="dm-ste-t"><b>Update the Pro card</b><span>Setting the accent to violet</span></span></li>
+  <ol class="vo-ste-steps" aria-label="Steps">
+    <li class="vo-ste-s vo-done"><span class="vo-ste-g"><!-- ok --></span><span class="vo-ste-t"><b>Read Pricing v4</b><span>3 frames, 14 layers</span></span></li>
+    <li class="vo-ste-s vo-run"><span class="vo-ste-g"><span class="vo-spin"></span></span><span class="vo-ste-t"><b>Update the Pro card</b><span>Setting the accent to violet</span></span></li>
   </ol>
-  <form class="dm-ste-box">
+  <form class="vo-ste-box">
     <input placeholder="Steer the agent while it works" aria-label="Message the agent" />
-    <button class="dm-ste-go" aria-label="Send" disabled><!-- up --></button>
+    <button class="vo-ste-go" aria-label="Send" disabled><!-- up --></button>
   </form>
 </div>
 ```
@@ -77,7 +77,7 @@ steps: SteerStep[] = [
 ];
 messages: SteerMessage[] = [];
 
-<dm-steering
+<vo-steering
   title="Redesign the pricing page"
   [steps]="steps"
   [messages]="messages"

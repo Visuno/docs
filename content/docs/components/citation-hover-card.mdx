@@ -73,7 +73,7 @@ sources: CitationHoverCardSource[] = [
   },
 ];
 
-<dm-citation-hover-card
+<vo-citation-hover-card
   [text]="'Teams that show the annual price first convert better[1].'"
   [sources]="sources"
   (openSource)="onOpen($event)"
@@ -119,7 +119,7 @@ CitationHoverCard(
 | `onOpenSource` | `(source, index) => void` | Called when the card's link is clicked, with the source and its index. |
 | `onOpenChange` | `(index \| null) => void` | Called when a card opens or closes, with the source's index, or `null`. |
 | `source.mark` | `string` | One or two letters on the source's coloured mark, like `B`. |
-| `source.color` | `string` | The mark's colour, like `#4a5a8a` or `var(--dm-pm)`. |
+| `source.color` | `string` | The mark's colour, like `#4a5a8a` or `var(--vo-pm)`. |
 | `source.site` | `string` | Where it comes from, like `baymard.com` or `Drive`. |
 | `source.title` | `string` | The source's title. |
 | `source.quote` | `ReactNode` | The passage the answer relies on. Wrap the part that matters in `<mark>`. |
@@ -130,5 +130,5 @@ CitationHoverCard(
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card sits
 on a surface with the pop shadow; the citation chips use the hover and accent tokens, the quote's accent
-rule uses `--dm-accent-mark` and its highlight uses the selection tint, so it all reads against the
+rule uses `--vo-accent-mark` and its highlight uses the selection tint, so it all reads against the
 stage. In Soft the chips and card are rounder.

@@ -33,7 +33,7 @@ export function ThinkingStatesExample() {
       style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-        gap: 'var(--dm-5, 20px)',
+        gap: 'var(--vo-5, 20px)',
         width: '100%',
         maxWidth: 560,
       }}
@@ -44,10 +44,10 @@ export function ThinkingStatesExample() {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: 'var(--dm-2, 8px)',
+            gap: 'var(--vo-2, 8px)',
           }}
         >
-          <span style={{ fontSize: 12, color: 'var(--dm-muted)' }}>{v.name}</span>
+          <span style={{ fontSize: 12, color: 'var(--vo-muted)' }}>{v.name}</span>
           <ThinkingStates variant={v.variant} steps={STEPS} interval={2600} />
         </div>
       ))}

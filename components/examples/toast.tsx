@@ -35,7 +35,7 @@ export function ToastExample() {
           <button
             key={t.id}
             type="button"
-            className="dm-pill dm-soft dm-sm"
+            className="vo-pill vo-soft vo-sm"
             onClick={() => spawn(t)}
           >
             {t.tone === 'success' ? 'Success' : t.tone === 'error' ? 'Error' : t.tone === 'info' ? 'Info' : 'Loading'}

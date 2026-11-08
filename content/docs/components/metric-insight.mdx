@@ -24,19 +24,19 @@ fetch those drivers and the button shows the agent "Looking into it".
 
 ```html
 <!-- include core.css + metric-insight.css -->
-<div class="dm-mix dm-panel">
-  <div class="dm-mix-h">
-    <span class="dm-muted">Trial to paid</span>
-    <div class="dm-seg2 dm-mix-rg" role="group" aria-label="Range">
+<div class="vo-mix vo-panel">
+  <div class="vo-mix-h">
+    <span class="vo-muted">Trial to paid</span>
+    <div class="vo-seg2 vo-mix-rg" role="group" aria-label="Range">
       <button data-v="7">7d</button>
       <button aria-pressed="true" data-v="30">30d</button>
       <button data-v="90">90d</button>
     </div>
   </div>
-  <div class="dm-mix-v"><b class="dm-num dm-mix-n">26.3%</b><span class="dm-tag dm-ok dm-mix-d dm-num">+8.1 pts</span></div>
-  <div class="dm-mix-ch"><!-- svg trend line --></div>
-  <div class="dm-mix-ins"><span class="dm-mix-ic"><!-- spark --></span><span class="dm-mix-t">Jumped after the pricing page update on Sep 18.</span></div>
-  <button class="dm-pill dm-soft dm-sm dm-mix-why">Why did it move?</button>
+  <div class="vo-mix-v"><b class="vo-num vo-mix-n">26.3%</b><span class="vo-tag vo-ok vo-mix-d vo-num">+8.1 pts</span></div>
+  <div class="vo-mix-ch"><!-- svg trend line --></div>
+  <div class="vo-mix-ins"><span class="vo-mix-ic"><!-- spark --></span><span class="vo-mix-t">Jumped after the pricing page update on Sep 18.</span></div>
+  <button class="vo-pill vo-soft vo-sm vo-mix-why">Why did it move?</button>
 </div>
 ```
 
@@ -76,7 +76,7 @@ ranges: MetricRange[] = [
     insight: 'Jumped after the pricing page update on Sep 18.', marker: { at: 0.58, label: 'Sep 18' } },
 ];
 
-<dm-metric-insight
+<vo-metric-insight
   label="Trial to paid"
   [ranges]="ranges"
   defaultRange="30"

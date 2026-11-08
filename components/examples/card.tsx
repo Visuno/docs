@@ -19,11 +19,11 @@ export function CardExample() {
       <Card
         title="Nightly run"
         subtitle="Finished 4 minutes ago"
-        action={<Badge tone="success" dot className="dm-live">Live</Badge>}
+        action={<Badge tone="success" dot className="vo-live">Live</Badge>}
         footer={
           <>
-            <button type="button" className="dm-pill dm-ghost dm-sm">Dismiss</button>
-            <button type="button" className="dm-pill dm-sm" data-variant="accent">Open run</button>
+            <button type="button" className="vo-pill vo-ghost vo-sm">Dismiss</button>
+            <button type="button" className="vo-pill vo-sm" data-variant="accent">Open run</button>
           </>
         }
       >
@@ -34,8 +34,8 @@ export function CardExample() {
       </Card>
 
       <Card interactive onClick={() => setOpens((n) => n + 1)}>
-        <span className="dm-crd-t">Interactive card</span>
-        <p style={{ margin: 0, lineHeight: 1.5, color: 'var(--dm-muted)' }}>
+        <span className="vo-crd-t">Interactive card</span>
+        <p style={{ margin: 0, lineHeight: 1.5, color: 'var(--vo-muted)' }}>
           The whole card is the hit target — it lifts on hover and takes focus.
           {opens > 0 && ` Opened ${opens}×.`}
         </p>

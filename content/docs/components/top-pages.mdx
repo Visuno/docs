@@ -22,15 +22,15 @@ running total rolls up, and the `Views` / `Change` sort switch slides the rows i
 
 ```html
 <!-- include core.css + top-pages.css -->
-<div class="dm-tpx dm-panel">
-  <div class="dm-tpx-h">
-    <div><b>Top pages</b><span class="dm-muted dm-tpx-sub"><span class="dm-num dm-tpx-tot">0</span> views, last 30 days</span></div>
-    <div class="dm-seg2 dm-tpx-sg" role="group" aria-label="Sort">
+<div class="vo-tpx vo-panel">
+  <div class="vo-tpx-h">
+    <div><b>Top pages</b><span class="vo-muted vo-tpx-sub"><span class="vo-num vo-tpx-tot">0</span> views, last 30 days</span></div>
+    <div class="vo-seg2 vo-tpx-sg" role="group" aria-label="Sort">
       <button aria-pressed="true" data-v="v">Views</button>
       <button aria-pressed="false" data-v="c">Change</button>
     </div>
   </div>
-  <div class="dm-tpx-list"><!-- rows rendered from your pages --></div>
+  <div class="vo-tpx-list"><!-- rows rendered from your pages --></div>
 </div>
 ```
 
@@ -47,7 +47,7 @@ const pages: TopPagesPage[] = [
   { path: '/components', title: 'Components', views: 9870, change: 41 },
 ];
 
-<TopPages pages={pages} site="designme.dev" period="last 30 days" />
+<TopPages pages={pages} site="visuno.dev" period="last 30 days" />
 ```
 
 </Tab>
@@ -61,7 +61,7 @@ pages: TopPagesPage[] = [
   { path: '/', title: 'Home', views: 15210, change: 3 },
 ];
 
-<dm-top-pages [pages]="pages" site="designme.dev" period="last 30 days" />
+<vo-top-pages [pages]="pages" site="visuno.dev" period="last 30 days" />
 ```
 
 </Tab>
@@ -76,7 +76,7 @@ TopPages(
     TopPagesPage(path: '/pricing', title: 'Pricing', views: 18420, change: 24),
     TopPagesPage(path: '/', title: 'Home', views: 15210, change: 3),
   ],
-  site: 'designme.dev',
+  site: 'visuno.dev',
   period: 'last 30 days',
 ),
 ```
@@ -92,7 +92,7 @@ TopPages(
 | `pages` | `TopPagesPage[]` | The page rows. Each has `path`, `title`, `views` and `change`. |
 | `title` | `string` | Header text. Defaults to `Top pages`. |
 | `period` | `string` | After the total, like `last 30 days`. |
-| `site` | `string` | Put in front of each path in the row tips, like `designme.dev`. |
+| `site` | `string` | Put in front of each path in the row tips, like `visuno.dev`. |
 | `sort` | `views \| change` | How the rows are ordered. Leave it out to let the switch change it. |
 | `defaultSort` | `views \| change` | The order before the switch is touched. Defaults to `views`. |
 | `onSortChange` | `(sort) => void` | Fires when the sort switch changes. |

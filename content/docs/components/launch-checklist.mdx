@@ -24,16 +24,16 @@ runs, then what is left to fix or "All clear, ready to ship".
 
 ```html
 <!-- include core.css + launch-checklist.css -->
-<div class="dm-lcx dm-panel">
-  <div class="dm-lcx-h">
-    <div><b>Ready to ship pricing?</b><span class="dm-muted dm-lcx-st">6 checks</span></div>
-    <button class="dm-pill dm-primary dm-sm dm-lcx-run"><!-- play -->Run checks</button>
+<div class="vo-lcx vo-panel">
+  <div class="vo-lcx-h">
+    <div><b>Ready to ship pricing?</b><span class="vo-muted vo-lcx-st">6 checks</span></div>
+    <button class="vo-pill vo-primary vo-sm vo-lcx-run"><!-- play -->Run checks</button>
   </div>
-  <div class="dm-lcx-bar"></div>
-  <div class="dm-lcx-list">
-    <div class="dm-lcx-r dm-ok">
-      <span class="dm-g"><!-- ok --></span>
-      <span class="dm-t">Contrast meets AA<span class="dm-d">All 14 text pairs pass</span></span>
+  <div class="vo-lcx-bar"></div>
+  <div class="vo-lcx-list">
+    <div class="vo-lcx-r vo-ok">
+      <span class="vo-g"><!-- ok --></span>
+      <span class="vo-t">Contrast meets AA<span class="vo-d">All 14 text pairs pass</span></span>
     </div>
   </div>
 </div>
@@ -71,7 +71,7 @@ checks: LaunchCheck[] = [
   { label: 'Links resolve', state: 'wait' },
 ];
 
-<dm-launch-checklist
+<vo-launch-checklist
   title="Ready to ship pricing?"
   [checks]="checks"
   [action]="{ label: 'Run checks', icon: 'play' }"
@@ -120,7 +120,7 @@ LaunchChecklist(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The
-progress segments and glyphs take their colour from the theme tokens — `--dm-ok` for a pass,
-`--dm-bad` for a fail, the accent mark while running — so results read the same on either
+progress segments and glyphs take their colour from the theme tokens — `--vo-ok` for a pass,
+`--vo-bad` for a fail, the accent mark while running — so results read the same on either
 background; in Soft the rows and buttons are rounder. The glyph crossfades in as each state lands,
 and the bar transition is skipped under `prefers-reduced-motion`.

@@ -53,7 +53,7 @@ import { BrowserSession } from './browser-session/BrowserSession';
   ]}
   ask={{ label: 'Allow closing it', onAllow: allow }}
 >
-  <div className="dm-bws-pg">{/* the page, drawn as a wireframe */}</div>
+  <div className="vo-bws-pg">{/* the page, drawn as a wireframe */}</div>
 </BrowserSession>
 ```
 
@@ -63,16 +63,16 @@ import { BrowserSession } from './browser-session/BrowserSession';
 
 ```html
 <!-- imports: [BrowserSessionComponent] -->
-<dm-browser-session
+<vo-browser-session
   title="Pricing research"
   url="northwind.app/pricing"
   [steps]="steps"
   [ask]="cookieAsk"
 >
   <ng-template #page>
-    <div class="dm-bws-pg"><!-- the page, drawn as a wireframe --></div>
+    <div class="vo-bws-pg"><!-- the page, drawn as a wireframe --></div>
   </ng-template>
-</dm-browser-session>
+</vo-browser-session>
 ```
 
 </Tab>

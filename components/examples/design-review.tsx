@@ -22,7 +22,7 @@ type Step = {
   note?: string;
 };
 
-const MAYA = { name: 'Maya Kim', initials: 'MK', color: 'var(--dm-av-l)' };
+const MAYA = { name: 'Maya Kim', initials: 'MK', color: 'var(--vo-av-l)' };
 const AGENT = { name: 'Design agent', agent: true };
 
 const CHECK_LABELS = ['Visual diff', 'Library tokens', 'Contrast'] as const;

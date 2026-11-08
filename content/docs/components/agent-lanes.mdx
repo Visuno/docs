@@ -68,7 +68,7 @@ lanes: AgentLane[] = [
 ];
 handoff: AgentHandoff = { from: 'researcher', to: 'designer', what: 'the brief' };
 
-<dm-agent-lanes [lanes]="lanes" [handoff]="handoff" [pauseWired]="true" (pausedChange)="paused = $event" />
+<vo-agent-lanes [lanes]="lanes" [handoff]="handoff" [pauseWired]="true" (pausedChange)="paused = $event" />
 ```
 
 </Tab>
@@ -119,7 +119,7 @@ AgentLanes(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). Each lane's
-hue comes from the theme's agent palette tokens (`--dm-pb`, `--dm-pl`, `--dm-pm` …) with a livelier
+hue comes from the theme's agent palette tokens (`--vo-pb`, `--vo-pl`, `--vo-pm` …) with a livelier
 "mark" variant for its track, line and finished badge, so the lanes stay 3:1 against the surface; in
 dark mode the agent colours are light already and are used as they are. In the Soft style the lanes
 are rounder and the tracks are hatched rather than washed.

@@ -24,7 +24,7 @@ const PEOPLE = [
   {
     key: 'mira',
     initials: 'MC',
-    color: 'var(--dm-av-l)',
+    color: 'var(--vo-av-l)',
     name: 'Mira Chen',
     role: 'Design lead',
     status: 'Editing Pricing, frame 2',
@@ -32,7 +32,7 @@ const PEOPLE = [
   {
     key: 'theo',
     initials: 'TK',
-    color: 'var(--dm-av-m)',
+    color: 'var(--vo-av-m)',
     name: 'Theo Kent',
     role: 'Engineer',
     status: 'Viewing the changelog',
@@ -40,7 +40,7 @@ const PEOPLE = [
   {
     key: 'agent',
     initials: 'AI',
-    color: 'var(--dm-av-p)',
+    color: 'var(--vo-av-p)',
     name: 'Visuno agent',
     role: 'Assistant',
     status: 'Drafting release notes',

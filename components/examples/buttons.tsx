@@ -12,7 +12,7 @@ import { Button, ButtonCopy } from '@visuno/buttons/Buttons';
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <span style={{ width: 64, flex: 'none', fontSize: 12, color: 'var(--dm-muted)' }}>{label}</span>
+      <span style={{ width: 64, flex: 'none', fontSize: 12, color: 'var(--vo-muted)' }}>{label}</span>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8 }}>{children}</div>
     </div>
   );

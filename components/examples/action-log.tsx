@@ -39,7 +39,7 @@ const STEPS: Raw[] = [
     detail: '+18 − 7 lines',
     time: '2.3s',
     output:
-      '<span class="dm-x">- gap: 20px;</span>\n<span class="dm-a">+ gap: var(--space-6);</span>',
+      '<span class="vo-x">- gap: 20px;</span>\n<span class="vo-a">+ gap: var(--space-6);</span>',
   },
   {
     icon: 'term',

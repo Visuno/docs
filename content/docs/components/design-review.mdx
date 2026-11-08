@@ -23,21 +23,21 @@ Something the agent made, laid out for sign-off. One column runs the `checks`; t
 
 ```html
 <!-- include core.css + design-review.css -->
-<div class="dm-drv dm-panel">
-  <div class="dm-drv-h">
-    <span class="dm-drv-ic"><!-- icon --></span>
-    <div class="dm-drv-ht"><b>Pricing page v4</b><span class="dm-muted">6 screens</span></div>
-    <span class="dm-tag dm-b dm-drv-tag">In review</span>
+<div class="vo-drv vo-panel">
+  <div class="vo-drv-h">
+    <span class="vo-drv-ic"><!-- icon --></span>
+    <div class="vo-drv-ht"><b>Pricing page v4</b><span class="vo-muted">6 screens</span></div>
+    <span class="vo-tag vo-b vo-drv-tag">In review</span>
   </div>
-  <div class="dm-drv-b">
-    <div class="dm-drv-col"><span class="dm-drv-lb">Checks</span><div class="dm-drv-checks"></div></div>
-    <div class="dm-drv-col"><span class="dm-drv-lb">Review</span><div class="dm-drv-rv"></div></div>
+  <div class="vo-drv-b">
+    <div class="vo-drv-col"><span class="vo-drv-lb">Checks</span><div class="vo-drv-checks"></div></div>
+    <div class="vo-drv-col"><span class="vo-drv-lb">Review</span><div class="vo-drv-rv"></div></div>
   </div>
-  <div class="dm-drv-f">
-    <span class="dm-muted dm-drv-st">Waiting on checks</span>
-    <div class="dm-drv-mg">
-      <button class="dm-pill dm-accent dm-sm dm-drv-go" disabled>Ship to everyone</button>
-      <button class="dm-pill dm-accent dm-sm dm-drv-dd" disabled><!-- chev-d --></button>
+  <div class="vo-drv-f">
+    <span class="vo-muted vo-drv-st">Waiting on checks</span>
+    <div class="vo-drv-mg">
+      <button class="vo-pill vo-accent vo-sm vo-drv-go" disabled>Ship to everyone</button>
+      <button class="vo-pill vo-accent vo-sm vo-drv-dd" disabled><!-- chev-d --></button>
     </div>
   </div>
 </div>
@@ -74,7 +74,7 @@ import { DesignReview } from './design-review/DesignReview';
 
 ```html
 <!-- imports: [DesignReviewComponent] -->
-<dm-design-review
+<vo-design-review
   title="Pricing page v4"
   subtitle="6 screens · sent for review by the design agent"
   [checks]="checks"
@@ -137,7 +137,7 @@ DesignReview(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
-sits on a `--dm-panel` surface; the header mark, the verdict tags and the checks' ok/bad glyphs all
-take their colours from the theme tokens (`--dm-ok`, `--dm-warn`, `--dm-bad`, `--dm-pb`), and the
+sits on a `--vo-panel` surface; the header mark, the verdict tags and the checks' ok/bad glyphs all
+take their colours from the theme tokens (`--vo-ok`, `--vo-warn`, `--vo-bad`, `--vo-pb`), and the
 Ship button follows the accent, so the whole review reads against either theme. Once it is live the
 header mark shifts to the ok tint.

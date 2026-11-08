@@ -21,7 +21,7 @@ const PAGES = [
 export function TopPagesExample() {
   return (
     <div style={{ width: '100%', maxWidth: 460 }}>
-      <TopPages pages={PAGES} site="designme.dev" period="last 30 days" />
+      <TopPages pages={PAGES} site="visuno.dev" period="last 30 days" />
     </div>
   );
 }

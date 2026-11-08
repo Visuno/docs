@@ -43,7 +43,7 @@ const SOURCES: CitationHoverCardSource[] = [
   },
   {
     mark: 'CSV',
-    color: 'var(--dm-pm)',
+    color: 'var(--vo-pm)',
     site: 'Drive',
     title: 'Q3 conversion export.csv',
     quote: (

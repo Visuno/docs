@@ -23,25 +23,25 @@ every call is done.
 
 ```html
 <!-- include core.css + tool-call.css -->
-<div class="dm-tcx">
-  <p class="dm-msg">Checking which plans changed this month.</p>
-  <div class="dm-tcx-calls">
-    <div class="dm-tcx-c dm-open">
-      <button class="dm-tcx-h" aria-expanded="true">
-        <span class="dm-tcx-ic"><!-- icon --></span>
-        <span class="dm-tcx-n"><span>billing.</span><b>list_plan_changes</b></span>
-        <span class="dm-tcx-ms"><span>412 ms</span><span><!-- check --></span></span>
+<div class="vo-tcx">
+  <p class="vo-msg">Checking which plans changed this month.</p>
+  <div class="vo-tcx-calls">
+    <div class="vo-tcx-c vo-open">
+      <button class="vo-tcx-h" aria-expanded="true">
+        <span class="vo-tcx-ic"><!-- icon --></span>
+        <span class="vo-tcx-n"><span>billing.</span><b>list_plan_changes</b></span>
+        <span class="vo-tcx-ms"><span>412 ms</span><span><!-- check --></span></span>
         <!-- chev-d -->
       </button>
-      <div class="dm-fold">
-        <div><div class="dm-tcx-io">
-          <div><div class="dm-tcx-l">Input</div><pre>{ "since": "2026-10-01" }</pre></div>
-          <div><div class="dm-tcx-l">Output</div><pre>[ { "plan": "Pro", "price": 24 } ]</pre></div>
+      <div class="vo-fold">
+        <div><div class="vo-tcx-io">
+          <div><div class="vo-tcx-l">Input</div><pre>{ "since": "2026-10-01" }</pre></div>
+          <div><div class="vo-tcx-l">Output</div><pre>[ { "plan": "Pro", "price": 24 } ]</pre></div>
         </div></div>
       </div>
     </div>
   </div>
-  <p class="dm-msg dm-tcx-end dm-in">Two plans changed. I updated their prices.</p>
+  <p class="vo-msg vo-tcx-end vo-in">Two plans changed. I updated their prices.</p>
 </div>
 ```
 
@@ -86,7 +86,7 @@ calls: ToolCallItem[] = [{
   output: [{ plan: 'Pro', price: 24 }, { plan: 'Team', price: 48 }],
 }];
 
-<dm-tool-call
+<vo-tool-call
   message="Checking which plans changed this month."
   [calls]="calls"
   reply="Two plans changed. I updated their prices."

@@ -46,7 +46,7 @@ export function StepLoaderExample() {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 'var(--dm-7, 32px)',
+        gap: 'var(--vo-7, 32px)',
         width: '100%',
         maxWidth: 560,
         alignItems: 'center',
@@ -58,7 +58,7 @@ export function StepLoaderExample() {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: 'var(--dm-6, 24px)',
+          gap: 'var(--vo-6, 24px)',
           width: '100%',
           justifyItems: 'center',
         }}
@@ -69,11 +69,11 @@ export function StepLoaderExample() {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: 'var(--dm-3, 12px)',
+              gap: 'var(--vo-3, 12px)',
               alignItems: 'center',
             }}
           >
-            <span style={{ fontSize: 12, color: 'var(--dm-muted)' }}>{g.name}</span>
+            <span style={{ fontSize: 12, color: 'var(--vo-muted)' }}>{g.name}</span>
             <StepLoader
               steps={[{ label: `${g.name} loader` }]}
               current={0}

@@ -23,24 +23,24 @@ and draws a `progress` track along its bottom.
 
 ```html
 <!-- include core.css + status-pill.css -->
-<div class="dm-spl">
-  <div class="dm-spl-pill" aria-live="polite">
-    <div class="dm-spl-in">
-      <span class="dm-g"><!-- glyph --></span>
-      <span class="dm-shim">Reading repository</span>
-      <span class="dm-m">2 of 4</span>
+<div class="vo-spl">
+  <div class="vo-spl-pill" aria-live="polite">
+    <div class="vo-spl-in">
+      <span class="vo-g"><!-- glyph --></span>
+      <span class="vo-shim">Reading repository</span>
+      <span class="vo-m">2 of 4</span>
     </div>
   </div>
 </div>
 
 <!-- bar variant with a progress track -->
-<div class="dm-spl dm-bar">
-  <div class="dm-spl-pill" aria-live="polite">
-    <div class="dm-spl-in">
-      <span class="dm-g"><!-- glyph --></span>
-      <span class="dm-shim">Writing tests</span>
+<div class="vo-spl vo-bar">
+  <div class="vo-spl-pill" aria-live="polite">
+    <div class="vo-spl-in">
+      <span class="vo-g"><!-- glyph --></span>
+      <span class="vo-shim">Writing tests</span>
     </div>
-    <div class="dm-spl-track"><div class="dm-spl-fill" style="width:80%"></div></div>
+    <div class="vo-spl-track"><div class="vo-spl-fill" style="width:80%"></div></div>
   </div>
 </div>
 ```
@@ -64,10 +64,10 @@ import { StatusPill } from './status-pill/StatusPill';
 
 ```html
 <!-- imports: [StatusPillComponent] -->
-<dm-status-pill state="reading" label="Reading repository" meta="2 of 4" />
-<dm-status-pill state="working" label="Editing" [file]="{ name: 'PricingCard.tsx', type: 'tsx' }" />
-<dm-status-pill state="waiting" label="Needs your review" [action]="{ label: 'Open', onClick: open }" />
-<dm-status-pill variant="bar" state="working" label="Writing tests" [progress]="80" />
+<vo-status-pill state="reading" label="Reading repository" meta="2 of 4" />
+<vo-status-pill state="working" label="Editing" [file]="{ name: 'PricingCard.tsx', type: 'tsx' }" />
+<vo-status-pill state="waiting" label="Needs your review" [action]="{ label: 'Open', onClick: open }" />
+<vo-status-pill variant="bar" state="working" label="Writing tests" [progress]="80" />
 ```
 
 </Tab>

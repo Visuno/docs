@@ -71,7 +71,7 @@ parts: TextPart[] = [
   { key: 'b', from: 'fits your team', to: 'grows with your studio' },
 ];
 
-<dm-inline-text-diff
+<vo-inline-text-diff
   [title]="title"
   [parts]="parts"
   doneLabel="Saved to Pricing v4"
@@ -121,6 +121,6 @@ InlineTextDiff(
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The struck
-and added words tint from the `--dm-del` and `--dm-add` tokens, an unsure edit uses the `--dm-warn`
+and added words tint from the `--vo-del` and `--vo-add` tokens, an unsure edit uses the `--vo-warn`
 tokens, and the toolbar sits on a raised surface with the pop shadow — so it all reads against the
 dark stage; in Soft the card and its pills are rounder.

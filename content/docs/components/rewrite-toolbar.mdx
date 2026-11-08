@@ -61,7 +61,7 @@ import { RewriteToolbar } from './rewrite-toolbar/RewriteToolbar';
 sentences = ['First sentence.', 'Second sentence.'];
 onRewrite = (s: string, action: string) => ask(s, action); // Promise<string> | string
 
-<dm-rewrite-toolbar
+<vo-rewrite-toolbar
   title="Onboarding intro"
   [sentences]="sentences"
   [onRewrite]="onRewrite"
@@ -109,5 +109,5 @@ RewriteToolbar(
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The
 document sits on a surface panel; the floating toolbar uses the ink/on-ink tokens so it reads as a
-dark pill over the text, and the picked sentence tints with `--dm-sel`. The struck-through old text
+dark pill over the text, and the picked sentence tints with `--vo-sel`. The struck-through old text
 uses the bad token for its line, and the new words fade and de-blur in as they arrive.

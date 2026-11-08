@@ -16,9 +16,9 @@ function Cell({ children }: { children: React.ReactNode }) {
         display: 'grid',
         placeItems: 'center',
         height: 56,
-        background: 'var(--dm-chip)',
-        borderRadius: 'var(--dm-r-box)',
-        color: 'var(--dm-fg2)',
+        background: 'var(--vo-chip)',
+        borderRadius: 'var(--vo-r-box)',
+        color: 'var(--vo-fg2)',
         fontSize: 13,
         fontWeight: 500,
       }}

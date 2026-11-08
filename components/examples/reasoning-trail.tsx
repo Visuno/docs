@@ -83,7 +83,7 @@ export function ReasoningTrailExample() {
         onViewChange={setView}
         bare={false}
       />
-      <div className="dm-seg2" role="group" aria-label="View" style={{ display: 'inline-flex', gap: 2, padding: 3, borderRadius: 'var(--dm-r-pill)', background: 'var(--dm-chip)' }}>
+      <div className="vo-seg2" role="group" aria-label="View" style={{ display: 'inline-flex', gap: 2, padding: 3, borderRadius: 'var(--vo-r-pill)', background: 'var(--vo-chip)' }}>
         {VIEWS.map((v) => (
           <button
             key={v.value}
@@ -93,10 +93,10 @@ export function ReasoningTrailExample() {
             style={{
               height: 26,
               padding: '0 11px',
-              borderRadius: 'var(--dm-r-pill)',
+              borderRadius: 'var(--vo-r-pill)',
               fontSize: 12.5,
-              color: view === v.value ? 'var(--dm-fg)' : 'var(--dm-fg2)',
-              background: view === v.value ? 'var(--dm-surface)' : 'transparent',
+              color: view === v.value ? 'var(--vo-fg)' : 'var(--vo-fg2)',
+              background: view === v.value ? 'var(--vo-surface)' : 'transparent',
               fontWeight: view === v.value ? 500 : 400,
             }}
           >

@@ -24,15 +24,15 @@ chat thread; set `bare` to `false` to give it a card of its own.
 
 ```html
 <!-- include core.css + proposal-card.css -->
-<div class="dm-prx" data-dm="">
-  <div class="dm-prx-h">
-    <span class="dm-prx-ic"><!-- wand icon --></span>
-    <div class="dm-prx-ht"><b>Raise contrast on the secondary button</b><span class="dm-muted">Pricing, frame 2 of 3</span></div>
+<div class="vo-prx" data-vo="">
+  <div class="vo-prx-h">
+    <span class="vo-prx-ic"><!-- wand icon --></span>
+    <div class="vo-prx-ht"><b>Raise contrast on the secondary button</b><span class="vo-muted">Pricing, frame 2 of 3</span></div>
   </div>
-  <div class="dm-prx-diff">
-    <div class="dm-prx-sw"><span class="dm-prx-c" style="background:#c9cfd8"></span><span class="dm-num">#C9CFD8</span><span class="dm-tag dm-bad">2.1 : 1</span></div>
-    <span class="dm-prx-ar"><!-- arrow --></span>
-    <div class="dm-prx-sw dm-prx-new"><span class="dm-prx-c" style="background:#5b6472"></span><span class="dm-num">#5B6472</span><span class="dm-tag dm-ok">5.9 : 1</span></div>
+  <div class="vo-prx-diff">
+    <div class="vo-prx-sw"><span class="vo-prx-c" style="background:#c9cfd8"></span><span class="vo-num">#C9CFD8</span><span class="vo-tag vo-bad">2.1 : 1</span></div>
+    <span class="vo-prx-ar"><!-- arrow --></span>
+    <div class="vo-prx-sw vo-prx-new"><span class="vo-prx-c" style="background:#5b6472"></span><span class="vo-num">#5B6472</span><span class="vo-tag vo-ok">5.9 : 1</span></div>
   </div>
   <!-- confidence meter, options fold, Accept / Not now -->
 </div>
@@ -71,7 +71,7 @@ options: ProposalOption[] = [
   { color: '#475161', label: '#475161', badge: '7.4 : 1', tone: 'ok', name: 'Darker', description: 'Stronger than the primary', confidence: 62 },
 ];
 
-<dm-proposal-card
+<vo-proposal-card
   title="Raise contrast on the secondary button"
   subtitle="Pricing, frame 2 of 3"
   [from]="{ color: '#c9cfd8', label: '#C9CFD8', badge: '2.1 : 1', tone: 'bad' }"

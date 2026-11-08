@@ -2,7 +2,7 @@
  * Landing-page styles. All page chrome (text, borders, surfaces) uses Fumadocs
  * theme tokens (--color-fd-*) so every string keeps strong contrast on the page
  * background in both light and dark mode — no light text on white. The Visuno
- * --dm-* tokens and data-style="soft" are confined to the live component stages
+ * --vo-* tokens and data-style="soft" are confined to the live component stages
  * (.vh-card, .vh-sc-stage), where they belong.
  */
 
@@ -12,7 +12,7 @@
   margin: 0 auto;
   padding: clamp(40px, 7vw, 88px) 20px 72px;
   color: var(--color-fd-foreground);
-  font-family: var(--dm-sans, Inter, ui-sans-serif, system-ui, sans-serif);
+  font-family: var(--vo-sans, Inter, ui-sans-serif, system-ui, sans-serif);
 }
 
 /* ---- Hero ---------------------------------------------------------------- */
@@ -30,7 +30,7 @@
 }
 
 .vh-hero-copy {
-  animation: vh-rise 0.6s var(--dm-ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
+  animation: vh-rise 0.6s var(--vo-ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
 }
 
 .vh-h1 {
@@ -86,7 +86,7 @@
 .vh-mark {
   display: grid;
   place-items: center;
-  animation: vh-rise 0.7s 0.08s var(--dm-ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
+  animation: vh-rise 0.7s 0.08s var(--vo-ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
 }
 .vh-mark-img {
   width: min(360px, 72%);
@@ -148,7 +148,7 @@
   border-bottom: 1px solid var(--color-fd-border);
 }
 .vh-lib-n {
-  font-family: var(--dm-mono, ui-monospace, monospace);
+  font-family: var(--vo-mono, ui-monospace, monospace);
   font-size: 13px;
   color: var(--color-fd-muted-foreground);
 }
@@ -214,7 +214,7 @@
   overflow: hidden;
   contain: strict;
   padding: 18px;
-  background: var(--dm-stage, #fafafa);
+  background: var(--vo-stage, #fafafa);
   border-bottom: 1px solid var(--color-fd-border);
   /* the live demo is non-interactive so the whole card stays one link */
   pointer-events: none;

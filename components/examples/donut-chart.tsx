@@ -13,7 +13,7 @@ const SEGMENTS = [
   { label: 'Code changes', value: 9.6 },
   { label: 'Research', value: 6.1 },
   { label: 'Copy edits', value: 3.4 },
-  { label: 'Other', value: 1.7, color: 'var(--dm-faint)' },
+  { label: 'Other', value: 1.7, color: 'var(--vo-faint)' },
 ];
 
 export function DonutChartExample() {

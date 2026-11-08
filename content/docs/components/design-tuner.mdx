@@ -9,7 +9,7 @@ import { DesignTunerExample } from '@/components/examples/design-tuner';
 A live preview beside a few sliders, with a button that hands the tuning to the agent. Drag a
 slider — or arrow-key it — to tweak the sample card by hand, or press **Tune with agent** and it
 walks each value to a target, turns the row it is moving accent, and drops a note on what it
-changed. Each slider sets a `--dm-<key>` variable on the preview, so the card reshapes live.
+changed. Each slider sets a `--vo-<key>` variable on the preview, so the card reshapes live.
 
 <Preview>
   <DesignTunerExample />
@@ -55,7 +55,7 @@ import { DesignTuner, type TunerParam } from './design-tuner/DesignTuner';
 
 ```html
 <!-- imports: [DesignTunerComponent] -->
-<dm-design-tuner
+<vo-design-tuner
   title="Pricing card"
   actionLabel="Tune with agent"
   (valuesChange)="onValues($event)"
@@ -96,7 +96,7 @@ DesignTuner(
 | `actionLabel` | `string` | The button's label, like `"Tune with agent"` or `"Tune again"`. |
 | `onTune` | `() => void` | Fires when the agent-tune button is pressed. |
 
-A `TunerParam` is `{ key, label, min, max, value, unit?, decimals? }`: `key` names the `--dm-<key>`
+A `TunerParam` is `{ key, label, min, max, value, unit?, decimals? }`: `key` names the `--vo-<key>`
 variable the preview reads, `unit` is appended to whole numbers (like `px`), and `decimals` shows
 and sets the value with that many decimals instead of rounding.
 

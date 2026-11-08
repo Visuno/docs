@@ -40,10 +40,10 @@ const RANGES: MetricRange[] = [
 ];
 
 const DRIVERS: MetricDriver[] = [
-  { label: 'Annual plan shown first', percent: 54, color: 'var(--dm-accent-mark, var(--dm-accent))' },
-  { label: 'One CTA per card', percent: 27, color: 'var(--dm-pl)' },
-  { label: 'Seasonal traffic', percent: 12, color: 'var(--dm-pt)' },
-  { label: 'Unexplained', percent: 7, color: 'var(--dm-faint)' },
+  { label: 'Annual plan shown first', percent: 54, color: 'var(--vo-accent-mark, var(--vo-accent))' },
+  { label: 'One CTA per card', percent: 27, color: 'var(--vo-pl)' },
+  { label: 'Seasonal traffic', percent: 12, color: 'var(--vo-pt)' },
+  { label: 'Unexplained', percent: 7, color: 'var(--vo-faint)' },
 ];
 
 export function MetricInsightExample() {

@@ -49,9 +49,9 @@ short notice with its own buttons, the last one filled.
 import { ModelPicker, type ModelOption } from './model-picker/ModelPicker';
 
 const models: ModelOption[] = [
-  { id: 'opus', name: 'Opus 5.5', color: 'var(--dm-pl)', note: 'Deepest reasoning, slower',
+  { id: 'opus', name: 'Opus 5.5', color: 'var(--vo-pl)', note: 'Deepest reasoning, slower',
     speed: 2, quality: 5, cost: 5, speedDetail: '38 tokens a second', costDetail: '$0.021 a reply' },
-  { id: 'sonnet', name: 'Sonnet 5.5', color: 'var(--dm-accent)', note: 'Balanced, the default',
+  { id: 'sonnet', name: 'Sonnet 5.5', color: 'var(--vo-accent)', note: 'Balanced, the default',
     speed: 4, quality: 4, cost: 2, speedDetail: '74 tokens a second', costDetail: '$0.006 a reply' },
 ];
 
@@ -67,14 +67,14 @@ const [value, setValue] = useState('sonnet');
 ```html
 <!-- imports: [ModelPickerComponent] -->
 models: ModelOption[] = [
-  { id: 'opus', name: 'Opus 5.5', color: 'var(--dm-pl)', note: 'Deepest reasoning, slower',
+  { id: 'opus', name: 'Opus 5.5', color: 'var(--vo-pl)', note: 'Deepest reasoning, slower',
     speed: 2, quality: 5, cost: 5 },
-  { id: 'sonnet', name: 'Sonnet 5.5', color: 'var(--dm-accent)', note: 'Balanced, the default',
+  { id: 'sonnet', name: 'Sonnet 5.5', color: 'var(--vo-accent)', note: 'Balanced, the default',
     speed: 4, quality: 4, cost: 2 },
 ];
 value = 'sonnet';
 
-<dm-model-picker [models]="models" [value]="value" (valueChange)="value = $event" />
+<vo-model-picker [models]="models" [value]="value" (valueChange)="value = $event" />
 ```
 
 </Tab>

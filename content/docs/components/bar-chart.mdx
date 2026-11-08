@@ -24,21 +24,21 @@ with a legend.
 
 ```html
 <!-- include core.css + bar-chart.css -->
-<div class="dm-bcx dm-panel">
-  <div class="dm-bcx-h">
-    <div><span class="dm-muted">Agent runs</span><b class="dm-num dm-bcx-v">0</b></div>
-    <div class="dm-seg2 dm-bcx-rg" role="group" aria-label="Range">
+<div class="vo-bcx vo-panel">
+  <div class="vo-bcx-h">
+    <div><span class="vo-muted">Agent runs</span><b class="vo-num vo-bcx-v">0</b></div>
+    <div class="vo-seg2 vo-bcx-rg" role="group" aria-label="Range">
       <button aria-pressed="true">Week</button>
       <button aria-pressed="false">Month</button>
     </div>
   </div>
-  <div class="dm-bcx-ch">
-    <div class="dm-bcx-b">
-      <div class="dm-bcx-tt"><b class="dm-num">53 runs</b><span>42 shipped, 9 reviewed, 2 failed</span></div>
-      <div class="dm-bcx-st"><i></i></div>
-      <div class="dm-bcx-l">Mon</div>
+  <div class="vo-bcx-ch">
+    <div class="vo-bcx-b">
+      <div class="vo-bcx-tt"><b class="vo-num">53 runs</b><span>42 shipped, 9 reviewed, 2 failed</span></div>
+      <div class="vo-bcx-st"><i></i></div>
+      <div class="vo-bcx-l">Mon</div>
     </div>
-    <!-- one .dm-bcx-b per bar -->
+    <!-- one .vo-bcx-b per bar -->
   </div>
 </div>
 ```
@@ -70,7 +70,7 @@ const ranges = [
 
 ```html
 <!-- imports: [BarChartComponent] -->
-<dm-bar-chart
+<vo-bar-chart
   label="Agent runs"
   [series]="series"
   [ranges]="ranges"
@@ -78,7 +78,7 @@ const ranges = [
   unit="runs"
   [stacked]="true"
   (rangeChange)="onRange($event)"
-></dm-bar-chart>
+></vo-bar-chart>
 ```
 
 </Tab>
@@ -134,6 +134,6 @@ series order sets the order of the parts, the legend and the breakdown in the re
 ## Theming
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The bars
-use the chart palette (`--dm-c1..c6`: the accent, then violet, orange, green…) unless a series sets
+use the chart palette (`--vo-c1..c6`: the accent, then violet, orange, green…) unless a series sets
 its own `color`; the readout tooltip sits on the ink tone and the big number and labels read from the
 foreground and muted tokens. In Soft the bars and tooltip are rounder.

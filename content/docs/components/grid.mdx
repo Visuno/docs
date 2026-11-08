@@ -63,16 +63,16 @@ import { Grid, GridItem } from './grid/Grid';
 
 ```html
 <!-- imports: [GridComponent, GridItemDirective] -->
-<dm-grid [cols]="3" [gap]="4">
-  <div dmGridItem="2">spans two</div>
+<vo-grid [cols]="3" [gap]="4">
+  <div voGridItem="2">spans two</div>
   <div>…</div>
   <div>…</div>
-</dm-grid>
+</vo-grid>
 
-<dm-grid [fit]="true" min="200px">
+<vo-grid [fit]="true" min="200px">
   <div>…</div>
   <div>…</div>
-</dm-grid>
+</vo-grid>
 ```
 
 </Tab>
@@ -82,17 +82,17 @@ import { Grid, GridItem } from './grid/Grid';
 ```dart
 import 'components/grid.dart';
 
-DmGrid(
+VoGrid(
   cols: 3,
   gap: 16,
   children: [
-    DmGridItem(span: 2, child: cell('spans two')),
+    VoGridItem(span: 2, child: cell('spans two')),
     cell('…'),
     cell('…'),
   ],
 ),
 
-DmGrid(
+VoGrid(
   fit: true,
   min: 200,
   children: [cell('…'), cell('…')],
@@ -113,11 +113,11 @@ DmGrid(
 | `gap` | `1–8 \| string` | The gutter: a core spacing step or a raw CSS length. `4` by default. |
 | `span` (on a child) | `2 \| 3 \| 4 \| full` | Make a child span more than one column, or the full row. |
 
-In React and Flutter a spanning child is wrapped in `GridItem` / `DmGridItem`; in Angular it carries
-the `dmGridItem` directive; in Vanilla it carries a `data-span` attribute.
+In React and Flutter a spanning child is wrapped in `GridItem` / `VoGridItem`; in Angular it carries
+the `voGridItem` directive; in Vanilla it carries a `data-span` attribute.
 
 ## Theming
 
 The grid is pure layout — it adds no color, shadow or border of its own, so the children it holds
-(cards, charts, tables) carry the look. Spacing flows through the shared `--dm-s-*` tokens. It works
+(cards, charts, tables) carry the look. Spacing flows through the shared `--vo-s-*` tokens. It works
 unchanged in light and dark and in both the Soft and Blueprint styles.

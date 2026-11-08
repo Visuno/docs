@@ -55,8 +55,8 @@ export function ComposerExample() {
       at(typed + 500, () => setMode('edit'));
       at(typed + 1400, () => {
         setThread(
-          <div className="dm-cpx-ag" style={{ justifyContent: 'flex-end' }}>
-            <span className="dm-fchip">{ASK}</span>
+          <div className="vo-cpx-ag" style={{ justifyContent: 'flex-end' }}>
+            <span className="vo-fchip">{ASK}</span>
           </div>
         );
         setText('');

@@ -239,7 +239,7 @@ export function TerminalStreamExample() {
       {done && (
         <button
           type="button"
-          className="dm-pill dm-ghost dm-sm"
+          className="vo-pill vo-ghost vo-sm"
           onClick={() => setRunId((n) => n + 1)}
         >
           Replay

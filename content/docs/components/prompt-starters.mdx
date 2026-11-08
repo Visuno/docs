@@ -23,21 +23,21 @@ another set of `starters` — a new set staggers the cards in again.
 
 ```html
 <!-- include core.css + prompt-starters.css -->
-<div class="dm-psx">
-  <div class="dm-psx-grid">
-    <button class="dm-psx-c">
-      <span class="dm-psx-ic"><!-- icon --></span>
+<div class="vo-psx">
+  <div class="vo-psx-grid">
+    <button class="vo-psx-c">
+      <span class="vo-psx-ic"><!-- icon --></span>
       <b>Audit a page</b>
-      <span class="dm-d">Check the pricing page for spacing and contrast</span>
+      <span class="vo-d">Check the pricing page for spacing and contrast</span>
     </button>
     <!-- more cards… -->
   </div>
-  <div class="dm-psx-in">
-    <span class="dm-psx-ph">Pick a starter or type your own</span>
-    <span class="dm-psx-tx"></span>
-    <button class="dm-psx-go" aria-label="Send" disabled><!-- up --></button>
+  <div class="vo-psx-in">
+    <span class="vo-psx-ph">Pick a starter or type your own</span>
+    <span class="vo-psx-tx"></span>
+    <button class="vo-psx-go" aria-label="Send" disabled><!-- up --></button>
   </div>
-  <button class="dm-pill dm-ghost dm-sm dm-psx-sh"><!-- refresh -->Shuffle</button>
+  <button class="vo-pill vo-ghost vo-sm vo-psx-sh"><!-- refresh -->Shuffle</button>
 </div>
 ```
 
@@ -70,7 +70,7 @@ starters: Starter[] = [
   { icon: 'grid', tone: 'blue', title: 'Audit a page', description: 'Check the pricing page', prompt: 'Audit pricing for spacing and contrast' },
 ];
 
-<dm-prompt-starters
+<vo-prompt-starters
   [starters]="starters"
   [onShuffle]="true"
   (send$)="run($event)"
@@ -127,4 +127,4 @@ PromptStarters(
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The cards
 sit on a chip fill that lifts to a surface with a faint ring when picked; the field is a pill on a
 surface with the shared shadow, and the Send button uses the accent tokens (a disabled hatch until a
-starter is picked). All colours, radii and spacing come from the `--dm-*` tokens.
+starter is picked). All colours, radii and spacing come from the `--vo-*` tokens.

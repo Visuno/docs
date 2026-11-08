@@ -27,7 +27,7 @@ const BASE_STEPS: SteerStep[] = [
   { id: 'read', title: 'Read Pricing v4', detail: '3 frames, 14 layers', status: 'done' },
   { id: 'pro', title: 'Update the Pro card', detail: 'Setting the accent to violet', status: 'running' },
   { id: 'team', title: 'Update the Team card', detail: 'Pricing v4, frame 3', status: 'queued' },
-  { id: 'ship', title: 'Export to staging', detail: 'designme.studio/pricing', status: 'queued' },
+  { id: 'ship', title: 'Export to staging', detail: 'visuno.studio/pricing', status: 'queued' },
 ];
 
 export function SteeringExample() {
@@ -112,7 +112,7 @@ function buildSteps(phase: Phase): SteerStep[] {
     steps.find((s) => s.id === 'team')!.detail = 'Accent set to library blue';
     const redo = steps.find((s) => s.id === 'redo-pro');
     if (redo) redo.detail = 'Accent set to library blue';
-    steps.find((s) => s.id === 'ship')!.detail = 'Live on designme.studio/pricing';
+    steps.find((s) => s.id === 'ship')!.detail = 'Live on visuno.studio/pricing';
   }
   return steps;
 }
