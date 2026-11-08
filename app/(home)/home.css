@@ -273,12 +273,45 @@
   border-top: 1px solid var(--color-fd-border);
   font-size: 13.5px;
   color: var(--color-fd-muted-foreground);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 .vh-footer-link {
   color: var(--color-fd-foreground);
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+/* ---- "Powered by SDK Industries" ---------------------------------------- */
+.vh-poweredby {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-fd-muted-foreground);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.vh-poweredby:hover {
+  opacity: 0.75;
+}
+.vh-sdk-logo {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+/* Theme-aware: show the dark-ink mark in light mode, the light mark in dark mode. */
+.vh-sdk-logo-light-ink {
+  display: none;
+}
+html.dark .vh-sdk-logo-dark-ink {
+  display: none;
+}
+html.dark .vh-sdk-logo-light-ink {
+  display: block;
 }
 
 /* ---- Motion -------------------------------------------------------------- */

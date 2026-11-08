@@ -1,0 +1,141 @@
+---
+title: Card
+description: A surface you drop other components onto, with an optional header, body and footer, and an interactive mode that turns the whole card into a hit target.
+---
+
+import { Preview } from '@/components/preview';
+import { CardExample } from '@/components/examples/card';
+
+A card is a surface you build other components onto. It has an optional header (a `title`, a
+`subtitle` and an end `action` slot), a body of whatever you put inside, and an optional `footer`
+of actions. `pad` sets the inset; set `interactive` (or pass `onClick`) and the whole card becomes a
+hit target that lifts on hover, takes focus, and fires on Enter or Space.
+
+<Preview>
+  <CardExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + card.css -->
+<div class="crd">
+  <div class="crd-h">
+    <div class="crd-hl">
+      <span class="crd-t">Nightly run</span>
+      <span class="crd-sub muted">Finished 4 minutes ago</span>
+    </div>
+    <span class="bdg" data-tone="success">Live</span>
+  </div>
+  <div class="crd-b"><p>Drop anything in the body.</p></div>
+  <div class="crd-f">
+    <button class="pill ghost sm">Dismiss</button>
+    <button class="pill sm" data-variant="accent">Open run</button>
+  </div>
+</div>
+
+<!-- the whole card as a hit target -->
+<div class="crd" data-interactive="true" tabindex="0" role="button">
+  <div class="crd-b"><span class="crd-t">Interactive card</span></div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { Card } from './card/Card';
+import { Badge } from './badge/Badge';
+
+<Card
+  title="Nightly run"
+  subtitle="Finished 4 minutes ago"
+  action={<Badge tone="success">Live</Badge>}
+  footer={<>
+    <button className="dm-pill dm-ghost dm-sm">Dismiss</button>
+    <button className="dm-pill dm-sm" data-variant="accent">Open run</button>
+  </>}
+>
+  <p>Drop anything in the body.</p>
+</Card>
+
+<Card interactive onClick={() => open()}>
+  <span className="dm-crd-t">Interactive card</span>
+</Card>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [CardComponent, BadgeComponent] -->
+<dm-card title="Nightly run" subtitle="Finished 4 minutes ago">
+  <dm-badge card-action tone="success">Live</dm-badge>
+  <p>Drop anything in the body.</p>
+  <button card-footer class="dm-pill dm-ghost dm-sm">Dismiss</button>
+  <button card-footer class="dm-pill dm-sm" data-variant="accent">Open run</button>
+</dm-card>
+
+<dm-card [interactive]="true" (clicked)="open()">
+  <span class="dm-crd-t">Interactive card</span>
+</dm-card>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/card.dart';
+import 'components/badge.dart';
+
+DmCard(
+  title: 'Nightly run',
+  subtitle: 'Finished 4 minutes ago',
+  action: const Badge('Live', tone: BadgeTone.success),
+  footer: [
+    TextButton(onPressed: dismiss, child: const Text('Dismiss')),
+    FilledButton(onPressed: open, child: const Text('Open run')),
+  ],
+  child: const Text('Drop anything in the body.'),
+),
+
+DmCard(
+  interactive: true,
+  onTap: open,
+  child: const Text('Interactive card'),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `ReactNode` | A title shown in the header. |
+| `subtitle` | `ReactNode` | A subtitle under the title. |
+| `action` | `ReactNode` | An end slot in the header, aligned right (a badge, a menu button). |
+| `footer` | `ReactNode` | A footer of actions below the body. |
+| `footerAlign` | `start \| end \| between` | How the footer's actions align. `end` by default. |
+| `pad` | `none \| sm \| md` | Inset for header, body and footer. `md` by default. |
+| `interactive` | `boolean` | Makes the whole card a hit target that lifts, takes focus and fires on Enter/Space. |
+| `onClick` / `clicked` / `onTap` | `callback` | Fired when an interactive card is activated. Setting it implies `interactive`. |
+
+In Angular the header end slot and the footer are projected with the `card-action` and `card-footer`
+attributes; in Flutter `action` is a widget and `footer` a list of widgets.
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). In Soft
+the card has rounded corners and floats on a soft shadow; in Blueprint it is squared off with a
+hairline instead of the float. An interactive card lifts on hover and keeps a visible focus ring;
+with reduced motion it still restyles but does not travel.

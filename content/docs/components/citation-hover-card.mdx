@@ -1,0 +1,134 @@
+---
+title: Citation hover card
+description: Hover a citation to see the exact passage it came from.
+---
+
+import { Preview } from '@/components/preview';
+import { CitationHoverCardExample } from '@/components/examples/citation-hover-card';
+
+An answer with numbered citations. Hovering, focusing or tapping one shows its source in a small card
+underneath — the coloured mark and site, the title, the passage the answer relies on (with the part
+that matters highlighted) and a link. The card rises in place; moving to another citation replays the
+entrance. It takes the answer `text` (where `[n]` cites source n and a blank line starts a new
+paragraph) and the list of `sources`.
+
+<Preview>
+  <CitationHoverCardExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + citation-hover-card.css -->
+<div class="chx">
+  <p class="msg chx-p">
+    Teams that show the annual price first convert better<button class="chx-c" data-i="0">1</button>.
+  </p>
+  <div class="chx-card panel keep" role="dialog" aria-label="Source"><div class="chx-in"></div></div>
+</div>
+<!-- citation-hover-card.js fills the card from its source list and places it under the citation -->
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { CitationHoverCard, type CitationHoverCardSource } from './citation-hover-card/CitationHoverCard';
+
+const sources: CitationHoverCardSource[] = [
+  {
+    mark: 'B',
+    color: '#4a5a8a',
+    site: 'baymard.com',
+    title: 'Pricing page UX benchmark',
+    quote: <>Those leading with the annual plan saw <mark>a 12 to 20% higher rate</mark>.</>,
+    meta: 'Read 4 days ago',
+  },
+];
+
+<CitationHoverCard
+  text="Teams that show the annual price first convert better[1]."
+  sources={sources}
+  onOpenSource={(s, i) => console.log(s.site, i)}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [CitationHoverCardComponent] -->
+sources: CitationHoverCardSource[] = [
+  {
+    mark: 'B', color: '#4a5a8a', site: 'baymard.com',
+    title: 'Pricing page UX benchmark',
+    quote: 'Those leading with the annual plan saw <mark>a 12 to 20% higher rate</mark>.',
+    meta: 'Read 4 days ago',
+  },
+];
+
+<dm-citation-hover-card
+  [text]="'Teams that show the annual price first convert better[1].'"
+  [sources]="sources"
+  (openSource)="onOpen($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/citation_hover_card.dart';
+
+CitationHoverCard(
+  text: 'Teams that show the annual price first convert better[1].',
+  sources: const [
+    CitationHoverCardSource(
+      mark: 'B',
+      color: Color(0xFF4A5A8A),
+      site: 'baymard.com',
+      title: 'Pricing page UX benchmark',
+      quote: 'Those leading with the annual plan saw a 12 to 20% higher rate.',
+      highlight: 'a 12 to 20% higher rate',
+      meta: 'Read 4 days ago',
+    ),
+  ],
+  onOpenSource: (source, index) => debugPrint(source.site),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `text` | `string` | The answer. `[n]` cites source n; a blank line starts a new paragraph. |
+| `sources` | `CitationHoverCardSource[]` | The sources behind the citations (source n is `sources[n − 1]`). |
+| `openLabel` | `string` | The link in the card's corner. Defaults to `Open source`. |
+| `open` | `number \| null` | Opens a source's card from outside (`0` is the first), or closes it with `null`. Hover, focus and taps still work. |
+| `onOpenSource` | `(source, index) => void` | Called when the card's link is clicked, with the source and its index. |
+| `onOpenChange` | `(index \| null) => void` | Called when a card opens or closes, with the source's index, or `null`. |
+| `source.mark` | `string` | One or two letters on the source's coloured mark, like `B`. |
+| `source.color` | `string` | The mark's colour, like `#4a5a8a` or `var(--dm-pm)`. |
+| `source.site` | `string` | Where it comes from, like `baymard.com` or `Drive`. |
+| `source.title` | `string` | The source's title. |
+| `source.quote` | `ReactNode` | The passage the answer relies on. Wrap the part that matters in `<mark>`. |
+| `source.meta` | `string` | The quiet line in the corner, like `Read 4 days ago`. |
+| `source.href` | `string` | Opens in a new tab from the card's link. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card sits
+on a surface with the pop shadow; the citation chips use the hover and accent tokens, the quote's accent
+rule uses `--dm-accent-mark` and its highlight uses the selection tint, so it all reads against the
+stage. In Soft the chips and card are rounder.

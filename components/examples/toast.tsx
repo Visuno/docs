@@ -24,6 +24,10 @@ const TOASTS: ToastData[] = [
 export function ToastExample() {
   const [current, setCurrent] = useState<ToastData | null>(TOASTS[0]);
 
+  // Each click spawns a fresh toast object so the same one can be shown again
+  // right after it was dismissed (a new identity re-triggers the slide-in).
+  const spawn = (t: ToastData) => setCurrent({ ...t });
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%', maxWidth: 420 }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
@@ -32,7 +36,7 @@ export function ToastExample() {
             key={t.id}
             type="button"
             className="dm-pill dm-soft dm-sm"
-            onClick={() => setCurrent(t)}
+            onClick={() => spawn(t)}
           >
             {t.tone === 'success' ? 'Success' : t.tone === 'error' ? 'Error' : t.tone === 'info' ? 'Info' : 'Loading'}
           </button>

@@ -16,12 +16,6 @@
     box-shadow 0.3s var(--dm-ease);
 }
 
-/* Docs-only: let the run-cost bar fill glide with the rAF ramp (the component's
- * own CSS only transitions the fill color, so width would otherwise snap). */
-.dm-rc-smooth .dm-rc-fill {
-  transition: width 0.12s linear, background 0.4s;
-}
-
 /*
  * Modern code boxes to suit the black & white layout: rounded corners, a hairline
  * border, slightly more breathing room, and crisp monospace. Keeps the default

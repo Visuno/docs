@@ -9,9 +9,10 @@ import { RunCost, type RunCostStatus } from '@visuno/run-cost/RunCost';
  * cap, turning the status amber and the button into "Raise cap". The toggle and
  * the button are wired, so you can raise the cap and watch it run to the budget.
  *
- * The spend is driven by a requestAnimationFrame ramp (a smooth per-frame climb),
- * not discrete interval steps, so the number and the bar glide instead of jumping.
- * Respects prefers-reduced-motion (it shows a paused run at once).
+ * The spend is driven by a requestAnimationFrame ramp (a smooth per-frame climb).
+ * The bar fill has NO CSS width transition, so it tracks the per-frame value
+ * exactly and glides with the number instead of lagging behind a transition that
+ * keeps restarting. Respects prefers-reduced-motion (it shows a paused run at once).
  */
 const BUDGET = 2000;
 const CAP_AT = 90;
@@ -45,7 +46,12 @@ export function RunCostExample() {
         if (next >= cap) {
           stop();
           setStatus(cap < BUDGET ? 'paused' : 'spent');
-          return { ...r, used: cap };
+          return {
+            used: cap,
+            inT: Math.round(cap * 16),
+            outT: Math.round(cap * 4),
+            tools: Math.floor(cap / 150),
+          };
         }
         return {
           used: next,
@@ -90,9 +96,9 @@ export function RunCostExample() {
   };
 
   return (
-    // dm-rc-smooth: transition the bar fill width so it glides with the ramp
-    // (the component's own CSS only transitions the fill color).
-    <div className="dm-rc-smooth" style={{ width: '100%', maxWidth: 360 }}>
+    // The component's own CSS now transitions the bar fill width, so it glides
+    // with the rAF ramp without a docs-only override.
+    <div style={{ width: '100%', maxWidth: 360 }}>
       <RunCost
         used={run.used}
         budget={BUDGET}

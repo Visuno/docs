@@ -170,11 +170,37 @@ export default function HomePage() {
       </section>
 
       <footer className="vh-footer">
-        Open source under the MIT licence.{' '}
-        <a href="https://github.com/Visuno/components" className="vh-footer-link">
-          Star on GitHub
+        <div>
+          Open source under the MIT licence.{' '}
+          <a href="https://github.com/Visuno/components" className="vh-footer-link">
+            Star on GitHub
+          </a>
+          .{' '}
+          <Link href="/docs/imprint" className="vh-footer-link">
+            Imprint
+          </Link>
+        </div>
+        <a
+          href="https://sdkindustries.de"
+          target="_blank"
+          rel="noreferrer"
+          className="vh-poweredby"
+        >
+          <span>Powered by</span>
+          {/* Theme-aware: dark-ink mark on light background, light mark on dark. */}
+          <img
+            className="vh-sdk-logo vh-sdk-logo-dark-ink"
+            src="https://sdkindustries.de/logo-dark.svg"
+            alt="SDK Industries"
+            height={20}
+          />
+          <img
+            className="vh-sdk-logo vh-sdk-logo-light-ink"
+            src="https://sdkindustries.de/logo.svg"
+            alt="SDK Industries"
+            height={20}
+          />
         </a>
-        .
       </footer>
     </main>
   );
