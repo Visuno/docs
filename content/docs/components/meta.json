@@ -88,6 +88,10 @@
     "icon",
     "progress",
     "tooltip",
-    "modal"
+    "modal",
+    "slider",
+    "search-input",
+    "number-field",
+    "otp-field"
   ]
 }

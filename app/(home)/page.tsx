@@ -89,6 +89,10 @@ import { IconExample } from "@/components/examples/icon";
 import { ProgressExample } from "@/components/examples/progress";
 import { TooltipExample } from "@/components/examples/tooltip";
 import { ModalExample } from "@/components/examples/modal";
+import { SliderExample } from "@/components/examples/slider";
+import { SearchInputExample } from "@/components/examples/search-input";
+import { NumberFieldExample } from "@/components/examples/number-field";
+import { OtpFieldExample } from "@/components/examples/otp-field";
 
 export const metadata: Metadata = {
   // `absolute` so the layout's "%s · Visuno" template doesn't append a second
@@ -470,6 +474,18 @@ const CATEGORIES: Category[] = [
       },
       { title: "Tooltip", slug: "tooltip", demo: <TooltipExample /> },
       { title: "Modal", slug: "modal", demo: <ModalExample /> },
+      { title: "Slider", slug: "slider", demo: <SliderExample /> },
+      {
+        title: "Search input",
+        slug: "search-input",
+        demo: <SearchInputExample />,
+      },
+      {
+        title: "Number field",
+        slug: "number-field",
+        demo: <NumberFieldExample />,
+      },
+      { title: "OTP field", slug: "otp-field", demo: <OtpFieldExample /> },
     ],
   },
 ];
