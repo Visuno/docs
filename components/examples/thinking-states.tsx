@@ -4,13 +4,16 @@ import { ThinkingStates } from '@visuno/thinking-states/ThinkingStates';
 /**
  * Live example for the Thinking States docs page.
  *
- * The six indicators shown side by side, each a small animated mark beside a
+ * The ten indicators shown side by side, each a small animated mark beside a
  * status line that steps through what an agent is doing. The lines auto-rotate
  * on their own (no `current` set), so every card is inherently animated.
  */
 const STEPS = ['Thinking', 'Reading 3 files', 'Planning the change', 'Writing the patch'];
 
-const VARIANTS: { variant: 'orbit' | 'morph' | 'scan' | 'stream' | 'matrix' | 'stack'; name: string }[] =
+const VARIANTS: {
+  variant: 'orbit' | 'morph' | 'scan' | 'stream' | 'matrix' | 'stack' | 'pulse' | 'wave' | 'bounce' | 'spiral';
+  name: string;
+}[] =
   [
     { variant: 'orbit', name: 'Orbit' },
     { variant: 'morph', name: 'Morph' },
@@ -18,6 +21,10 @@ const VARIANTS: { variant: 'orbit' | 'morph' | 'scan' | 'stream' | 'matrix' | 's
     { variant: 'stream', name: 'Stream' },
     { variant: 'matrix', name: 'Matrix' },
     { variant: 'stack', name: 'Stack' },
+    { variant: 'pulse', name: 'Pulse' },
+    { variant: 'wave', name: 'Wave' },
+    { variant: 'bounce', name: 'Bounce' },
+    { variant: 'spiral', name: 'Spiral' },
   ];
 
 export function ThinkingStatesExample() {

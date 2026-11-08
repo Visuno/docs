@@ -46,9 +46,9 @@ export function StepLoaderExample() {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 'var(--dm-6, 24px)',
+        gap: 'var(--dm-7, 32px)',
         width: '100%',
-        maxWidth: 420,
+        maxWidth: 560,
         alignItems: 'center',
       }}
     >
@@ -57,9 +57,10 @@ export function StepLoaderExample() {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-          gap: 'var(--dm-4, 16px)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: 'var(--dm-6, 24px)',
           width: '100%',
+          justifyItems: 'center',
         }}
       >
         {GLYPHS.map((g) => (
@@ -68,7 +69,7 @@ export function StepLoaderExample() {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: 'var(--dm-2, 8px)',
+              gap: 'var(--dm-3, 12px)',
               alignItems: 'center',
             }}
           >

@@ -64,18 +64,20 @@ export function AgentPhasesExample() {
     timers.current.push(t);
   };
 
+  // Stop or the natural wait moves on to asking for approval
+  const toWaiting = () => {
+    clearTimers();
+    setModel({ phase: 'waiting', error: false, slow: false, took: { thinking: 2, searching: 3, reading: 4 } });
+  };
+
   // Retry clears the error and lets reading run, which turns slow
   const onRetry = () => {
     clearTimers();
     setModel({ phase: 'searching', error: false, slow: false, took: { thinking: 2 } });
     after(() => setModel({ phase: 'reading', error: false, slow: false, took: { thinking: 2, searching: 3 } }), 900);
     after(() => setModel((m) => ({ ...m, slow: true })), 2500);
-  };
-
-  // Stop or the natural wait moves on to asking for approval
-  const toWaiting = () => {
-    clearTimers();
-    setModel({ phase: 'waiting', error: false, slow: false, took: { thinking: 2, searching: 3, reading: 4 } });
+    // the "Still working" note lingers a good while, then moves on by itself (Stop cuts it short)
+    after(() => toWaiting(), 12500);
   };
 
   const onApprove = () => {
