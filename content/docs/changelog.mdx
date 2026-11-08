@@ -8,15 +8,51 @@ Component source lives in the [components repository](https://github.com/Visuno/
 
 ## Unreleased
 
+- **Slider** — new shared component in all four frameworks: a track with a
+  single value or a range, optional discrete steps and named stops, and an
+  agent-recommended value marked on the track. Keyboard and drag, tokens only.
+- **Search input** — new shared component in all four frameworks: a search
+  field with scoped filters, recent queries and an inline agent answer.
+- **Number field** — new shared component in all four frameworks: type a number
+  or step it with minus and plus, with units, limits, and a note when a value is
+  clamped to fit.
+- **OTP field** — new shared component in all four frameworks: a one-time code,
+  one box per digit, that auto-advances, navigates by keyboard and fills from a
+  paste.
+- **Docs preview** — live example stages now always use the docs page's own theme
+  (light or dark), never the browser's colour-scheme preference. The per-preview
+  Light/Dark toggle has been removed; the component tokens follow the site theme.
+- **Icon** — new shared component in all four frameworks: one line icon from a shared
+  MIT set of ~5,200, or your own SVG. Colour follows `currentColor` so icons theme for
+  free; sizes run `xs`–`xl` on a 24×24 grid. Any name resolves on the web; Angular and
+  Flutter draw names outside the compiled core set, and custom glyphs, from a `path`.
+  The whole set now uses canonical, descriptive names (`chevron-right`, `circle-check`,
+  `terminal-2`…) across every framework.
+- **Packages** — the library now publishes as installable packages: `@visuno/react` and
+  `@visuno/angular` on npm, and `visuno` on pub.dev for Flutter. Each is released from its
+  framework directory in the components repo.
+- **Vanilla JS dropped** — Visuno is now **three frameworks**: React, Angular and Flutter.
+  The Vanilla JS tabs have been removed from every component page, and the docs, FAQ and
+  roadmap updated to match. React is now the reference implementation.
+- **Landing page** — the home page now showcases the **whole library** live: every
+  shipped component appears as a running preview card, grouped by category, with the
+  component count derived from the list. New marketing hero leading with the Visuno
+  name, a secondary "Star on GitHub" action, and feature pills.
+- **Frameworks slider** — the frameworks strip is now an auto-scrolling black & white
+  logo slider covering React, Angular, Flutter and the React
+  meta-frameworks it works with (Next.js, Remix, Gatsby, Astro).
+- **Modal** — new shared component in all three frameworks: a centred dialog over a
+  dimmed backdrop, closed by the backdrop, a button or Escape, with focus and page
+  scroll kept in check. It carries the active style and theme to its portal, so it
+  matches the surrounding components (rounded in Soft, correct light/dark).
+- **Run summary** — the "Run details" and "Open changes" buttons now work: Run
+  details opens a Modal with the run's stats, Open changes opens a full diff view.
+- **Thinking states** — four new indicators: Pulse, Wave, Bounce and Spiral.
+- **Run cost** — the spend bar now glides with the number instead of stalling.
+- **Toast** — a dismissed toast can be shown again straight after.
 - **Imprint page** added with the legal information of SDK Industries, linked from
   the docs navigation and the homepage footer.
-- **"Powered by SDK Industries"** attribution added to the homepage footer, with a
-  theme-aware [SDK Industries](https://sdkindustries.de) logo.
-- **FAQ, Changelog, and Roadmap** added to the docs.
-- Homepage preview cards locked to a fixed, clipped stage so live demos no longer
-  resize or overflow their cards.
 - **Stat cards** homepage preview reworked into a responsive single-column layout.
-- Visuno mark added as the docs favicon.
 
 ## 2026-11-07
 

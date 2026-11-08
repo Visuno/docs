@@ -1,4 +1,5 @@
 import { RootProvider } from 'fumadocs-ui/provider/next';
+import { ThemeBridge } from '@/components/theme-bridge';
 import './global.css';
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
     template: `%s · ${appName}`,
   },
   description:
-    'Native UI components for AI-agent products — one design across Vanilla JS, React, Angular, and Flutter.',
+    'Native UI components for AI-agent products — one design across React, Angular, and Flutter.',
 };
 
 const inter = Inter({
@@ -30,6 +31,7 @@ export default function Layout({ children }: LayoutProps<'/'>) {
             },
           }}
         >
+          <ThemeBridge />
           {children}
         </RootProvider>
       </body>

@@ -95,7 +95,7 @@ export function LaunchChecklistExample() {
       ? { label: 'Ship it', accent: true, onClick: () => setShipped(true) }
       : {
           label: running ? 'Checking' : started ? 'Run again' : 'Run checks',
-          icon: (running ? 'refresh' : started ? 'refresh' : 'play') as 'play' | 'refresh',
+          icon: (running ? 'refresh' : started ? 'refresh' : 'player-play') as 'player-play' | 'refresh',
           disabled: running,
           onClick: run,
         };

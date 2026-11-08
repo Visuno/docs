@@ -21,28 +21,7 @@ Enter or by clicking away. The Send button waits until every field is sure or ch
 Wrap the parts of the page a field comes from in a zone, and tie each field to its zone with a
 matching `key`/`field`. The zone lights up while its field is read, hovered or checked.
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + field-extraction.css -->
-<div class="fex">
-  <div class="fex-doc">
-    <div class="fex-pg">
-      <div class="fex-z" data-z="no"><span class="muted">Invoice no.</span> <span class="num">NW-2041</span></div>
-      <!-- more zones … -->
-    </div>
-  </div>
-  <div class="fex-side panel">
-    <div class="fex-sh"><b>Extracted fields</b><span class="muted fex-st">Reading page 1</span></div>
-    <div class="fex-list"><!-- rows added as fields are read --></div>
-    <div class="fex-f"><button class="pill primary sm fex-go" disabled>Send to Sheets</button></div>
-  </div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 

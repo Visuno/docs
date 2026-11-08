@@ -18,27 +18,7 @@ collapses to one column when it gets narrow — whatever the page around it does
 
 ## Usage
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + grid.css -->
-<!-- a fixed count; --grd-cols and --grd-gap are plain CSS vars -->
-<div class="grd" style="--grd-cols:3">
-  <div data-span="2">spans two</div>
-  <div>…</div>
-  <div>…</div>
-</div>
-
-<!-- auto-fit: as many columns as fit at 200px -->
-<div class="grd" data-fit="true" style="--grd-min:200px">
-  <div>…</div>
-  <div>…</div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -114,7 +94,7 @@ VoGrid(
 | `span` (on a child) | `2 \| 3 \| 4 \| full` | Make a child span more than one column, or the full row. |
 
 In React and Flutter a spanning child is wrapped in `GridItem` / `VoGridItem`; in Angular it carries
-the `voGridItem` directive; in Vanilla it carries a `data-span` attribute.
+the `voGridItem` directive.
 
 ## Theming
 

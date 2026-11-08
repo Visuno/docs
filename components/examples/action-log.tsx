@@ -34,7 +34,7 @@ const STEPS: Raw[] = [
     output: 'Button / Primary\nButton / Secondary\nButton / Ghost  +3',
   },
   {
-    icon: 'edit',
+    icon: 'pencil',
     title: 'Edited <code>PricingCard.tsx</code>',
     detail: '+18 − 7 lines',
     time: '2.3s',
@@ -42,14 +42,14 @@ const STEPS: Raw[] = [
       '<span class="vo-x">- gap: 20px;</span>\n<span class="vo-a">+ gap: var(--space-6);</span>',
   },
   {
-    icon: 'term',
+    icon: 'terminal-2',
     title: 'Ran <code>npm test</code>',
     detail: '24 tests passed',
     time: '3.2s',
     output: '✓ PricingCard renders 3 plans\n✓ toggles yearly billing\n24 passed, 0 failed',
   },
   {
-    icon: 'pr',
+    icon: 'git-pull-request',
     title: 'Opened a pull request',
     detail: '#412, Use shared spacing tokens',
     time: '0.6s',

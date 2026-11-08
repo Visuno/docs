@@ -82,6 +82,32 @@
   transform: translateX(2px);
 }
 
+/* Secondary / ghost CTA */
+.vh-cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 15px;
+  border-radius: 9px;
+  border: 1px solid var(--color-fd-border);
+  background: var(--color-fd-card);
+  color: var(--color-fd-foreground);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+.vh-cta-ghost:hover {
+  border-color: var(--color-fd-muted-foreground);
+  transform: translateY(-1px);
+}
+
+/* Emphasis inside the headline */
+.vh-h1 em {
+  font-style: normal;
+  color: var(--color-fd-primary);
+}
+
 /* Hero mark — the Visuno logo (no text) */
 .vh-mark {
   display: grid;
@@ -100,37 +126,87 @@
   }
 }
 
-/* ---- Frameworks ---------------------------------------------------------- */
-.vh-frameworks {
+/* ---- Frameworks: black & white logo slider ------------------------------- */
+.vh-fs {
   margin-top: clamp(44px, 6vw, 72px);
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+}
+.vh-fs-viewport {
+  overflow: hidden;
+  /* Fade the two edges so logos appear/disappear instead of clipping hard. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+.vh-fs-track {
+  display: flex;
+  width: max-content;
+  gap: clamp(28px, 6vw, 72px);
+  padding: 4px 0;
+  margin: 0;
+  list-style: none;
+  animation: vh-fs-scroll 48s linear infinite;
+}
+.vh-fs-viewport:hover .vh-fs-track {
+  animation-play-state: paused;
+}
+.vh-fs-item {
+  display: flex;
+  align-items: center;
   gap: 12px;
+  flex: 0 0 auto;
+  /* Monochrome by default; brighten on hover. */
+  color: var(--color-fd-muted-foreground);
+  transition: color 0.2s ease;
 }
-@media (min-width: 720px) {
-  .vh-frameworks {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.vh-fs-item:hover {
+  color: var(--color-fd-foreground);
 }
-.vh-fw {
-  border: 1px solid var(--color-fd-border);
-  border-radius: 12px;
-  background: var(--color-fd-card);
-  padding: 14px 16px;
-  transition: border-color 0.2s ease;
+.vh-fs-logo {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
 }
-.vh-fw:hover {
-  border-color: var(--color-fd-muted-foreground);
+.vh-fs-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
 }
-.vh-fw-name {
+.vh-fs-name {
   font-size: 14px;
   font-weight: 500;
   color: var(--color-fd-foreground);
 }
-.vh-fw-note {
-  margin-top: 3px;
+.vh-fs-note {
   font-size: 12px;
   color: var(--color-fd-muted-foreground);
+}
+@keyframes vh-fs-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* -50% because the track is the list duplicated once. */
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vh-fs-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(20px, 4vw, 40px);
+  }
 }
 
 /* ---- Library ------------------------------------------------------------- */
@@ -139,6 +215,22 @@
   display: flex;
   flex-direction: column;
   gap: 48px;
+}
+.vh-lib-intro {
+  max-width: 40em;
+}
+.vh-lib-h2 {
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--color-fd-foreground);
+}
+.vh-lib-lead {
+  margin: 12px 0 0;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--color-fd-muted-foreground);
 }
 .vh-lib-head {
   display: flex;

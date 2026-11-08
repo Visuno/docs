@@ -33,7 +33,7 @@ const SPECS: Spec[] = [
   {
     key: 'designer',
     name: 'Designer',
-    icon: 'edit',
+    icon: 'pencil',
     tone: 'purple',
     wait: 'Waiting for the brief',
     acts: ['Laying out pricing cards', 'Setting type and spacing', 'Exporting frames'],

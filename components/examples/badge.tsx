@@ -100,7 +100,7 @@ export function BadgeExample() {
         </Badge>
         <Badge dot>Idle</Badge>
         <Badge icon="lock">Private</Badge>
-        <Badge tone="accent" icon="spark">
+        <Badge tone="accent" icon="sparkles">
           Agent
         </Badge>
       </Row>

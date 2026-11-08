@@ -9,11 +9,11 @@ import { ToastStack, type StackToast } from '@visuno/toast-stack/ToastStack';
  * A "Send notification" button adds one by hand. Uses the real Visuno component.
  */
 const POOL: Omit<StackToast, 'id' | 'time'>[] = [
-  { icon: 'ok', tone: 'ok', title: 'Tests passed', detail: '42 of 42 in 38s' },
-  { icon: 'pr', tone: 'merge', title: 'PR #412 is ready', detail: 'Use shared spacing tokens' },
-  { icon: 'figma', tone: 'purple', title: 'Frames synced', detail: '6 frames from Pricing.fig' },
-  { icon: 'warn', tone: 'warn', title: 'Budget at 80%', detail: '1,600 of 2,000 credits' },
-  { icon: 'spark', tone: 'blue', title: 'Draft written', detail: 'Launch email, 2 subject lines' },
+  { icon: 'circle-check', tone: 'ok', title: 'Tests passed', detail: '42 of 42 in 38s' },
+  { icon: 'git-pull-request', tone: 'merge', title: 'PR #412 is ready', detail: 'Use shared spacing tokens' },
+  { icon: 'brand-figma', tone: 'purple', title: 'Frames synced', detail: '6 frames from Pricing.fig' },
+  { icon: 'alert-triangle', tone: 'warn', title: 'Budget at 80%', detail: '1,600 of 2,000 credits' },
+  { icon: 'sparkles', tone: 'blue', title: 'Draft written', detail: 'Launch email, 2 subject lines' },
 ];
 
 export function ToastStackExample() {

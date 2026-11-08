@@ -9,12 +9,12 @@ import { Tooltip } from '@visuno/tooltip/Tooltip';
  */
 const GROUPS = [
   [
-    { key: 'undo', icon: 'undo' as const, label: 'Undo', kbd: '⌘Z' },
-    { key: 'redo', icon: 'redo' as const, label: 'Redo', kbd: '⌘⇧Z' },
-    { key: 'comment', icon: 'comment' as const, label: 'Comment', tip: 'Leave a comment', kbd: 'C' },
+    { key: 'undo', icon: 'arrow-back-up' as const, label: 'Undo', kbd: '⌘Z' },
+    { key: 'redo', icon: 'arrow-forward-up' as const, label: 'Redo', kbd: '⌘⇧Z' },
+    { key: 'comment', icon: 'message' as const, label: 'Comment', tip: 'Leave a comment', kbd: 'C' },
   ],
   [
-    { key: 'ask', icon: 'spark' as const, label: 'Ask agent', tip: 'Ask the agent', kbd: '⌘J' },
+    { key: 'ask', icon: 'sparkles' as const, label: 'Ask agent', tip: 'Ask the agent', kbd: '⌘J' },
     { key: 'search', icon: 'search' as const, label: 'Search', kbd: '⌘K' },
     { key: 'share', icon: 'users' as const, label: 'Share', tip: 'Share with your team' },
   ],

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { LoopingDemo } from './looping-demo';
 
 /**
  * A single advertised component: its real, live example running on a soft stage,
@@ -19,7 +20,9 @@ export function ShowcaseCard({
   return (
     <Link href={`/docs/components/${slug}`} className="vh-sc" aria-label={`${title} — view docs`}>
       <div className="vh-sc-stage" aria-hidden="true" data-style="soft">
-        <div className="vh-sc-inner">{children}</div>
+        <div className="vh-sc-inner">
+          <LoopingDemo>{children}</LoopingDemo>
+        </div>
       </div>
       <div className="vh-sc-foot">
         <span className="vh-sc-name">{title}</span>

@@ -17,33 +17,7 @@ away, and when the last task is gone the table says so.
 
 ## Usage
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + task-table.css -->
-<div class="ttx panel" data-reveal="flat">
-  <div class="ttx-hd">
-    <div class="ttx-ti"><b>Agent tasks</b><span class="muted num ttx-sum">6 tasks, 2 running</span></div>
-    <div class="ttx-sb" inert>
-      <span class="ttx-n num">2 selected</span>
-      <button class="pill ghost sm" data-a="pause">Pause</button>
-      <button class="pill ghost sm" data-a="retry">Retry</button>
-      <button class="pill ghost sm ttx-del" data-a="cancel">Cancel</button>
-      <span class="ttx-sp"></span>
-      <button class="pill ghost sm ttx-clr">Clear</button>
-    </div>
-  </div>
-  <div class="ttx-sc"><table class="ttx-t">
-    <thead><tr><th class="ck"><button class="ttx-cb ttx-all" role="checkbox" aria-checked="false" aria-label="Select all"></button></th><th><button class="ttx-s" data-k="0">Task</button></th><!-- … --></tr></thead>
-    <tbody></tbody>
-  </table></div>
-</div>
-<script type="module">import { VO } from './core.js'; VO.mount();</script>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 

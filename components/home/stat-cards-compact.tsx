@@ -13,7 +13,7 @@ import { StatCards } from '@visuno/stat-cards/StatCards';
 const STATS = [
   {
     key: 'runs',
-    icon: 'spark' as const,
+    icon: 'sparkles' as const,
     label: 'Agent runs',
     values: [{ value: 1842, change: 12.4, points: [980, 1120, 1070, 1260, 1410, 1550, 1842] }],
   },
