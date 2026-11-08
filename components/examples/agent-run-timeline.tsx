@@ -11,11 +11,11 @@ import { AgentRunTimeline, type TimelineStep } from '@visuno/agent-run-timeline/
  * component. Honours prefers-reduced-motion by showing the finished run at once.
  */
 const STEPS: TimelineStep[] = [
-  { label: 'Plan the change', icon: 'spark', kind: 'model', start: 0, duration: 1.6, cost: 0.03 },
+  { label: 'Plan the change', icon: 'sparkles', kind: 'model', start: 0, duration: 1.6, cost: 0.03 },
   { label: 'Read 6 files', icon: 'file-text', kind: 'tool', start: 1.6, duration: 2.2, cost: 0.02 },
   { label: 'Search Figma', brand: 'figma', kind: 'app', start: 1.9, duration: 1.4, cost: 0.01 },
-  { label: 'Edit PricingCard', icon: 'edit', kind: 'model', start: 4, duration: 2.4, cost: 0.06 },
-  { label: 'Run tests', icon: 'term', kind: 'tool', start: 6.5, duration: 1.5, cost: 0.01, failed: true, tag: '2 failed', note: '2 tests failed' },
+  { label: 'Edit PricingCard', icon: 'pencil', kind: 'model', start: 4, duration: 2.4, cost: 0.06 },
+  { label: 'Run tests', icon: 'terminal-2', kind: 'tool', start: 6.5, duration: 1.5, cost: 0.01, failed: true, tag: '2 failed', note: '2 tests failed' },
   { label: 'Run tests again', icon: 'refresh', kind: 'tool', start: 8.1, duration: 1.9, cost: 0.01, retry: true },
   { label: 'Open a PR on GitHub', brand: 'github', kind: 'app', start: 10.1, duration: 1, cost: 0.02 },
   { label: 'Post to Slack', brand: 'slack', kind: 'app', start: 11.1, duration: 0.6, cost: 0.01 },

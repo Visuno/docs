@@ -23,8 +23,8 @@ type JobSeed = {
 
 const SEEDS: JobSeed[] = [
   { id: 'brief', title: 'Summarise the research', agent: 'Research agent', icon: 'brain', time: '3.1s', steps: ['Read 12 notes', 'Cluster findings', 'Write the brief'] },
-  { id: 'email', title: 'Draft the launch email', agent: 'Copy agent', icon: 'spark', time: '4.2s', steps: ['Outline', 'Draft', 'Proofread'], failAt: 1 },
-  { id: 'assets', title: 'Render the hero image', agent: 'Design agent', icon: 'image', time: '2.4s', steps: ['Compose', 'Render'] },
+  { id: 'email', title: 'Draft the launch email', agent: 'Copy agent', icon: 'sparkles', time: '4.2s', steps: ['Outline', 'Draft', 'Proofread'], failAt: 1 },
+  { id: 'assets', title: 'Render the hero image', agent: 'Design agent', icon: 'photo', time: '2.4s', steps: ['Compose', 'Render'] },
   { id: 'post', title: 'Schedule the posts', agent: 'Social agent', icon: 'send', time: 'in ~4s', steps: ['Pick slots', 'Queue'] },
 ];
 

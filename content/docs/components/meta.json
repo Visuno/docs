@@ -80,13 +80,14 @@
     "account-table",
     "---Dates---",
     "segmented-control",
-    "---Layout---",
+    "---Core---",
     "card",
     "grid",
-    "---Forms and inputs---",
     "buttons",
     "badge",
+    "icon",
     "progress",
-    "tooltip"
+    "tooltip",
+    "modal"
   ]
 }

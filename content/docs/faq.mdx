@@ -12,9 +12,8 @@ open an issue on [GitHub](https://github.com/Visuno/issues/issues).
 
 <Accordion title="What is Visuno?">
 Visuno is an open-source UI component library for building **agent-powered products**.
-Every component ships natively for **Vanilla JS**, **React**, **Angular**, and **Flutter**,
-built from one shared set of design tokens — so a component looks and behaves the same
-wherever you use it.
+Every component ships natively for **React**, **Angular**, and **Flutter**, built from one
+shared set of design tokens — so a component looks and behaves the same wherever you use it.
 </Accordion>
 
 <Accordion title="Is it free to use?">
@@ -24,9 +23,9 @@ for the full licence text.
 </Accordion>
 
 <Accordion title="Is Visuno production-ready?">
-The Vanilla JS and React builds are the reference implementations and are stable. Angular
-and Flutter are native ports that mirror the same props and behaviour. As with any
-pre-1.0 library, pin a version and read the [changelog](/docs/changelog) before upgrading.
+The React build is the reference implementation and is stable. Angular and Flutter are
+native ports that mirror the same props and behaviour. As with any pre-1.0 library, pin a
+version and read the [changelog](/docs/changelog) before upgrading.
 </Accordion>
 
 </Accordions>
@@ -36,32 +35,29 @@ pre-1.0 library, pin a version and read the [changelog](/docs/changelog) before 
 <Accordions>
 
 <Accordion title="Which frameworks are supported?">
-Four, from a single design source:
+Three, from a single design source:
 
-| Framework | Form |
-|-----------|------|
-| **Vanilla JS** | Plain HTML + CSS + JS — no build step, drop it in |
-| **React** | `.tsx` components (requires React 19) |
-| **Angular** | Standalone components (`vo-*` selectors, Angular 17+) |
-| **Flutter** | Dart widgets, themed to match the web |
+| Framework | Form | Package |
+|-----------|------|---------|
+| **React** | `.tsx` components (React 18+) | `@visuno/react` |
+| **Angular** | Standalone components (`vo-*` selectors, Angular 18+) | `@visuno/angular` |
+| **Flutter** | Dart widgets, themed to match the web | `visuno` on pub.dev |
 
-The Vanilla and React versions are the reference; Angular and Flutter mirror the same
-props and behaviour.
+The React version is the reference; Angular and Flutter mirror the same props and behaviour.
 </Accordion>
 
 <Accordion title="Do all frameworks get every component?">
-That's the goal — one design, four frameworks. Vanilla JS and React lead, and the Angular
-and Flutter ports follow. Each component's docs page shows the code for every framework it
-currently ships in, side by side.
+That's the goal — one design, three frameworks. React leads, and the Angular and Flutter
+ports follow. Each component's docs page shows the code for every framework it currently
+ships in, side by side.
 </Accordion>
 
 <Accordion title="Do I need a build step?">
-Not for Vanilla JS — drop in the HTML, CSS, and JS and it works. React, Angular, and
-Flutter use their usual toolchains.
+React, Angular, and Flutter use their usual toolchains.
 </Accordion>
 
 <Accordion title="Can I use it with Next.js / Vite / other React setups?">
-Yes. The React components are plain React 19 components with no framework lock-in, so they
+Yes. The React components are plain React 18+ components with no framework lock-in, so they
 work in Next.js, Vite, Remix, or any React setup.
 </Accordion>
 

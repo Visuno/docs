@@ -11,9 +11,9 @@ import { Composer, type ComposerAttachment } from '@visuno/composer/Composer';
  * component in controlled mode.
  */
 const CONTEXTS = [
-  { value: 'pricing', label: 'Pricing v4', detail: 'Figma, 6 frames', icon: 'figma' as const },
-  { value: 'checkout', label: 'Checkout flow', detail: 'Figma, 4 frames', icon: 'figma' as const },
-  { value: 'marketing', label: 'Marketing site', detail: 'Code, main branch', icon: 'term' as const },
+  { value: 'pricing', label: 'Pricing v4', detail: 'Figma, 6 frames', icon: 'brand-figma' as const },
+  { value: 'checkout', label: 'Checkout flow', detail: 'Figma, 4 frames', icon: 'brand-figma' as const },
+  { value: 'marketing', label: 'Marketing site', detail: 'Code, main branch', icon: 'terminal-2' as const },
 ];
 const FRAME = 'Pricing / Desktop';
 const ASK = 'Tighten the spacing on the plan cards';
@@ -32,7 +32,7 @@ export function ComposerExample() {
     const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) {
       setThread(null);
-      setFiles([{ key: 'f', label: FRAME, icon: 'figma', status: 'ready' }]);
+      setFiles([{ key: 'f', label: FRAME, icon: 'brand-figma', status: 'ready' }]);
       setText(ASK);
       setMode('edit');
       return clear;
@@ -43,11 +43,11 @@ export function ComposerExample() {
       setText('');
       setMode('ask');
       // attach a frame that fails to open
-      setFiles([{ key: 'f', label: FRAME, icon: 'figma', status: 'loading' }]);
-      at(1000, () => setFiles([{ key: 'f', label: `${FRAME} can't be opened`, icon: 'figma', status: 'error' }]));
+      setFiles([{ key: 'f', label: FRAME, icon: 'brand-figma', status: 'loading' }]);
+      at(1000, () => setFiles([{ key: 'f', label: `${FRAME} can't be opened`, icon: 'brand-figma', status: 'error' }]));
       // Try again: it loads, then lands ready
-      at(2200, () => setFiles([{ key: 'f', label: FRAME, icon: 'figma', status: 'loading' }]));
-      at(3200, () => setFiles([{ key: 'f', label: FRAME, icon: 'figma', status: 'ready' }]));
+      at(2200, () => setFiles([{ key: 'f', label: FRAME, icon: 'brand-figma', status: 'loading' }]));
+      at(3200, () => setFiles([{ key: 'f', label: FRAME, icon: 'brand-figma', status: 'ready' }]));
       // type the ask, a few characters at a time
       ASK.split('').forEach((_, i) => at(3800 + i * 55, () => setText(ASK.slice(0, i + 1))));
       const typed = 3800 + ASK.length * 55;
@@ -75,7 +75,7 @@ export function ComposerExample() {
         onValueChange={setText}
         attachments={files}
         onAttachmentsChange={setFiles}
-        onRetry={() => setFiles([{ key: 'f', label: FRAME, icon: 'figma', status: 'loading' }])}
+        onRetry={() => setFiles([{ key: 'f', label: FRAME, icon: 'brand-figma', status: 'loading' }])}
         contexts={CONTEXTS}
         defaultContext="pricing"
         onContextChange={() => {}}

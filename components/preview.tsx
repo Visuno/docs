@@ -3,11 +3,12 @@ import { useState, type ReactNode } from 'react';
 
 /**
  * A live example stage for a component. Renders its children (a real Visuno React
- * component) centered on a surface, with toggles for dark mode (data-theme="dark")
- * and the Soft style (data-style="soft") so readers can see every combination.
+ * component) centered on a surface, with a toggle for the Soft style
+ * (data-style="soft"). The light/dark theme always follows the docs page's own
+ * theme (set as data-theme on <html> by ThemeBridge) — never the browser
+ * preference — and is inherited here, not toggled per preview.
  */
 export function Preview({ children }: { children: ReactNode }) {
-  const [dark, setDark] = useState(false);
   const [soft, setSoft] = useState(true);
 
   return (
@@ -22,16 +23,8 @@ export function Preview({ children }: { children: ReactNode }) {
         >
           {soft ? 'Soft' : 'Blueprint'}
         </button>
-        <button
-          type="button"
-          onClick={() => setDark((d) => !d)}
-          className="rounded-md border border-fd-border px-2 py-1 text-xs hover:bg-fd-accent"
-        >
-          {dark ? 'Dark' : 'Light'}
-        </button>
       </div>
       <div
-        data-theme={dark ? 'dark' : 'light'}
         data-style={soft ? 'soft' : undefined}
         className="grid min-h-45 place-items-center p-8"
         style={{ background: 'var(--vo-stage)' }}

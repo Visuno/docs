@@ -42,7 +42,7 @@ export function ButtonsExample() {
       <Row label="States">
         <Button
           variant="primary"
-          icon="spark"
+          icon="sparkles"
           busyLabel="Publishing"
           doneLabel="Published"
           onClick={() => wait(1200)}

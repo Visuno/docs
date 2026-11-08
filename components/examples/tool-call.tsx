@@ -27,8 +27,8 @@ const CALLS: ToolCallItem[] = [
   {
     key: 'files',
     server: 'files',
-    name: 'edit',
-    icon: 'edit',
+    name: 'pencil',
+    icon: 'pencil',
     state: 'queued',
     duration: '1.2 s',
     input: { path: 'Pricing.tsx', lines: 6 },

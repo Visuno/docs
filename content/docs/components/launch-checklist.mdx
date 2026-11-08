@@ -18,28 +18,7 @@ runs, then what is left to fix or "All clear, ready to ship".
 
 ## Usage
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + launch-checklist.css -->
-<div class="vo-lcx vo-panel">
-  <div class="vo-lcx-h">
-    <div><b>Ready to ship pricing?</b><span class="vo-muted vo-lcx-st">6 checks</span></div>
-    <button class="vo-pill vo-primary vo-sm vo-lcx-run"><!-- play -->Run checks</button>
-  </div>
-  <div class="vo-lcx-bar"></div>
-  <div class="vo-lcx-list">
-    <div class="vo-lcx-r vo-ok">
-      <span class="vo-g"><!-- ok --></span>
-      <span class="vo-t">Contrast meets AA<span class="vo-d">All 14 text pairs pass</span></span>
-    </div>
-  </div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -115,7 +94,7 @@ LaunchChecklist(
 | `check.label` | `string` | What is checked, like "Contrast meets AA". |
 | `check.state` | `wait \| run \| ok \| bad` | Not run yet, checking or fixing, passed, or failed. |
 | `check.note` | `string` | The quiet line under the label, or what is wrong. |
-| `check.onFix` | `() => void` | React/Vanilla: shows a Fix button on a failed check. Angular uses `canFix` + `(fix)`; Flutter uses `canFix` + `onFix`. |
+| `check.onFix` | `() => void` | React: shows a Fix button on a failed check. Angular uses `canFix` + `(fix)`; Flutter uses `canFix` + `onFix`. |
 
 ## Theming
 
