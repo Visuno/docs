@@ -46,7 +46,7 @@ starters: Starter[] = [
   { icon: 'grid', tone: 'blue', title: 'Audit a page', description: 'Check the pricing page', prompt: 'Audit pricing for spacing and contrast' },
 ];
 
-<vo-prompt-starters
+<PromptStarters
   [starters]="starters"
   [onShuffle]="true"
   (send$)="run($event)"

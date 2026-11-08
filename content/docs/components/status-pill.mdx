@@ -36,10 +36,10 @@ import { StatusPill } from './status-pill/StatusPill';
 
 ```html
 <!-- imports: [StatusPillComponent] -->
-<vo-status-pill state="reading" label="Reading repository" meta="2 of 4" />
-<vo-status-pill state="working" label="Editing" [file]="{ name: 'PricingCard.tsx', type: 'tsx' }" />
-<vo-status-pill state="waiting" label="Needs your review" [action]="{ label: 'Open', onClick: open }" />
-<vo-status-pill variant="bar" state="working" label="Writing tests" [progress]="80" />
+<StatusPill state="reading" label="Reading repository" meta="2 of 4" />
+<StatusPill state="working" label="Editing" [file]="{ name: 'PricingCard.tsx', type: 'tsx' }" />
+<StatusPill state="waiting" label="Needs your review" [action]="{ label: 'Open', onClick: open }" />
+<StatusPill variant="bar" state="working" label="Writing tests" [progress]="80" />
 ```
 
 </Tab>

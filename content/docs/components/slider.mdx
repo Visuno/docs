@@ -43,18 +43,18 @@ import { Slider } from './slider/Slider';
 
 ```html
 <!-- imports: [SliderComponent] -->
-<vo-slider label="Quality" [value]="v" (valueChange)="v = $event" [showValue]="true"></vo-slider>
+<Slider label="Quality" [value]="v" (valueChange)="v = $event" [showValue]="true"></Slider>
 
-<vo-slider
+<Slider
   label="Autonomy"
   [step]="20"
   [value]="a"
   (valueChange)="a = $event"
   [stops]="[{ value: 0, label: 'Off' }, { value: 100, label: 'Full' }]"
   [recommended]="80"
-></vo-slider>
+></Slider>
 
-<vo-slider label="Budget" [range]="[20, 70]" (rangeChange)="r = $event"></vo-slider>
+<Slider label="Budget" [range]="[20, 70]" (rangeChange)="r = $event"></Slider>
 ```
 
 </Tab>

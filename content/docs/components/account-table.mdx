@@ -47,7 +47,7 @@ accounts: AccountTableAccount[] = [
 ];
 action: AccountTableAction = { label: 'Draft email', doneLabel: 'Draft ready', onClick: () => this.draft() };
 
-<vo-account-table [accounts]="accounts" [action]="action" (openChange)="onOpen($event)" />
+<AccountTable [accounts]="accounts" [action]="action" (openChange)="onOpen($event)" />
 ```
 
 </Tab>

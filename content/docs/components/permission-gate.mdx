@@ -54,7 +54,7 @@ scopes: PermissionScope[] = [
   { key: 'publish', label: 'Publish library', detail: 'Affects 4 other files', risk: 'Risky' },
 ];
 
-<vo-permission-gate
+<PermissionGate
   [bare]="false"
   title="Allow the agent to edit Figma?"
   subtitle="It needs this to apply the pricing fixes"

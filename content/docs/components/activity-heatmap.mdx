@@ -45,7 +45,7 @@ series: ActivityHeatmapSeries[] = [
   { key: 'team', label: 'Team', values: teamValues, max: 25, unit: 'edits', note: 'Busiest 10am to 4pm on weekdays' },
 ];
 
-<vo-activity-heatmap [series]="series" defaultValue="agent" period="Last 4 weeks" />
+<ActivityHeatmap [series]="series" defaultValue="agent" period="Last 4 weeks" />
 ```
 
 </Tab>

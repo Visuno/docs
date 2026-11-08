@@ -42,7 +42,7 @@ import { RewriteToolbar } from './rewrite-toolbar/RewriteToolbar';
 sentences = ['First sentence.', 'Second sentence.'];
 onRewrite = (s: string, action: string) => ask(s, action); // Promise<string> | string
 
-<vo-rewrite-toolbar
+<RewriteToolbar
   title="Onboarding intro"
   [sentences]="sentences"
   [onRewrite]="onRewrite"

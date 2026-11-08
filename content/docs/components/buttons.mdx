@@ -42,15 +42,15 @@ import { Button, ButtonCopy } from './buttons/Buttons';
 
 ```html
 <!-- imports: [ButtonComponent, ButtonCopyComponent] -->
-<vo-button variant="primary">Primary</vo-button>
-<vo-button variant="soft" size="sm">Small</vo-button>
+<VoButton variant="primary">Primary</VoButton>
+<VoButton variant="soft" size="sm">Small</VoButton>
 
-<vo-button variant="primary" busyLabel="Publishing" doneLabel="Published" (click)="publish()">
+<VoButton variant="primary" busyLabel="Publishing" doneLabel="Published" (click)="publish()">
   Publish
-</vo-button>
-<vo-button variant="accent" [success]="true" (click)="save()">Save</vo-button>
+</VoButton>
+<VoButton variant="accent" [success]="true" (click)="save()">Save</VoButton>
 
-<vo-button-copy text="https://example.com" label="Copy link" />
+<VoButtonCopy text="https://example.com" label="Copy link" />
 ```
 
 </Tab>

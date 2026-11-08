@@ -1,0 +1,13 @@
+{
+  "title": "Getting started",
+  "icon": "rocket",
+  "collapsible": true,
+  "defaultOpen": true,
+  "pages": [
+    "../index",
+    "installation",
+    "theming",
+    "accessibility",
+    "using-with-ai"
+  ]
+}

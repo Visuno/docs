@@ -61,7 +61,7 @@ turns: AnswerTurn[] = [
   },
 ];
 
-<vo-live-answer
+<LiveAnswer
   [turns]="turns"
   [followUps]="['Show the drop-off by device']"
   (followUp)="ask($event)"

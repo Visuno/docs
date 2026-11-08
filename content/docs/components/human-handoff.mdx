@@ -57,7 +57,7 @@ billing: HandoffPerson[] = [
   { name: 'Alex Rivera', color: 'var(--vo-av-m)', team: 'Billing', presence: 'Available', tone: 'ok' },
 ];
 
-<vo-human-handoff
+<HumanHandoff
   reason="Refund over $500 needs a person"
   [assignee]="billing[0]"
   [people]="billing"

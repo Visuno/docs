@@ -50,7 +50,7 @@ lanes: AgentLane[] = [
 ];
 handoff: AgentHandoff = { from: 'researcher', to: 'designer', what: 'the brief' };
 
-<vo-agent-lanes [lanes]="lanes" [handoff]="handoff" [pauseWired]="true" (pausedChange)="paused = $event" />
+<AgentLanes [lanes]="lanes" [handoff]="handoff" [pauseWired]="true" (pausedChange)="paused = $event" />
 ```
 
 </Tab>

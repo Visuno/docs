@@ -46,7 +46,7 @@ sources: StackSource[] = [
   { kind: 'file', title: 'Q3 conversion export.csv', host: 'Drive', relevance: 0.84, mark: 'CSV', color: 'var(--vo-pm)' },
 ];
 
-<vo-source-stack
+<SourceStack
   [sources]="sources"
   message="Annual plans convert about 18% better when the monthly price is shown crossed out."
   (openChange)="onOpenChange($event)"

@@ -1,5 +1,6 @@
 {
   "title": "Components",
+  "icon": "blocks",
   "pages": [
     "---Agent status---",
     "status-pill",

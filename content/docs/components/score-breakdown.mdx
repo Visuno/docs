@@ -52,7 +52,7 @@ factors: ScoreFactor[] = [
   { key: 'speed', label: 'Speed', weight: 20, earned: 11, note: 'Median reply 6.4s, target under 4s', improvable: true },
 ];
 
-<vo-score-breakdown
+<ScoreBreakdown
   [factors]="factors"
   title="Support agent quality"
   [previous]="77"

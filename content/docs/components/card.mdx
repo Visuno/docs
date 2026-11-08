@@ -48,16 +48,16 @@ import { Badge } from './badge/Badge';
 
 ```html
 <!-- imports: [CardComponent, BadgeComponent] -->
-<vo-card title="Nightly run" subtitle="Finished 4 minutes ago">
-  <vo-badge card-action tone="success">Live</vo-badge>
+<Card title="Nightly run" subtitle="Finished 4 minutes ago">
+  <Badge card-action tone="success">Live</Badge>
   <p>Drop anything in the body.</p>
   <button card-footer class="vo-pill vo-ghost vo-sm">Dismiss</button>
   <button card-footer class="vo-pill vo-sm" data-variant="accent">Open run</button>
-</vo-card>
+</Card>
 
-<vo-card [interactive]="true" (clicked)="open()">
+<Card [interactive]="true" (clicked)="open()">
   <span class="vo-crd-t">Interactive card</span>
-</vo-card>
+</Card>
 ```
 
 </Tab>

@@ -62,7 +62,7 @@ questions: DecisionQuestion[] = [
   },
 ];
 
-<vo-decision-prompt
+<DecisionPrompt
   [questions]="questions"
   startLabel="Starting the redesign"
   (complete)="run($event)"

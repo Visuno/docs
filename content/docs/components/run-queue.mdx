@@ -56,13 +56,13 @@ jobs: RunJob[] = [
 ```
 
 ```html
-<vo-run-queue
+<RunQueue
   title="Launch prep"
   [jobs]="jobs"
   summary="12.8s in all"
   (retry)="onRetry($event)"
   (densityChange)="onDensity($event)"
-></vo-run-queue>
+></RunQueue>
 ```
 
 </Tab>

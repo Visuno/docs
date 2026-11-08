@@ -1,0 +1,261 @@
+---
+title: Installation
+description: Add Visuno to a React, Angular, or Flutter project — install the package, pull the shared core once, then drop in components.
+---
+
+Visuno ships the same design across **React**, **Angular**, and **Flutter**. Whatever your stack, the
+shape is the same: **install the package**, **pull the shared core once** (design tokens + a little
+CSS/helpers), then add components one at a time. The React build is the reference; Angular and
+Flutter mirror its props and behaviour.
+
+## Prerequisites
+
+| Framework | You need |
+|-----------|----------|
+| **React** | React 18+ and a bundler (Next.js, Vite, Remix — anything). |
+| **Angular** | Angular 18+ with standalone components. |
+| **Flutter** | Flutter 3+ (Dart 3). |
+
+## Set up
+
+Pick your framework. Each starts by installing the package, then pulling the shared core once.
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+The React components are plain React 18+ components with no framework lock-in, so they work in
+Next.js, Vite, Remix, or any React setup.
+
+<Steps>
+
+<Step>
+
+### Install the package
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+<Tab value="npm">
+
+```bash
+npm install @visuno/react
+```
+
+</Tab>
+
+<Tab value="pnpm">
+
+```bash
+pnpm add @visuno/react
+```
+
+</Tab>
+
+<Tab value="yarn">
+
+```bash
+yarn add @visuno/react
+```
+
+</Tab>
+
+<Tab value="bun">
+
+```bash
+bun add @visuno/react
+```
+
+</Tab>
+
+</Tabs>
+
+</Step>
+
+<Step>
+
+### Pull the core
+
+Import the shared tokens and base styles **once**, near the root of your app (e.g. in `layout.tsx`
+or your global CSS entry):
+
+```ts
+import '@visuno/core/tokens.css';
+```
+
+</Step>
+
+<Step>
+
+### Add a component
+
+Import the component and drop it in:
+
+```tsx
+import { StatusPill } from '@visuno/react/status-pill/StatusPill';
+
+export function Row() {
+  return <StatusPill state="working" label="Editing PricingCard.tsx" />;
+}
+```
+
+</Step>
+
+</Steps>
+
+</Tab>
+
+<Tab value="Angular">
+
+Components are **standalone** — import the one you need directly into your component's `imports`, no
+module boilerplate.
+
+<Steps>
+
+<Step>
+
+### Install the package
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+<Tab value="npm">
+
+```bash
+npm install @visuno/angular
+```
+
+</Tab>
+
+<Tab value="pnpm">
+
+```bash
+pnpm add @visuno/angular
+```
+
+</Tab>
+
+<Tab value="yarn">
+
+```bash
+yarn add @visuno/angular
+```
+
+</Tab>
+
+<Tab value="bun">
+
+```bash
+bun add @visuno/angular
+```
+
+</Tab>
+
+</Tabs>
+
+</Step>
+
+<Step>
+
+### Pull the core
+
+Add the token stylesheet to your global styles **once** (e.g. `styles.css`, or the `styles` array
+in `angular.json`):
+
+```css
+@import '@visuno/core/tokens.css';
+```
+
+</Step>
+
+<Step>
+
+### Add a component
+
+```ts
+import { Component } from '@angular/core';
+import { StatusPillComponent } from '@visuno/angular/status-pill';
+
+@Component({
+  selector: 'app-row',
+  standalone: true,
+  imports: [StatusPillComponent],
+  template: `<StatusPill state="working" label="Editing PricingCard.tsx" />`,
+})
+export class RowComponent {}
+```
+
+</Step>
+
+</Steps>
+
+</Tab>
+
+<Tab value="Flutter">
+
+The Flutter widgets are themed to match the web. Wrap your app in the Visuno theme once, then use
+the widgets anywhere.
+
+<Steps>
+
+<Step>
+
+### Install the package
+
+Add it from the command line:
+
+```bash
+flutter pub add visuno
+```
+
+Or add it to your `pubspec.yaml` and run `flutter pub get`:
+
+```yaml
+dependencies:
+  visuno: ^0.1.0
+```
+
+</Step>
+
+<Step>
+
+### Apply the theme
+
+Wrap your app **once** so every widget inherits the shared tokens:
+
+```dart
+import 'package:visuno/visuno.dart';
+
+MaterialApp(
+  theme: VisunoTheme.dark, // Brightness.dark to match the web's dark mode
+  home: const Home(),
+);
+```
+
+</Step>
+
+<Step>
+
+### Add a widget
+
+```dart
+import 'package:visuno/visuno.dart';
+
+const StatusPill(state: StatusPillState.working, label: 'Editing PricingCard.tsx');
+```
+
+</Step>
+
+</Steps>
+
+</Tab>
+
+</Tabs>
+
+## Next steps
+
+<Cards>
+  <Card title="Theming" href="/docs/getting-started/theming" description="Dark mode, the two styles, and the token system." />
+  <Card title="Browse components" href="/docs/components/status-pill" description="Live previews and code for every component." />
+</Cards>
+
+Install the package and pull the core once, and every component you add after that just works — it
+reads the same tokens and inherits your theme automatically.

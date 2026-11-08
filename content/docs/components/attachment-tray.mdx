@@ -47,7 +47,7 @@ files: Attachment[] = [
   { id: 'brief.pdf', name: 'brief.pdf', size: 2_400_000, progress: 100, detail: '12 pages' },
 ];
 
-<vo-attachment-tray
+<AttachmentTray
   [files]="files"
   title="Drop files here"
   [action]="{ label: 'add sample files', onClick: addSamples }"

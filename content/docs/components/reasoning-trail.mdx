@@ -42,13 +42,13 @@ import { ReasoningTrail } from './reasoning-trail/ReasoningTrail';
 
 ```html
 <!-- imports: [ReasoningTrailComponent] -->
-<vo-reasoning-trail
+<ReasoningTrail
   [running]="true"
   view="plan"
   [plan]="plan"
   [sources]="sources"
   (viewChange)="view = $event"
-></vo-reasoning-trail>
+></ReasoningTrail>
 
 // plan: PlanStep[] = [
 //   { label: 'Open the onboarding file', detail: '4 frames', state: 'done' },

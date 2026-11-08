@@ -40,13 +40,13 @@ const [code, setCode] = useState('');
 
 ```html
 <!-- imports: [OtpFieldComponent] -->
-<vo-otp-field
+<OtpField
   [value]="code"
   (valueChange)="code = $event"
   (complete)="verify($event)"
-></vo-otp-field>
+></OtpField>
 
-<vo-otp-field [value]="code" status="success"></vo-otp-field>
+<OtpField [value]="code" status="success"></OtpField>
 ```
 
 </Tab>

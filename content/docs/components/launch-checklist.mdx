@@ -50,7 +50,7 @@ checks: LaunchCheck[] = [
   { label: 'Links resolve', state: 'wait' },
 ];
 
-<vo-launch-checklist
+<LaunchChecklist
   title="Ready to ship pricing?"
   [checks]="checks"
   [action]="{ label: 'Run checks', icon: 'play' }"

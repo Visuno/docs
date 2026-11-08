@@ -49,7 +49,7 @@ entries: TerminalEntry[] = [
   { command: 'npm test', status: 'ok', duration: '2.9 s', output: [{ text: 'Tests  24 passed (24)', tone: 'ok' }] },
 ];
 
-<vo-terminal-stream [cwd]="'~/acme/web'" [entries]="entries" (stop)="onStop()" (copy)="onCopy($event)" />
+<TerminalStream [cwd]="'~/acme/web'" [entries]="entries" (stop)="onStop()" (copy)="onCopy($event)" />
 ```
 
 </Tab>

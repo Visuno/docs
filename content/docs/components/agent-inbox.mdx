@@ -45,7 +45,7 @@ runs: InboxRun[] = [
   { id: 'cards', title: 'Rework the plan cards', agent: 'Design agent', group: 'running', detail: 'Editing frame 3 of 6', seconds: 102 },
 ];
 
-<vo-agent-inbox [runs]="runs" (approve)="start($event)" (retry)="retry($event)" />
+<AgentInbox [runs]="runs" (approve)="start($event)" (retry)="retry($event)" />
 ```
 
 </Tab>

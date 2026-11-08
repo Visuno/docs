@@ -45,7 +45,7 @@ import { RunCost } from './run-cost/RunCost';
 
 ```html
 <!-- imports: [RunCostComponent] -->
-<vo-run-cost
+<RunCost
   [used]="1620"
   [budget]="2000"
   [capAt]="90"
@@ -53,7 +53,7 @@ import { RunCost } from './run-cost/RunCost';
   [rows]="rows"
   (action)="stop()"
   (capChange)="cap = $event"
-></vo-run-cost>
+></RunCost>
 
 // rows: RunCostRow[] = [
 //   { label: 'Input tokens', value: 14200 },

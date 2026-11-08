@@ -1,5 +1,7 @@
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import { ThemeBridge } from '@/components/theme-bridge';
+import { SiteFooter } from '@/components/site-footer';
+import { ScrollToTop } from '@/components/scroll-to-top';
 import './global.css';
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
@@ -33,6 +35,8 @@ export default function Layout({ children }: LayoutProps<'/'>) {
         >
           <ThemeBridge />
           {children}
+          <SiteFooter />
+          <ScrollToTop />
         </RootProvider>
       </body>
     </html>

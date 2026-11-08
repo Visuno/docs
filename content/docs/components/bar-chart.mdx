@@ -45,7 +45,7 @@ const ranges = [
 
 ```html
 <!-- imports: [BarChartComponent] -->
-<vo-bar-chart
+<BarChart
   label="Agent runs"
   [series]="series"
   [ranges]="ranges"
@@ -53,7 +53,7 @@ const ranges = [
   unit="runs"
   [stacked]="true"
   (rangeChange)="onRange($event)"
-></vo-bar-chart>
+></BarChart>
 ```
 
 </Tab>

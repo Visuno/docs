@@ -51,7 +51,7 @@ words: Array<string | HeardWord> = [
   { text: 'toggle', alternatives: ['toggle', 'toddle', 'tunnel'] },
 ];
 
-<vo-voice-capture
+<VoiceCapture
   [words]="words"
   (send)="onSend($event)"
   (fixWord)="onFix($event)"

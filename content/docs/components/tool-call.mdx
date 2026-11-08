@@ -58,7 +58,7 @@ calls: ToolCallItem[] = [{
   output: [{ plan: 'Pro', price: 24 }, { plan: 'Team', price: 48 }],
 }];
 
-<vo-tool-call
+<ToolCall
   message="Checking which plans changed this month."
   [calls]="calls"
   reply="Two plans changed. I updated their prices."

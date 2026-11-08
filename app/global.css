@@ -66,3 +66,118 @@ html > body[data-scroll-locked] {
   margin-right: 0px !important;
   --removed-body-scroll-bar-size: 0px !important;
 }
+
+/* ===== Global footer =====================================================
+ * Shared by the home page and the global <SiteFooter>. The base look matches
+ * the original home-page footer; the site variant spans full width with a
+ * centered inner row so it reads the same under docs and marketing layouts.
+ */
+.vh-footer {
+  padding-top: 22px;
+  border-top: 1px solid var(--color-fd-border);
+  font-size: 13.5px;
+  color: var(--color-fd-muted-foreground);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.vh-footer-link {
+  color: var(--color-fd-foreground);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* The global footer: full-bleed band under the page, with a max-width inner row.
+ * Overrides the base flex so the real row layout lives on the inner wrapper. */
+.vh-site-footer {
+  display: block;
+  margin-top: auto; /* push to the bottom in the flex-column body */
+  padding-left: clamp(16px, 5vw, 64px);
+  padding-right: clamp(16px, 5vw, 64px);
+  padding-bottom: 22px;
+  /* border-top + font/color come from .vh-footer; don't double the border. */
+}
+.vh-site-footer-inner {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* ---- "Powered by SDK Industries" ---------------------------------------- */
+.vh-poweredby {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-fd-muted-foreground);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.vh-poweredby:hover {
+  opacity: 0.75;
+}
+.vh-sdk-logo {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+/* Theme-aware: show the dark-ink mark in light mode, the light mark in dark mode. */
+.vh-sdk-logo-light-ink {
+  display: none;
+}
+html.dark .vh-sdk-logo-dark-ink {
+  display: none;
+}
+html.dark .vh-sdk-logo-light-ink {
+  display: block;
+}
+
+/* ===== Scroll-to-top button ============================================== */
+.vh-to-top {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 28px);
+  z-index: 50;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--color-fd-border);
+  background: var(--color-fd-popover, var(--color-fd-background));
+  color: var(--color-fd-foreground);
+  box-shadow: 0 6px 20px hsla(0, 0%, 0%, 0.12);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease;
+}
+.vh-to-top[data-visible] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.vh-to-top:hover {
+  background: var(--color-fd-accent, var(--color-fd-muted));
+}
+.vh-to-top:focus-visible {
+  outline: 2px solid var(--color-fd-ring, var(--color-fd-foreground));
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .vh-to-top {
+    transition: opacity 0.2s ease;
+    transform: none;
+  }
+  .vh-to-top[data-visible] {
+    transform: none;
+  }
+}

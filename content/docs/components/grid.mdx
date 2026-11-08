@@ -43,16 +43,16 @@ import { Grid, GridItem } from './grid/Grid';
 
 ```html
 <!-- imports: [GridComponent, GridItemDirective] -->
-<vo-grid [cols]="3" [gap]="4">
-  <div voGridItem="2">spans two</div>
+<Grid [cols]="3" [gap]="4">
+  <div gridItem="2">spans two</div>
   <div>…</div>
   <div>…</div>
-</vo-grid>
+</Grid>
 
-<vo-grid [fit]="true" min="200px">
+<Grid [fit]="true" min="200px">
   <div>…</div>
   <div>…</div>
-</vo-grid>
+</Grid>
 ```
 
 </Tab>
@@ -94,7 +94,7 @@ VoGrid(
 | `span` (on a child) | `2 \| 3 \| 4 \| full` | Make a child span more than one column, or the full row. |
 
 In React and Flutter a spanning child is wrapped in `GridItem` / `VoGridItem`; in Angular it carries
-the `voGridItem` directive.
+the `gridItem` directive.
 
 ## Theming
 

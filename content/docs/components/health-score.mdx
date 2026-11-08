@@ -53,7 +53,7 @@ checks: HealthScoreCheck[] = [
 ];
 fix = async (check: HealthScoreCheck, i: number) => { await this.repair(check); };
 
-<vo-health-score
+<HealthScore
   [checks]="checks"
   title="Design system health"
   [onFix]="fix"

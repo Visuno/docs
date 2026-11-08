@@ -43,7 +43,7 @@ toasts: StackToast[] = [
   { id: 2, icon: 'pr', tone: 'merge', title: 'PR #412 is ready', time: 'now' },
 ];
 
-<vo-toast-stack [toasts]="toasts" (dismiss)="toasts = toasts.filter(t => t.id !== $event)" />
+<ToastStack [toasts]="toasts" (dismiss)="toasts = toasts.filter(t => t.id !== $event)" />
 ```
 
 </Tab>

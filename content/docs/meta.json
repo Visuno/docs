@@ -1,12 +1,10 @@
 {
   "title": "Library",
   "pages": [
-    "index",
+    "getting-started",
     "components",
-    "---Resources---",
-    "faq",
     "changelog",
     "roadmap",
-    "imprint"
+    "faq"
   ]
 }

@@ -42,9 +42,9 @@ const [range, setRange] = useState('day');
 
 ```html
 <!-- imports: [SegmentedControlComponent] -->
-<vo-segmented-control label="Range" [options]="options"
+<SegmentedControl label="Range" [options]="options"
   [value]="range" (valueChange)="range = $event" />
-<vo-segmented-control label="Density" as="radio" [options]="options" defaultValue="week" />
+<SegmentedControl label="Density" as="radio" [options]="options" defaultValue="week" />
 ```
 
 </Tab>

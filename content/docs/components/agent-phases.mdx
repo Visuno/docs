@@ -37,11 +37,11 @@ import { AgentPhases } from './agent-phases/AgentPhases';
 
 ```html
 <!-- imports: [AgentPhasesComponent] -->
-<vo-agent-phases phase="reading" label="Reading 3 articles"></vo-agent-phases>
-<vo-agent-phases phase="searching" [error]="searchError"></vo-agent-phases>
-<vo-agent-phases phase="reading" [slow]="slowNote"></vo-agent-phases>
-<vo-agent-phases phase="waiting" [ask]="refundAsk"></vo-agent-phases>
-<vo-agent-phases phase="done" [took]="took"></vo-agent-phases>
+<AgentPhases phase="reading" label="Reading 3 articles"></AgentPhases>
+<AgentPhases phase="searching" [error]="searchError"></AgentPhases>
+<AgentPhases phase="reading" [slow]="slowNote"></AgentPhases>
+<AgentPhases phase="waiting" [ask]="refundAsk"></AgentPhases>
+<AgentPhases phase="done" [took]="took"></AgentPhases>
 ```
 
 </Tab>

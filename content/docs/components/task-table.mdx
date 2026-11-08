@@ -49,7 +49,7 @@ tasks: Task[] = [
     agent: { name: 'Design', initials: 'DS', color: 'var(--vo-av-b)' }, cost: 0.42, updated: 2 },
 ];
 
-<vo-task-table
+<TaskTable
   [tasks]="tasks"
   (action)="run($event.action, $event.ids)"
   (selectedChange)="selected = $event"

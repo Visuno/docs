@@ -54,16 +54,16 @@ const fields: ExtractedField[] = [
 
 ```html
 <!-- imports: [FieldExtractionComponent, VoFieldZoneComponent] -->
-<vo-field-extraction
+<FieldExtraction
   [fields]="fields"
   [status]="status"
   sendLabel="Send to Sheets"
   (fix)="onFix($event.key, $event.value)"
   (onSend)="send()"
 >
-  <div vo-field-zone field="no"><span class="vo-muted">Invoice no.</span> NW-2041</div>
-  <div vo-field-zone field="due" class="vo-fex-smudge">Due by 1? Nov 2026</div>
-</vo-field-extraction>
+  <div fieldZone field="no"><span class="vo-muted">Invoice no.</span> NW-2041</div>
+  <div fieldZone field="due" class="vo-fex-smudge">Due by 1? Nov 2026</div>
+</FieldExtraction>
 ```
 
 </Tab>

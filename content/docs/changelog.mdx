@@ -1,12 +1,29 @@
 ---
 title: Changelog
 description: What's new in Visuno — components, docs, and tooling, newest first.
+icon: history
 ---
 
 Notable changes to the Visuno component library and these docs, newest first.
 Component source lives in the [components repository](https://github.com/Visuno/components).
 
 ## Unreleased
+
+- **Angular demos** — restored the React demos’ interactive state updates, streamed stories, retries, approvals, replay controls, and reduced-motion behavior. Added missing controlled inputs and copy/disabled button support in the Angular library.
+
+- **Angular** — component selectors now use PascalCase that mirrors the React component names (`<vo-status-pill>` → `<StatusPill>`, `<vo-icon>` → `<Icon>`, `<vo-agent-tree>` → `<AgentTree>`, …). The three selectors that shadowed native HTML elements are prefixed to stay unambiguous: `<VoButton>`, `<VoButtonCopy>`, `<VoProgress>`. The `voGridItem` / `vo-field-zone` directives become `gridItem` / `fieldZone`. The shared `--vo-*` design tokens and `vo-*` CSS classes are unchanged. **Breaking:** update Angular templates to the new tag names.
+
+- **Docs** — a global site footer now appears on every page (MIT licence, Star on GitHub, a link to the machine-readable **llms.txt**, Imprint, and "Powered by SDK Industries"), plus a floating **back-to-top** button that fades in once you scroll.
+
+- **Angular Stat cards** — adapt columns and spacing to the component width so cards fit narrow panels as well as mobile screens.
+
+- **Angular Code viewer** — removed oversized gaps between code lines while preserving code indentation and blank lines.
+
+- **Angular test bench** — added the missing Number field, OTP field, Search input, and Slider examples with interactive states.
+
+- **Docs** — new getting-started guides: **Installation** (per-framework setup), **Theming** (the two switches and the `--vo-*` token system, with per-framework code tabs), **Accessibility** (semantics, keyboard, focus, reduced motion), and **Using with AI** (point a coding assistant at the `llms.txt` docs). Grouped under a collapsible **Docs** section in the sidebar, and every nav entry now carries a Visuno icon.
+
+- **Angular** — use the same shared web styles as React for consistent typography, controls, icons, and Soft/Blueprint themes.
 
 - **Slider** — new shared component in all four frameworks: a track with a
   single value or a range, optional discrete steps and named stops, and an

@@ -1,8 +1,9 @@
+import { createElement } from 'react';
 import { llms, loader } from 'fumadocs-core/source';
-import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 import { docsContentRoute, docsImageRoute, docsRoute } from './shared';
 import { defineDocs } from 'fumadocs-mdx/macro';
 import { metaSchema, pageSchema } from 'fumadocs-core/source/schema';
+import { VisunoIcon } from '@visuno/icon/VisunoIcon';
 
 const docs = defineDocs({
   dir: 'content/docs',
@@ -17,11 +18,16 @@ const docs = defineDocs({
   },
 });
 
+// Render a sidebar `icon` (set in a page's frontmatter or a folder's meta.json)
+// with Visuno's own icon component, so nav icons match the library's icon set.
 // See https://fumadocs.dev/docs/headless/source-api for more info
 export const source = loader({
   baseUrl: docsRoute,
   source: docs.toFumadocsSource(),
-  plugins: [lucideIconsPlugin()],
+  icon(name) {
+    if (!name) return;
+    return createElement(VisunoIcon, { name, size: 'm' });
+  },
 });
 
 export const docsLlms = llms(source, {

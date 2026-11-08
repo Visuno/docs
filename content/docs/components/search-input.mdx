@@ -40,7 +40,7 @@ import { SearchInput } from '@visuno/search-input/SearchInput';
 
 ```html
 <!-- imports: [SearchInputComponent] -->
-<vo-search-input
+<SearchInput
   placeholder="Search…"
   [scopes]="scopes"
   [results]="results"
@@ -48,7 +48,7 @@ import { SearchInput } from '@visuno/search-input/SearchInput';
   answer="3 matches for “tokens” in Docs."
   (search)="run($event.query, $event.scope)"
   (select)="open($event)"
-></vo-search-input>
+></SearchInput>
 ```
 
 </Tab>
