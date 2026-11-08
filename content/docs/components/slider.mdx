@@ -3,13 +3,16 @@ title: Slider
 description: A value or a range on a stepped or continuous track, with named stops and an agent-recommended mark.
 ---
 
+import { Preview } from '@/components/preview';
 import { SliderExample } from '@/components/examples/slider';
 
 Drag a thumb to set a value, or two thumbs for a `[low, high]` range. Give it discrete `step`s and
 a labelled scale with `stops`, and mark a suggested value with `recommended`. Keyboard works too —
 arrows step, Page keys jump by ten, Home/End go to the ends.
 
-<SliderExample />
+<Preview>
+  <SliderExample />
+</Preview>
 
 ## Usage
 

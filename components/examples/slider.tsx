@@ -31,7 +31,7 @@ export function SliderExample() {
   const [budget, setBudget] = useState<[number, number]>([20, 70]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%', maxWidth: 520, margin: '20px 0', color: 'inherit' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%', maxWidth: 520, margin: '20px 0', color: 'var(--vo-fg)' }}>
       <Row label="Value">
         <Slider label="Quality" value={quality} onValueChange={setQuality} showValue />
       </Row>

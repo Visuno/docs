@@ -19,7 +19,7 @@ export function NumberFieldExample() {
         gap: 28,
         alignItems: 'flex-start',
         margin: '20px 0',
-        color: 'inherit',
+        color: 'var(--vo-fg)',
       }}
     >
       <NumberField label="Quantity" value={qty} min={1} max={99} onChange={setQty} />

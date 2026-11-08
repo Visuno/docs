@@ -3,13 +3,16 @@ title: OTP field
 description: A one-time code, one box per digit, that auto-advances and fills from a paste.
 ---
 
+import { Preview } from '@/components/preview';
 import { OtpFieldExample } from '@/components/examples/otp-field';
 
 A one-time code as a row of single-character boxes. Typing auto-advances, Backspace steps back, the
 arrows move between boxes, and pasting a full code fills them all at once. Set `status` to show the
 code as verified or rejected.
 
-<OtpFieldExample />
+<Preview>
+  <OtpFieldExample />
+</Preview>
 
 ## Usage
 

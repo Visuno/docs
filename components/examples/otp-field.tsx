@@ -32,7 +32,7 @@ export function OtpFieldExample() {
         alignItems: 'center',
         gap: 14,
         margin: '20px 0',
-        color: 'inherit',
+        color: 'var(--vo-fg)',
       }}
     >
       <p style={{ margin: 0, fontSize: 13, opacity: 0.7 }}>{msg}</p>
@@ -52,9 +52,9 @@ export function OtpFieldExample() {
           font: 'inherit',
           fontSize: 13,
           padding: '6px 12px',
-          color: 'inherit',
+          color: 'var(--vo-fg)',
           background: 'transparent',
-          border: '1px solid var(--fd-border)',
+          border: '1px solid var(--vo-line)',
           borderRadius: 8,
           cursor: 'pointer',
         }}
