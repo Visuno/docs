@@ -9,6 +9,8 @@ Component source lives in the [components repository](https://github.com/Visuno/
 
 ## Unreleased
 
+- **Segmented control** — the docs example and the Angular/Flutter test benches now show a real "Pricing launch" planner: picking Day, Week or Month switches the panel below between a day agenda, a week list and a month grid, with Today and prev/next steppers. The previous demo had a dead radio group that drove nothing, so clicking appeared to do nothing — now every pick visibly changes the panel.
+
 - **Angular demos** — restored the React demos’ interactive state updates, streamed stories, retries, approvals, replay controls, and reduced-motion behavior. Added missing controlled inputs and copy/disabled button support in the Angular library.
 
 - **Angular** — component selectors now use PascalCase that mirrors the React component names (`<vo-status-pill>` → `<StatusPill>`, `<vo-icon>` → `<Icon>`, `<vo-agent-tree>` → `<AgentTree>`, …). The three selectors that shadowed native HTML elements are prefixed to stay unambiguous: `<VoButton>`, `<VoButtonCopy>`, `<VoProgress>`. The `voGridItem` / `vo-field-zone` directives become `gridItem` / `fieldZone`. The shared `--vo-*` design tokens and `vo-*` CSS classes are unchanged. **Breaking:** update Angular templates to the new tag names.
