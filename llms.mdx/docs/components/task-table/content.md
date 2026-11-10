@@ -1,0 +1,102 @@
+# Task table (/docs/components/task-table)
+
+Agent tasks in a table you can sort by any column. Pick rows with the checkboxes — or the
+select-all in the header — and the header turns into what you can do to the selection: `pause`,
+`retry` or `cancel`. Rows glide to their new places when the order changes, cancelled rows slide
+away, and when the last task is gone the table says so.
+
+<Preview>
+  <TaskTableExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { TaskTable, type Task } from './task-table/TaskTable';
+
+const tasks: Task[] = [
+  { id: '1', name: 'Audit pricing contrast', status: 'running',
+    agent: { name: 'Design', initials: 'DS', color: 'var(--vo-av-b)' }, cost: 0.42, updated: 2 },
+  { id: '2', name: 'Export tokens to CSS', status: 'done',
+    agent: { name: 'Code', initials: 'CO', color: 'var(--vo-av-m)' }, cost: 0.18, updated: 14 },
+];
+
+<TaskTable
+  tasks={tasks}
+  onAction={(action, ids) => run(action, ids)}
+  emptyAction={{ label: 'Bring them back', onClick: reset }}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [TaskTableComponent] -->
+tasks: Task[] = [
+  { id: '1', name: 'Audit pricing contrast', status: 'running',
+    agent: { name: 'Design', initials: 'DS', color: 'var(--vo-av-b)' }, cost: 0.42, updated: 2 },
+];
+
+<TaskTable
+  [tasks]="tasks"
+  (action)="run($event.action, $event.ids)"
+  (selectedChange)="selected = $event"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/task_table.dart';
+
+TaskTable(
+  tasks: const [
+    Task(
+      id: '1',
+      name: 'Audit pricing contrast',
+      status: TaskStatus.running,
+      agent: TaskAgent(name: 'Design', initials: 'DS', color: Color(0xFF126FE6)),
+      cost: 0.42,
+      updated: 2,
+    ),
+  ],
+  onAction: (action, ids) => run(action, ids),
+);
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `tasks` | `Task[]` | The tasks to show. Each has an `id`, `name`, `status`, `agent`, `cost` and `updated`. |
+| `title` | `string` | The name in the header. Defaults to `"Agent tasks"`. |
+| `summary` | `string` | The quiet line beside the name. Defaults to a count of tasks and how many are running. |
+| `selected` / `defaultSelected` | `string[]` | The ids of the selected tasks. Leave `selected` out to let the checkboxes and rows drive it. |
+| `onSelectedChange` | `(ids) => void` | Called when the selection changes. |
+| `sort` / `defaultSort` | `{ key; desc? }` | The column the rows are sorted by. Defaults to `updated`, newest first. |
+| `onSortChange` | `(sort) => void` | Called when a header sets the sort. |
+| `onAction` | `(action, ids) => void` | A bulk action (`pause` \| `retry` \| `cancel`). The selection clears after it; cancelled rows slide away first. |
+| `empty` / `emptyAction` | `ReactNode` / `{ label; onClick }` | What shows when there are no tasks, and an optional button under it. |
+
+`Task.status` is one of `running`, `failed`, `queued`, `paused` or `done`. `Task.agent` is
+`{ name, initials, color }`, where `color` is an avatar token like `var(--vo-av-b)`.
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
+sits on a surface and every colour comes from the theme tokens: the status pills tint from the
+accent (Running), `--vo-ok` (Done) and `--vo-bad` (Failed), with Queued and Paused staying muted;
+the checkbox fills with the accent and its tick springs in. The table reflows into a stacked layout
+inside a narrow card via a container query, so it reads on a phone as well as full width.

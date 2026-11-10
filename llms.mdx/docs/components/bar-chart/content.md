@@ -1,0 +1,108 @@
+# Bar chart (/docs/components/bar-chart)
+
+A bar chart plots a value per bar, with a readout on hover that breaks each one down by `series` and
+a switch between `ranges`. The bars grow in one after another a moment after the chart appears, then
+redraw left to right on every switch while the total rolls to its new figure. Off by default each
+bar is one block in the accent; set `stacked` to split every bar into its parts in the chart palette,
+with a legend.
+
+<Preview>
+  <BarChartExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { BarChart } from './bar-chart/BarChart';
+
+const series = [
+  { label: 'Shipped', tipLabel: 'shipped' },
+  { label: 'Needed review', tipLabel: 'reviewed' },
+  { label: 'Failed', tipLabel: 'failed' },
+];
+
+const ranges = [
+  { key: 'w', label: 'Week', bars: [{ label: 'Mon', values: [42, 9, 2] }, /* ... */] },
+  { key: 'm', label: 'Month', bars: [{ label: 'W1', values: [180, 40, 9] }, /* ... */] },
+];
+
+<BarChart label="Agent runs" series={series} ranges={ranges} defaultRange="w" unit="runs" stacked />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [BarChartComponent] -->
+<BarChart
+  label="Agent runs"
+  [series]="series"
+  [ranges]="ranges"
+  defaultRange="w"
+  unit="runs"
+  [stacked]="true"
+  (rangeChange)="onRange($event)"
+></BarChart>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/bar_chart.dart';
+
+BarChart(
+  label: 'Agent runs',
+  unit: 'runs',
+  stacked: true,
+  series: const [
+    BarChartSeries(label: 'Shipped', tipLabel: 'shipped'),
+    BarChartSeries(label: 'Needed review', tipLabel: 'reviewed'),
+    BarChartSeries(label: 'Failed', tipLabel: 'failed'),
+  ],
+  ranges: const [
+    BarChartRange(key: 'w', label: 'Week', bars: [
+      BarChartBar(label: 'Mon', values: [42, 9, 2]),
+      // one BarChartBar per bar
+    ]),
+    BarChartRange(key: 'm', label: 'Month', bars: [
+      BarChartBar(label: 'W1', values: [180, 40, 9]),
+    ]),
+  ],
+  defaultRange: 'w',
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `label` | `string` | The name over the big number, like "Agent runs". |
+| `series` | `BarChartSeries[]` | What each part of a bar means, in order. The readout breaks each bar down by these. Each has a `label`, an optional `tipLabel` and, when stacked, an optional `color`. |
+| `stacked` | `boolean` | Draws each bar as a stack of its parts in the palette's colours, with a legend. Off by default: one bar in the accent, with the breakdown in the readout. |
+| `ranges` | `BarChartRange[]` | One set of bars per range. Each has a `key`, a `label` and `bars: { label, values }[]`. With more than one, a switch picks between them. |
+| `range` | `string` | Key of the range shown. Leave it out to let the switch change it. |
+| `defaultRange` | `string` | The range shown first when uncontrolled. Defaults to the first range. |
+| `onRangeChange` | `(key: string) => void` | Called with the new key when the switch changes. |
+| `unit` | `string` | What the values count, like "runs" in "66 runs". |
+| `format` | `(n: number) => string` | Writes a value. Defaults to whole numbers like `1,240`. |
+
+Each `BarChartBar` carries `values: number[]` — one per series, stacked from the bottom — so the
+series order sets the order of the parts, the legend and the breakdown in the readout.
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The bars
+use the chart palette (`--vo-c1..c6`: the accent, then violet, orange, green…) unless a series sets
+its own `color`; the readout tooltip sits on the ink tone and the big number and labels read from the
+foreground and muted tokens. In Soft the bars and tooltip are rounder.

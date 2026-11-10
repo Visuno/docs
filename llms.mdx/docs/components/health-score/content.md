@@ -1,0 +1,105 @@
+# Health score (/docs/components/health-score)
+
+One score for a design system, with the checks behind it. A half-gauge shows the overall score
+(green from 90, the accent from 80, red below). Point at a check — or tab to it — and the gauge
+swings to that check's score and names it; leave the list and it swings back. Open a check to see
+why, and, when it is `fixable` and you pass `onFix`, fix it from there: the button spins until your
+promise settles, then you update the check's `score` and `detail`.
+
+<Preview>
+  <HealthScoreExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { HealthScore, type HealthScoreCheck } from './health-score/HealthScore';
+
+const checks: HealthScoreCheck[] = [
+  { label: 'Token usage', score: 96, detail: 'All colours come from the library' },
+  { label: 'Contrast', score: 88, detail: '2 text pairs below AA', fixable: true },
+  { label: 'Component reuse', score: 74, detail: '11 detached instances in Checkout' },
+];
+
+<HealthScore
+  checks={checks}
+  title="Design system health"
+  onFix={async (check, i) => {
+    await repair(check);
+    // then update the check's score and detail in your state
+  }}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [HealthScoreComponent] -->
+checks: HealthScoreCheck[] = [
+  { label: 'Token usage', score: 96, detail: 'All colours come from the library' },
+  { label: 'Contrast', score: 88, detail: '2 text pairs below AA', fixable: true },
+];
+fix = async (check: HealthScoreCheck, i: number) => { await this.repair(check); };
+
+<HealthScore
+  [checks]="checks"
+  title="Design system health"
+  [onFix]="fix"
+  (openChange)="opened = $event"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/health_score.dart';
+
+HealthScore(
+  checks: const [
+    HealthScoreCheck(label: 'Token usage', score: 96, detail: 'All colours come from the library'),
+    HealthScoreCheck(label: 'Contrast', score: 88, detail: '2 text pairs below AA', fixable: true),
+  ],
+  title: 'Design system health',
+  onFix: (check, i) async {
+    await repair(check);
+    // then update the checks you pass in from your state
+  },
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `checks` | `HealthScoreCheck[]` | The checks behind the score. |
+| `title` | `string` | Beside the gauge. Defaults to `"Design system health"`. |
+| `score` | `number` | The gauge score. Defaults to the average of the checks. |
+| `status` | `string` | The line under the title. Defaults to a line built from the checks. |
+| `open` | `string[]` | The open checks, by key (controlled). Leave out to let each row toggle itself. |
+| `defaultOpen` | `string[]` | The checks open at first (uncontrolled). |
+| `onOpenChange` | `(open: string[]) => void` | Called when the set of open checks changes. |
+| `onFix` | `(check, index) => void \| Promise` | A check's Fix button. Return a promise and it spins until it settles; then update the check's score and detail. |
+| `check.key` | `string` | Identifies the check. Defaults to its label. |
+| `check.label` | `string` | Like "Contrast". |
+| `check.score` | `number` | 0 to 100. From 90 green, from 80 the accent, below that red. |
+| `check.detail` | `string` | One line under the check when it is open. |
+| `check.fixable` | `boolean` | Adds a Fix button to the open check (needs `onFix`). |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card,
+rows, bars and gauge track all come from the theme tokens; the gauge fill follows the score (its green
+and red are the component's own `--vo-hs-ok` / `--vo-hs-bad`, the accent in between), and an open or
+hovered row picks up the row tint. In Soft the card and the Fix pill are rounder.

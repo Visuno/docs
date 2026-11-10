@@ -1,0 +1,88 @@
+# Rewrite toolbar (/docs/components/rewrite-toolbar)
+
+Click a sentence in the document and a small toolbar offers rewrites — `Clearer`, `Shorter`,
+`Friendlier` by default. Pick one and `onRewrite` is called; while it works the toolbar says
+Rewriting, then the answer is written in beside the old sentence word by word, struck-through
+old against the new. Keep it with Accept or put it back with Undo. The toolbar sits above the
+sentence, or under it when above would cover the header.
+
+<Preview>
+  <RewriteToolbarExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { RewriteToolbar } from './rewrite-toolbar/RewriteToolbar';
+
+<RewriteToolbar
+  title="Onboarding intro"
+  defaultSentences={sentences}
+  onRewrite={async (sentence, action, index) => rewrite(sentence, action)}
+  onSentencesChange={setSentences}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [RewriteToolbarComponent] -->
+sentences = ['First sentence.', 'Second sentence.'];
+onRewrite = (s: string, action: string) => ask(s, action); // Promise<string> | string
+
+<RewriteToolbar
+  title="Onboarding intro"
+  [sentences]="sentences"
+  [onRewrite]="onRewrite"
+  (sentencesChange)="sentences = $event"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/rewrite_toolbar.dart';
+
+RewriteToolbar(
+  title: 'Onboarding intro',
+  sentences: sentences,
+  onRewrite: (sentence, action, index) async => rewrite(sentence, action),
+  onSentencesChange: (next) => setState(() => sentences = next),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `ReactNode` | The document's name shown in the header. |
+| `kind` | `string` | The file type tag in front of the name. Defaults to `DOC`. |
+| `sentences` / `defaultSentences` | `string[]` | The text, one sentence each, so a click picks a sentence. |
+| `onSentencesChange` | `(sentences) => void` | Called with every sentence once a rewrite is accepted. |
+| `selected` / `defaultSelected` | `number \| null` | Index of the sentence with the toolbar on it, or `null`. |
+| `onSelectedChange` | `(index) => void` | Called when the selected sentence changes. |
+| `actions` | `RewriteAction[]` | The toolbar's buttons. Defaults to Clearer, Shorter and Friendlier. |
+| `onRewrite` | `(sentence, action, index) => Promise<string> \| string` | Writes the new sentence. If it rejects, the sentence is left as it was. |
+| `onAsk` | `(sentence, index) => void` | The wand at the end of the toolbar. Left out, it rewrites with the first action. |
+| `askLabel` | `string` | The tip on the wand. Defaults to `Ask the agent`. |
+| `askShortcut` | `string` | The shortcut shown in that tip. Defaults to `⌘K`. |
+| `ref` | `RewriteToolbarHandle` | Drive it from a shortcut or demo: `rewrite(action)`, `accept()`, `undo()`. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The
+document sits on a surface panel; the floating toolbar uses the ink/on-ink tokens so it reads as a
+dark pill over the text, and the picked sentence tints with `--vo-sel`. The struck-through old text
+uses the bad token for its line, and the new words fade and de-blur in as they arrive.

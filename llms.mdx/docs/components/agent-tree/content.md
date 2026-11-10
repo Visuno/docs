@@ -1,0 +1,112 @@
+# Agent tree (/docs/components/agent-tree)
+
+An agent tree shows an orchestrator and its sub-agents as a tree. Each row has its `name`, its
+`task`, a status glyph and a `cost`; a branch's cost is its own plus everything under it, and the
+header rolls up the whole run. A chevron folds a branch, and the arrow keys move through it as in
+any tree view. A failed step can carry a `fix` — a button under its task that offers the way out.
+
+<Preview>
+  <AgentTreeExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { AgentTree, type AgentNode } from './agent-tree/AgentTree';
+
+const root: AgentNode = {
+  id: 'root', name: 'Orchestrator', task: 'Plans the work and hands it out', status: 'running', cost: 0.04,
+  children: [
+    { id: 'res', name: 'Research agent', task: 'Compare 3 pricing pages', status: 'done', cost: 0.02, children: [
+      { id: 'res1', name: 'Read the pages', task: '3 pages, 9.4k words', status: 'done', cost: 0.06 },
+    ] },
+    { id: 'des', name: 'Design agent', task: 'Rework the plan cards', status: 'failed', cost: 0.02, children: [
+      { id: 'des1', name: 'Apply library tokens', task: "color.accent.600 isn't in the library", status: 'failed', cost: 0.02,
+        fix: { label: 'Use color.accent.500', onClick: applyFix } },
+    ] },
+  ],
+};
+
+<AgentTree root={root} title="Redesign the pricing page" defaultCollapsed={['res']} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [AgentTreeComponent] -->
+root: AgentNode = {
+  id: 'root', name: 'Orchestrator', task: 'Plans the work and hands it out', status: 'running', cost: 0.04,
+  children: [ /* agents and their steps */ ],
+};
+
+<AgentTree
+  [root]="root"
+  title="Redesign the pricing page"
+  [defaultCollapsed]="['res']"
+  (collapsedChange)="onCollapsed($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/agent_tree.dart';
+
+const root = AgentNode(
+  id: 'root', name: 'Orchestrator', task: 'Plans the work and hands it out',
+  status: AgentNodeStatus.running, cost: 0.04,
+  children: [
+    AgentNode(id: 'res', name: 'Research agent', task: 'Compare 3 pricing pages',
+      status: AgentNodeStatus.done, cost: 0.02, children: [
+        AgentNode(id: 'res1', name: 'Read the pages', task: '3 pages, 9.4k words',
+          status: AgentNodeStatus.done, cost: 0.06),
+      ]),
+  ],
+);
+
+AgentTree(
+  root: root,
+  title: 'Redesign the pricing page',
+  defaultCollapsed: const ['res'],
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `root` | `AgentNode` | The orchestrator, with its agents and their steps as children. |
+| `title` | `string` | The run's goal, like "Redesign the pricing page". |
+| `status` | `string` | The line under the title. Defaults to "Running", "N steps failed" or "Done". |
+| `seconds` | `number` | Seconds to show as `m:ss`. Leave it out to count up until the root is done. |
+| `summary` | `string \| false` | Shown under the tree once the root is done. `false` hides it; default rolls one up. |
+| `collapsed` | `string[]` | Ids of the folded branches (controlled). |
+| `defaultCollapsed` | `string[]` | Ids folded to begin with when uncontrolled. |
+| `onCollapsedChange` | `(ids) => void` | Emitted when a branch folds or unfolds, with the ids now folded. |
+| `formatCost` | `(dollars) => string` | Writes a cost. Defaults to dollars and cents, like `$0.12`. |
+| `AgentNode.id` | `string` | Identifies the node; used as the fold key. |
+| `AgentNode.name` | `string` | Like "Design agent", or a step's name. |
+| `AgentNode.task` | `string` | Its task, or what it is doing now. Crossfades when it changes. |
+| `AgentNode.status` | `queued \| running \| done \| failed` | Picks the status glyph and row tint. |
+| `AgentNode.cost` | `number` | What this node spent on its own. A branch shows this plus everything under it. |
+| `AgentNode.fix` | `{ label; onClick }` | On a failed step, a button under its task that offers the way out. |
+| `AgentNode.children` | `AgentNode[]` | The agents or steps under this node. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The tree
+sits on a surface; the running glyph spins in the accent colour, a done branch turns green and a
+failed step tints its row with the bad-tone background, so it reads in either theme. In Soft the
+card, rows and the fix button are rounder.

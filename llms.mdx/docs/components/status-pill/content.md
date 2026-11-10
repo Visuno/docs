@@ -11,35 +11,7 @@ and draws a `progress` track along its bottom.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + status-pill.css -->
-<div class="dm-spl">
-  <div class="dm-spl-pill" aria-live="polite">
-    <div class="dm-spl-in">
-      <span class="dm-g"><!-- glyph --></span>
-      <span class="dm-shim">Reading repository</span>
-      <span class="dm-m">2 of 4</span>
-    </div>
-  </div>
-</div>
-
-<!-- bar variant with a progress track -->
-<div class="dm-spl dm-bar">
-  <div class="dm-spl-pill" aria-live="polite">
-    <div class="dm-spl-in">
-      <span class="dm-g"><!-- glyph --></span>
-      <span class="dm-shim">Writing tests</span>
-    </div>
-    <div class="dm-spl-track"><div class="dm-spl-fill" style="width:80%"></div></div>
-  </div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -58,10 +30,10 @@ import { StatusPill } from './status-pill/StatusPill';
 
 ```html
 <!-- imports: [StatusPillComponent] -->
-<dm-status-pill state="reading" label="Reading repository" meta="2 of 4" />
-<dm-status-pill state="working" label="Editing" [file]="{ name: 'PricingCard.tsx', type: 'tsx' }" />
-<dm-status-pill state="waiting" label="Needs your review" [action]="{ label: 'Open', onClick: open }" />
-<dm-status-pill variant="bar" state="working" label="Writing tests" [progress]="80" />
+<StatusPill state="reading" label="Reading repository" meta="2 of 4" />
+<StatusPill state="working" label="Editing" [file]="{ name: 'PricingCard.tsx', type: 'tsx' }" />
+<StatusPill state="waiting" label="Needs your review" [action]="{ label: 'Open', onClick: open }" />
+<StatusPill variant="bar" state="working" label="Writing tests" [progress]="80" />
 ```
 
 </Tab>

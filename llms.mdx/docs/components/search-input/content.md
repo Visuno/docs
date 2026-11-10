@@ -1,0 +1,90 @@
+# Search input (/docs/components/search-input)
+
+A search field with a leading icon and a clear button. Optional scope chips narrow the search; a
+dropdown shows recent queries while the field is empty and live results as you type, with an
+optional agent answer on top. Press Enter to search, or pick a result.
+
+<Preview>
+  <SearchInputExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { SearchInput } from '@visuno/search-input/SearchInput';
+
+<SearchInput
+  placeholder="Search…"
+  scopes={[{ value: 'all', label: 'All' }, { value: 'docs', label: 'Docs', icon: 'file-text' }]}
+  results={results}
+  recent={['design tokens', 'dark mode']}
+  answer="3 matches for “tokens” in Docs."
+  onSearch={(q, scope) => run(q, scope)}
+  onSelect={(value) => open(value)}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [SearchInputComponent] -->
+<SearchInput
+  placeholder="Search…"
+  [scopes]="scopes"
+  [results]="results"
+  [recent]="['design tokens', 'dark mode']"
+  answer="3 matches for “tokens” in Docs."
+  (search)="run($event.query, $event.scope)"
+  (select)="open($event)"
+></SearchInput>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/search_input.dart';
+
+SearchInput(
+  placeholder: 'Search…',
+  scopes: const [SearchScope('all', label: 'All'), SearchScope('docs', label: 'Docs', icon: 'file-text')],
+  results: results,
+  recent: const ['design tokens', 'dark mode'],
+  answer: '3 matches for “tokens” in Docs.',
+  onSearch: (q, scope) => run(q, scope),
+  onSelect: open,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `value` / `onValueChange` | `string` / `callback` | The text in the field. Omit `value` to let the component keep it. |
+| `placeholder` | `string` | Placeholder shown while the field is empty. |
+| `scopes` | `SearchScope[]` | Scope chips before the field. The active one narrows the search. Each has a `value`, optional `label` and `icon`. |
+| `scope` / `onScopeChange` | `string` / `callback` | The active scope's value. |
+| `results` | `SearchResult[]` | Live results for the current query. Each has a `value`, optional `label`, `detail` and `icon`. |
+| `recent` | `string[]` | Earlier queries, shown while the field is empty. |
+| `answer` | `node` | The agent's answer for the current query, shown above the results. |
+| `loading` | `boolean` | Shows a spinner in the field while results load. |
+| `onSearch` | `(query, scope) => void` | Called on submit (Enter) or a recent pick. |
+| `onSelect` | `(value) => void` | Called with a result's value when it is picked. |
+| `onClear` | `callback` | Called when the field is cleared. |
+
+## Theming [#theming]
+
+The field, scope chips and dropdown all draw from the shared `--vo-*` tokens, so they work in light
+and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The field shows focus
+with its own edge (no extra ring); the agent answer sits on a faint accent tint.

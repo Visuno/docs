@@ -1,0 +1,122 @@
+# Prompt library (/docs/components/prompt-library)
+
+The studio's saved prompts, each with blanks written as `{key}`. Opening one lays its blanks out as
+fields — typed, or picked from a short list — and the prompt fills in as they change: filled blanks
+take the accent colour, empty ones read by name. A prompt can't be used until every blank has a
+value; try it empty and each missing blank turns red and says what it needs.
+
+<Preview>
+  <PromptLibraryExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { PromptLibrary, type SavedPrompt } from './prompt-library/PromptLibrary';
+
+const prompts: SavedPrompt[] = [
+  {
+    id: 'rewrite',
+    title: 'Rewrite a section',
+    template: 'Rewrite {section} on {page} so it reads {tone}.',
+    blanks: {
+      section: { label: 'Section', placeholder: 'Like the plan cards' },
+      page: { label: 'Page', options: ['Pricing v4', 'Home', 'Checkout'] },
+      tone: { label: 'Tone', options: ['clearer', 'friendlier', 'shorter'] },
+    },
+  },
+];
+
+<PromptLibrary
+  prompts={prompts}
+  subtitle="Shared with Visuno Studio"
+  onUse={(text) => send(text)}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [PromptLibraryComponent] -->
+prompts: SavedPrompt[] = [
+  {
+    id: 'rewrite',
+    title: 'Rewrite a section',
+    template: 'Rewrite {section} on {page} so it reads {tone}.',
+    blanks: {
+      section: { label: 'Section', placeholder: 'Like the plan cards' },
+      page: { label: 'Page', options: ['Pricing v4', 'Home', 'Checkout'] },
+      tone: { label: 'Tone', options: ['clearer', 'friendlier', 'shorter'] },
+    },
+  },
+];
+
+<PromptLibrary
+  [prompts]="prompts"
+  subtitle="Shared with Visuno Studio"
+  (usePrompt)="send($event.text)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/prompt_library.dart';
+
+PromptLibrary(
+  prompts: const [
+    SavedPrompt(
+      id: 'rewrite',
+      title: 'Rewrite a section',
+      template: 'Rewrite {section} on {page} so it reads {tone}.',
+      blanks: {
+        'section': PromptBlank(label: 'Section', placeholder: 'Like the plan cards'),
+        'page': PromptBlank(label: 'Page', options: ['Pricing v4', 'Home', 'Checkout']),
+        'tone': PromptBlank(label: 'Tone', options: ['clearer', 'friendlier', 'shorter']),
+      },
+    ),
+  ],
+  subtitle: 'Shared with Visuno Studio',
+  onUse: (text, prompt, values) => send(text),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `prompts` | `SavedPrompt[]` | The saved prompts to list. |
+| `title` | `string` | The list's heading. Defaults to "Prompt library". |
+| `subtitle` | `string` | The line under the title, like "Shared with Visuno Studio". |
+| `open` | `string \| null` | The open prompt's id, or `null` for the list. Leave it out to let the component hold its own. |
+| `defaultOpen` | `string \| null` | The id to open at first when uncontrolled. |
+| `onOpenChange` | `(id: string \| null) => void` | Called when a prompt opens or the list comes back (`null`). |
+| `values` | `Record<string, string>` | The open prompt's blanks, by key. A picked blank left out starts on its first option. |
+| `onValuesChange` | `(values) => void` | Called whenever a blank's value changes. |
+| `onUse` | `(text, prompt, values) => void` | Called with the filled prompt once every blank has a value. |
+| `onUndo` | `() => void` | Called when the used notice is undone. |
+| `SavedPrompt.template` | `string` | The prompt, with each blank written as `{key}`. |
+| `SavedPrompt.blanks` | `Record<string, PromptBlank>` | The blanks, keyed by `{key}`. |
+| `PromptBlank.label` | `string` | The field's label. Lowercased, it also stands in the prompt while the blank is empty. |
+| `PromptBlank.placeholder` | `string` | For a typed blank: the hint in the empty field. |
+| `PromptBlank.options` | `string[]` | For a picked blank: the choices, in a dropdown that starts on the first. |
+| `PromptBlank.error` | `string` | What the field says when used empty. Defaults to "Fill in the \<label\>". |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
+sits on a surface, the prompt on a chip, and a filled blank takes the accent tint (`--vo-accent-bg`)
+while an empty one is outlined and a needed one turns `--vo-bad` — all from the theme tokens, so it
+reads in either mode; in Soft the card, fields and pills are rounder.

@@ -1,0 +1,96 @@
+# Response versions (/docs/components/response-versions)
+
+An answer with its earlier versions a click away. The arrows page through every `versions` entry
+(oldest first); a different version fades the old text out, then the new one arrives word by word.
+The regenerate button calls `onRegenerate` so you can add a version and show it, and the copy button
+copies the version on screen. While `streaming` is set the new words fade in as they arrive, paging
+waits, and the `status` beside the buttons shimmers.
+
+<Preview>
+  <ResponseVersionsExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { ResponseVersions } from './response-versions/ResponseVersions';
+
+const [versions, setVersions] = useState(['Pricing that grows with your team.']);
+const [version, setVersion] = useState(0);
+
+<ResponseVersions
+  prompt="Write a headline for the pricing page"
+  versions={versions}
+  version={version}
+  onVersionChange={setVersion}
+  status="Writing a new version"
+  onRegenerate={() => setVersions((v) => [...v, next()])}
+  onCopy={(text) => console.log(text)}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ResponseVersionsComponent] -->
+versions = ['Pricing that grows with your team.'];
+
+<ResponseVersions
+  prompt="Write a headline for the pricing page"
+  [versions]="versions"
+  [version]="version"
+  (versionChange)="version = $event"
+  (regenerateClick)="regenerate()"
+  (copyText)="onCopy($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/response_versions.dart';
+
+ResponseVersions(
+  prompt: 'Write a headline for the pricing page',
+  versions: versions,
+  version: version,
+  onVersionChange: (i) => setState(() => version = i),
+  status: 'Writing a new version',
+  onRegenerate: regenerate,
+  onCopy: (text) => debugPrint(text),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `prompt` | `ReactNode` | The person's message the answer replies to, shown as a bubble above it. |
+| `versions` | `string[]` | Every version of the answer so far, oldest first. |
+| `version` | `number` | Which version is showing. Leave it out to let the arrows page through them. |
+| `defaultVersion` | `number` | The version shown at first when `version` is left out. Defaults to `0`. |
+| `onVersionChange` | `(index) => void` | Called when the arrows move to another version. |
+| `streaming` | `boolean` | The version showing is still being written. New words fade in as they arrive and paging waits. |
+| `status` | `string` | Quiet text beside the buttons, like "Writing a new version". It shimmers while streaming. |
+| `onRegenerate` | `() => void` | Called by the regenerate button. Add a version and show it to answer it. Leave it out to hide the button. |
+| `onCopy` | `(text) => void` | Called with the text after it is copied to the clipboard. |
+| `bare` | `boolean` | Sits flat in a chat thread (the default). Set `false` to give it a card of its own. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The prompt
+bubble, the muted count and status, and the icon buttons all take their colour from the theme tokens;
+each new word fades in, the regenerate glyph turns a full circle, and copy flips to a check in the
+`--vo-ok` colour. Reduced motion drops the word fade, the spin and the status shimmer.

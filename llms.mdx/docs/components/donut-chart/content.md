@@ -1,0 +1,90 @@
+# Donut chart (/docs/components/donut-chart)
+
+A donut chart shows a whole split into parts: a ring of `segments` that draw in one by one, with a
+legend beside it. Each segment takes a `label` and a `value`, and gets a colour from the chart
+palette unless you pass one. The middle shows the total with its `label` and `unit`; hovering a
+segment or its legend row highlights both and shows that one in the middle instead.
+
+<Preview>
+  <DonutChartExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { DonutChart } from './donut-chart/DonutChart';
+
+const segments = [
+  { label: 'Design reviews', value: 14.2 },
+  { label: 'Code changes', value: 9.6 },
+  { label: 'Research', value: 6.1 },
+  { label: 'Other', value: 1.7, color: 'var(--vo-faint)' },
+];
+
+<DonutChart segments={segments} label="Agent time" unit="h" />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [DonutChartComponent] -->
+segments: DonutChartSegment[] = [
+  { label: 'Design reviews', value: 14.2 },
+  { label: 'Code changes', value: 9.6 },
+  { label: 'Research', value: 6.1 },
+  { label: 'Other', value: 1.7, color: 'var(--vo-faint)' },
+];
+
+<DonutChart [segments]="segments" label="Agent time" unit="h" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/donut_chart.dart';
+
+DonutChart(
+  segments: const [
+    DonutChartSegment(label: 'Design reviews', value: 14.2),
+    DonutChartSegment(label: 'Code changes', value: 9.6),
+    DonutChartSegment(label: 'Research', value: 6.1),
+    DonutChartSegment(label: 'Other', value: 1.7),
+  ],
+  label: 'Agent time',
+  unit: 'h',
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `segments` | `DonutChartSegment[]` | The ring's parts. Each is `{ label, value, color? }`. |
+| `label` | `string` | Under the total in the middle, like "Agent time". Defaults to `Total`. |
+| `unit` | `string` | After every value, like `h` in "14.2h". |
+| `format` | `(n: number) => string` | Writes a value. Defaults to one decimal, like `14.2`. |
+| `active` | `number \| null` | Index of the highlighted segment, or `null`. Leave it out to let hovering highlight it. |
+| `defaultActive` | `number \| null` | The highlight to start with when uncontrolled. |
+| `onActiveChange` | `(index: number \| null) => void` | Fires when the highlighted segment changes (Angular: `activeChange`; Flutter: `onActiveChange`). |
+
+A `DonutChartSegment` is `{ label: string; value: number; color?: string }`; `color` defaults to the
+chart palette (`--vo-c1..c6`) in order.
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). Segment
+colours come from the chart palette tokens (`--vo-c1..c6`), the card sits on a surface, and the
+legend hover tint and the centre text read from the theme tokens. The arcs sweep in and the total
+counts up on load; with `prefers-reduced-motion` the ring appears already drawn.

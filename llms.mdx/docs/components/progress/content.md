@@ -11,28 +11,7 @@ follow (Pause, Resume, Run again). An optional `meter` underneath warns in words
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + progress.css -->
-<div class="dm-prg dm-panel" data-s="run">
-  <div class="dm-prg-h">
-    <span class="dm-prg-ring"><span class="dm-prg-pc dm-num">42%</span></span>
-    <div class="dm-prg-t">
-      <b>Indexing the docs</b>
-      <span class="dm-muted dm-prg-vt">Step 2 of 4, embedding</span>
-    </div>
-    <span class="dm-tag dm-prg-st dm-run">Running</span>
-    <button class="dm-ib dm-prg-btn" aria-label="Pause">⏸</button>
-  </div>
-  <div class="dm-prg-seg"><i><b></b></i><i><b></b></i></div>
-  <div class="dm-prg-lin"><i style="width: 42%"></i></div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -65,7 +44,7 @@ const steps = [
 
 ```html
 <!-- imports: [ProgressComponent] -->
-<dm-progress
+<VoProgress
   title="Indexing the docs"
   state="running"
   [steps]="steps"
@@ -76,7 +55,7 @@ const steps = [
   (resume)="onResume()"
   (retry)="onRetry()"
   (restart)="onRestart()"
-></dm-progress>
+></VoProgress>
 ```
 
 </Tab>

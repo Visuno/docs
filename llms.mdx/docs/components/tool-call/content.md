@@ -1,0 +1,115 @@
+# Tool call (/docs/components/tool-call)
+
+The tools an agent calls, shown between its message and its answer. Each call takes a `server`,
+a `name` and a `state` — `queued` waits, `running` spins, `done` shows how long it took and what
+came back. Click a call to fold its `input` and `output` open or shut. The `reply` fades in once
+every call is done.
+
+<Preview>
+  <ToolCallExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { ToolCall, type ToolCallItem } from './tool-call/ToolCall';
+
+const calls: ToolCallItem[] = [
+  {
+    key: 'billing',
+    server: 'billing',
+    name: 'list_plan_changes',
+    icon: 'coins',
+    state: 'done',
+    duration: '412 ms',
+    input: { since: '2026-10-01' },
+    output: [{ plan: 'Pro', price: 24 }, { plan: 'Team', price: 48 }],
+  },
+];
+
+<ToolCall
+  message="Checking which plans changed this month."
+  calls={calls}
+  reply="Two plans changed. I updated their prices."
+  defaultOpen={['billing']}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ToolCallComponent] -->
+calls: ToolCallItem[] = [{
+  key: 'billing', server: 'billing', name: 'list_plan_changes', icon: 'coins',
+  state: 'done', duration: '412 ms',
+  input: { since: '2026-10-01' },
+  output: [{ plan: 'Pro', price: 24 }, { plan: 'Team', price: 48 }],
+}];
+
+<ToolCall
+  message="Checking which plans changed this month."
+  [calls]="calls"
+  reply="Two plans changed. I updated their prices."
+  [defaultOpen]="['billing']"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/tool_call.dart';
+
+const calls = [
+  ToolCallItem(
+    key: 'billing', server: 'billing', name: 'list_plan_changes',
+    icon: Icons.monetization_on_outlined,
+    state: ToolCallState.done, duration: '412 ms',
+    input: {'since': '2026-10-01'}, hasInput: true,
+    output: [{'plan': 'Pro', 'price': 24}, {'plan': 'Team', 'price': 48}], hasOutput: true,
+  ),
+];
+
+ToolCall(
+  message: 'Checking which plans changed this month.',
+  calls: calls,
+  reply: 'Two plans changed. I updated their prices.',
+  defaultOpen: const ['billing'],
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `message` | `ReactNode` | The agent's message before the calls. |
+| `calls` | `ToolCallItem[]` | The tools the agent called, each a row that folds open. |
+| `reply` | `ReactNode` | The agent's answer after the calls. It fades in once every call is done. |
+| `open` | `string[]` | Keys of the calls that are open. Leave it out to let each call toggle itself. |
+| `defaultOpen` | `string[]` | The calls open at first when `open` is uncontrolled. |
+| `onOpenChange` | `(open: string[]) => void` | Called with the new open set whenever a call is toggled. |
+| `call.server` | `string` | The tool's server or namespace, like `billing`. |
+| `call.name` | `string` | The tool's name, like `list_plan_changes`. |
+| `call.icon` | `IconName` | The icon in front of the call. |
+| `call.state` | `queued \| running \| done` | `queued` waits, `running` spins, `done` shows the time and output. |
+| `call.duration` | `string` | How long it took, like `412 ms`. Shown once done. |
+| `call.input` | `Json` | What the agent sent, shown as highlighted JSON. |
+| `call.output` | `Json` | What came back, shown once done. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The call
+rows sit on the stage with a chip-tinted icon badge and chip-tinted JSON blocks; keys, strings and
+numbers take their own palette tokens, and the running spinner and fold motion follow the shared
+ease. In Soft the rows and JSON blocks are rounder.

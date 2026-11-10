@@ -1,0 +1,99 @@
+# Launch checklist (/docs/components/launch-checklist)
+
+A launch checklist runs the pre-flight checks before something ships. Each check is a row with a
+glyph — a waiting ring, a spinner while it runs, a pass or a fail — plus a `label` and a quiet
+`note`. A progress bar across the top carries one segment per check, tinted as each result lands.
+A failed check shows a **Fix** button; the `status` line defaults to a count, "Checking" while one
+runs, then what is left to fix or "All clear, ready to ship".
+
+<Preview>
+  <LaunchChecklistExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { LaunchChecklist, type LaunchCheck } from './launch-checklist/LaunchChecklist';
+
+const checks: LaunchCheck[] = [
+  { label: 'Contrast meets AA', state: 'ok', note: 'All 14 text pairs pass' },
+  { label: 'Uses library tokens', state: 'bad', note: '3 raw hex values', onFix: fixTokens },
+  { label: 'Links resolve', state: 'wait' },
+];
+
+<LaunchChecklist
+  title="Ready to ship pricing?"
+  checks={checks}
+  action={{ label: 'Run checks', icon: 'play', onClick: run }}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [LaunchChecklistComponent] -->
+checks: LaunchCheck[] = [
+  { label: 'Contrast meets AA', state: 'ok', note: 'All 14 text pairs pass' },
+  { label: 'Uses library tokens', state: 'bad', note: '3 raw hex values', canFix: true },
+  { label: 'Links resolve', state: 'wait' },
+];
+
+<LaunchChecklist
+  title="Ready to ship pricing?"
+  [checks]="checks"
+  [action]="{ label: 'Run checks', icon: 'play' }"
+  (run)="run()"
+  (fix)="fixCheck($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/launch_checklist.dart';
+
+LaunchChecklist(
+  title: 'Ready to ship pricing?',
+  checks: const [
+    LaunchCheck(label: 'Contrast meets AA', state: CheckState.ok, note: 'All 14 text pairs pass'),
+    LaunchCheck(label: 'Uses library tokens', state: CheckState.bad, note: '3 raw hex values', canFix: true),
+    LaunchCheck(label: 'Links resolve', state: CheckState.wait),
+  ],
+  action: LaunchAction(label: 'Run checks', icon: Icons.play_arrow, onPressed: run),
+  onFix: (i) => fixCheck(i),
+);
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | The line above the checks, like "Ready to ship pricing?". |
+| `checks` | `LaunchCheck[]` | The checks, one row and one progress segment each. |
+| `status` | `string` | The line under the title. Defaults to a count, "Checking" while one runs, then what is left to fix. |
+| `action` | `{ label; icon?; accent?; disabled? }` | The button beside the title, like Run checks, Run again or Ship it. `accent` tints the ship step. |
+| `bare` | `boolean` | Sits flat in a thread (the default). Set `false` to give it a card of its own. |
+| `check.label` | `string` | What is checked, like "Contrast meets AA". |
+| `check.state` | `wait \| run \| ok \| bad` | Not run yet, checking or fixing, passed, or failed. |
+| `check.note` | `string` | The quiet line under the label, or what is wrong. |
+| `check.onFix` | `() => void` | React: shows a Fix button on a failed check. Angular uses `canFix` + `(fix)`; Flutter uses `canFix` + `onFix`. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The
+progress segments and glyphs take their colour from the theme tokens — `--vo-ok` for a pass,
+`--vo-bad` for a fail, the accent mark while running — so results read the same on either
+background; in Soft the rows and buttons are rounder. The glyph crossfades in as each state lands,
+and the bar transition is skipped under `prefers-reduced-motion`.

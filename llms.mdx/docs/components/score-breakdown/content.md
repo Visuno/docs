@@ -1,0 +1,104 @@
+# Score breakdown (/docs/components/score-breakdown)
+
+A single score out of 100, with a half-circle gauge split into one segment per `factor`, each
+sized by its `weight` and filled by the points it `earned`. The rows under it say what each earned
+and why; the weakest factor is flagged in words, and an `improvable` row offers **Improve**, which
+asks the agent (`onImprove`) for a proposal you can **Apply** to lift that factor's points — and the
+whole score with it.
+
+<Preview>
+  <ScoreBreakdownExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { ScoreBreakdown, type ScoreFactor, type ScoreProposal } from './score-breakdown/ScoreBreakdown';
+
+const factors: ScoreFactor[] = [
+  { key: 'accuracy', label: 'Accuracy', weight: 40, earned: 34, note: '2 wrong refund amounts in 120 tickets' },
+  { key: 'speed', label: 'Speed', weight: 20, earned: 11, note: 'Median reply 6.4s, target under 4s', improvable: true },
+  { key: 'cost', label: 'Cost', weight: 20, earned: 16, note: '$0.11 a ticket, budget $0.12' },
+  { key: 'safety', label: 'Safety', weight: 20, earned: 19, note: 'No policy breaks, 1 tone flag' },
+];
+
+<ScoreBreakdown
+  factors={factors}
+  title="Support agent quality"
+  previous={77}
+  onImprove={async (f) => ({ text: 'Cache the search results…', gain: 'About 2.1s faster a reply', to: 17 })}
+  onApply={(f, p) => update(f.key, p.to)}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ScoreBreakdownComponent] -->
+factors: ScoreFactor[] = [
+  { key: 'accuracy', label: 'Accuracy', weight: 40, earned: 34, note: '2 wrong refund amounts in 120 tickets' },
+  { key: 'speed', label: 'Speed', weight: 20, earned: 11, note: 'Median reply 6.4s, target under 4s', improvable: true },
+];
+
+<ScoreBreakdown
+  [factors]="factors"
+  title="Support agent quality"
+  [previous]="77"
+  (improveRequest)="$event.resolve({ text: 'Cache the search results…', gain: 'About 2.1s faster a reply', to: 17 })"
+  (applyProposal)="update($event.factor, $event.proposal)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/score_breakdown.dart';
+
+ScoreBreakdown(
+  factors: const [
+    ScoreFactor(key: 'accuracy', label: 'Accuracy', weight: 40, earned: 34, note: '2 wrong refund amounts in 120 tickets'),
+    ScoreFactor(key: 'speed', label: 'Speed', weight: 20, earned: 11, note: 'Median reply 6.4s, target under 4s', improvable: true),
+  ],
+  title: 'Support agent quality',
+  previous: 77,
+  onImprove: (f) async => const ScoreProposal(text: 'Cache the search results…', gain: 'About 2.1s faster a reply', to: 17),
+  onApply: (f, p) => update(f.key, p.to),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `factors` | `ScoreFactor[]` | The parts of the score; their `weight`s add up to 100. |
+| `title` | `string` | The gauge label and heading. Defaults to `"Quality score"`. |
+| `previous` | `number` | Last period's score, for the change shown beside the band word. |
+| `since` | `string` | What the change is measured against. Defaults to `"since last week"`. |
+| `open` / `defaultOpen` | `string[]` | The open rows, by key (controlled / initial). |
+| `onOpenChange` | `(open: string[]) => void` | Fires when a row opens or closes. |
+| `onImprove` | `(factor) => ScoreProposal \| Promise<…>` | Called by **Improve**; while it waits the row says the agent is looking. |
+| `onApply` | `(factor, proposal) => void` | Called by **Apply**; update the factor's `earned` and `note`. |
+| `improvingLabel` | `string` | What the row says while the agent works. Defaults to `"Looking into it"`. |
+| `factor.weight` / `factor.earned` | `number` | The points a factor can earn and did earn. |
+| `factor.note` | `string` | The agent's one-line note, like `"Median reply 6.4s, target under 4s"`. |
+| `factor.improvable` | `boolean` | Adds an **Improve** button to the open row. |
+| `factor.detail` | `string` | A line shown first in the open row, like what was changed. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The gauge
+segments and the row swatches use the chart palette (`--vo-c1`…`--vo-c6`); the band chip, the Weakest
+flag and the proposal card tint from the theme tokens (`--vo-ok`, `--vo-warn`, `--vo-surface`,
+`--vo-line`), so the breakdown reads on either background. In Soft the rows and buttons are rounder.

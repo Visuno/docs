@@ -1,0 +1,99 @@
+# Draft review (/docs/components/draft-review)
+
+An email the agent drafted, laid out like the email it is: who it goes to, the `subject`, the `body`
+and any `attachments`. Check and edit it, then send now or later — the menu beside the button picks
+`when` — or `discard` it. A `warning` can stop it before it sends, like an attachment the message
+mentions but nothing attached, and after sending there is a short window to `undo`. The `phase` drives
+what the footer shows.
+
+<Preview>
+  <DraftReviewExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { DraftReview } from './draft-review/DraftReview';
+
+<DraftReview
+  subtitle="After the pricing review with Maya"
+  to={[{ name: 'Maya Kim', initials: 'MK', color: 'var(--vo-av-l)' }]}
+  subject="Pricing v4: what changed"
+  body={"Hi Maya,\n\nHere's what changed on the pricing page…"}
+  phase="draft"
+  onSend={(option) => send(option.key)}
+  onDiscard={() => discard()}
+  onUndo={() => bringBack()}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [DraftReviewComponent] -->
+<DraftReview
+  subtitle="After the pricing review with Maya"
+  [to]="[{ name: 'Maya Kim', initials: 'MK', color: 'var(--vo-av-l)' }]"
+  subject="Pricing v4: what changed"
+  [body]="draftBody"
+  phase="draft"
+  (send)="onSend($event)"
+  (discard)="onDiscard()"
+  (undo)="onUndo()"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/draft_review.dart';
+
+DraftReview(
+  subtitle: 'After the pricing review with Maya',
+  to: const [DraftRecipient(name: 'Maya Kim', initials: 'MK')],
+  subject: 'Pricing v4: what changed',
+  body: "Hi Maya,\n\nHere's what changed on the pricing page…",
+  phase: DraftPhase.draft,
+  onSend: (option) => send(option.key),
+  onDiscard: () => discard(),
+  onUndo: () => bringBack(),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | The bold first line. Defaults to "Draft from the agent". |
+| `subtitle` | `string` | The quieter line under the title. |
+| `to` | `DraftRecipient[]` | Who it goes to: `{ name; initials?; color? }`. |
+| `subject` | `string` | The subject line. Editable when `onSubjectChange` is set. |
+| `body` | `string` | The message as the agent wrote it. Stays editable; read edits from `onBodyChange`. |
+| `attachments` | `DraftAttachment[]` | Files on the draft: `{ name; size?; loading? }`. |
+| `warning` | `{ text; actions }` | A problem to settle before it sends, with its own buttons. |
+| `phase` | `draft \| sending \| undo \| sent \| scheduled \| discarded` | Drives what the footer shows. |
+| `sendOptions` | `SendOption[]` | The "when to send" menu: `{ key; label; detail? }`. `now` sends straight away. |
+| `sendOption` / `defaultSendOption` | `string` | The picked option's key, controlled or uncontrolled. |
+| `undoLeft` | `number` | Seconds left to undo, shown while the phase is `undo`. |
+| `onSend` | `(option) => void` | Called when Send (or Schedule) is pressed, with the chosen option. |
+| `onDiscard` | `() => void` | Called by the Discard button. |
+| `onUndo` | `() => void` | Takes it back: undoes a send, cancels a scheduled one, or brings back a discarded draft. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
+sits on a surface with the card shadow; the warning uses the warn tint, a sent draft the ok tint, and
+a scheduled one the blue "preview" tint — all from the theme tokens. In Soft the card, chips and pills
+are rounder.

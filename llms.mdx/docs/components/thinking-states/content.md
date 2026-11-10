@@ -1,9 +1,16 @@
 # Thinking States (/docs/components/thinking-states)
 
-A thinking state is a small animated mark beside a status line. Pick one of six marks with
+A thinking state is a small animated mark beside a status line. Pick one of ten marks with
 `variant`; give it `steps` and, with more than one, they take turns every `interval` unless you
 drive the index with `current`. An elapsed-seconds counter sits at the end of the line and counts
 by itself unless you set `seconds` or hide it with `seconds={false}`.
+
+The marks are `orbit` (a light running round a ring, the line shimmering), `morph` (a rectangle,
+circle and triangle in turn), `scan` (a column sweeping rows of dots), `stream` (dots filling in,
+the line typed out behind a caret), `matrix` (a dot grid twinkling at random), `stack` (pages
+shuffling to the front), `pulse` (a core breathing with sonar rings growing out of it), `wave`
+(bars rising and falling in a travelling waveform), `bounce` (three dots hopping in turn) and
+`spiral` (dots lighting up along an inward spiral toward the centre).
 
 <Preview>
   <ThinkingStatesExample />
@@ -11,26 +18,7 @@ by itself unless you set `seconds` or hide it with `seconds={false}`.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + thinking-states.css -->
-<div class="ths" data-v="orbit">
-  <div class="ths-row">
-    <span class="ths-mk" aria-hidden="true"></span>
-    <span class="ths-l" aria-hidden="true">
-      <span class="ths-tx shim">Thinking</span>
-      <span class="ths-car" hidden></span>
-    </span>
-    <span class="ths-t num" aria-hidden="true">0s</span>
-  </div>
-  <span class="ths-sr" role="status" aria-live="polite">Thinking</span>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -50,9 +38,9 @@ const steps = ['Thinking', 'Reading 3 files', 'Planning the change'];
 
 ```html
 <!-- imports: [ThinkingStatesComponent] -->
-<dm-thinking-states variant="orbit" [steps]="steps" />
-<dm-thinking-states variant="stream" [steps]="steps" [interval]="2600" />
-<dm-thinking-states variant="scan" [steps]="steps" [seconds]="false" />
+<ThinkingStates variant="orbit" [steps]="steps" />
+<ThinkingStates variant="stream" [steps]="steps" [interval]="2600" />
+<ThinkingStates variant="scan" [steps]="steps" [seconds]="false" />
 ```
 
 </Tab>
@@ -77,7 +65,7 @@ ThinkingStates(variant: ThinkingVariant.scan, steps: steps, seconds: false),
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `variant` | `orbit \| morph \| scan \| stream \| matrix \| stack` | Which indicator to draw. `orbit` by default. |
+| `variant` | `orbit \| morph \| scan \| stream \| matrix \| stack \| pulse \| wave \| bounce \| spiral` | Which indicator to draw. `orbit` by default. |
 | `steps` | `string[]` | The status lines. With more than one they take turns unless `current` is set. |
 | `current` | `number` | Index of the line to show. Leave it out to let the lines take turns by themselves. |
 | `interval` | `number` | Milliseconds each line shows for when they take turns. `2600` by default. |

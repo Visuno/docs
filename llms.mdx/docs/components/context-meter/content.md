@@ -11,24 +11,7 @@ line fades in with a warning or a result.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + context-meter.css -->
-<div class="ctm" data-open="1">
-  <button class="ctm-tg" aria-expanded="true"><span class="ctm-ring"><svg viewBox="0 0 20 20"><circle class="tr" cx="10" cy="10" r="7.5"/><circle class="fl" cx="10" cy="10" r="7.5" pathLength="100"/></svg></span><span><span class="ctm-pc num">0%</span> of context used</span></button>
-  <div class="ctm-pop panel">
-    <div class="ctm-ph"><span>In context</span><span class="num"><b class="ctm-tot">0k</b> of 200k tokens</span></div>
-    <div class="ctm-bar"></div>
-    <div class="ctm-leg"></div>
-    <div class="ctm-f"><span class="ctm-hint">Summarises older turns</span><button class="pill ghost sm ctm-go">Compact</button></div>
-  </div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -52,11 +35,11 @@ import { ContextMeter } from './context-meter/ContextMeter';
 
 ```html
 <!-- imports: [ContextMeterComponent] -->
-<dm-context-meter
+<ContextMeter
   [limit]="200000"
   [parts]="parts"
   (compact)="summarise()"
-></dm-context-meter>
+></ContextMeter>
 
 // parts: ContextPart[] = [
 //   { key: 'files', label: 'Files', tokens: 56200, items: 'PricingCard.tsx 18.2k, tokens.css 6.1k' },

@@ -1,5 +1,8 @@
-:HL["/docs/_next/static/chunks/3m06e-2ajv-r1.css","style"]
-:HL["/docs/_next/static/chunks/1bnh8r0-prf7e.css","style"]
+:HL["/_next/static/chunks/2pab07de6_o6l.css","style"]
+:HL["/_next/static/chunks/2__10jq91xz73.css","style"]
+:HL["/_next/static/chunks/1bnh8r0-prf7e.css","style"]
+:HL["https://sdkindustries.de/logo-dark.svg","image"]
+:HL["https://sdkindustries.de/logo.svg","image"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"2JYVlzBBUoIAbcp9zFflZ","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"_q4Far6IOVmmLKEncwA05","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

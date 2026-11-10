@@ -1,0 +1,98 @@
+# Inline text diff (/docs/components/inline-text-diff)
+
+A piece of copy with the agent's edits marked inline — the old words struck, the suggestion added.
+Each edit opens a small toolbar to `accept` or `reject` it, and the header takes the rest all at
+once. An edit the agent isn't sure of is tinted and shows a `note` above its buttons. Once every edit
+is decided, the buttons give way to a short `doneLabel`.
+
+<Preview>
+  <InlineTextDiffExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { InlineTextDiff, type TextPart } from './inline-text-diff/InlineTextDiff';
+
+const parts: TextPart[] = [
+  { key: 'a', from: 'Pick', to: 'Choose' },
+  ' a plan that ',
+  { key: 'b', from: 'fits your team', to: 'grows with your studio' },
+  { key: 'c', from: 'you can cancel', to: 'your first month is free',
+    note: "Not in the pricing brief: there is no free month" },
+  '.',
+];
+
+<InlineTextDiff title="Pricing intro" parts={parts} doneLabel="Saved to Pricing v4" />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [InlineTextDiffComponent] -->
+title = 'Pricing intro';
+parts: TextPart[] = [
+  { key: 'a', from: 'Pick', to: 'Choose' },
+  ' a plan that ',
+  { key: 'b', from: 'fits your team', to: 'grows with your studio' },
+];
+
+<InlineTextDiff
+  [title]="title"
+  [parts]="parts"
+  doneLabel="Saved to Pricing v4"
+  (decisionsChange)="onDecisions($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/inline_text_diff.dart';
+
+InlineTextDiff(
+  title: 'Pricing intro',
+  doneLabel: 'Saved to Pricing v4',
+  parts: const [
+    EditPart(TextEdit(key: 'a', from: 'Pick', to: 'Choose')),
+    TextRun(' a plan that '),
+    EditPart(TextEdit(key: 'b', from: 'fits your team', to: 'grows with your studio')),
+    TextRun('.'),
+  ],
+  onDecisionsChange: (d) {},
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | What the copy is, like "Pricing intro". |
+| `parts` | `TextPart[]` | The copy in order: plain strings, with the edits between them. |
+| `decisions` | `Record<string, EditDecision>` | Controlled map of what was decided for each edit, by key. Leave an edit out while it waits. |
+| `defaultDecisions` | `Record<string, EditDecision>` | The uncontrolled initial decisions. |
+| `onDecisionsChange` | `(decisions) => void` | Called whenever the decisions change, with the full map by key. |
+| `doneLabel` | `string` | The line that replaces the buttons once every edit is decided. |
+| `labels` | `{ accept?; reject?; acceptAll?; rejectAll? }` | Overrides for the button labels. |
+| `TextEdit.from` | `string` | The words the copy has now, shown struck. |
+| `TextEdit.to` | `string` | The words the agent suggests instead. |
+| `TextEdit.note` | `string` | Why the agent isn't sure of this one; the edit is marked and the note shows above its buttons. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The struck
+and added words tint from the `--vo-del` and `--vo-add` tokens, an unsure edit uses the `--vo-warn`
+tokens, and the toolbar sits on a raised surface with the pop shadow — so it all reads against the
+dark stage; in Soft the card and its pills are rounder.

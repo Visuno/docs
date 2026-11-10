@@ -1,0 +1,88 @@
+# Changelog (/docs/changelog)
+
+Notable changes to the Visuno component library and these docs, newest first.
+Component source lives in the [components repository](https://github.com/Visuno/components).
+
+## Unreleased [#unreleased]
+
+- **Angular demos** — restored the React demos’ interactive state updates, streamed stories, retries, approvals, replay controls, and reduced-motion behavior. Added missing controlled inputs and copy/disabled button support in the Angular library.
+
+- **Angular** — component selectors now use PascalCase that mirrors the React component names (`<vo-status-pill>` → `<StatusPill>`, `<vo-icon>` → `<Icon>`, `<vo-agent-tree>` → `<AgentTree>`, …). The three selectors that shadowed native HTML elements are prefixed to stay unambiguous: `<VoButton>`, `<VoButtonCopy>`, `<VoProgress>`. The `voGridItem` / `vo-field-zone` directives become `gridItem` / `fieldZone`. The shared `--vo-*` design tokens and `vo-*` CSS classes are unchanged. **Breaking:** update Angular templates to the new tag names.
+
+- **Docs** — a global site footer now appears on every page (MIT licence, Star on GitHub, a link to the machine-readable **llms.txt**, Imprint, and "Powered by SDK Industries"), plus a floating **back-to-top** button that fades in once you scroll.
+
+- **Angular Stat cards** — adapt columns and spacing to the component width so cards fit narrow panels as well as mobile screens.
+
+- **Angular Code viewer** — removed oversized gaps between code lines while preserving code indentation and blank lines.
+
+- **Angular test bench** — added the missing Number field, OTP field, Search input, and Slider examples with interactive states.
+
+- **Docs** — new getting-started guides: **Installation** (per-framework setup), **Theming** (the two switches and the `--vo-*` token system, with per-framework code tabs), **Accessibility** (semantics, keyboard, focus, reduced motion), and **Using with AI** (point a coding assistant at the `llms.txt` docs). Grouped under a collapsible **Docs** section in the sidebar, and every nav entry now carries a Visuno icon.
+
+- **Angular** — use the same shared web styles as React for consistent typography, controls, icons, and Soft/Blueprint themes.
+
+- **Slider** — new shared component in all four frameworks: a track with a
+  single value or a range, optional discrete steps and named stops, and an
+  agent-recommended value marked on the track. Keyboard and drag, tokens only.
+- **Search input** — new shared component in all four frameworks: a search
+  field with scoped filters, recent queries and an inline agent answer.
+- **Number field** — new shared component in all four frameworks: type a number
+  or step it with minus and plus, with units, limits, and a note when a value is
+  clamped to fit.
+- **OTP field** — new shared component in all four frameworks: a one-time code,
+  one box per digit, that auto-advances, navigates by keyboard and fills from a
+  paste.
+- **Docs preview** — live example stages now always use the docs page's own theme
+  (light or dark), never the browser's colour-scheme preference. The per-preview
+  Light/Dark toggle has been removed; the component tokens follow the site theme.
+- **Icon** — new shared component in all four frameworks: one line icon from a shared
+  MIT set of ~5,200, or your own SVG. Colour follows `currentColor` so icons theme for
+  free; sizes run `xs`–`xl` on a 24×24 grid. Any name resolves on the web; Angular and
+  Flutter draw names outside the compiled core set, and custom glyphs, from a `path`.
+  The whole set now uses canonical, descriptive names (`chevron-right`, `circle-check`,
+  `terminal-2`…) across every framework.
+- **Packages** — the library now publishes as installable packages: `@visuno/react` and
+  `@visuno/angular` on npm, and `visuno` on pub.dev for Flutter. Each is released from its
+  framework directory in the components repo.
+- **Vanilla JS dropped** — Visuno is now **three frameworks**: React, Angular and Flutter.
+  The Vanilla JS tabs have been removed from every component page, and the docs, FAQ and
+  roadmap updated to match. React is now the reference implementation.
+- **Landing page** — the home page now showcases the **whole library** live: every
+  shipped component appears as a running preview card, grouped by category, with the
+  component count derived from the list. New marketing hero leading with the Visuno
+  name, a secondary "Star on GitHub" action, and feature pills.
+- **Frameworks slider** — the frameworks strip is now an auto-scrolling black & white
+  logo slider covering React, Angular, Flutter and the React
+  meta-frameworks it works with (Next.js, Remix, Gatsby, Astro).
+- **Modal** — new shared component in all three frameworks: a centred dialog over a
+  dimmed backdrop, closed by the backdrop, a button or Escape, with focus and page
+  scroll kept in check. It carries the active style and theme to its portal, so it
+  matches the surrounding components (rounded in Soft, correct light/dark).
+- **Run summary** — the "Run details" and "Open changes" buttons now work: Run
+  details opens a Modal with the run's stats, Open changes opens a full diff view.
+- **Thinking states** — four new indicators: Pulse, Wave, Bounce and Spiral.
+- **Run cost** — the spend bar now glides with the number instead of stalling.
+- **Toast** — a dismissed toast can be shown again straight after.
+- **Imprint page** added with the legal information of SDK Industries, linked from
+  the docs navigation and the homepage footer.
+- **Stat cards** homepage preview reworked into a responsive single-column layout.
+
+## 2026-11-07 [#2026-11-07]
+
+- **16 Conversation components** documented: live answer, thread panel, composer,
+  model picker, voice capture, voice orb, tool call, artifact card, image generation,
+  rich text editor, prompt starters, prompt library, attachment tray, response versions,
+  answer action bar, and feedback sheet.
+
+## 2026-11-06 [#2026-11-06]
+
+- **7 Agent status components** documented, including status pill, thinking, reasoning
+  trail, agent phases, step loader, action log, and context meter.
+- Docs landing page **redesigned** — a quieter hero with live, self-animating component
+  previews and the full library advertised as preview cards.
+- Component documentation updated and **sections reorganised** for clarity (Agent status,
+  Conversation, Charts and tables, Dates, Forms and inputs).
+- Light wordmark asset added so the logo reads correctly in dark mode.
+- **GitHub Pages** deployment enabled, with the private components repository read through
+  a GitHub App token in CI.
+- Initial commit — docs site scaffolded on Next.js and Fumadocs.

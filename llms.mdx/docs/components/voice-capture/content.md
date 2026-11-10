@@ -1,0 +1,100 @@
+# Voice capture (/docs/components/voice-capture)
+
+Speech to text that shows what it heard as it hears it, and lets the person fix the words it was
+unsure of. Each word fades in as it arrives and the wave scrolls while it records. Press Done to
+move from recording into review, where unsure words are highlighted — tap one to pick from a short
+"Did you mean" menu — then Done again to send, or Cancel to drop it. Once recording stops the box
+keeps its height: the wave freezes as the whole recording and the words stay where they were.
+
+<Preview>
+  <VoiceCaptureExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { VoiceCapture, type HeardWord } from './voice-capture/VoiceCapture';
+
+const words: Array<string | HeardWord> = [
+  'Move', 'the', 'yearly',
+  { text: 'toggle', alternatives: ['toggle', 'toddle', 'tunnel'] },
+  'above', 'the', 'cards',
+];
+
+<VoiceCapture
+  words={words}
+  level={() => analyser.level()}
+  onSend={(text) => send(text)}
+  onFix={(index, text) => console.log('fixed', index, text)}
+  onRecordAgain={() => reset()}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [VoiceCaptureComponent] -->
+words: Array<string | HeardWord> = [
+  'Move', 'the', 'yearly',
+  { text: 'toggle', alternatives: ['toggle', 'toddle', 'tunnel'] },
+];
+
+<VoiceCapture
+  [words]="words"
+  (send)="onSend($event)"
+  (fixWord)="onFix($event)"
+  (recordAgain)="reset()"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/voice_capture.dart';
+
+VoiceCapture(
+  words: const [
+    'Move', 'the', 'yearly',
+    HeardWord('toggle', alternatives: ['toggle', 'toddle', 'tunnel']),
+  ],
+  onSend: (text) => send(text),
+  onFix: (index, text) => debugPrint('fixed $index $text'),
+  onRecordAgain: () => reset(),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `words` | `Array<string \| HeardWord>` | The words heard so far, in order. Add to the end as they arrive and each one fades in. |
+| `state` | `listening \| paused \| review \| sent \| cancelled` | The state. Leave it out to let the buttons move it along. |
+| `defaultState` | `VoiceCaptureState` | The state to start in when uncontrolled. Defaults to `listening`. |
+| `onStateChange` | `(state) => void` | Called whenever the state moves. |
+| `seconds` | `number` | Seconds recorded. Leave it out to let it count while listening. |
+| `level` | `number \| (() => number)` | The input level from 0 to 1, drawn into the wave about 20 times a second. Pass a function to read the microphone on every sample. |
+| `status` | `string` | The status line. Defaults to Listening, Paused, Check what I heard, Sent or Cancelled. |
+| `onSend` | `(text) => void` | Called with the checked transcript when Done is pressed in review. |
+| `onFix` | `(index, text) => void` | Called when the person picks one of a word's alternatives. |
+| `onRecordAgain` | `() => void` | Called by Record again, once the capture is sent or cancelled. |
+| `HeardWord.text` | `string` | The word as heard. |
+| `HeardWord.alternatives` | `string[]` | What it might have been instead. Highlights the word and opens a "Did you mean" menu. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The panel
+sits on a surface; the recording dot uses the `--vo-bad` tone and pulses, unsure words are tinted
+with `--vo-hl` (and `--vo-hl-ok` once fixed), and the wave is drawn from the `--vo-fg2`, `--vo-faint`
+and `--vo-muted` tokens, so it reads in either theme. In Soft the panel and its buttons are rounder.

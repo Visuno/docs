@@ -1,0 +1,116 @@
+# Field extraction (/docs/components/field-extraction)
+
+The agent reads a document on the left and lists the fields it found on the right, each with
+how sure it is. A new field slides in and its source region on the page lights up for a moment,
+so you can see where each value came from. A field the agent is unsure of (`confidence` under
+`0.6`) asks the person to check it — they type the value into the field itself and confirm with
+Enter or by clicking away. The Send button waits until every field is sure or checked.
+
+<Preview>
+  <FieldExtractionExample />
+</Preview>
+
+## Usage [#usage]
+
+Wrap the parts of the page a field comes from in a zone, and tie each field to its zone with a
+matching `key`/`field`. The zone lights up while its field is read, hovered or checked.
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { FieldExtraction, FieldZone, type ExtractedField } from './field-extraction/FieldExtraction';
+
+const fields: ExtractedField[] = [
+  { key: 'no', label: 'Invoice no.', value: 'NW-2041', confidence: 0.99 },
+  { key: 'due', label: 'Due by', value: '1? Nov 2026', confidence: 0.41 },
+];
+
+<FieldExtraction
+  page={
+    <>
+      <FieldZone field="no"><span className="vo-muted">Invoice no.</span> NW-2041</FieldZone>
+      <FieldZone field="due" className="vo-fex-smudge">Due by 1? Nov 2026</FieldZone>
+    </>
+  }
+  fields={fields}
+  status="Reading page 1"
+  sendLabel="Send to Sheets"
+  onFix={(key, value) => confirm(key, value)}
+  onSend={send}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [FieldExtractionComponent, VoFieldZoneComponent] -->
+<FieldExtraction
+  [fields]="fields"
+  [status]="status"
+  sendLabel="Send to Sheets"
+  (fix)="onFix($event.key, $event.value)"
+  (onSend)="send()"
+>
+  <div fieldZone field="no"><span class="vo-muted">Invoice no.</span> NW-2041</div>
+  <div fieldZone field="due" class="vo-fex-smudge">Due by 1? Nov 2026</div>
+</FieldExtraction>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/field_extraction.dart';
+
+FieldExtraction(
+  page: const [
+    FexPageRow(zone: 'no', left: 'Invoice no.', right: 'NW-2041'),
+    FexPageRow(zone: 'due', left: 'Due by', right: '1? Nov 2026', smudge: true),
+  ],
+  fields: const [
+    ExtractedField(key: 'no', label: 'Invoice no.', value: 'NW-2041', confidence: 0.99),
+    ExtractedField(key: 'due', label: 'Due by', value: '1? Nov 2026', confidence: 0.41),
+  ],
+  status: 'Reading page 1',
+  sendLabel: 'Send to Sheets',
+  onFix: (key, value) => confirm(key, value),
+  onSend: send,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `page` | `ReactNode` | The page being read, on the left. Wrap the parts the fields come from in `FieldZone`. |
+| `fields` | `ExtractedField[]` | The fields found so far, in order. Each new one slides in and its zone lights up for a moment. |
+| `reading` | `boolean` | A scan line passes down the page each time this turns true, and Send waits while it is true. |
+| `status` | `string` | The quiet line by the title, like "Reading page 1". Crossfades when it changes. |
+| `checkHint` | `string` | Replaces the status while a field is being checked. |
+| `onFix` | `(key, value) => void` | Called when a checked field is confirmed with Enter or by clicking away. |
+| `title` | `string` | The heading over the field list. Defaults to "Extracted fields". |
+| `sendLabel` | `string` | The button under the fields. It waits until every field is sure or checked. |
+| `sendState` | `idle \| sending \| sent` | `idle` shows `sendLabel`, `sending` a spinner, `sent` a check and `sentLabel`. |
+| `sentLabel` | `string` | The label once the fields have been sent. |
+| `onSend` | `() => void` | Called when Send is pressed while every field is sure. |
+| `ExtractedField.key` | `string` | Ties the field to the `FieldZone` it was read from. |
+| `ExtractedField.confidence` | `number` | 0 to 1. Under `0.6` the field asks the person to check it. |
+| `ExtractedField.suggestion` | `string` | What the value starts as when the person checks it. |
+| `ExtractedField.fixed` | `boolean` | The person has checked it. Shows "Fixed" with a full bar. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The
+page is drawn as paper — white ink-on-paper in light mode, a dark document in dark mode — while
+the rest of the component follows the theme tokens. A highlighted source region tints and rings
+with the accent, and an unsure one with the warning tint, so each keeps its contrast against the
+ink; in Soft the document, panel and buttons are rounder.

@@ -11,24 +11,7 @@ the number, and the button starts, stops, resumes or raises the cap by status.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + run-cost.css -->
-<div class="rc panel">
-  <div class="rc-h"><span class="muted">Credits used</span><span class="rc-st tag"><span class="dot"></span><span class="rc-stt">Idle</span></span></div>
-  <div class="rc-big"><span class="rc-n num">0</span><span class="muted"> / 2,000</span></div>
-  <div class="rc-track"><div class="rc-fill"></div><div class="rc-cap" data-tip="The agent pauses here"></div></div>
-  <div class="rc-f">
-    <label class="rc-cap-t"><button class="toggle" role="switch" aria-checked="true"></button><span>Pause at 90%</span></label>
-    <button class="pill primary sm rc-go">Start run</button>
-  </div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -56,7 +39,7 @@ import { RunCost } from './run-cost/RunCost';
 
 ```html
 <!-- imports: [RunCostComponent] -->
-<dm-run-cost
+<RunCost
   [used]="1620"
   [budget]="2000"
   [capAt]="90"
@@ -64,7 +47,7 @@ import { RunCost } from './run-cost/RunCost';
   [rows]="rows"
   (action)="stop()"
   (capChange)="cap = $event"
-></dm-run-cost>
+></RunCost>
 
 // rows: RunCostRow[] = [
 //   { label: 'Input tokens', value: 14200 },

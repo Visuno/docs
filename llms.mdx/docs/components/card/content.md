@@ -1,0 +1,108 @@
+# Card (/docs/components/card)
+
+A card is a surface you build other components onto. It has an optional header (a `title`, a
+`subtitle` and an end `action` slot), a body of whatever you put inside, and an optional `footer`
+of actions. `pad` sets the inset; set `interactive` (or pass `onClick`) and the whole card becomes a
+hit target that lifts on hover, takes focus, and fires on Enter or Space.
+
+<Preview>
+  <CardExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { Card } from './card/Card';
+import { Badge } from './badge/Badge';
+
+<Card
+  title="Nightly run"
+  subtitle="Finished 4 minutes ago"
+  action={<Badge tone="success">Live</Badge>}
+  footer={<>
+    <button className="vo-pill vo-ghost vo-sm">Dismiss</button>
+    <button className="vo-pill vo-sm" data-variant="accent">Open run</button>
+  </>}
+>
+  <p>Drop anything in the body.</p>
+</Card>
+
+<Card interactive onClick={() => open()}>
+  <span className="vo-crd-t">Interactive card</span>
+</Card>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [CardComponent, BadgeComponent] -->
+<Card title="Nightly run" subtitle="Finished 4 minutes ago">
+  <Badge card-action tone="success">Live</Badge>
+  <p>Drop anything in the body.</p>
+  <button card-footer class="vo-pill vo-ghost vo-sm">Dismiss</button>
+  <button card-footer class="vo-pill vo-sm" data-variant="accent">Open run</button>
+</Card>
+
+<Card [interactive]="true" (clicked)="open()">
+  <span class="vo-crd-t">Interactive card</span>
+</Card>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/card.dart';
+import 'components/badge.dart';
+
+VoCard(
+  title: 'Nightly run',
+  subtitle: 'Finished 4 minutes ago',
+  action: const Badge('Live', tone: BadgeTone.success),
+  footer: [
+    TextButton(onPressed: dismiss, child: const Text('Dismiss')),
+    FilledButton(onPressed: open, child: const Text('Open run')),
+  ],
+  child: const Text('Drop anything in the body.'),
+),
+
+VoCard(
+  interactive: true,
+  onTap: open,
+  child: const Text('Interactive card'),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `ReactNode` | A title shown in the header. |
+| `subtitle` | `ReactNode` | A subtitle under the title. |
+| `action` | `ReactNode` | An end slot in the header, aligned right (a badge, a menu button). |
+| `footer` | `ReactNode` | A footer of actions below the body. |
+| `footerAlign` | `start \| end \| between` | How the footer's actions align. `end` by default. |
+| `pad` | `none \| sm \| md` | Inset for header, body and footer. `md` by default. |
+| `interactive` | `boolean` | Makes the whole card a hit target that lifts, takes focus and fires on Enter/Space. |
+| `onClick` / `clicked` / `onTap` | `callback` | Fired when an interactive card is activated. Setting it implies `interactive`. |
+
+In Angular the header end slot and the footer are projected with the `card-action` and `card-footer`
+attributes; in Flutter `action` is a widget and `footer` a list of widgets.
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). In Soft
+the card has rounded corners and floats on a soft shadow; in Blueprint it is squared off with a
+hairline instead of the float. An interactive card lifts on hover and keeps a visible focus ring;
+with reduced motion it still restyles but does not travel.

@@ -1,0 +1,86 @@
+# Activity heatmap (/docs/components/activity-heatmap)
+
+An activity heatmap shows when something is busy, as a 7×24 grid of cells — one a day down, one
+an hour across — each tinted from the accent by its value. Pass one or more `series`; each is 168
+values from 0 to 1 (Monday 12am first), with a `max` and `unit` for the tips and an optional
+`note`. With two or more series a switch appears, and picking one sweeps it in as a wave from the
+top left. In a narrow card the grid shows half the day at a time in bigger cells and scrolls
+sideways, starting at the latest hours.
+
+<Preview>
+  <ActivityHeatmapExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { ActivityHeatmap, type ActivityHeatmapSeries } from './activity-heatmap/ActivityHeatmap';
+
+const series: ActivityHeatmapSeries[] = [
+  { key: 'agent', label: 'Agent', values: agentValues, max: 40, unit: 'runs', note: 'Busiest overnight, when the queue runs' },
+  { key: 'team', label: 'Team', values: teamValues, max: 25, unit: 'edits', note: 'Busiest 10am to 4pm on weekdays' },
+];
+
+<ActivityHeatmap series={series} defaultValue="agent" period="Last 4 weeks" />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ActivityHeatmapComponent] -->
+series: ActivityHeatmapSeries[] = [
+  { key: 'agent', label: 'Agent', values: agentValues, max: 40, unit: 'runs', note: 'Busiest overnight, when the queue runs' },
+  { key: 'team', label: 'Team', values: teamValues, max: 25, unit: 'edits', note: 'Busiest 10am to 4pm on weekdays' },
+];
+
+<ActivityHeatmap [series]="series" defaultValue="agent" period="Last 4 weeks" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/activity_heatmap.dart';
+
+final series = [
+  ActivityHeatmapSeries(key: 'agent', label: 'Agent', values: agentValues, max: 40, unit: 'runs', note: 'Busiest overnight, when the queue runs'),
+  ActivityHeatmapSeries(key: 'team', label: 'Team', values: teamValues, max: 25, unit: 'edits', note: 'Busiest 10am to 4pm on weekdays'),
+];
+
+ActivityHeatmap(series: series, defaultValue: 'agent', period: 'Last 4 weeks'),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `series` | `ActivityHeatmapSeries[]` | One or more series; the switch shows when there are two or more. |
+| `value` | `string` | The series on show, by key. Leave it out to let the switch pick it. |
+| `defaultValue` | `string` | The series shown first when uncontrolled. Defaults to the first series. |
+| `onValueChange` | `(key) => void` | Called when the switch picks a series. |
+| `title` | `string` | Header text. Defaults to `Activity`. |
+| `period` | `string` | The line under the title before the cells fill in, and when a series has no note. Defaults to `Last 4 weeks`. |
+| `series[].key` | `string` | Identifies the series, used by `value` / `defaultValue`. |
+| `series[].label` | `string` | The switch label, like `Agent`. |
+| `series[].values` | `number[]` | 168 values from 0 to 1, one an hour, Monday 12am first. |
+| `series[].max` | `number` | What a full cell counts, for the tips, like `40`. |
+| `series[].unit` | `string` | What it counts, for the tips, like `runs`. |
+| `series[].note` | `string` | The line under the title while this series shows. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
+sits on a surface, and each cell is a mix of the accent into the chip by its value — so the whole
+grid shifts with the theme's accent and the empty cells read against the surface. In Soft the card
+and cells are a touch rounder.

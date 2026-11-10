@@ -1,12 +1,17 @@
-# Docs
+# Library
 
-- [Introduction](/docs): Native UI components for AI-agent products, in four frameworks.
+- Getting started
+  - [Introduction](/docs): Native UI components for AI-agent products, in three frameworks.
+  - [Installation](/docs/getting-started/installation): Add Visuno to a React, Angular, or Flutter project — install the package, pull the shared core once, then drop in components.
+  - [Theming](/docs/getting-started/theming): Two switches — dark mode and style — plus the shared --vo-* token system that drives every color, space, radius, and motion.
+  - [Accessibility](/docs/getting-started/accessibility): How Visuno components handle semantics, keyboard, focus, contrast, and reduced motion — and what's still on you.
+  - [Using with AI](/docs/getting-started/using-with-ai): Point your AI coding assistant at Visuno — llms.txt, per-page Markdown, and prompts that get correct, on-token output.
 - Components
 
   - **Agent status**
   - [Status pill](/docs/components/status-pill): One live line for what an agent is doing right now, fading between its states and resizing to fit them.
   - [Thinking](/docs/components/thinking): The live trace an agent writes as it works, each step turning green as it finishes, then folded away into a summary.
-  - [Thinking States](/docs/components/thinking-states): Six animated indicators, each a small mark beside a status line that steps through what an agent is doing, with an optional elapsed-seconds counter.
+  - [Thinking States](/docs/components/thinking-states): Ten animated indicators, each a small mark beside a status line that steps through what an agent is doing, with an optional elapsed-seconds counter.
   - [Reasoning trail](/docs/components/reasoning-trail): The agent's plan, notes, sources or edits, under a header it can fold away.
   - [Agent phases](/docs/components/agent-phases): One line for which phase an agent is in, from thinking to done, that stops to ask, says when it is slow, and folds to how long it took.
   - [Step Loader](/docs/components/step-loader): A named-steps progress list with a loader beside the running step, a track that fills as steps finish, and an expandable list of every step.
@@ -18,15 +23,89 @@
   - [Run queue](/docs/components/run-queue): A queue of agent jobs in three parts — the one running with its steps and progress, the ones up next, and the ones done — with a compact toggle.
   - [Run cost](/docs/components/run-cost): Live credit and token spend against a budget, with a cap the agent pauses at.
   - [Toast](/docs/components/toast): One toast at a time — a new one rises in while the last one slips away.
+  - [Toast stack](/docs/components/toast-stack): Agent notifications that stack into a deck and fan out on hover.
+  - [Run summary](/docs/components/run-summary): What the agent did, what changed and what needs you.
+  - [Error recovery](/docs/components/error-recovery): A failed step with retry, skip or hand over to a person.
+  - [Agent lanes](/docs/components/agent-lanes): Several agents working in parallel, each with its own lane and hand-offs.
+  - [Agent tree](/docs/components/agent-tree): An orchestrator and its sub-agents, with cost rolled up per branch.
+  - [Agent inbox](/docs/components/agent-inbox): Every run that needs you, is running or is done, in one list.
+  - [Agent run timeline](/docs/components/agent-run-timeline): Every model and tool step of a run on one time axis — a Gantt chart with a playhead, the time each step takes, and the cost as it adds up.
+
+  - **Conversation**
+  - [Live answer](/docs/components/live-answer): Answers that stream in with numbered sources and next steps.
+  - [Thread panel](/docs/components/thread-panel): Switch between agent threads and reply in place.
+  - [Composer](/docs/components/composer): Message input with attachments, what to work on, a mode and dictation.
+  - [Model picker](/docs/components/model-picker): Pick a model by speed, quality and cost, and how hard it thinks.
+  - [Voice capture](/docs/components/voice-capture): Talk to the agent, then fix what it misheard before sending.
+  - [Voice orb](/docs/components/voice-orb): A hands-free voice chat, with an orb that shows who is talking.
+  - [Tool call](/docs/components/tool-call): Each tool the agent calls, with its input and output.
+  - [Artifact card](/docs/components/artifact-card): A file the agent made, with its versions, Open, Copy and Download.
+  - [Image generation](/docs/components/image-generation): A prompt with styles, shape and count, pictures that resolve out of grain, and a gallery of earlier ones.
+  - [Rich text editor](/docs/components/rich-text-editor): A minimal editor with an inline AI menu that streams a suggestion to accept or discard.
+  - [Prompt starters](/docs/components/prompt-starters): Suggested tasks that fill the composer in one click.
+  - [Prompt library](/docs/components/prompt-library): Saved prompts with blanks to fill in before they go to the agent.
+  - [Attachment tray](/docs/components/attachment-tray): Drop files for the agent and watch each one upload.
+  - [Response versions](/docs/components/response-versions): Regenerate an answer and flip between versions.
+  - [Answer action bar](/docs/components/answer-action-bar): Copy, regenerate, rate and listen to an answer from one row under it.
+  - [Feedback sheet](/docs/components/feedback-sheet): Rate an answer and tell the agent what missed.
+
+  - **Review and approve**
+  - [Decision prompt](/docs/components/decision-prompt): The agent asks a few quick questions before it starts.
+  - [Proposal card](/docs/components/proposal-card): A suggested change with confidence, alternatives and undo.
+  - [Rewrite toolbar](/docs/components/rewrite-toolbar): Select a sentence and let the agent rewrite it in place.
+  - [Design tuner](/docs/components/design-tuner): Tweak a component by hand or let the agent tune it.
+  - [Permission gate](/docs/components/permission-gate): The agent asks before it touches something new.
+  - [Human handoff](/docs/components/human-handoff): The agent hands a conversation to a person, with what they need to pick it up.
+  - [Launch checklist](/docs/components/launch-checklist): The agent checks a design before it ships, and fixes what fails.
+  - [Draft review](/docs/components/draft-review): An email the agent drafted, to check and edit before it sends.
+  - [Steering](/docs/components/steering): Change the agent's course while it works, without starting over.
+  - [Eval results](/docs/components/eval-results): An eval run case by case, against the run before.
+  - [Inline text diff](/docs/components/inline-text-diff): The agent's edits to a piece of copy, accepted or rejected one by one.
+  - [Design review](/docs/components/design-review): A design review on its way out — checks run, a teammate reviews and the agent answers, then you pick how it ships.
+  - [Plan review](/docs/components/plan-review): A plan the agent proposes before it starts — edit a step, skip it, add one, then approve.
+  - [Change review](/docs/components/change-review): A diff to review hunk by hunk — keep or undo each change, or ask the agent about a line.
+
+  - **Sources and output**
+  - [Source stack](/docs/components/source-stack): Everything the agent read, folded into one quiet pill.
+  - [Metric insight](/docs/components/metric-insight): A number, its trend, and the agent's read on why it moved.
+  - [Task table](/docs/components/task-table): Agent tasks in a sortable table with bulk actions.
+  - [Code viewer](/docs/components/code-viewer): Code the agent wrote, with line notes you can ask about.
+  - [Terminal stream](/docs/components/terminal-stream): Shell commands the agent runs, with their output as it streams in.
+  - [Details panel](/docs/components/details-panel): Properties of a run you can change in place.
+  - [Citation hover card](/docs/components/citation-hover-card): Hover a citation to see the exact passage it came from.
+  - [Field extraction](/docs/components/field-extraction): The agent pulls fields out of a document and shows where each came from.
 
   - **Charts and tables**
+  - [Line chart](/docs/components/line-chart): Two series over time with a hover readout and toggles.
+  - [Bar chart](/docs/components/bar-chart): Weekly agent runs, split by outcome, with a range switch.
+  - [Donut chart](/docs/components/donut-chart): Where the agent's time went, by kind of task.
+  - [Radial goals](/docs/components/radial-goals): Each agent's share of its own target as a ring, with the overall score in the middle.
+  - [Funnel chart](/docs/components/funnel-chart): Signup to paid, with the biggest drop called out by the agent.
+  - [Top pages](/docs/components/top-pages): Most visited pages with share of traffic and a quick sort.
+  - [Health score](/docs/components/health-score): A design system score made of a few checks you can open.
+  - [Score breakdown](/docs/components/score-breakdown): A score out of 100 whose gauge is split by what goes into it, with the weakest part flagged and a fix to try.
+  - [Radar chart](/docs/components/radar-chart): This run against the baseline on six eval scores, with the weak ones flagged.
+  - [Scatter chart](/docs/components/scatter-chart): Every run as a dot by cost and eval score, sized by tokens, with quadrants and a drag to select.
+  - [Activity heatmap](/docs/components/activity-heatmap): When the agent and the team were busy, by day and hour.
   - [Stat cards](/docs/components/stat-cards): A row of KPIs, each with its change against the period before and a sparkline, with a period switch that rolls the numbers and redraws the lines.
+  - [Account table](/docs/components/account-table): Customer accounts with health, plan and an agent note per row.
 
   - **Dates**
   - [Segmented Control](/docs/components/segmented-control): One choice from a few views or options, with a white knob that slides to the picked one. Works as tabs or as a radio group, fully keyboard driven.
 
-  - **Forms and inputs**
+  - **Core**
+  - [Card](/docs/components/card): A surface you drop other components onto, with an optional header, body and footer, and an interactive mode that turns the whole card into a hit target.
+  - [Grid](/docs/components/grid): A responsive grid you drop cards or any other components into — a fixed column count or an auto-fit pack, with a gutter and per-child column spans.
   - [Buttons](/docs/components/buttons): A pill button in the library's variants and sizes, with built-in busy, done and pressed states.
   - [Badge](/docs/components/badge): A small label for a plan, environment, or status, with an optional dot or icon and an optional remove button.
+  - [Icon](/docs/components/icon): A line icon by name — or your own SVG — that takes the text colour and themes for free.
   - [Progress](/docs/components/progress): A run's progress three ways — a ring for the whole run, segments for its steps and a bar for the step in hand — with controls and an optional meter that warns as it fills.
   - [Tooltip](/docs/components/tooltip): A toolbar whose labels wait a moment, then follow the pointer instantly between buttons, with a richer hover card for people.
+  - [Modal](/docs/components/modal): A centred dialog over a dimmed backdrop, closed by the backdrop, a button or Escape, with focus and page scroll kept in check.
+  - [Slider](/docs/components/slider): A value or a range on a stepped or continuous track, with named stops and an agent-recommended mark.
+  - [Search input](/docs/components/search-input): Search with scoped filters, recent queries and an inline agent answer.
+  - [Number field](/docs/components/number-field): Type a number or step it with minus and plus, with a unit, limits, and a word when a value is nudged to fit.
+  - [OTP field](/docs/components/otp-field): A one-time code, one box per digit, that auto-advances and fills from a paste.
+- [Changelog](/docs/changelog): What's new in Visuno — components, docs, and tooling, newest first.
+- [Roadmap](/docs/roadmap): Where Visuno is headed — what's shipped, in progress, and planned.
+- [FAQ](/docs/faq): Common questions about Visuno — frameworks, theming, licensing, and how the components ship.

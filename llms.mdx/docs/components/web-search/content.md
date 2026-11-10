@@ -12,29 +12,7 @@ its bracketed numbers pointing back at the pages that back them up.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + web-search.css, then the component script -->
-<div class="card bare" data-c="web-search">
-  <div class="stage-in">
-    <div class="wsx panel">
-      <button class="wsx-h" aria-expanded="true">
-        <span class="wsx-ic"><span class="spin"></span></span>
-        <span class="wsx-st shim">Searching the web</span>
-        <span class="wsx-marks" aria-hidden="true"></span>
-      </button>
-      <div class="fold wsx-fold"><div><div class="wsx-list"></div></div></div>
-      <div class="wsx-ans"></div>
-      <p class="wsx-sr" role="status"></p>
-    </div>
-  </div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -73,13 +51,13 @@ queries: WebQuery[] = [
 ```
 
 ```html
-<dm-web-search
+<WebSearch
   [queries]="queries"
   [done]="true"
   answer="Stripe caps metered usage at 100 million events a month [1]."
   [bare]="false"
   (openChange)="onOpen($event)"
-></dm-web-search>
+></WebSearch>
 ```
 
 </Tab>

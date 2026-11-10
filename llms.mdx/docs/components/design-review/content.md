@@ -1,0 +1,111 @@
+# Design review (/docs/components/design-review)
+
+Something the agent made, laid out for sign-off. One column runs the `checks`; the other holds the
+`messages` — a teammate's verdict, the agent's reply — oldest first. The `phase` carries it from
+`review` to `approved` (the Ship button turns on), then `shipping`, and finally `live` or
+`scheduled`. Beside the Ship button a menu picks how it ships from your `options`.
+
+<Preview>
+  <DesignReviewExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { DesignReview } from './design-review/DesignReview';
+
+<DesignReview
+  title="Pricing page v4"
+  subtitle="6 screens · sent for review by the design agent"
+  checks={[
+    { label: 'Visual diff', state: 'ok', note: '2 of 6 screens changed' },
+    { label: 'Library tokens', state: 'ok', note: 'All from the library' },
+    { label: 'Contrast', state: 'run' },
+  ]}
+  messages={[
+    { author: { name: 'Maya Kim', initials: 'MK' }, verdict: { label: 'Changes requested', tone: 'warn' },
+      text: 'Start the plan toggle on yearly.' },
+  ]}
+  phase="approved"
+  note="Waiting on Maya"
+  onShip={(o) => ship(o.key)}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [DesignReviewComponent] -->
+<DesignReview
+  title="Pricing page v4"
+  subtitle="6 screens · sent for review by the design agent"
+  [checks]="checks"
+  [messages]="messages"
+  phase="approved"
+  note="Waiting on Maya"
+  (shipClick)="ship($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/design_review.dart';
+
+DesignReview(
+  title: 'Pricing page v4',
+  subtitle: '6 screens · sent for review by the design agent',
+  checks: const [
+    ReviewCheck(label: 'Visual diff', state: ReviewCheckState.ok, note: '2 of 6 screens changed'),
+    ReviewCheck(label: 'Contrast', state: ReviewCheckState.run),
+  ],
+  messages: const [
+    ReviewMessage(
+      author: ReviewAuthor(name: 'Maya Kim', initials: 'MK'),
+      verdict: ReviewVerdict(label: 'Changes requested', tone: VerdictTone.warn),
+      text: 'Start the plan toggle on yearly.',
+    ),
+  ],
+  phase: ReviewPhase.approved,
+  note: 'Waiting on Maya',
+  onShip: (o) => ship(o.key),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | What is up for review, like "Pricing page v4". |
+| `subtitle` | `string` | The line under the title. |
+| `icon` | `IconName` | The header mark. Defaults to `palette`. |
+| `checks` | `ReviewCheck[]` | The Checks column: `{ label; state: wait \| run \| ok \| bad; note? }`. |
+| `messages` | `ReviewMessage[]` | The review so far, oldest first: who, an optional verdict tag, and the text. |
+| `phase` | `review \| approved \| shipping \| live \| scheduled` | Where it is. `approved` turns the Ship button on; `live`/`scheduled` replace the buttons with a done line. |
+| `note` | `string` | The line beside the Ship button, like "Waiting on Maya". |
+| `waitingLabel` | `string` | Shown in the review column before anyone has written. |
+| `options` | `ShipOption[]` | The ways it can ship, picked from the menu beside the button. |
+| `option` / `defaultOption` | `string` | The picked option key, controlled or uncontrolled. |
+| `onOptionChange` | `(key) => void` | The picked ship option changed. |
+| `onShip` | `(option) => void` | The Ship button was pressed, with the chosen option. |
+| `doneLabel` | `string` | Replaces the chosen label on the done line once it is live or scheduled. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
+sits on a `--vo-panel` surface; the header mark, the verdict tags and the checks' ok/bad glyphs all
+take their colours from the theme tokens (`--vo-ok`, `--vo-warn`, `--vo-bad`, `--vo-pb`), and the
+Ship button follows the accent, so the whole review reads against either theme. Once it is live the
+header mark shifts to the ok tint.

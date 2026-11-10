@@ -1,0 +1,108 @@
+# Voice orb (/docs/components/voice-orb)
+
+A hands-free voice chat on a card. The orb is a lit glass sphere that swells with whoever is
+talking — the accent colour for you, violet for the agent — with what was said underneath and mute
+and end below. It draws what you pass through `state`, `level` and `caption`; it never opens the
+microphone itself. Talking while muted shows a notice, the way calls do.
+
+<Preview>
+  <VoiceOrbExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { VoiceOrb, type VoiceState } from './voice-orb/VoiceOrb';
+
+const [state, setState] = useState<VoiceState>('idle');
+
+<VoiceOrb
+  state={state}
+  level={level}            // 0..1, from your audio or a made-up curve
+  muted={muted}
+  onMutedChange={setMuted}
+  mutedNotice
+  caption={{ speaker: 'Agent', text: 'Yearly is now the default.', id: 't2' }}
+  hint="Talk to the agent about Pricing v4"
+  elapsed={seconds}
+  onStart={start}
+  onEnd={end}
+  onRestart={start}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [VoiceOrbComponent] -->
+<VoiceOrb
+  [state]="state"
+  [level]="level"
+  [muted]="muted"
+  (mutedChange)="muted = $event"
+  [mutedNotice]="true"
+  [caption]="caption"
+  hint="Talk to the agent about Pricing v4"
+  [elapsed]="seconds"
+  (start)="start()"
+  (end)="end()"
+  (restart)="start()"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/voice_orb.dart';
+
+VoiceOrb(
+  state: state,                       // VoiceState.idle, listening, thinking, speaking, ended
+  level: level,                       // 0..1
+  muted: muted,
+  onMutedChange: (v) => setState(() => muted = v),
+  mutedNotice: true,
+  caption: const VoiceCaption(speaker: 'Agent', text: 'Yearly is now the default.', id: 't2'),
+  hint: 'Talk to the agent about Pricing v4',
+  elapsed: seconds,
+  onStart: start,
+  onEnd: end,
+  onRestart: start,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `state` | `idle \| listening \| thinking \| speaking \| ended` | Where the chat is. `muted` while `listening` shows as Muted. |
+| `level` | `number` | How loud whoever is talking is, 0 to 1. The orb swells with it. |
+| `muted` | `boolean` | Your microphone is off; the mute button is pressed and Listening reads as Muted. |
+| `onMutedChange` | `(muted) => void` | The mute button and the notice's Unmute call this. |
+| `mutedNotice` | `boolean` | Shows "You're muted" with an Unmute button, for when someone talks while muted. |
+| `caption` | `{ speaker; text; id? }` | What was said last and who said it. A new `id` (or speaker) starts a new line. |
+| `hint` | `string` | Shown before anything is said, like "Talk to the agent about Pricing v4". |
+| `elapsed` | `number` | Seconds since the chat started, shown top right. |
+| `onStart` / `onEnd` | `() => void` | Start talking, and End. |
+| `onRestart` | `() => void` | Start again, from the row shown once the chat has ended. |
+| `endedDetail` | `string` | The quiet line under "Voice chat ended". Defaults to the length and "Transcript saved". |
+| `labels` | `object` | Overrides for every bit of text (status words, buttons, notice). |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The orb's
+colours flow from the tokens: the accent is yours, `--vo-pl` (violet) is the agent, and the two are
+mixed in oklch so the step between them stays bright. The glass sphere is drawn on a canvas with
+WebGL where it can, falling back to layered gradients otherwise; with reduced motion it holds a
+single still frame and only redraws when the speaker changes.

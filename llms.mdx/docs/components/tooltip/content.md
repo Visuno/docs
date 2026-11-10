@@ -11,27 +11,7 @@ role and what they are doing now, with an agent shown by its thinking dots.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + tooltip.css -->
-<div class="dm-ttp">
-  <div class="dm-ttp-bar dm-panel">
-    <button class="dm-ib" aria-label="Undo" data-tip="Undo" data-kbd="⌘Z">↶</button>
-    <button class="dm-ib" aria-label="Redo" data-tip="Redo" data-kbd="⌘⇧Z">↷</button>
-    <span class="dm-ttp-sep"></span>
-    <button class="dm-ib" aria-label="Ask agent" data-tip="Ask the agent" data-kbd="⌘J">✦</button>
-    <span class="dm-ttp-sep"></span>
-    <span class="dm-ttp-avs">
-      <button class="dm-ttp-av" aria-label="Mira Chen">MC</button>
-    </span>
-  </div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -47,8 +27,8 @@ const groups = [
 ];
 
 const people = [
-  { key: 'mira', initials: 'MC', color: 'var(--dm-av-l)', name: 'Mira Chen', role: 'Design lead', status: 'Editing Pricing, frame 2' },
-  { key: 'agent', initials: 'AI', color: 'var(--dm-av-p)', name: 'Visuno agent', role: 'Assistant', status: 'Drafting release notes', working: true },
+  { key: 'mira', initials: 'MC', color: 'var(--vo-av-l)', name: 'Mira Chen', role: 'Design lead', status: 'Editing Pricing, frame 2' },
+  { key: 'agent', initials: 'AI', color: 'var(--vo-av-p)', name: 'Visuno agent', role: 'Assistant', status: 'Drafting release notes', working: true },
 ];
 
 <Tooltip groups={groups} people={people} note="Hover a button for its tip." />
@@ -60,11 +40,11 @@ const people = [
 
 ```html
 <!-- imports: [TooltipComponent] -->
-<dm-tooltip
+<Tooltip
   [groups]="groups"
   [people]="people"
   note="Hover a button for its tip."
-></dm-tooltip>
+></Tooltip>
 ```
 
 </Tab>
@@ -83,8 +63,8 @@ Tooltip(
     [TooltipTool(key: 'share', icon: IconName.users, label: 'Share', tip: 'Share with your team')],
   ],
   people: const [
-    TooltipPerson(key: 'mira', initials: 'MC', color: 'var(--dm-av-l)', name: 'Mira Chen', role: 'Design lead', status: 'Editing Pricing, frame 2'),
-    TooltipPerson(key: 'agent', initials: 'AI', color: 'var(--dm-av-p)', name: 'Visuno agent', role: 'Assistant', status: 'Drafting release notes', working: true),
+    TooltipPerson(key: 'mira', initials: 'MC', color: 'var(--vo-av-l)', name: 'Mira Chen', role: 'Design lead', status: 'Editing Pricing, frame 2'),
+    TooltipPerson(key: 'agent', initials: 'AI', color: 'var(--vo-av-p)', name: 'Visuno agent', role: 'Assistant', status: 'Drafting release notes', working: true),
   ],
 ),
 ```
@@ -112,5 +92,5 @@ green status dot for the agent's thinking dots.
 
 Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). In
 Blueprint the bar and card are squared off with hairline borders; in Soft they are rounded panels.
-The tooltip itself and the avatar colours (`--dm-av-*`) come from the theme, so they stay legible on
+The tooltip itself and the avatar colours (`--vo-av-*`) come from the theme, so they stay legible on
 either background.

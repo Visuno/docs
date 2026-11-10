@@ -11,22 +11,7 @@ and a green dot once it finishes.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + action-log.css -->
-<div class="alg panel">
-  <div class="alg-h">
-    <span class="alg-t">Agent activity</span>
-    <span class="alg-st"><span class="spin"></span><span class="alg-sum">Running</span></span>
-  </div>
-  <ol class="alg-list"></ol>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -49,11 +34,11 @@ import { ActionLog } from './action-log/ActionLog';
 
 ```html
 <!-- imports: [ActionLogComponent] -->
-<dm-action-log
+<ActionLog
   title="Agent activity"
   [running]="true"
   [actions]="actions"
-></dm-action-log>
+></ActionLog>
 
 // actions: Action[] = [
 //   { icon: 'file-text', title: 'Read <code>Pricing.tsx</code>', detail: 'src/pages, 212 lines', state: 'done', time: '0.4s' },

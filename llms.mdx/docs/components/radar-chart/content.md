@@ -1,0 +1,98 @@
+# Radar chart (/docs/components/radar-chart)
+
+A radar chart compares a run with its baseline on a handful of eval scores: the baseline draws itself
+as an outline, then this run grows out of the middle filled over it, on grey scale rings. Each axis
+takes a `label`, this run's `value` and the `baseline` it is measured against, both 0 to 100; a score
+under `weakBelow` is flagged "Weak". Pointing at or tabbing to an axis shows its two scores and the
+change in the line below, and the legend shows and hides either series (one always stays).
+
+<Preview>
+  <RadarChartExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { RadarChart } from './radar-chart/RadarChart';
+
+const axes = [
+  { label: 'Accuracy', value: 88, baseline: 84 },
+  { label: 'Instruction following', short: 'Instructions', value: 86, baseline: 80 },
+  { label: 'Tool use', value: 62, baseline: 78 },
+  { label: 'Speed', value: 74, baseline: 66 },
+  { label: 'Cost efficiency', short: 'Cost', value: 82, baseline: 58 },
+  { label: 'Safety', value: 91, baseline: 90 },
+];
+
+<RadarChart axes={axes} subtitle="Run 48 against run 41" pulse={2} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [RadarChartComponent] -->
+axes: RadarAxis[] = [
+  { label: 'Accuracy', value: 88, baseline: 84 },
+  { label: 'Instruction following', short: 'Instructions', value: 86, baseline: 80 },
+  { label: 'Tool use', value: 62, baseline: 78 },
+  { label: 'Speed', value: 74, baseline: 66 },
+  { label: 'Cost efficiency', short: 'Cost', value: 82, baseline: 58 },
+  { label: 'Safety', value: 91, baseline: 90 },
+];
+
+<RadarChart [axes]="axes" subtitle="Run 48 against run 41" [pulse]="2" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/radar_chart.dart';
+
+RadarChart(
+  axes: const [
+    RadarAxis(label: 'Accuracy', value: 88, baseline: 84),
+    RadarAxis(label: 'Instruction following', short: 'Instructions', value: 86, baseline: 80),
+    RadarAxis(label: 'Tool use', value: 62, baseline: 78),
+    RadarAxis(label: 'Speed', value: 74, baseline: 66),
+    RadarAxis(label: 'Cost efficiency', short: 'Cost', value: 82, baseline: 58),
+    RadarAxis(label: 'Safety', value: 91, baseline: 90),
+  ],
+  subtitle: 'Run 48 against run 41',
+  pulse: 2,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `axes` | `RadarAxis[]` | Five to seven axes, clockwise from the top. Each is `{ label, short?, value, baseline }`. |
+| `title` | `string` | The bold heading. Defaults to `Eval scores`. |
+| `subtitle` | `string` | The quieter line beside the title, like "Run 48 against run 41". |
+| `seriesLabels` | `[string, string]` | The legend's names for the two series. Defaults to `['This run', 'Baseline']`. |
+| `weakBelow` | `number` | A score under this is flagged "Weak". Defaults to `70`. |
+| `note` | `ReactNode` | The note under the chart, shown while no axis is pointed at. Defaults to the average and its change. |
+| `pulse` | `number` | An axis to call out once the chart is drawn: its label pulses (by index). |
+
+A `RadarAxis` is `{ label: string; short?: string; value: number; baseline: number }`; `short` is
+shown instead of `label` on a narrow card, and `value`/`baseline` are 0 to 100.
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). This run
+and the baseline take the chart palette tokens (`--vo-c1`, `--vo-c2`), the rings and spokes read from
+the line tokens, and the card, the "Weak" tag and the readout line come from the theme tokens. The
+baseline draws itself and this run's fill scales in from the middle on load; with
+`prefers-reduced-motion` the chart appears already drawn.

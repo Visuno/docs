@@ -1,0 +1,93 @@
+# Account table (/docs/components/account-table)
+
+Customer accounts you can search and filter by plan. Each row shows the logo, plan tag, seats, a
+health bar and the MRR; click a row and it opens to the note the agent left — with an optional
+action button (like **Draft email**) that spins until its promise settles, then shows its done
+label. The rows stagger in again whenever the search or the filter changes.
+
+<Preview>
+  <AccountTableExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { AccountTable, type AccountTableAccount } from './account-table/AccountTable';
+
+const accounts: AccountTableAccount[] = [
+  { name: 'Northwind', color: 'var(--vo-av-b)', plan: 'Enterprise', seats: 120, health: 92, mrr: '$14,400', note: 'Expanding. Design team added 18 seats this month.' },
+  { name: 'Lumen Labs', color: 'var(--vo-av-l)', plan: 'Pro', seats: 14, health: 48, mrr: '$672', note: 'Usage fell 40% after their lead designer left.' },
+];
+
+<AccountTable
+  accounts={accounts}
+  action={{ label: 'Draft email', doneLabel: 'Draft ready', onClick: () => draft() }}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [AccountTableComponent] -->
+accounts: AccountTableAccount[] = [
+  { name: 'Northwind', color: 'var(--vo-av-b)', plan: 'Enterprise', seats: 120, health: 92, mrr: '$14,400', note: 'Expanding. Design team added 18 seats this month.' },
+  { name: 'Lumen Labs', color: 'var(--vo-av-l)', plan: 'Pro', seats: 14, health: 48, mrr: '$672', note: 'Usage fell 40% after their lead designer left.' },
+];
+action: AccountTableAction = { label: 'Draft email', doneLabel: 'Draft ready', onClick: () => this.draft() };
+
+<AccountTable [accounts]="accounts" [action]="action" (openChange)="onOpen($event)" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/account_table.dart';
+
+AccountTable(
+  accounts: const [
+    AccountTableAccount(name: 'Northwind', color: Color(0xFF4890FA), plan: 'Enterprise', seats: 120, health: 92, mrr: r'$14,400', note: 'Expanding. Design team added 18 seats this month.'),
+    AccountTableAccount(name: 'Lumen Labs', color: Color(0xFF9776FA), plan: 'Pro', seats: 14, health: 48, mrr: r'$672', note: 'Usage fell 40% after their lead designer left.'),
+  ],
+  action: AccountTableAction(
+    label: 'Draft email',
+    doneLabel: 'Draft ready',
+    onClick: (a) => Future.delayed(const Duration(milliseconds: 800)),
+  ),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `accounts` | `AccountTableAccount[]` | The account rows. Each has `name`, `color`, `plan`, `seats`, `health` (0–100), `mrr` and an optional `note`. |
+| `plans` | `string[]` | The plan filters after All. Defaults to the plans in `accounts`, in first-seen order. |
+| `planTones` | `Record<string, Tone>` | The tag colour per plan. Defaults to Enterprise purple, Pro blue, Team teal. |
+| `plan` / `defaultPlan` | `string` | The active plan filter, or `''` for All. |
+| `onPlanChange` | `(plan) => void` | Called when a filter chip is picked. |
+| `query` / `defaultQuery` | `string` | The search text. Matches account names. |
+| `onQueryChange` | `(query) => void` | Called as the search text changes. |
+| `open` / `defaultOpen` | `string \| null` | The account whose row is open, or `null`. |
+| `onOpenChange` | `(name) => void` | Called when a row opens or closes. |
+| `action` | `{ label; doneLabel?; onClick }` | A button in the open row's note. Return a promise and it spins until it settles, then shows `doneLabel`. |
+| `placeholder` | `string` | The search field's placeholder. Defaults to `Search accounts`. |
+| `emptyLabel` | `string` | Shown when nothing matches the search and filter. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The plan
+tags run a little brighter than the shared tones — each plan takes its own saturated tint (blue,
+purple, teal and so on), and the health bar fills green from 80, amber from 60 and red below, all
+from the theme tokens. In Soft the panel, chips and tags are rounder.

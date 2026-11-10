@@ -1,0 +1,85 @@
+# Feedback sheet (/docs/components/feedback-sheet)
+
+A feedback sheet sits under an answer in a chat thread. The thumbs rate it; a thumbs down
+opens a sheet with quick `reasons` and a free-text box so the person can say what missed.
+Send shows a spinner, then the sheet folds away and a thank-you line lands. A thumbs up just
+notes it. It is `bare` by default so it reads flat under a message; set it to `false` for a
+card of its own.
+
+<Preview>
+  <FeedbackSheetExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { FeedbackSheet, type Feedback } from './feedback-sheet/FeedbackSheet';
+
+<FeedbackSheet
+  onSubmit={(f: Feedback) => save(f)}
+  onRatingChange={(r) => track(r)}
+>
+  I tightened the hero spacing to 24px and swapped the CTA to the accent blue.
+</FeedbackSheet>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [FeedbackSheetComponent] -->
+<FeedbackSheet
+  message="I tightened the hero spacing to 24px…"
+  (submit)="save($event)"
+  (ratingChange)="track($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/feedback_sheet.dart';
+
+FeedbackSheet(
+  message: 'I tightened the hero spacing to 24px…',
+  onSubmit: (f) => save(f),
+  onRatingChange: (r) => track(r),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `children` / `message` | `ReactNode` / `string` | The answer being rated, shown above the thumbs. |
+| `rating` | `'up' \| 'down' \| null` | Whether the answer was rated good or bad. Leave it out to let the thumbs set it. |
+| `onRatingChange` | `(rating) => void` | Called when the thumbs change. |
+| `open` | `boolean` | Whether the reasons sheet is open. Leave it out and thumbs down opens it. |
+| `selected` | `string[]` | The reasons picked. Leave it out to let the chips keep it. |
+| `comment` | `string` | What is written in the box. Leave it out to let the box keep it. |
+| `question` | `string` | The heading of the sheet that opens on thumbs down. |
+| `reasons` | `string[]` | Quick reasons to pick from. |
+| `placeholder` | `string` | The box placeholder. |
+| `note` | `string` | A quiet note beside the buttons, like who sees the feedback. |
+| `sending` | `boolean` | Shows the spinner on Send, for a scripted demo. |
+| `sent` | `Feedback \| null` | What was sent, which shows the thank-you line. Leave it out and Send sets it. |
+| `onSubmit` | `(feedback) => void \| Promise<void>` | Called with what the person picked and wrote. Return a promise to show a spinner until it settles. |
+| `bare` | `boolean` | Sits flat under a message in a chat thread (the default). Set `false` to give it a card of its own. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The
+active bad thumb and the thank-you line take their tints from the `--vo-bad` and `--vo-ok` tokens,
+the selected chips from the accent, and the box line from the field tokens, so the sheet reads
+against the stage; in Soft the chips, box and buttons are rounder.

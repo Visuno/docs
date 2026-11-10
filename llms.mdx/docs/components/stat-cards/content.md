@@ -11,32 +11,7 @@ line.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + stat-cards.css -->
-<div class="dm-scx">
-  <div class="dm-scx-grid">
-    <div class="dm-scx-c dm-panel">
-      <span class="dm-scx-k">Agent runs</span>
-      <div class="dm-scx-v">
-        <b class="dm-num">1,842</b>
-        <span class="dm-scx-d dm-tag dm-ok dm-up">+12.4%</span>
-      </div>
-      <div class="dm-scx-sp">
-        <svg viewBox="0 0 100 30" preserveAspectRatio="none">
-          <path d="M0 24 L100 4" />
-        </svg>
-      </div>
-    </div>
-    <!-- one .dm-scx-c per stat -->
-  </div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -69,12 +44,12 @@ const periods = [
 
 ```html
 <!-- imports: [StatCardsComponent] -->
-<dm-stat-cards
+<StatCards
   [stats]="stats"
   [periods]="periods"
   [defaultPeriod]="0"
   (periodChange)="onPeriod($event)"
-></dm-stat-cards>
+></StatCards>
 ```
 
 </Tab>

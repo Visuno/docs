@@ -1,0 +1,82 @@
+# OTP field (/docs/components/otp-field)
+
+A one-time code as a row of single-character boxes. Typing auto-advances, Backspace steps back, the
+arrows move between boxes, and pasting a full code fills them all at once. Set `status` to show the
+code as verified or rejected.
+
+<Preview>
+  <OtpFieldExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { OtpField } from './otp-field/OtpField';
+
+const [code, setCode] = useState('');
+
+<OtpField
+  value={code}
+  onChange={setCode}
+  onComplete={(v) => verify(v)}
+/>
+
+<OtpField value={code} onChange={setCode} status="error" />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [OtpFieldComponent] -->
+<OtpField
+  [value]="code"
+  (valueChange)="code = $event"
+  (complete)="verify($event)"
+></OtpField>
+
+<OtpField [value]="code" status="success"></OtpField>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/otp_field.dart';
+
+OtpField(
+  value: code,
+  onChanged: (v) => setState(() => code = v),
+  onComplete: (v) => verify(v),
+),
+
+OtpField(value: code, status: OtpStatus.error),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `length` | `number` | How many boxes / characters. Six by default. |
+| `value` | `string` | The current code, up to `length` characters. |
+| `onChange` / `valueChange` / `onChanged` | `callback` | Fires with the new value as the person types, pastes or deletes. |
+| `onComplete` / `complete` | `callback` | Fires once the last box is filled, with the full code. |
+| `numeric` | `boolean` | Only digits may be entered, and a paste keeps just its digits. On by default. |
+| `status` | `default \| success \| error` | Tints the boxes green or red and shows a mark. |
+| `disabled` | `boolean` | Greys the boxes out and blocks input. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). Boxes use
+the field tokens, the accent for focus, and the success/danger tokens for `status`; in Blueprint the
+boxes are squared off, in Soft they are rounded. The code is set in the monospace token.

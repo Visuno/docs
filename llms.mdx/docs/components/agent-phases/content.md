@@ -11,24 +11,7 @@ once it is done the line reads how long it took and opens to the phases it ran t
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + agent-phases.css -->
-<div class="aph" data-p="read">
-  <button class="aph-h" aria-expanded="false" aria-disabled="true">
-    <span class="aph-g"></span><span class="aph-l shim">Reading 3 articles</span>
-    <span class="aph-t num">7s</span><svg class="i xs aph-chev"><use href="#i-chev-d"/></svg>
-  </button>
-  <div class="aph-tr" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-  <div class="aph-x"></div>
-  <div class="fold shut aph-fold"><div><ol class="aph-list"></ol></div></div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -48,11 +31,11 @@ import { AgentPhases } from './agent-phases/AgentPhases';
 
 ```html
 <!-- imports: [AgentPhasesComponent] -->
-<dm-agent-phases phase="reading" label="Reading 3 articles"></dm-agent-phases>
-<dm-agent-phases phase="searching" [error]="searchError"></dm-agent-phases>
-<dm-agent-phases phase="reading" [slow]="slowNote"></dm-agent-phases>
-<dm-agent-phases phase="waiting" [ask]="refundAsk"></dm-agent-phases>
-<dm-agent-phases phase="done" [took]="took"></dm-agent-phases>
+<AgentPhases phase="reading" label="Reading 3 articles"></AgentPhases>
+<AgentPhases phase="searching" [error]="searchError"></AgentPhases>
+<AgentPhases phase="reading" [slow]="slowNote"></AgentPhases>
+<AgentPhases phase="waiting" [ask]="refundAsk"></AgentPhases>
+<AgentPhases phase="done" [took]="took"></AgentPhases>
 ```
 
 </Tab>

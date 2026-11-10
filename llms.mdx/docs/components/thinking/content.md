@@ -11,24 +11,7 @@ lands it becomes a summary of the work and the trace folds itself away.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + thinking.css -->
-<div class="tk" data-open="1">
-  <button class="tk-h" aria-expanded="true">
-    <span class="tk-mark"><span class="think on"><i></i><i></i><i></i><i></i></span></span>
-    <span class="tk-title shim">Checking the pricing page</span>
-    <span class="tk-time num">0s</span>
-    <svg class="i xs tk-chev"><use href="#i-chev-d"/></svg>
-  </button>
-  <div class="fold tk-fold"><div><ol class="tk-list" aria-live="polite"></ol></div></div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -52,12 +35,12 @@ import { Thinking } from './thinking/Thinking';
 
 ```html
 <!-- imports: [ThinkingComponent] -->
-<dm-thinking
+<Thinking
   [running]="running"
   title="Checking the pricing page"
   summary="3 cards to fix, 2 changes planned"
   [steps]="steps"
-></dm-thinking>
+></Thinking>
 ```
 
 </Tab>

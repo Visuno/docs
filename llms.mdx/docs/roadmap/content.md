@@ -1,0 +1,46 @@
+# Roadmap (/docs/roadmap)
+
+Where Visuno is headed. This is a direction, not a dated commitment — priorities shift
+with what people need. Have a request? Open an issue on
+[GitHub](https://github.com/Visuno/issues/issues).
+
+## Shipped [#shipped]
+
+- **Agent status** components — status pill, thinking, thinking states, reasoning trail,
+  agent phases, step loader, action log, context meter, and more.
+- **Conversation** components — live answer, thread panel, composer, model picker, voice
+  capture and orb, tool call, artifact card, and more.
+- **Charts and tables**, **Dates**, and **Forms and inputs** — stat cards, segmented
+  control, buttons, badge, progress, and tooltip.
+- **Docs site** with live previews, light/dark and Blueprint/Soft toggles, and per-framework
+  code for every component.
+
+## In progress [#in-progress]
+
+- **Full three-framework parity** — bringing every documented component to React, Angular,
+  and Flutter.
+- **Accessibility pass** — keyboard, focus, and reduced-motion coverage audited and
+  documented per component.
+- **Theming guide** — a dedicated page on the `--vo-*` token system and how to build a
+  custom theme.
+
+## Planned [#planned]
+
+- **Installation & setup guide** — a first-class getting-started flow per framework.
+- **Copy-paste recipes** — common agent-UI compositions built from several components.
+- **Versioned releases** — semver-tagged packages with migration notes in the
+  [changelog](/docs/changelog).
+- **More components** — driven by what agent products actually need; suggestions welcome.
+
+## Exploring [#exploring]
+
+Ideas we're considering but haven't committed to. Feedback shapes what graduates to
+_Planned_:
+
+- A CLI to pull components and tokens into a project.
+- Design-tool assets (Figma kit) matched to the shipped components.
+
+---
+
+Nothing here is a promise of a date. The [changelog](/docs/changelog) records what has
+actually shipped; this page records intent.

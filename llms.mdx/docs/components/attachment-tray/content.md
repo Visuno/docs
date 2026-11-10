@@ -1,0 +1,96 @@
+# Attachment tray (/docs/components/attachment-tray)
+
+A drop zone, then the files as plain rows. Each file wears its type's hue — its badge, its
+progress ring and the wash that fills its row from the left as it uploads. Once a file is up the
+agent reads it: the line shimmers, then says what it found, like `12 pages`. Pass `files` with each
+one's `progress`, `reading` and `detail`; `onFiles` hands back what the person dropped or picked.
+
+<Preview>
+  <AttachmentTrayExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { AttachmentTray, type Attachment } from './attachment-tray/AttachmentTray';
+
+const [files, setFiles] = useState<Attachment[]>([]);
+
+<AttachmentTray
+  files={files}
+  title="Drop files here"
+  action={{ label: 'add sample files', onClick: addSamples }}
+  onFiles={(picked) => upload(picked)}
+  onRemove={(id) => setFiles((f) => f.filter((x) => x.id !== id))}
+/>;
+
+// each file: { id, name, size, progress /* 0–100 */, reading?, detail? }
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [AttachmentTrayComponent] -->
+files: Attachment[] = [
+  { id: 'brief.pdf', name: 'brief.pdf', size: 2_400_000, progress: 100, detail: '12 pages' },
+];
+
+<AttachmentTray
+  [files]="files"
+  title="Drop files here"
+  [action]="{ label: 'add sample files', onClick: addSamples }"
+  (filesPicked)="upload($event)"
+  (remove$)="files = files.filter(f => f.id !== $event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/attachment_tray.dart';
+
+AttachmentTray(
+  files: const [
+    Attachment(id: 'brief.pdf', name: 'brief.pdf', size: 2400000, progress: 100, detail: '12 pages'),
+  ],
+  title: 'Drop files here',
+  action: AttachmentAction(label: 'add sample files', onClick: addSamples),
+  onRemove: (id) => setState(() => files.removeWhere((f) => f.id == id)),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `files` | `Attachment[]` | The files in the tray, each uploading then read in place. |
+| `onFiles` | `(files: File[]) => void` | Files the person dropped on the tray or picked with the file dialog. |
+| `onRemove` | `(id) => void` | Adds a remove button to each file. Called once the file has animated out. |
+| `title` | `ReactNode` | The drop zone's heading. Defaults to "Drop files here". |
+| `action` | `{ label; onClick }` | A link after "or" in the drop zone, like "add sample files". |
+| `accept` | `string` | Passed to the file input, like `image/*,.pdf`. |
+| `summary` | `string` | The line under the list. Defaults to how many files the agent can read. |
+| `dragging` | `boolean` | Shows the drop zone as if a file were being dragged over it, for a scripted demo. |
+| `file.progress` | `number` | 0 to 100. The ring closes and the row fills with the file type's colour. |
+| `file.reading` | `boolean` | While the agent reads the file: a spinner, and "Reading" shimmering after the size. |
+| `file.detail` | `string` | What the agent found once it has read the file, like "12 pages". |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). Each file
+takes its hue from its type — PDF, image, CSV and the rest — drawn from the palette tokens, so the
+badge, the ring and the row wash stay in step across the themes; in Soft the drop zone and badges are
+rounder. The dashed drop-zone edge, the uploading rings and the reading shimmer all respect
+`prefers-reduced-motion`.

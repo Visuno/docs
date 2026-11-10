@@ -11,24 +11,7 @@ text and flashes a check.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + buttons.css -->
-<button class="dm-pill dm-primary">Primary</button>
-<button class="dm-pill dm-accent">Accent</button>
-<button class="dm-pill dm-soft" aria-pressed="false">Preview</button>
-<button class="dm-pill dm-line">Line</button>
-<button class="dm-pill dm-ghost">Ghost</button>
-
-<!-- sizes -->
-<button class="dm-pill dm-accent dm-sm">Small</button>
-<button class="dm-pill dm-accent dm-btx-lg">Large</button>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -44,7 +27,7 @@ import { Button, ButtonCopy } from './buttons/Buttons';
 </Button>
 <Button variant="accent" success onClick={save}>Save</Button>
 
-<ButtonCopy text="https://designme.dev" label="Copy link" />
+<ButtonCopy text="https://example.com" label="Copy link" />
 ```
 
 </Tab>
@@ -53,15 +36,15 @@ import { Button, ButtonCopy } from './buttons/Buttons';
 
 ```html
 <!-- imports: [ButtonComponent, ButtonCopyComponent] -->
-<dm-button variant="primary">Primary</dm-button>
-<dm-button variant="soft" size="sm">Small</dm-button>
+<VoButton variant="primary">Primary</VoButton>
+<VoButton variant="soft" size="sm">Small</VoButton>
 
-<dm-button variant="primary" busyLabel="Publishing" doneLabel="Published" (click)="publish()">
+<VoButton variant="primary" busyLabel="Publishing" doneLabel="Published" (click)="publish()">
   Publish
-</dm-button>
-<dm-button variant="accent" [success]="true" (click)="save()">Save</dm-button>
+</VoButton>
+<VoButton variant="accent" [success]="true" (click)="save()">Save</VoButton>
 
-<dm-button-copy text="https://designme.dev" label="Copy link" />
+<VoButtonCopy text="https://example.com" label="Copy link" />
 ```
 
 </Tab>
@@ -77,7 +60,7 @@ const Button('Small', variant: ButtonVariant.soft, size: ButtonSize.sm),
 Button('Publish', variant: ButtonVariant.primary, busyLabel: 'Publishing', doneLabel: 'Published', onClick: publish),
 Button('Save', variant: ButtonVariant.accent, success: true, onClick: save),
 
-ButtonCopy(text: 'https://designme.dev', label: 'Copy link'),
+ButtonCopy(text: 'https://example.com', label: 'Copy link'),
 ```
 
 </Tab>

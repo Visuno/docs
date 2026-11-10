@@ -1,0 +1,67 @@
+# Accessibility (/docs/getting-started/accessibility)
+
+Agent interfaces move a lot: things stream in, states change, and panels open and close. Visuno
+components are built so that motion and live updates don't lock anyone out. This page covers what the
+library handles and what stays your responsibility.
+
+## What the components do [#what-the-components-do]
+
+<Accordions>
+
+<Accordion title="Semantic markup">
+Components use the right element for the job — real `<button>`s for actions, headings and lists where
+they belong, and ARIA roles only where native semantics fall short. Interactive controls expose a
+name, role, and state to assistive tech.
+</Accordion>
+
+<Accordion title="Keyboard support">
+Anything you can click, you can reach and operate from the keyboard. Focus order follows reading
+order, overlays (modals, popovers) trap focus while open and return it to the trigger on close, and
+Escape dismisses transient surfaces.
+</Accordion>
+
+<Accordion title="Visible focus">
+Every interactive element has a visible focus ring drawn from the `--vo-focus` token, so keyboard
+users can always see where they are. The ring respects the active theme and style.
+</Accordion>
+
+<Accordion title="Reduced motion">
+Components that animate — streaming status, shimmering states, fades between lines — honour
+`prefers-reduced-motion`. When a viewer asks their OS for less motion, animations are shortened or
+removed and content simply appears, with no loss of information.
+</Accordion>
+
+<Accordion title="Live regions">
+Components that update on their own (status pills, toasts, live answers) announce changes through
+ARIA live regions so screen-reader users hear what changed without having to go looking for it.
+</Accordion>
+
+<Accordion title="Color and contrast">
+The default light and dark themes are tuned to meet WCAG AA contrast for text and essential UI.
+Meaning is never carried by color alone — states also use a glyph, label, or shape.
+</Accordion>
+
+</Accordions>
+
+## What stays on you [#what-stays-on-you]
+
+The library gives you accessible building blocks; the composition is yours. A few things to get
+right in your app:
+
+- **Labels and text alternatives** — give icon-only buttons an accessible name, and images and charts
+  a meaningful description for the data they show.
+- **Contrast of custom tokens** — if you override `--vo-*` colors (see [Theming](/docs/getting-started/theming)),
+  re-check text and UI contrast against the new values.
+- **Heading structure** — keep a sensible heading order on the page around the components.
+- **Reading order** — place components in the DOM in the order you want them read and tabbed.
+
+## Per-component notes [#per-component-notes]
+
+Accessibility details specific to a component — which keys it responds to, what it announces, how it
+behaves under reduced motion — are called out in the **Theming** and usage sections of that
+component's docs page.
+
+<Cards>
+  <Card title="Theming" href="/docs/getting-started/theming" description="Tokens, dark mode, and the focus ring." />
+  <Card title="FAQ" href="/docs/faq" description="More short answers, including accessibility." />
+</Cards>

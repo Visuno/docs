@@ -11,21 +11,7 @@ readers.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + segmented-control.css -->
-<div class="sgc-seg" role="tablist" aria-label="View">
-  <span class="sgc-k" aria-hidden="true"></span>
-  <button role="tab" aria-selected="true" data-v="day">Day</button>
-  <button role="tab" aria-selected="false" tabindex="-1" data-v="week">Week</button>
-  <button role="tab" aria-selected="false" tabindex="-1" data-v="month">Month</button>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -50,9 +36,9 @@ const [range, setRange] = useState('day');
 
 ```html
 <!-- imports: [SegmentedControlComponent] -->
-<dm-segmented-control label="Range" [options]="options"
+<SegmentedControl label="Range" [options]="options"
   [value]="range" (valueChange)="range = $event" />
-<dm-segmented-control label="Density" as="radio" [options]="options" defaultValue="week" />
+<SegmentedControl label="Density" as="radio" [options]="options" defaultValue="week" />
 ```
 
 </Tab>

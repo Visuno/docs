@@ -1,0 +1,107 @@
+# Scatter chart (/docs/components/scatter-chart)
+
+A scatter chart plots every `run` as a dot by its `x` (cost along the bottom) and `y` (eval score up
+the side), sized by its `size` (tokens). Each `series` has a colour and a shape, so it reads without
+colour too. Dashed median lines cut the plot into four named `quadrants`; pointing snaps to the
+nearest run and shows a tooltip, and a drag draws a box that selects the runs in it. Pass `ringed`
+ids to circle outliers, and an `onAsk` handler to add "Ask the agent why" to a selection.
+
+<Preview>
+  <ScatterChartExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { ScatterChart } from './scatter-chart/ScatterChart';
+
+<ScatterChart
+  runs={[
+    { id: 12, series: 'opus', x: 0.41, y: 92, size: 44 },
+    { id: 13, series: 'sonnet', x: 0.14, y: 88, size: 20 },
+    { id: 14, series: 'haiku', x: 0.05, y: 74, size: 9 },
+  ]}
+  series={[
+    { key: 'opus', label: 'Opus', shape: 'circle' },
+    { key: 'sonnet', label: 'Sonnet', shape: 'square' },
+    { key: 'haiku', label: 'Haiku', shape: 'triangle' },
+  ]}
+  subtitle="48 runs this week, sized by tokens"
+  ringed={[30, 31, 32]}
+  onAsk={(runs) => `Looked at ${runs.length} runs…`}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ScatterChartComponent] -->
+<ScatterChart
+  [runs]="runs"
+  [series]="series"
+  subtitle="48 runs this week, sized by tokens"
+  [ringed]="[30, 31, 32]"
+  (selectedChange)="onSelected($event)"
+  (ask)="answer($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/scatter_chart.dart';
+
+ScatterChart(
+  runs: const [
+    ScatterRun(id: 12, series: 'opus', x: 0.41, y: 92, size: 44),
+    ScatterRun(id: 13, series: 'sonnet', x: 0.14, y: 88, size: 20),
+    ScatterRun(id: 14, series: 'haiku', x: 0.05, y: 74, size: 9),
+  ],
+  series: const [
+    ScatterSeries(key: 'opus', label: 'Opus', shape: ScatterShape.circle),
+    ScatterSeries(key: 'sonnet', label: 'Sonnet', shape: ScatterShape.square),
+    ScatterSeries(key: 'haiku', label: 'Haiku', shape: ScatterShape.triangle),
+  ],
+  subtitle: '48 runs this week, sized by tokens',
+  ringed: const [30, 31, 32],
+  onAsk: (runs) {},
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `runs` | `ScatterRun[]` | Each run is a dot: `id`, `series`, `x` (along), `y` (up) and `size`. |
+| `series` | `ScatterSeries[]` | `key`, `label`, optional `color` and `shape` (`circle \| square \| triangle`). |
+| `title` | `string` | The bold heading. Defaults to "Cost vs quality". |
+| `subtitle` | `string` | The quieter line beside the title. |
+| `xDomain` / `yDomain` | `[number, number]` | The `[min, max]` of each axis. |
+| `xTicks` / `yTicks` | `number[]` | Where the labels and gridlines go. A narrow chart keeps the two ends and the middle. |
+| `xTitle` / `yTitle` | `string` | The axis titles, clear of the ticks. |
+| `formatX` / `formatY` / `formatSize` | `(n) => string` | Writes the axis values and the tooltip's token count. |
+| `quadrants` | `[string, string, string, string]` | The four names the medians make, from the top left, clockwise. A narrow chart leaves them out. |
+| `ringed` | `(string \| number)[]` | Runs to ring, like outliers the agent found. |
+| `note` | `string` | The line under the chart while nothing is selected. |
+| `selected` | `(string \| number)[]` | The selected runs, by id. Leave it out to let the chart hold the selection. |
+| `onSelectedChange` | `(ids) => void` | Fires when the drag selection changes. |
+| `onAsk` | `(runs) => string \| Promise<string>` | Adds "Ask the agent why" to a selection; the answer streams in. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The dots
+take the chart palette (`--vo-c1`…`--vo-c6`); the gridlines, axes, median lines and the selection box
+are mixed from the line and foreground tokens, and the tooltip sits on the ink token — so the chart
+reads on either theme without any hard-coded colours.

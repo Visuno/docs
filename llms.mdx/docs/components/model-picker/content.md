@@ -1,0 +1,103 @@
+# Model picker (/docs/components/model-picker)
+
+A trigger names the picked model and how hard it thinks, over the open list of
+`models`. Each shows its `speed`, `quality` and `cost` as five-step meters, with the
+real numbers (`speedDetail`, `qualityDetail`, `costDetail`) on hover. The thinking
+effort sits under them as a small dropdown. A model that can't take the request can
+set a `status` of `checking` or `busy` and offer a way out through `suggestion` — a
+short notice with its own buttons, the last one filled.
+
+<Preview>
+  <ModelPickerExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { ModelPicker, type ModelOption } from './model-picker/ModelPicker';
+
+const models: ModelOption[] = [
+  { id: 'opus', name: 'Opus 5.5', color: 'var(--vo-pl)', note: 'Deepest reasoning, slower',
+    speed: 2, quality: 5, cost: 5, speedDetail: '38 tokens a second', costDetail: '$0.021 a reply' },
+  { id: 'sonnet', name: 'Sonnet 5.5', color: 'var(--vo-accent)', note: 'Balanced, the default',
+    speed: 4, quality: 4, cost: 2, speedDetail: '74 tokens a second', costDetail: '$0.006 a reply' },
+];
+
+const [value, setValue] = useState('sonnet');
+
+<ModelPicker models={models} value={value} onValueChange={setValue} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ModelPickerComponent] -->
+models: ModelOption[] = [
+  { id: 'opus', name: 'Opus 5.5', color: 'var(--vo-pl)', note: 'Deepest reasoning, slower',
+    speed: 2, quality: 5, cost: 5 },
+  { id: 'sonnet', name: 'Sonnet 5.5', color: 'var(--vo-accent)', note: 'Balanced, the default',
+    speed: 4, quality: 4, cost: 2 },
+];
+value = 'sonnet';
+
+<ModelPicker [models]="models" [value]="value" (valueChange)="value = $event" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/model_picker.dart';
+
+final models = const [
+  ModelOption(id: 'opus', name: 'Opus 5.5', note: 'Deepest reasoning, slower',
+      speed: 2, quality: 5, cost: 5),
+  ModelOption(id: 'sonnet', name: 'Sonnet 5.5', note: 'Balanced, the default',
+      speed: 4, quality: 4, cost: 2),
+];
+String value = 'sonnet';
+
+ModelPicker(
+  models: models,
+  value: value,
+  onValueChange: (id) => setState(() => value = id),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `models` | `ModelOption[]` | The models to choose from. |
+| `value` | `string` | The picked model's id. Leave it out to let the list hold its own. |
+| `defaultValue` | `string` | The picked model's id to start on when uncontrolled. |
+| `onValueChange` | `(id) => void` | Called when a row is picked, busy or not, so you can check the model first. |
+| `efforts` | `ThinkingEffort[]` | The thinking efforts. Defaults to Off, Low, Medium and High. |
+| `effort` / `defaultEffort` | `string` | The picked effort's label, controlled or to start on. |
+| `onEffortChange` | `(effort) => void` | Called when the effort changes. |
+| `suggestion` | `{ text; actions: { label; onClick }[] }` | A way out when the picked model can't take the request. The last button is filled. |
+| `note` | `string` | The confirmation under the picker, shown with a green check. |
+| `label` | `string` | The label beside the trigger. Defaults to "Model for this chat". |
+| `open` / `defaultOpen` | `boolean` | Whether the list is open. Leave it out to let the trigger and Escape open and close it. |
+| `onOpenChange` | `(open) => void` | Called when the list opens or closes. |
+| `ModelOption.speed/quality/cost` | `number` | Each from 1 to 5. For cost, 5 is the most expensive. |
+| `ModelOption.status` | `ready \| checking \| busy` | `checking` spins beside the name; `busy` turns the row amber, both showing `statusText`. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style
+(`data-style="soft"`). The trigger and panel sit on a surface with the card shadow;
+each model's tile takes its own `color` with a letter colour that reads on it, the
+picked row's filled meters take the accent, and a busy row and its notice take the
+warn tint — all from the theme tokens, so it reads against the dark stage.

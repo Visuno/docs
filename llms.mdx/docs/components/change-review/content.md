@@ -1,0 +1,131 @@
+# Change review (/docs/components/change-review)
+
+Change review walks a set of changed `files` as a diff. Pick a file in the list, then **keep** or
+**undo** each hunk on its own — Keep turns to a green done chip, an undone hunk's Undo sits on the
+surface, and pressing either again takes the choice back. **Keep all** settles the current file and
+steps to the next; **Undo all** settles it in place. Hover a line to reveal its comment button and
+ask the agent about that change. The file list rolls each file up to kept, undone or part-decided.
+
+<Preview>
+  <ChangeReviewExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { ChangeReview, type ChangedFile } from './change-review/ChangeReview';
+
+const files: ChangedFile[] = [
+  {
+    name: 'PricingCard.tsx',
+    path: 'src/PricingCard.tsx',
+    hunks: [
+      {
+        title: 'Use the shared button',
+        lines: [
+          { kind: 'ctx', line: 14, text: '  return (' },
+          { kind: 'del', line: 15, text: '    <button className="cta-old">' },
+          { kind: 'add', line: 15, text: '    <Button variant="primary">' },
+        ],
+      },
+    ],
+  },
+];
+
+<ChangeReview
+  files={files}
+  onDecisionsChange={(d) => console.log(d)}
+  onComment={(c) => ask(c.text)}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ChangeReviewComponent] -->
+files: ChangedFile[] = [
+  {
+    name: 'PricingCard.tsx', path: 'src/PricingCard.tsx',
+    hunks: [{ title: 'Use the shared button', lines: [
+      { kind: 'ctx', line: 14, text: '  return (' },
+      { kind: 'del', line: 15, text: '    <button className="cta-old">' },
+      { kind: 'add', line: 15, text: '    <Button variant="primary">' },
+    ] }],
+  },
+];
+
+<ChangeReview
+  [files]="files"
+  (decisionsChange)="onDecisions($event)"
+  (comment)="ask($event.text)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/change_review.dart';
+
+ChangeReview(
+  files: const [
+    ChangedFile(
+      name: 'PricingCard.tsx',
+      path: 'src/PricingCard.tsx',
+      hunks: [
+        Hunk(title: 'Use the shared button', lines: [
+          DiffLine(kind: DiffKind.ctx, line: 14, text: '  return ('),
+          DiffLine(kind: DiffKind.del, line: 15, text: '    <button className="cta-old">'),
+          DiffLine(kind: DiffKind.add, line: 15, text: '    <Button variant="primary">'),
+        ]),
+      ],
+    ),
+  ],
+  onDecisionsChange: (d) => debugPrint('$d'),
+  onComment: (c) => ask(c.text),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `files` | `ChangedFile[]` | The files to review. Each has a `name`, an optional `path` and its `hunks`. |
+| `file` | `number` | The file shown on the right, by index (controlled). |
+| `defaultFile` | `number` | The file shown first when uncontrolled. Defaults to `0`. |
+| `onFileChange` | `(index) => void` | Called when the shown file changes. |
+| `decisions` | `Record<string, 'kept' \| 'undone'>` | Kept or undone, by hunk key (controlled). |
+| `defaultDecisions` | `Record<string, 'kept' \| 'undone'>` | Starting decisions when uncontrolled. |
+| `onDecisionsChange` | `(decisions) => void` | Called when any hunk's decision changes. |
+| `onComment` | `(comment) => void` | Called when the person asks the agent about a line. Without a question it sends "Why this change?". |
+| `title` | `string` | Header over the file list. Defaults to `"N files changed"`. |
+
+### `ChangedFile` / `Hunk` / `DiffLine` [#changedfile--hunk--diffline]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `file.name` | `string` | Like `"PricingCard.tsx"`. Its extension becomes the type label. |
+| `file.path` | `string` | Shown above the diff. Defaults to the name. |
+| `hunk.title` | `string` | What the change does, like `"Use the shared button"`. |
+| `hunk.key` | `string` | Identifies the hunk in `decisions`. Defaults to `"<file name>#<index>"`. |
+| `line.kind` | `add \| del \| ctx` | `add` and `del` lines are coloured; `ctx` lines are unchanged context. |
+| `line.line` | `number` | The line number shown in the gutter. |
+| `line.text` | `string` | The line's text. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). Added and
+removed lines take the ok and bad tints; a hunk's Keep reads as the accent on a tint of itself, and
+turns to the green done chip once kept — all from the theme tokens. The comment box uses the field
+tokens, becoming a squircle in Blueprint where the browser supports it.

@@ -1,0 +1,117 @@
+# Thread panel (/docs/components/thread-panel)
+
+A thread panel holds several conversations with an agent, one tab each, with a reply field
+under the open one. The tabs switch which thread is shown and an underline slides to the open
+one; switching staggers that thread's messages in, and a later message glides into view. Each
+`agent` message can carry `sources` — the files or pages it used — and a `thinking` message
+shimmers while the agent works on a reply.
+
+<Preview>
+  <ThreadPanelExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { ThreadPanel, type Thread } from './thread-panel/ThreadPanel';
+
+const [threads, setThreads] = useState<Thread[]>([
+  {
+    id: 'onboarding',
+    title: 'Onboarding',
+    color: 'var(--vo-ok-mark)',
+    messages: [
+      { from: 'user', text: 'Why is the workspace step losing people?' },
+      { from: 'agent', text: 'Moving the team-name step after the first project should help.' },
+    ],
+  },
+]);
+
+<ThreadPanel
+  threads={threads}
+  onSend={(text, threadId) =>
+    setThreads((prev) =>
+      prev.map((t) =>
+        t.id === threadId ? { ...t, messages: [...t.messages, { from: 'user', text }] } : t,
+      ),
+    )
+  }
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ThreadPanelComponent] -->
+threads: Thread[] = [
+  {
+    id: 'onboarding',
+    title: 'Onboarding',
+    color: 'var(--vo-ok-mark)',
+    messages: [
+      { from: 'user', text: 'Why is the workspace step losing people?' },
+      { from: 'agent', text: 'Moving the team-name step after the first project should help.' },
+    ],
+  },
+];
+
+<ThreadPanel [threads]="threads" (sendMessage)="add($event)" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/thread_panel.dart';
+
+List<Thread> threads = const [
+  Thread(
+    id: 'onboarding',
+    title: 'Onboarding',
+    messages: [
+      ThreadMessage(from: ThreadFrom.user, text: 'Why is the workspace step losing people?'),
+      ThreadMessage(from: ThreadFrom.agent, text: 'Moving the team-name step after should help.'),
+    ],
+  ),
+];
+
+ThreadPanel(
+  threads: threads,
+  onSend: (text, threadId) => setState(() {/* add the message to that thread */}),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `threads` | `Thread[]` | The conversations, one tab each. |
+| `value` | `string` | The id of the open thread. Leave it out to let the tabs switch it. |
+| `defaultValue` | `string` | The thread open at first when uncontrolled. Defaults to the first thread. |
+| `onValueChange` | `(id) => void` | Called when a tab opens another thread. |
+| `onSend` | `(text, threadId) => void` | Called with the reply and the open thread's id. Add the message to that thread to show it. |
+| `draft` | `string` | The reply being written. Leave it out to let the field keep its own. |
+| `defaultDraft` | `string` | The reply written at first when uncontrolled. |
+| `onDraftChange` | `(text) => void` | Called as the reply field changes. |
+| `placeholder` | `string` | The reply field's placeholder. Defaults to `Reply to the agent`. |
+| `bare` | `boolean` | Sits flat in a chat column (the default). Set `false` to give it a card of its own. |
+| `Thread.color` | `string` | The dot in front of the title, any CSS colour. Defaults to a quiet grey. |
+| `ThreadMessage.sources` | `Source[]` | Files or pages the agent used, shown as chips above its reply. |
+| `ThreadMessage.thinking` | `boolean` | Shows a shimmering line while the agent works on a reply. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The
+open tab's underline uses the accent mark token and the reply field sits on a surface with an
+inset field line, so it reads against the dark stage; in Soft the field is rounder (squircle).

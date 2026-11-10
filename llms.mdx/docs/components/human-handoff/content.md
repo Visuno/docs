@@ -1,0 +1,133 @@
+# Human handoff (/docs/components/human-handoff)
+
+The agent passes a conversation to a person: why it handed off (`reason`), who has it (`assignee`,
+with a `people` list for **Reassign**), when the reply is due (`secondsLeft` counts down and the bar
+empties, turning orange under five minutes), the `summary` and `facts` they need to pick it up, and
+the `message` the customer was told (editable in place when you pass `onMessageChange`). A `status`
+row at the foot says where it stands — neutral while it waits, amber when the person can't take it,
+green once they have.
+
+<Preview>
+  <HumanHandoffExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { HumanHandoff, type HandoffPerson } from './human-handoff/HumanHandoff';
+
+const billing: HandoffPerson[] = [
+  { name: 'Alex Rivera', color: 'var(--vo-av-m)', team: 'Billing', presence: 'Available', tone: 'ok' },
+  { name: 'Maya Chen', color: 'var(--vo-av-l)', team: 'Billing', presence: 'Out until 2pm', tone: 'warn' },
+];
+
+<HumanHandoff
+  reason="Refund over $500 needs a person"
+  assignee={billing[0]}
+  people={billing}
+  onReassign={(p) => reassign(p)}
+  secondsLeft={846}
+  targetSeconds={900}
+  summary="Dana was charged twice and wants one charge back."
+  facts={[{ label: 'Amount', value: '$588.00' }]}
+  message="Thanks, Dana. I've passed your conversation to our billing team."
+  messageLabel="Sent to Dana"
+  onMessageChange={(text) => save(text)}
+  status={{ tone: 'ok', title: 'With Alex · agent paused', detail: "The agent won't reply while Alex has it" }}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [HumanHandoffComponent] -->
+billing: HandoffPerson[] = [
+  { name: 'Alex Rivera', color: 'var(--vo-av-m)', team: 'Billing', presence: 'Available', tone: 'ok' },
+];
+
+<HumanHandoff
+  reason="Refund over $500 needs a person"
+  [assignee]="billing[0]"
+  [people]="billing"
+  (reassign)="reassign($event)"
+  [secondsLeft]="846"
+  [targetSeconds]="900"
+  summary="Dana was charged twice and wants one charge back."
+  [facts]="facts"
+  message="Thanks, Dana. I've passed your conversation to our billing team."
+  messageLabel="Sent to Dana"
+  [editable]="true"
+  (messageChange)="save($event)"
+  [status]="status"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/human_handoff.dart';
+
+HumanHandoff(
+  reason: 'Refund over \$500 needs a person',
+  assignee: const HandoffPerson(
+    name: 'Alex Rivera', color: VoAvatar.mint, team: 'Billing',
+    presence: 'Available', tone: HandoffPresenceTone.ok,
+  ),
+  people: billing,
+  onReassign: (p) => reassign(p),
+  secondsLeft: 846,
+  targetSeconds: 900,
+  summary: 'Dana was charged twice and wants one charge back.',
+  facts: const [HandoffFact(label: 'Amount', value: '\$588.00')],
+  message: "Thanks, Dana. I've passed your conversation to our billing team.",
+  messageLabel: 'Sent to Dana',
+  onMessageChange: (text) => save(text),
+  status: const HandoffStatus(
+    tone: HandoffStatusTone.ok,
+    title: 'With Alex · agent paused',
+    detail: "The agent won't reply while Alex has it",
+  ),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `reason` | `string` | Why the agent handed off, like "Refund over $500 needs a person". |
+| `assignee` | `HandoffPerson \| null` | Who has it, or `null` while the agent is still finding someone. |
+| `finding` | `{ title; detail? }` | The two lines shown while `assignee` is `null`. |
+| `people` | `HandoffPerson[]` | The people it can go to instead. Leave it out to hide **Reassign**. |
+| `onReassign` | `(person) => void` | Called when a row is picked in **Reassign**. |
+| `secondsLeft` | `number` | Seconds until the reply is due. Whole minutes; orange under five; overdue at 0 or less. |
+| `targetSeconds` | `number` | The whole window, for the bar and the "15 min target" line. Defaults to `900`. |
+| `summary` | `string` | What the person needs to pick it up. |
+| `facts` | `{ label; value }[]` | A few key facts, as label and value rows. |
+| `link` | `{ label; href?; onClick?; tip? }` | A link to the whole conversation. |
+| `message` | `string` | What the agent told the customer. |
+| `messageLabel` | `string` | The label over the message, like "Sent to Dana". |
+| `onMessageChange` | `(text) => void` | Adds **Edit**: the message turns editable, and **Save** calls this with the new text. |
+| `edited` | `boolean` | Adds "· edited" to the message label. |
+| `status` | `HandoffStatus` | The foot row: `tone` (`wait \| warn \| ok`), `title`, `detail?` and an optional `person`. |
+
+`HandoffPerson` is `{ name; initials?; color?; team?; presence?; tone?: ok \| warn }` — `name` is the
+key, `tone` puts a green or orange dot before the presence.
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
+sits on a surface; the countdown bar, the presence dot and the foot row take their colours from the
+`--vo-*` tokens — amber from the warn tokens under five minutes or when the person is out, green from
+the ok tokens once they have it. The two columns stack when the card is narrow.

@@ -1,0 +1,98 @@
+# Slider (/docs/components/slider)
+
+Drag a thumb to set a value, or two thumbs for a `[low, high]` range. Give it discrete `step`s and
+a labelled scale with `stops`, and mark a suggested value with `recommended`. Keyboard works too —
+arrows step, Page keys jump by ten, Home/End go to the ends.
+
+<Preview>
+  <SliderExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { Slider } from './slider/Slider';
+
+<Slider label="Quality" value={v} onValueChange={setV} showValue />
+
+<Slider
+  label="Autonomy"
+  step={20}
+  value={a}
+  onValueChange={setA}
+  stops={[{ value: 0, label: 'Off' }, { value: 100, label: 'Full' }]}
+  recommended={80}
+/>
+
+<Slider label="Budget" range={[20, 70]} onRangeChange={setR} format={(v) => `$${v}`} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [SliderComponent] -->
+<Slider label="Quality" [value]="v" (valueChange)="v = $event" [showValue]="true"></Slider>
+
+<Slider
+  label="Autonomy"
+  [step]="20"
+  [value]="a"
+  (valueChange)="a = $event"
+  [stops]="[{ value: 0, label: 'Off' }, { value: 100, label: 'Full' }]"
+  [recommended]="80"
+></Slider>
+
+<Slider label="Budget" [range]="[20, 70]" (rangeChange)="r = $event"></Slider>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/slider.dart';
+
+VoSlider(label: 'Quality', value: v, onValueChanged: (x) => setState(() => v = x), showValue: true),
+
+VoSlider(
+  label: 'Autonomy',
+  step: 20,
+  value: a,
+  onValueChanged: (x) => setState(() => a = x),
+  stops: const [SliderStop(value: 0, label: 'Off'), SliderStop(value: 100, label: 'Full')],
+  recommended: 80,
+),
+
+VoSlider(label: 'Budget', range: (20, 70), onRangeChanged: (r) => setState(() => range = r)),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `min` / `max` | `number` | The ends of the track. `0` and `100` by default. |
+| `step` | `number` | Step between values. `1` by default; `0` for a continuous track. |
+| `value` / `onValueChange` | `number` / `callback` | A single thumb. The value and its change handler. |
+| `range` / `onRangeChange` | `[number, number]` / `callback` | Two thumbs for a `[low, high]` range. |
+| `stops` | `{ value, label }[]` | A labelled scale drawn under the track. Click a stop to jump to it (single value). |
+| `recommended` | `number` | A value marked on the track as the agent's suggestion. |
+| `showValue` | `boolean` | Shows the value in a bubble above the active thumb. |
+| `format` | `(value) => string` | Formats the displayed value, e.g. `` v => `$${v}` ``. |
+| `disabled` | `boolean` | Turns off interaction and dims the slider. |
+| `label` | `string` | Accessible name for the slider. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The fill
+and thumbs take the accent, the rail and ticks the field/line tokens, and the recommended mark the
+accent's ring colour — all from `--vo-*`, so it recolours with the theme automatically.

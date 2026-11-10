@@ -10,18 +10,7 @@ optional remove button after it.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + badge.css -->
-<span class="bdg" data-tone="success">Live</span>
-<span class="bdg live" data-tone="success"><span class="bdg-dot"></span>Running</span>
-<span class="bdg sm" data-tone="accent">Pro</span>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -40,10 +29,10 @@ import { Badge } from './badge/Badge';
 
 ```html
 <!-- imports: [BadgeComponent] -->
-<dm-badge tone="success">Live</dm-badge>
-<dm-badge tone="success" [dot]="true" [live]="true">Running</dm-badge>
-<dm-badge tone="accent" size="sm">Pro</dm-badge>
-<dm-badge tone="warning" [removable]="true" (remove)="drop()">Production</dm-badge>
+<Badge tone="success">Live</Badge>
+<Badge tone="success" [dot]="true" [live]="true">Running</Badge>
+<Badge tone="accent" size="sm">Pro</Badge>
+<Badge tone="warning" [removable]="true" (remove)="drop()">Production</Badge>
 ```
 
 </Tab>

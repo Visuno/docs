@@ -1,0 +1,106 @@
+# Terminal stream (/docs/components/terminal-stream)
+
+A compact terminal for the shell commands an agent runs: the working directory and how the run is
+going in the header, each command with its output streaming in under it and an exit code or a check
+with how long it took, and a summary at the foot once it is over. Notes and edits sit between the
+commands — a note the agent writes about what went wrong, and the edit that fixes it. Long output
+folds to its last lines. The terminal keeps one height (420px) and its output scrolls, staying on
+the newest line unless the reader has scrolled up.
+
+<Preview>
+  <TerminalStreamExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { TerminalStream, type TerminalEntry } from './terminal-stream/TerminalStream';
+
+const entries: TerminalEntry[] = [
+  { command: 'npm run build', status: 'ok', duration: '6.1 s', output: ['✓ built in 6.1s'] },
+  { kind: 'note', text: 'The test expects whole dollars. Dropping the cents for round amounts.' },
+  { kind: 'edit', file: 'src/lib/price.ts', added: 2, removed: 1, status: 'done',
+    diff: ['- return `$${n.toFixed(2)}`', '+ return `$${v}`'] },
+  { command: 'npm test', status: 'ok', duration: '2.9 s', output: [{ text: 'Tests  24 passed (24)', tone: 'ok' }] },
+];
+
+<TerminalStream cwd="~/acme/web" entries={entries} onStop={stop} onCopy={save} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [TerminalStreamComponent] -->
+entries: TerminalEntry[] = [
+  { command: 'npm run build', status: 'ok', duration: '6.1 s', output: ['✓ built in 6.1s'] },
+  { kind: 'note', text: 'Dropping the cents for round amounts.' },
+  { command: 'npm test', status: 'ok', duration: '2.9 s', output: [{ text: 'Tests  24 passed (24)', tone: 'ok' }] },
+];
+
+<TerminalStream [cwd]="'~/acme/web'" [entries]="entries" (stop)="onStop()" (copy)="onCopy($event)" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/terminal_stream.dart';
+
+TerminalStream(
+  cwd: '~/acme/web',
+  entries: const [
+    TerminalCommand(
+      command: 'npm run build',
+      status: TerminalCommandStatus.ok,
+      duration: '6.1 s',
+      output: [TerminalLine('✓ built in 6.1s', tone: TerminalTone.ok)],
+    ),
+    TerminalNote('Dropping the cents for round amounts.'),
+    TerminalCommand(
+      command: 'npm test',
+      status: TerminalCommandStatus.ok,
+      duration: '2.9 s',
+      output: [TerminalLine('Tests  24 passed (24)', tone: TerminalTone.ok)],
+    ),
+  ],
+  onStop: stop,
+  onCopy: (text) => save(text),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `cwd` | `string` | The working directory, shown in the header, like `~/acme/web`. |
+| `entries` | `TerminalEntry[]` | Commands, notes and edits, oldest first. |
+| `status` | `running \| passed \| failed \| stopped` | The run as a whole. Left out, it is derived from the entries. |
+| `elapsed` | `string` | How long the run has taken, like `0:18`. Shown beside Running and in the summary. |
+| `summary` | `string \| false` | The line at the foot once the run is over. `false` hides it. |
+| `tail` | `number` | How many lines a folded output keeps showing. Default `4`. |
+| `onStop` | `() => void` | Adds the Stop button while the run is going. |
+| `onCopy` | `(text) => void` | Called with the whole run as text when it is copied. |
+| `entry.command` | `string` | A command, like `npm run build`, with its `output` and `status`. |
+| `entry.output` | `(string \| { text; tone? })[]` | What it printed; `tone` is `ok`, `bad` or `muted`. |
+| `entry.status` | `running \| ok \| failed \| stopped` | A spinner, a check, an `Exit N` tag, or a Stopped tag. |
+| `note.text` | `string` | A line from the agent between commands. The newest shimmers while the run goes on. |
+| `edit.file` | `string` | A file the agent edits, with its `added`/`removed` counts and a `diff`. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The output
+is 12px monospace on a 1.8 line height, the state tag and left rail take the accent while the run is
+live and turn green or red once it is over, and a block cursor blinks after the newest line — all drawn
+from the theme tokens. In the Blueprint style the rail thins and the cursor marches; Soft rounds the
+corners and the scrollbar.

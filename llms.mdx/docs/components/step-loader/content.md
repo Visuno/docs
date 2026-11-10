@@ -11,25 +11,7 @@ is done and the row shows the `doneLabel`.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + step-loader.css -->
-<div class="stl dm">
-  <button class="stl-row" aria-expanded="false">
-    <span class="stl-g"></span>
-    <span class="stl-t"><span class="stl-lab shim">Reading Figma frames</span></span>
-    <span class="stl-n num">1/4</span>
-    <svg class="i xs stl-chev"><use href="#i-chev-d" /></svg>
-  </button>
-  <div class="stl-track"><i></i><i></i><i></i><i></i></div>
-  <div class="fold shut stl-fold"><div><ol class="stl-list"></ol></div></div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -52,8 +34,8 @@ const steps = [
 
 ```html
 <!-- imports: [StepLoaderComponent] -->
-<dm-step-loader [steps]="steps" [current]="1" loader="radar" />
-<dm-step-loader [steps]="steps" [current]="steps.length" doneLabel="Ready for review" />
+<StepLoader [steps]="steps" [current]="1" loader="radar" />
+<StepLoader [steps]="steps" [current]="steps.length" doneLabel="Ready for review" />
 ```
 
 </Tab>

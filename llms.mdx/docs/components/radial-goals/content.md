@@ -1,0 +1,102 @@
+# Radial goals (/docs/components/radial-goals)
+
+Radial goals are concentric rings, one per agent, each its share of its own target. The overall
+score sits in the middle. Past the target a ring goes round again from the top, with a marker where
+it ends, so an agent that is ahead reads as a second lap. Hovering or focusing a ring — or its
+legend row — dims the rest and rolls the middle to that agent's share. A `ranges` switch (like Week
+and Month) repaints every ring.
+
+<Preview>
+  <RadialGoalsExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { RadialGoals, type RadialGoal } from './radial-goals/RadialGoals';
+
+const goals: RadialGoal[] = [
+  { key: 'support', label: 'Support agent', unit: 'tickets', value: 412, target: 375 },
+  { key: 'qa', label: 'QA agent', unit: 'checks', value: 136, target: 160 },
+  { key: 'research', label: 'Research agent', unit: 'reports', value: 18, target: 24 },
+];
+
+const [range, setRange] = useState('w');
+
+<RadialGoals
+  goals={goals}
+  subtitle="This week"
+  ranges={[{ value: 'w', label: 'Week' }, { value: 'm', label: 'Month' }]}
+  range={range}
+  onRangeChange={setRange}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [RadialGoalsComponent] -->
+<RadialGoals
+  [goals]="goals"
+  subtitle="This week"
+  [ranges]="ranges"
+  [range]="range"
+  (rangeChange)="range = $event"
+></RadialGoals>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/radial_goals.dart';
+
+RadialGoals(
+  goals: const [
+    RadialGoal(key: 'support', label: 'Support agent', unit: 'tickets', value: 412, target: 375),
+    RadialGoal(key: 'qa', label: 'QA agent', unit: 'checks', value: 136, target: 160),
+    RadialGoal(key: 'research', label: 'Research agent', unit: 'reports', value: 18, target: 24),
+  ],
+  subtitle: 'This week',
+  ranges: const [
+    RadialGoalRange(value: 'w', label: 'Week'),
+    RadialGoalRange(value: 'm', label: 'Month'),
+  ],
+  range: range,
+  onRangeChange: (r) => setState(() => range = r),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `goals` | `RadialGoal[]` | Two to five agents, outermost first. Three read best — the fewer the rings, the thicker they are. |
+| `title` | `string` | The heading above the rings. Defaults to `"Agent goals"`. |
+| `subtitle` | `string` | The line under the title. Defaults to `"N of M on target"`. |
+| `ranges` | `{ value; label }[]` | The period switch options, like Week and Month. Leave out for no switch. |
+| `range` | `string` | The selected range value (controlled). Leave out to let the switch pick it. |
+| `onRangeChange` | `(range: string) => void` | Called with the new range value when the switch changes. |
+
+Each `RadialGoal` carries a `key`, a `label` (like "Support agent"), a `unit` (what it counts, like
+"tickets"), the `value` done, its `target`, and an optional `color`. The share is `value / target`;
+at or past the target the ring's row shows an "on target" chip, and the ring draws a second lap with
+a marker. Colours fall back to the chart palette (the accent, then green, orange, violet and red).
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The ring
+tracks use the chip token and the laps and dots use the chart palette, so the rings read on either
+surface; the "on target" chip uses the ok tokens. In Soft the panel and the legend rows are rounder.
+Respecting `prefers-reduced-motion`, the sweep and the middle readout settle without animating.

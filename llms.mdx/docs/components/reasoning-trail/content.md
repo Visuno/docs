@@ -11,24 +11,7 @@ settles on "Reasoned for Ns" once it finishes.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + reasoning-trail.css -->
-<div class="rtr panel">
-  <button class="rtr-h" aria-expanded="true">
-    <span class="think on rtr-mark"><i></i><i></i><i></i><i></i></span>
-    <span class="rtr-title shim">Reasoning</span>
-    <span class="rtr-time num muted">0s</span>
-    <svg class="i xs rtr-chev"><use href="#i-chev-d"/></svg>
-  </button>
-  <div class="fold rtr-fold"><div><div class="rtr-body"></div></div></div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -53,13 +36,13 @@ import { ReasoningTrail } from './reasoning-trail/ReasoningTrail';
 
 ```html
 <!-- imports: [ReasoningTrailComponent] -->
-<dm-reasoning-trail
+<ReasoningTrail
   [running]="true"
   view="plan"
   [plan]="plan"
   [sources]="sources"
   (viewChange)="view = $event"
-></dm-reasoning-trail>
+></ReasoningTrail>
 
 // plan: PlanStep[] = [
 //   { label: 'Open the onboarding file', detail: '4 frames', state: 'done' },

@@ -1,0 +1,102 @@
+# Line chart (/docs/components/line-chart)
+
+A line chart plots a few `series` over the same `points` in time. The first series is the main one —
+a solid line with a soft fill — and the rest are dashed, to compare against. The lines draw in from
+the left while the big number counts up; move the pointer over the chart for a readout that follows
+the cursor, and use the legend to toggle a series off (one always stays on).
+
+<Preview>
+  <LineChartExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { LineChart } from './line-chart/LineChart';
+
+<LineChart
+  label="Active editors"
+  points={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']}
+  series={[
+    { key: 'this', label: 'This year', values: [820, 910, 1040, 1210, 1320, 1620] },
+    { key: 'last', label: 'Last year', values: [610, 660, 690, 800, 850, 960] },
+  ]}
+  unit="editors"
+  compareLabel="vs last year"
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [LineChartComponent] -->
+series: LineChartSeries[] = [
+  { key: 'this', label: 'This year', values: [820, 910, 1040, 1210, 1320, 1620] },
+  { key: 'last', label: 'Last year', values: [610, 660, 690, 800, 850, 960] },
+];
+
+<LineChart
+  label="Active editors"
+  [series]="series"
+  [points]="['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']"
+  unit="editors"
+  compareLabel="vs last year"
+  (visibleChange)="onVisibleChange($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/line_chart.dart';
+
+LineChart(
+  label: 'Active editors',
+  points: const ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  series: const [
+    LineChartSeries(seriesKey: 'this', label: 'This year', values: [820, 910, 1040, 1210, 1320, 1620]),
+    LineChartSeries(seriesKey: 'last', label: 'Last year', values: [610, 660, 690, 800, 850, 960]),
+  ],
+  unit: 'editors',
+  compareLabel: 'vs last year',
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `label` | `string` | The name over the big number, like "Active editors". |
+| `series` | `LineChartSeries[]` | The series to plot. The first is the main one (solid, with a fill); the rest are dashed. |
+| `points` | `string[]` | One name per point, shown in the hover readout, like the months. |
+| `axis` | `string[]` | Labels spread along the bottom. Defaults to every other point. |
+| `range` | `[number, number]` | The values at the bottom and top of the chart. Defaults to the data's range with a little room. |
+| `unit` | `string` | What the values count, like "editors" in "1,620 editors". |
+| `compareLabel` | `string` | Ends the readout's comparison of the first two series, like "vs last year". |
+| `format` | `(n: number) => string` | Writes a value. Defaults to whole numbers like 1,620. |
+| `visible` / `defaultVisible` | `string[]` | Keys of the series shown. Leave out to let the legend toggle them; one always stays on. |
+| `onVisibleChange` | `(keys: string[]) => void` | Fires when the legend toggles a series. |
+| `series[].key` | `string` | Names the series in `visible`. |
+| `series[].label` | `string` | The legend's label, like "This year". |
+| `series[].values` | `number[]` | One value per point, oldest first. |
+| `series[].color` | `string` | Overrides the palette colour for that series. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The first
+line and its fill use the accent; the rest take the chart palette (`--vo-c2`, `--vo-c3`, …). The grid
+lines, the pointer rule and the dark tooltip pill all come from the theme tokens, so the chart reads
+on either background. In Flutter the lines are drawn with a `CustomPainter` and the draw-in and
+count-up run on an `AnimationController`.

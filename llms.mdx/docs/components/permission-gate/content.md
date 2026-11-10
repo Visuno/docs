@@ -1,0 +1,117 @@
+# Permission gate (/docs/components/permission-gate)
+
+The agent asks before it acts: one card with the question, the `scopes` to tick, and a footer
+with how long the grant lasts (`durations`) and the two answers. Once allowed it gives way to a
+shorter result row — a spinner while the agent is `working`, a green check when done — with a
+Revoke button; declining shows an undoable notice. A follow-up ask mid-run (`followUp`) turns the
+icon tile amber.
+
+<Preview>
+  <PermissionGateExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { PermissionGate, type PermissionScope } from './permission-gate/PermissionGate';
+
+const scopes: PermissionScope[] = [
+  { key: 'read', label: 'Read frames', detail: 'Pricing, Checkout' },
+  { key: 'edit', label: 'Edit frames', detail: 'Only on a new page' },
+  { key: 'publish', label: 'Publish library', detail: 'Affects 4 other files', risk: 'Risky' },
+];
+
+<PermissionGate
+  bare={false}
+  title="Allow the agent to edit Figma?"
+  subtitle="It needs this to apply the pricing fixes"
+  scopes={scopes}
+  defaultValue={['read', 'edit']}
+  onAllow={(keys, duration) => grant(keys, duration)}
+  onDecline={skip}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [PermissionGateComponent] -->
+scopes: PermissionScope[] = [
+  { key: 'read', label: 'Read frames', detail: 'Pricing, Checkout' },
+  { key: 'edit', label: 'Edit frames', detail: 'Only on a new page' },
+  { key: 'publish', label: 'Publish library', detail: 'Affects 4 other files', risk: 'Risky' },
+];
+
+<PermissionGate
+  [bare]="false"
+  title="Allow the agent to edit Figma?"
+  subtitle="It needs this to apply the pricing fixes"
+  [scopes]="scopes"
+  [defaultValue]="['read', 'edit']"
+  (allowEvent)="grant($event.keys, $event.duration)"
+  (declineEvent)="skip()"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/permission_gate.dart';
+
+PermissionGate(
+  bare: false,
+  title: 'Allow the agent to edit Figma?',
+  subtitle: 'It needs this to apply the pricing fixes',
+  defaultValue: const ['read', 'edit'],
+  scopes: const [
+    PermissionScope(key: 'read', label: 'Read frames', detail: 'Pricing, Checkout'),
+    PermissionScope(key: 'edit', label: 'Edit frames', detail: 'Only on a new page'),
+    PermissionScope(key: 'publish', label: 'Publish library', detail: 'Affects 4 other files', risk: 'Risky'),
+  ],
+  onAllow: (keys, duration) => grant(keys, duration),
+  onDecline: skip,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `ReactNode` | The question, like "Allow the agent to edit Figma?". |
+| `subtitle` | `ReactNode` | Why it asks. |
+| `icon` | `ReactNode` | The glyph in the tile beside the question. Defaults to a shield. |
+| `scopes` | `PermissionScope[]` | The things to allow: `{ key, label, detail?, risk?, riskDetail? }`. |
+| `value` / `defaultValue` | `string[]` | Keys of the ticked scopes. Leave `value` out to let the checkboxes hold their own. |
+| `onValueChange` | `(keys) => void` | Fires when the ticked scopes change. |
+| `durations` | `string[]` | How long the grant lasts, in the footer dropdown. Defaults to This task, Today, Always. |
+| `durationDetails` | `Record<string, string>` | The quiet line under each duration in its menu. |
+| `duration` / `defaultDuration` | `string` | The picked duration. |
+| `status` / `defaultStatus` | `asking \| allowed \| declined` | Which view shows. Leave `status` out to let the buttons move it. |
+| `onAllow` | `(keys, duration) => void \| Promise` | Called on Allow; the button spins until a returned promise settles. |
+| `onDecline` / `onRevoke` / `onUndo` | `() => void` | Called by the decline, Revoke and Undo buttons. |
+| `allowedTitle` / `allowedDetail` | `string` | The two lines on the allowed row, like "Done. 6 frames edited". |
+| `working` | `boolean` | The agent is still working: a spinner on a neutral row instead of the green check. |
+| `meta` | `ReactNode` | Quiet text at the end of the allowed row, like an elapsed time "0:04". |
+| `followUp` | `boolean` | A follow-up ask mid-run, for one more scope: the icon tile turns amber. |
+| `declineLabel` | `string` | The decline button. Defaults to "Not now". |
+| `declinedTitle` / `declinedDetail` | `ReactNode` | Shown after declining. |
+| `bare` | `boolean` | Sits flat in a chat thread (the default). Set `false` to give it a card of its own. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The scopes,
+footer and result row all draw from the shared `--vo-*` tokens: the ticked box and primary button take
+the accent, the risk tag and the follow-up tile the warn tint, and the allowed row the ok tint; in Soft
+the card, pills and tick boxes are rounder.

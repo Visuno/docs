@@ -12,26 +12,7 @@ back.
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + browser-session.css -->
-<div class="bws panel">
-  <div class="bws-h">
-    <div class="bws-ht"><b>Pricing research</b><span class="muted bws-st"></span></div>
-    <div class="bws-ctl">
-      <button class="ib bws-pause" aria-label="Pause"><svg class="i s"><use href="#i-pause"/></svg></button>
-      <button class="pill line sm bws-take" aria-pressed="false">Take over</button>
-    </div>
-  </div>
-  <div class="bws-win"><div class="bws-bar"></div><div class="bws-vp"></div></div>
-  <ol class="bws-steps" aria-label="Steps"></ol>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -47,7 +28,7 @@ import { BrowserSession } from './browser-session/BrowserSession';
   ]}
   ask={{ label: 'Allow closing it', onAllow: allow }}
 >
-  <div className="dm-bws-pg">{/* the page, drawn as a wireframe */}</div>
+  <div className="vo-bws-pg">{/* the page, drawn as a wireframe */}</div>
 </BrowserSession>
 ```
 
@@ -57,16 +38,16 @@ import { BrowserSession } from './browser-session/BrowserSession';
 
 ```html
 <!-- imports: [BrowserSessionComponent] -->
-<dm-browser-session
+<BrowserSession
   title="Pricing research"
   url="northwind.app/pricing"
   [steps]="steps"
   [ask]="cookieAsk"
 >
   <ng-template #page>
-    <div class="dm-bws-pg"><!-- the page, drawn as a wireframe --></div>
+    <div class="vo-bws-pg"><!-- the page, drawn as a wireframe --></div>
   </ng-template>
-</dm-browser-session>
+</BrowserSession>
 ```
 
 </Tab>

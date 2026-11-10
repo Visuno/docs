@@ -1,0 +1,100 @@
+# Prompt starters (/docs/components/prompt-starters)
+
+Prompt starters are suggested first prompts shown as cards, two to a row. Picking one writes its
+full `prompt` into the field word by word and marks the card as picked; pressing Send emits the
+prompt and clears the field with a sent line. Pass `onShuffle` to add a Shuffle button and swap in
+another set of `starters` — a new set staggers the cards in again.
+
+<Preview>
+  <PromptStartersExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { PromptStarters, type Starter } from './prompt-starters/PromptStarters';
+
+const starters: Starter[] = [
+  { icon: 'grid', tone: 'blue', title: 'Audit a page', description: 'Check the pricing page', prompt: 'Audit pricing for spacing and contrast' },
+  { icon: 'edit', tone: 'purple', title: 'Rewrite copy', description: 'Shorten the intro', prompt: 'Make the onboarding intro shorter' },
+];
+
+<PromptStarters
+  starters={starters}
+  onSend={(prompt) => run(prompt)}
+  onShuffle={() => setStarters(next())}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [PromptStartersComponent] -->
+starters: Starter[] = [
+  { icon: 'grid', tone: 'blue', title: 'Audit a page', description: 'Check the pricing page', prompt: 'Audit pricing for spacing and contrast' },
+];
+
+<PromptStarters
+  [starters]="starters"
+  [onShuffle]="true"
+  (send$)="run($event)"
+  (shuffle)="starters = next()"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/prompt_starters.dart';
+
+PromptStarters(
+  starters: const [
+    Starter(
+      icon: Icons.grid_view,
+      tone: StarterTone.blue,
+      title: 'Audit a page',
+      description: 'Check the pricing page',
+      prompt: 'Audit pricing for spacing and contrast',
+    ),
+  ],
+  onSend: (prompt) => run(prompt),
+  onShuffle: () => setState(() => starters = next()),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `starters` | `Starter[]` | The starters to show, two to a row. Pass a new set to stagger them in again. |
+| `value` | `string \| null` | The title of the picked starter. Leave it out to let the cards pick it. |
+| `defaultValue` | `string \| null` | Initial picked title when uncontrolled. |
+| `onValueChange` | `(title: string \| null) => void` | Called with the picked starter's title, or `null` when cleared. |
+| `onSend` | `(prompt: string) => void` | Called with the prompt when Send is pressed. |
+| `onShuffle` | `() => void` | Adds a Shuffle button under the field. Swap in another set of starters when called. |
+| `placeholder` | `string` | The field's empty text. Defaults to `Pick a starter or type your own`. |
+| `sentLabel` | `string` | Shown in the field once the prompt is sent. Defaults to `Sent to the agent`. |
+| `Starter.icon` | `IconName` | The card's icon. |
+| `Starter.tone` | `blue \| purple \| green \| orange \| red \| yellow \| pink \| teal` | Colours the icon. |
+| `Starter.title` | `string` | A few words, like "Audit a page". |
+| `Starter.description` | `string` | One quiet line under the title. |
+| `Starter.prompt` | `string` | The full prompt it writes into the field when picked. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The cards
+sit on a chip fill that lifts to a surface with a faint ring when picked; the field is a pill on a
+surface with the shared shadow, and the Send button uses the accent tokens (a disabled hatch until a
+starter is picked). All colours, radii and spacing come from the `--vo-*` tokens.

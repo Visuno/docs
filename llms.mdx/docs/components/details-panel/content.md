@@ -1,0 +1,138 @@
+# Details panel (/docs/components/details-panel)
+
+A details panel shows a record's properties in folding sections and lets you edit them in
+place. Each `section` holds `rows`: a `select` row picks its value from a small menu (with a
+coloured dot, an avatar or a plain chevron), a `number` row rolls to its new value, a `tags`
+row carries labels and an optional add button, and a plain row just shows its `value`. The
+accent flashes behind a value when it changes. A `copyValue` adds a copy button beside the
+title.
+
+<Preview>
+  <DetailsPanelExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { DetailsPanel, type DetailsPanelSection } from './details-panel/DetailsPanel';
+
+const sections: DetailsPanelSection[] = [
+  {
+    key: 'props',
+    title: 'Properties',
+    rows: [
+      {
+        key: 'status',
+        label: 'Status',
+        type: 'select',
+        defaultValue: 'review',
+        options: [
+          { value: 'progress', label: 'In progress', color: 'var(--vo-py)' },
+          { value: 'review', label: 'In review', color: 'var(--vo-accent)' },
+          { value: 'shipped', label: 'Shipped', color: 'var(--vo-ok)' },
+        ],
+      },
+      { key: 'tokens', label: 'Tokens', type: 'number', value: 184200 },
+      { key: 'due', label: 'Due', value: 'Oct 24' },
+    ],
+  },
+];
+
+<DetailsPanel title="Pricing page redesign" kind="RUN" copyValue="run_8f2a" sections={sections} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [DetailsPanelComponent] -->
+sections: DetailsPanelSection[] = [
+  {
+    key: 'props', title: 'Properties',
+    rows: [
+      { key: 'status', label: 'Status', type: 'select', defaultValue: 'review',
+        options: [
+          { value: 'progress', label: 'In progress', color: 'var(--vo-py)' },
+          { value: 'review', label: 'In review', color: 'var(--vo-accent)' },
+        ] },
+      { key: 'tokens', label: 'Tokens', type: 'number', value: 184200 },
+    ],
+  },
+];
+
+<DetailsPanel
+  title="Pricing page redesign"
+  kind="RUN"
+  copyValue="run_8f2a"
+  [sections]="sections"
+  (valueChange)="onChange($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/details_panel.dart';
+
+DetailsPanel(
+  title: 'Pricing page redesign',
+  kind: 'RUN',
+  copyValue: 'run_8f2a',
+  sections: [
+    DetailsPanelSection(
+      key: 'props',
+      title: 'Properties',
+      rows: [
+        DetailsPanelRow.select(
+          key: 'status',
+          label: 'Status',
+          defaultValue: 'review',
+          options: const [
+            DetailsPanelOption(value: 'progress', label: 'In progress', color: Color(0xFF856404)),
+            DetailsPanelOption(value: 'review', label: 'In review', color: Color(0xFF116FF8)),
+          ],
+        ),
+        const DetailsPanelRow.number(key: 'tokens', label: 'Tokens', number: 184200),
+        const DetailsPanelRow.text(key: 'due', label: 'Due', value: 'Oct 24'),
+      ],
+    ),
+  ],
+);
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | The title at the top, like "Pricing page redesign". |
+| `kind` | `string` | A short type tag before the title, like "RUN". |
+| `copyValue` | `string` | Adds a copy button that copies this, like a run ID. |
+| `copyLabel` | `string` | The copy button's tooltip. Defaults to "Copy run ID". |
+| `sections` | `DetailsPanelSection[]` | The folding sections, each a `key`, a `title` and its `rows`. |
+| `open` | `string[]` | Keys of the open sections. Leave it out to let the headers toggle them; every section starts open. |
+| `onOpenChange` | `(open) => void` | Called when the open sections change. |
+| `row.type` | `text \| select \| number \| tags` | What the row shows. A plain `text` row is the default. |
+| `select.options` | `{ value; label; detail?; color?; avatar? }[]` | The menu choices, with a dot (`color`), an `avatar` or a plain chevron. |
+| `select.onValueChange` | `(value) => void` | Called when the row's value changes. |
+| `number.value` | `number` | The value, which rolls into view and whenever it changes. |
+| `number.format` | `(n) => string` | Turns the number into text. Defaults to a rounded number with thousands separators. |
+| `tags.tags` | `{ label; tone? }[]` | The labels; `tone` tints a chip. Later tags enter with the panel. |
+| `tags.onAdd` | `() => void` | Shows an add button after the labels and fires when it is pressed. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The
+panel sits on a surface; values hover and flash with the accent tint, dots and avatars take
+the hue tokens, and the folding sections draw from the shared `fold` and popover tokens, so
+everything reads against either theme. In Soft the panel, menus and chips are rounder.

@@ -1,23 +1,22 @@
 # Introduction (/docs)
 
 **Visuno** is an open-source UI component library for building agent interfaces. Every component
-ships natively for **Vanilla JS**, **React**, **Angular**, and **Flutter**, built from a single
-shared set of design tokens — so a component looks and behaves the same wherever you use it.
+ships natively for **React**, **Angular**, and **Flutter**, built from a single shared set of
+design tokens — so a component looks and behaves the same wherever you use it.
 
 Each component in these docs has a **live preview** you can toggle between light/dark and the two
-styles, plus the code for all four frameworks side by side.
+styles, plus the code for all three frameworks side by side.
 
-## Four frameworks, one design [#four-frameworks-one-design]
+## Three frameworks, one design [#three-frameworks-one-design]
 
-| Framework | Form |
-|-----------|------|
-| **Vanilla JS** | Plain HTML + CSS + JS — no build step, drop it in |
-| **React** | `.tsx` components (requires React 19) |
-| **Angular** | Standalone components (`dm-*` selectors, Angular 17+) |
-| **Flutter** | Dart widgets, themed to match the web |
+| Framework | Form | Package |
+|-----------|------|---------|
+| **React** | `.tsx` components (React 18+) | `@visuno/react` |
+| **Angular** | Standalone components (`vo-*` selectors, Angular 18+) | `@visuno/angular` |
+| **Flutter** | Dart widgets, themed to match the web | `visuno` on pub.dev |
 
-The Vanilla and React versions are the reference; Angular and Flutter are native ports that mirror
-the same props and behavior.
+The React version is the reference; Angular and Flutter are native ports that mirror the same props
+and behavior.
 
 ## Theming [#theming]
 
@@ -28,7 +27,7 @@ Every component responds to the same two switches, so your whole UI changes at o
 - **Style** — the default **Blueprint** style, or **Soft** via `data-style="soft"` (web). Blueprint
   is crisp and squared; Soft is rounded and plush.
 
-Design tokens (`--dm-*` on the web, `DmColors`/`DmSpace`/`DmRadius` in Flutter) drive every color,
+Design tokens (`--vo-*` on the web, `VoColors`/`VoSpace`/`VoRadius` in Flutter) drive every color,
 space, radius, and motion — change a token once and it flows everywhere.
 
 ## Sections [#sections]
@@ -45,7 +44,7 @@ Components are grouped by what they do in an agent product:
 
 <Cards>
   <Card title="Browse components" href="/docs/components/status-pill" description="Live previews and code for every component." />
-  <Card title="Components on GitHub" href="https://github.com/Visuno/components" description="The source for all four frameworks." />
+  <Card title="Components on GitHub" href="https://github.com/Visuno/components" description="The source for all three frameworks." />
 </Cards>
 
 Pick a component from the sidebar, copy the snippet for your framework, and drop it in. Pull the

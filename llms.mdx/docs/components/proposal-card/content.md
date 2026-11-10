@@ -1,0 +1,109 @@
+# Proposal card (/docs/components/proposal-card)
+
+A proposal card is a change the agent proposes, posted in the thread. It shows a `from` value
+changing to the chosen option, a confidence meter that fills in a moment after the card appears
+and then follows the chosen option, and the other `options` behind an "other options" fold. Accept,
+Not now and Undo move it between `open`, `accepted` and `dismissed`. By default it sits flat in a
+chat thread; set `bare` to `false` to give it a card of its own.
+
+<Preview>
+  <ProposalCardExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { ProposalCard, type ProposalOption } from './proposal-card/ProposalCard';
+
+const options: ProposalOption[] = [
+  { color: '#5b6472', label: '#5B6472', badge: '5.9 : 1', tone: 'ok', name: 'Suggested', description: 'Balanced with the primary', confidence: 84 },
+  { color: '#475161', label: '#475161', badge: '7.4 : 1', tone: 'ok', name: 'Darker', description: 'Stronger than the primary', confidence: 62 },
+];
+
+<ProposalCard
+  title="Raise contrast on the secondary button"
+  subtitle="Pricing, frame 2 of 3"
+  from={{ color: '#c9cfd8', label: '#C9CFD8', badge: '2.1 : 1', tone: 'bad' }}
+  options={options}
+  acceptedLabel="Applied to 3 buttons"
+  onAccept={(option, i) => apply(option, i)}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ProposalCardComponent] -->
+options: ProposalOption[] = [
+  { color: '#5b6472', label: '#5B6472', badge: '5.9 : 1', tone: 'ok', name: 'Suggested', description: 'Balanced with the primary', confidence: 84 },
+  { color: '#475161', label: '#475161', badge: '7.4 : 1', tone: 'ok', name: 'Darker', description: 'Stronger than the primary', confidence: 62 },
+];
+
+<ProposalCard
+  title="Raise contrast on the secondary button"
+  subtitle="Pricing, frame 2 of 3"
+  [from]="{ color: '#c9cfd8', label: '#C9CFD8', badge: '2.1 : 1', tone: 'bad' }"
+  [options]="options"
+  acceptedLabel="Applied to 3 buttons"
+  (accepted)="apply($event.option, $event.index)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/proposal_card.dart';
+
+ProposalCard(
+  title: 'Raise contrast on the secondary button',
+  subtitle: 'Pricing, frame 2 of 3',
+  from: const ProposalValue(color: Color(0xFFC9CFD8), label: '#C9CFD8', badge: '2.1 : 1', tone: ProposalTone.bad),
+  options: const [
+    ProposalOption(color: Color(0xFF5B6472), label: '#5B6472', badge: '5.9 : 1', tone: ProposalTone.ok, name: 'Suggested', description: 'Balanced with the primary', confidence: 84),
+    ProposalOption(color: Color(0xFF475161), label: '#475161', badge: '7.4 : 1', tone: ProposalTone.ok, name: 'Darker', description: 'Stronger than the primary', confidence: 62),
+  ],
+  acceptedLabel: 'Applied to 3 buttons',
+  onAccept: (option, i) => apply(option, i),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `ReactNode` | What the agent wants to change. |
+| `subtitle` | `ReactNode` | Where, like "Pricing, frame 2 of 3". |
+| `icon` | `IconName` | The icon in the tile. Defaults to a wand. |
+| `from` | `ProposalValue` | How it is now — a swatch, its label and a tag. |
+| `options` | `ProposalOption[]` | The changes on offer, the agent's pick first. |
+| `value` / `defaultValue` | `number` | Index of the option shown as the change. Leave `value` out to let the list pick it. |
+| `onValueChange` | `(index) => void` | Called when another option is chosen. |
+| `open` / `defaultOpen` | `boolean` | Whether the other options are listed. Leave `open` out to let the toggle open them. |
+| `onOpenChange` | `(open) => void` | Called when the fold toggles. |
+| `status` / `defaultStatus` | `open \| accepted \| dismissed` | Leave `status` out to let Accept, Not now and Undo move it. |
+| `onStatusChange` | `(status) => void` | Called when the status changes. |
+| `onAccept` | `(option, index) => void` | Called with the chosen option when Accept is pressed. |
+| `onDismiss` / `onUndo` | `() => void` | Called by Not now and Undo. |
+| `acceptedLabel` | `string` | Shown once accepted, like "Applied to 3 buttons". |
+| `dismissedLabel` | `string` | Shown once dismissed. |
+| `confidenceLabel` | `string` | Label beside the confidence meter. |
+| `bare` | `boolean` | Sits flat in a chat thread (the default). Set `false` to give it a card of its own. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The diff
+chip, confidence meter and tags take their colours from the theme tokens — the current value reads as
+`bad` and the options as `ok` by default — and the icon tile uses the accent tint, so the card reads
+against the dark stage; in Soft the swatches, tile and pills are rounder.

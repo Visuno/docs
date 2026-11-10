@@ -1,0 +1,116 @@
+# Decision prompt (/docs/components/decision-prompt)
+
+The agent asks a few quick questions before it starts — one at a time, with a row of
+options for each. Number keys pick, **Enter** continues and **Skip** lets the agent decide.
+Once every question is answered the body settles into a summary and a line that says the
+agent is getting going; pass `started` to settle that line with a check.
+
+<Preview>
+  <DecisionPromptExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { DecisionPrompt, type DecisionQuestion } from './decision-prompt/DecisionPrompt';
+
+const questions: DecisionQuestion[] = [
+  {
+    question: 'Which frames should the agent redesign?',
+    label: 'Frames',
+    options: [
+      { label: 'Pricing only', detail: '1 frame' },
+      { label: 'Pricing and checkout', detail: '3 frames' },
+      { label: 'The whole flow', detail: '9 frames' },
+    ],
+  },
+  // …more questions
+];
+
+<DecisionPrompt
+  questions={questions}
+  startLabel="Starting the redesign"
+  onComplete={(answers) => run(answers)}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [DecisionPromptComponent] -->
+questions: DecisionQuestion[] = [
+  {
+    question: 'Which frames should the agent redesign?',
+    label: 'Frames',
+    options: [
+      { label: 'Pricing only', detail: '1 frame' },
+      { label: 'Pricing and checkout', detail: '3 frames' },
+      { label: 'The whole flow', detail: '9 frames' },
+    ],
+  },
+];
+
+<DecisionPrompt
+  [questions]="questions"
+  startLabel="Starting the redesign"
+  (complete)="run($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/decision_prompt.dart';
+
+DecisionPrompt(
+  questions: const [
+    DecisionQuestion(
+      question: 'Which frames should the agent redesign?',
+      label: 'Frames',
+      options: [
+        DecisionOption(label: 'Pricing only', detail: '1 frame'),
+        DecisionOption(label: 'Pricing and checkout', detail: '3 frames'),
+        DecisionOption(label: 'The whole flow', detail: '9 frames'),
+      ],
+    ),
+  ],
+  startLabel: 'Starting the redesign',
+  onComplete: (answers) => run(answers),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `questions` | `DecisionQuestion[]` | The questions the agent asks, in order. |
+| `answers` | `(number \| null)[]` | The answers so far — an option's index, or `null` for a skipped question. Leave it out to let Continue and Skip fill it. |
+| `defaultAnswers` | `(number \| null)[]` | The answers the prompt starts with when uncontrolled. |
+| `onAnswersChange` | `(answers) => void` | Called whenever the answers change (a pick, or a skip). Angular: `(answersChange)`. |
+| `onComplete` | `(answers) => void` | Called once every question is answered. Angular: `(complete)`. |
+| `skippedLabel` | `string` | What the summary says for a skipped question. Defaults to `Agent decides`. |
+| `startLabel` | `string` | The line under the summary while the agent gets going. Defaults to `Starting`. |
+| `started` | `boolean` | The agent has got going: the summary line settles with a check. |
+| `startedLabel` | `string` | What that line says once started. Defaults to `startLabel`. |
+| `bare` | `boolean` | Sits flat in a chat thread (the default). Set `false` to give it a card of its own. |
+| `question.label` | `string` | A short name for the question in the summary, like "Scope". |
+| `option.detail` | `string` | Quiet text at the end of the row, like "3 frames" or "Recommended". |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). It sits
+flat in the chat thread by default; set `bare` to `false` to give it its own surface card. The active
+step dot and the picked option's key badge take the accent tint, so the prompt reads against the stage
+in either theme; in Soft the card, options and pills are rounder.

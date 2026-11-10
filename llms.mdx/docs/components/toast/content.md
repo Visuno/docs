@@ -10,25 +10,7 @@ to slide a new toast in and the old one away; keep the same `id` to change the t
 
 ## Usage [#usage]
 
-<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
-
-<Tab value="Vanilla">
-
-```html
-<!-- include core.css + toast.css -->
-<div class="dm-tst-slot" aria-live="polite">
-  <div class="dm-tst-t dm-tst-in" role="status">
-    <span class="dm-g"><!-- tone icon --></span>
-    <div class="dm-tx"><b>Deploy succeeded</b><span>Live in production.</span></div>
-    <div class="dm-acts">
-      <button class="dm-pill dm-sm dm-ghost">Undo</button>
-      <button class="dm-ib" aria-label="Dismiss"><!-- x --></button>
-    </div>
-  </div>
-</div>
-```
-
-</Tab>
+<Tabs items={['React', 'Angular', 'Flutter']}>
 
 <Tab value="React">
 
@@ -58,7 +40,7 @@ toast: ToastData | null = {
   id: 1, tone: 'success', title: 'Deploy succeeded', description: 'Live in production.'
 };
 
-<dm-toast [toast]="toast" (dismiss)="toast = null" />
+<Toast [toast]="toast" (dismiss)="toast = null" />
 ```
 
 </Tab>

@@ -1,0 +1,107 @@
+# FAQ (/docs/faq)
+
+Short answers to the questions that come up most. If something isn't covered here,
+open an issue on [GitHub](https://github.com/Visuno/issues/issues).
+
+## General [#general]
+
+<Accordions>
+
+<Accordion title="What is Visuno?">
+Visuno is an open-source UI component library for building **agent-powered products**.
+Every component ships natively for **React**, **Angular**, and **Flutter**, built from one
+shared set of design tokens — so a component looks and behaves the same wherever you use it.
+</Accordion>
+
+<Accordion title="Is it free to use?">
+Yes. Visuno is open source under the **MIT licence** — free for personal and commercial
+projects, with no attribution required. See the [components repository](https://github.com/Visuno/components)
+for the full licence text.
+</Accordion>
+
+<Accordion title="Is Visuno production-ready?">
+The React build is the reference implementation and is stable. Angular and Flutter are
+native ports that mirror the same props and behaviour. As with any pre-1.0 library, pin a
+version and read the [changelog](/docs/changelog) before upgrading.
+</Accordion>
+
+</Accordions>
+
+## Frameworks [#frameworks]
+
+<Accordions>
+
+<Accordion title="Which frameworks are supported?">
+Three, from a single design source:
+
+| Framework | Form | Package |
+|-----------|------|---------|
+| **React** | `.tsx` components (React 18+) | `@visuno/react` |
+| **Angular** | Standalone components (`vo-*` selectors, Angular 18+) | `@visuno/angular` |
+| **Flutter** | Dart widgets, themed to match the web | `visuno` on pub.dev |
+
+The React version is the reference; Angular and Flutter mirror the same props and behaviour.
+</Accordion>
+
+<Accordion title="Do all frameworks get every component?">
+That's the goal — one design, three frameworks. React leads, and the Angular and Flutter
+ports follow. Each component's docs page shows the code for every framework it currently
+ships in, side by side.
+</Accordion>
+
+<Accordion title="Do I need a build step?">
+React, Angular, and Flutter use their usual toolchains.
+</Accordion>
+
+<Accordion title="Can I use it with Next.js / Vite / other React setups?">
+Yes. The React components are plain React 18+ components with no framework lock-in, so they
+work in Next.js, Vite, Remix, or any React setup.
+</Accordion>
+
+</Accordions>
+
+## Theming & styling [#theming--styling]
+
+<Accordions>
+
+<Accordion title="How does dark mode work?">
+Set `data-theme="dark"` on a parent element (web), or use `Brightness.dark` in the Flutter
+theme. Every component reads the same tokens, so your whole UI flips at once.
+</Accordion>
+
+<Accordion title="What are the two styles?">
+The default **Blueprint** style is crisp and squared; **Soft** is rounded and plush. Switch
+to Soft on the web with `data-style="soft"` on a parent element.
+</Accordion>
+
+<Accordion title="Can I customise colours, spacing, and radii?">
+Yes. Design tokens drive everything — `--vo-*` custom properties on the web, and
+`VoColors` / `VoSpace` / `VoRadius` in Flutter. Override a token once and the change flows
+through every component.
+</Accordion>
+
+</Accordions>
+
+## Using the components [#using-the-components]
+
+<Accordions>
+
+<Accordion title="How do I add a component to my project?">
+Pick a component from the sidebar, copy the snippet for your framework, and drop it in.
+Pull the shared core once (tokens + helpers), and every component you add after that just
+works.
+</Accordion>
+
+<Accordion title="Are the components accessible?">
+Components are built with semantic markup, keyboard support, and reduced-motion handling
+where animation is involved. Accessibility notes specific to a component are called out on
+its docs page.
+</Accordion>
+
+<Accordion title="How do I report a bug or request a component?">
+Open an issue on the [issue tracker](https://github.com/Visuno/issues/issues). Planned
+work and what's shipped are tracked on the [roadmap](/docs/roadmap) and
+[changelog](/docs/changelog).
+</Accordion>
+
+</Accordions>

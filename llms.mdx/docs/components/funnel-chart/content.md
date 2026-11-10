@@ -1,0 +1,102 @@
+# Funnel chart (/docs/components/funnel-chart)
+
+A funnel chart shows how many people reach each `stage` in order. Each bar grows in a moment
+after the chart appears, the stage that loses the largest share of the one before it is marked
+in red, and the agent's `insight` sits below. With more than one `view`, a segment switch redraws
+the bars top to bottom and crossfades the note.
+
+<Preview>
+  <FunnelChartExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { FunnelChart } from './funnel-chart/FunnelChart';
+
+<FunnelChart
+  title="Signup to paid"
+  stages={['Signed up', 'Opened a file', 'Ran the agent', 'Invited a teammate', 'Paid']}
+  views={[
+    { key: 'all', label: 'All', values: [12400, 9180, 6420, 2310, 1490], insight: 'The biggest drop is after the first agent run.' },
+    { key: 'team', label: 'Teams', values: [4100, 3570, 2980, 1890, 1210], insight: 'Teams convert well.' },
+  ]}
+  defaultView="all"
+  shareLabel="of signups"
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [FunnelChartComponent] -->
+stages = ['Signed up', 'Opened a file', 'Ran the agent', 'Invited a teammate', 'Paid'];
+views = [
+  { key: 'all', label: 'All', values: [12400, 9180, 6420, 2310, 1490], insight: 'The biggest drop is after the first agent run.' },
+  { key: 'team', label: 'Teams', values: [4100, 3570, 2980, 1890, 1210], insight: 'Teams convert well.' },
+];
+
+<FunnelChart
+  title="Signup to paid"
+  [stages]="stages"
+  [views]="views"
+  defaultView="all"
+  shareLabel="of signups"
+  (viewChange)="onView($event)"
+/>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/funnel_chart.dart';
+
+FunnelChart(
+  title: 'Signup to paid',
+  stages: const ['Signed up', 'Opened a file', 'Ran the agent', 'Invited a teammate', 'Paid'],
+  views: const [
+    FunnelChartView(key: 'all', label: 'All', values: [12400, 9180, 6420, 2310, 1490], insight: 'The biggest drop is after the first agent run.'),
+    FunnelChartView(key: 'team', label: 'Teams', values: [4100, 3570, 2980, 1890, 1210], insight: 'Teams convert well.'),
+  ],
+  defaultView: 'all',
+  shareLabel: 'of signups',
+)
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | Like "Signup to paid". |
+| `stages` | `string[]` | The stages in order, like "Signed up" then "Opened a file". |
+| `views` | `FunnelChartView[]` | One set of numbers per view. With more than one, a switch picks between them. |
+| `view` | `string` | Key of the view shown. Leave it out to let the switch change it. |
+| `defaultView` | `string` | Defaults to the first view. |
+| `onViewChange` | `(key) => void` | Called when the switch picks a view. |
+| `shareLabel` | `string` | Ends a stage's tip, like "of signups" in "51.8% of signups". |
+| `startLabel` | `string` | The first stage's tip. Defaults to "Starting point". |
+| `format` | `(n) => string` | Writes a count. Defaults to whole numbers like 12,400. |
+| `view.key` | `string` | Identifies the view. |
+| `view.label` | `string` | On the switch, like "Teams". |
+| `view.values` | `number[]` | How many reached each stage, in order. |
+| `view.insight` | `string` | The agent's note under the funnel for this view. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The card
+sits on a surface and the bars run from the first chart colour (`--vo-c1`, the accent) down to the
+next (`--vo-c2`), so each stage reads a shade apart; the biggest drop uses the bad tone and the
+agent's note tints with the accent — all from the theme tokens. In the default style the bars carry
+a light accent edge on the track; in Soft they are flat fills.
