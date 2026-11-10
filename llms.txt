@@ -91,7 +91,10 @@
   - [Account table](/docs/components/account-table): Customer accounts with health, plan and an agent note per row.
 
   - **Dates**
+  - [Date Picker](/docs/components/date-picker): A field that opens a calendar, with quick picks and natural language. Add range mode to pick a start and end across two months.
   - [Segmented Control](/docs/components/segmented-control): One choice from a few views or options, with a white knob that slides to the picked one. Works as tabs or as a radio group, fully keyboard driven.
+  - [Event Calendar](/docs/components/event-calendar): A work week of events you can drag, add to and open for details — and an agent that finds a free slot and suggests it.
+  - [Agenda](/docs/components/agenda): Today's schedule in order, with a live now line and the notes an agent prepared for each event.
 
   - **Core**
   - [Card](/docs/components/card): A surface you drop other components onto, with an optional header, body and footer, and an interactive mode that turns the whole card into a hit target.
