@@ -11,7 +11,7 @@
 // Target:  ./visuno
 
 import { cp, rm, stat } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const DOCS = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -25,6 +25,15 @@ try {
   process.exit(1);
 }
 
+// Only the component source (and its CSS) is needed to render live docs examples.
+// Skip the package's own tooling: installed deps, build output, and build config —
+// copying those pulls a second @types/react into the tree and feeds build-only
+// files (e.g. tsup.config.ts) to the docs type-checker.
+const SKIP = new Set(['node_modules', 'dist', 'tsup.config.ts']);
+
 await rm(DEST, { recursive: true, force: true });
-await cp(SRC, DEST, { recursive: true });
+await cp(SRC, DEST, {
+  recursive: true,
+  filter: (src) => !SKIP.has(relative(SRC, src).split(sep)[0]),
+});
 console.log(`Synced React components: ${SRC} -> ${DEST}`);
