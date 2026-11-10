@@ -17,60 +17,47 @@ Open http://localhost:3000 with your browser to see the result.
 
 ## GitHub Pages
 
-This folder is the root of the `Visuno/docs` repository. Its
-`.github/workflows/deploy-pages.yml` workflow builds pull requests. On pushes to
-`main`, it commits the static output to the `deploy` branch, pushes that branch,
-and publishes its contents through GitHub Pages. You can also run it manually
-from the Actions tab on `main`.
+Deployment is manual. The `deploy` branch contains the generated static site,
+`.nojekyll`, and a `CNAME` for the custom domain https://visuno.dev/. GitHub Pages
+serves this branch directly; no GitHub Actions deployment workflow is required.
 
 In `Visuno/docs`, set **Settings → Pages → Build and deployment → Source** to
-**GitHub Actions** before the first deployment. The default site URL is
-https://visuno.github.io/docs/. The workflow reads the Pages base path, so asset
-URLs also work if Pages is configured with a custom domain.
-The `deploy` branch contains only the generated site and `.nojekyll`. Keep Pages
-set to **GitHub Actions**: pushes made with the workflow's `GITHUB_TOKEN` do not
-trigger branch-based Pages builds, so the workflow explicitly uploads and
-deploys the branch's contents. The workflow needs permission to write to
-`deploy`; branch rules must allow the GitHub Actions bot to push there.
+**Deploy from a branch**, select **deploy**, and use **/ (root)**.
 
-The build checks out `Visuno/components` at `main` alongside this repository
-because `npm run build` syncs its React examples from `../components/react`.
-Changes in the components repository alone do not trigger a docs deployment;
-run the docs workflow manually to publish them.
-
-To build the same static output locally from this workspace:
+From this standalone docs repository, with the `Visuno/components` checkout
+alongside it at `../components`, run:
 
 ```bash
 npm ci
-NEXT_PUBLIC_BASE_PATH=/docs SITE_URL=https://visuno.github.io/docs/ npm run build
-```
-
-To build and commit the latest site to the local `deploy` branch:
-
-```bash
-npm run deploy:branch
-```
-
-To also push the branch to `origin`:
-
-```bash
 npm run deploy:branch -- --push
 ```
 
-The script creates `deploy` on its first run, preserves deployment history,
-removes obsolete output files, and skips the commit when nothing changed. It
-uses a temporary Git worktree, so your source branch and uncommitted files stay
-in place. Configure your Git author name and email before running it locally.
-Use `--skip-build` to commit an existing `out/` export. Local builds default to
-the `/docs` base path and `https://visuno.github.io/docs/` site URL; set
-`NEXT_PUBLIC_BASE_PATH` (including an empty value for root hosting) and `SITE_URL`
-to override them.
+The script syncs the React examples from `../components/react`, builds the
+latest site, creates or updates `deploy`, commits changed output, and pushes
+the branch to `origin`. Configure your Git author name and email before running
+it. To update only the local branch, omit `--push`. Use `--skip-build` to publish
+an existing `out/` export.
 
-The generated site is in `out/`; serve it with a static web server mounted at
-`/docs/` (or omit `NEXT_PUBLIC_BASE_PATH` when hosting at the root). Search runs
-in the browser using the exported index. Markdown is available at the explicit
-`/llms.mdx/docs/<slug>/content.md` URLs, prefixed with the site's base path;
-GitHub Pages cannot perform the former Accept-header or `.md` proxy rewrites.
+The script preserves deployment history, removes obsolete files, and skips the
+commit when output is unchanged. It uses a temporary Git worktree, keeping your
+source branch and uncommitted files in place. It does not commit or push source
+changes to `main`; commit and push those separately when needed.
+
+Local builds default to the root of `https://visuno.dev/`. To publish to a
+GitHub project site instead:
+
+```bash
+SITE_URL=https://visuno.github.io/docs/ npm run deploy:branch -- --push
+```
+
+The base path defaults to the path in `SITE_URL`; `NEXT_PUBLIC_BASE_PATH` can
+override it. A custom hostname produces a `CNAME` file; a `*.github.io` URL
+does not. Update the Pages custom-domain setting when changing the hostname.
+
+The generated site is in `out/`. Search runs in the browser using the exported
+index. Markdown is available at the explicit
+`/llms.mdx/docs/<slug>/content.md` URLs, prefixed with the site's base path.
+GitHub Pages cannot perform Accept-header or `.md` proxy rewrites.
 `npm start` requires a Next.js server build and cannot serve this static export.
 
 ## Explore
