@@ -8,6 +8,7 @@
     "dev": "next dev",
     "prebuild": "npm run sync",
     "build": "next build",
+    "deploy:branch": "node scripts/update-deploy-branch.mjs",
     "start": "next start",
     "pretypes:check": "npm run sync",
     "types:check": "next typegen && tsc --noEmit"

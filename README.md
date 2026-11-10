@@ -18,13 +18,20 @@ Open http://localhost:3000 with your browser to see the result.
 ## GitHub Pages
 
 This folder is the root of the `Visuno/docs` repository. Its
-`.github/workflows/deploy-pages.yml` workflow builds pull requests and deploys
-pushes to `main`. You can also run it manually from the Actions tab on `main`.
+`.github/workflows/deploy-pages.yml` workflow builds pull requests. On pushes to
+`main`, it commits the static output to the `deploy` branch, pushes that branch,
+and publishes its contents through GitHub Pages. You can also run it manually
+from the Actions tab on `main`.
 
 In `Visuno/docs`, set **Settings → Pages → Build and deployment → Source** to
 **GitHub Actions** before the first deployment. The default site URL is
 https://visuno.github.io/docs/. The workflow reads the Pages base path, so asset
 URLs also work if Pages is configured with a custom domain.
+The `deploy` branch contains only the generated site and `.nojekyll`. Keep Pages
+set to **GitHub Actions**: pushes made with the workflow's `GITHUB_TOKEN` do not
+trigger branch-based Pages builds, so the workflow explicitly uploads and
+deploys the branch's contents. The workflow needs permission to write to
+`deploy`; branch rules must allow the GitHub Actions bot to push there.
 
 The build checks out `Visuno/components` at `main` alongside this repository
 because `npm run build` syncs its React examples from `../components/react`.
@@ -37,6 +44,27 @@ To build the same static output locally from this workspace:
 npm ci
 NEXT_PUBLIC_BASE_PATH=/docs SITE_URL=https://visuno.github.io/docs/ npm run build
 ```
+
+To build and commit the latest site to the local `deploy` branch:
+
+```bash
+npm run deploy:branch
+```
+
+To also push the branch to `origin`:
+
+```bash
+npm run deploy:branch -- --push
+```
+
+The script creates `deploy` on its first run, preserves deployment history,
+removes obsolete output files, and skips the commit when nothing changed. It
+uses a temporary Git worktree, so your source branch and uncommitted files stay
+in place. Configure your Git author name and email before running it locally.
+Use `--skip-build` to commit an existing `out/` export. Local builds default to
+the `/docs` base path and `https://visuno.github.io/docs/` site URL; set
+`NEXT_PUBLIC_BASE_PATH` (including an empty value for root hosting) and `SITE_URL`
+to override them.
 
 The generated site is in `out/`; serve it with a static web server mounted at
 `/docs/` (or omit `NEXT_PUBLIC_BASE_PATH` when hosting at the root). Search runs
