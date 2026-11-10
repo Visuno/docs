@@ -5,6 +5,10 @@ Component source lives in the [components repository](https://github.com/Visuno/
 
 ## Unreleased [#unreleased]
 
+- **Date picker, Event calendar & Agenda** — three new **Dates** components with live docs pages. The **date picker** opens a calendar with quick picks and a box that understands "next friday", and in `range` mode becomes a two-month range picker with ready-made ranges and Apply. The **event calendar** shows a work week you can add to and open for details, with an agent that finds a free slot and suggests it. The **agenda** lists today's schedule with a live now line and the notes an agent prepared for each event. (React and docs land now; Angular and Flutter to follow.)
+
+- **Segmented control** — the docs example and the Angular/Flutter test benches now show a real "Pricing launch" planner: picking Day, Week or Month switches the panel below between a day agenda, a week list and a month grid, with Today and prev/next steppers. The previous demo had a dead radio group that drove nothing, so clicking appeared to do nothing — now every pick visibly changes the panel.
+
 - **Angular demos** — restored the React demos’ interactive state updates, streamed stories, retries, approvals, replay controls, and reduced-motion behavior. Added missing controlled inputs and copy/disabled button support in the Angular library.
 
 - **Angular** — component selectors now use PascalCase that mirrors the React component names (`<vo-status-pill>` → `<StatusPill>`, `<vo-icon>` → `<Icon>`, `<vo-agent-tree>` → `<AgentTree>`, …). The three selectors that shadowed native HTML elements are prefixed to stay unambiguous: `<VoButton>`, `<VoButtonCopy>`, `<VoProgress>`. The `voGridItem` / `vo-field-zone` directives become `gridItem` / `fieldZone`. The shared `--vo-*` design tokens and `vo-*` CSS classes are unchanged. **Breaking:** update Angular templates to the new tag names.
@@ -356,6 +360,92 @@ Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style
 sits on a surface, and each cell is a mix of the accent into the chip by its value — so the whole
 grid shifts with the theme's accent and the empty cells read against the surface. In Soft the card
 and cells are a touch rounder.
+
+
+# Agenda (/docs/components/agenda)
+
+An agenda lists today's events in order. A live **now line** sits after the last event that is over,
+so you can see at a glance what is next. Past events fade back. Open an event to reveal the notes the
+agent prepared for it and an optional action like **Join**. Events without notes don't open.
+
+<Preview>
+  <AgendaExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { Agenda } from './agenda/Agenda';
+
+const items = [
+  { time: '09:30', title: 'Pricing review with Maya', detail: '30 min · Zoom', past: true },
+  { time: '11:00', title: 'Agent demo', detail: '45 min · Room 2',
+    notes: ['Latest build is green.', 'Talking points ready.'],
+    action: { label: 'Join in 18 min' } },
+  { time: '16:00', title: 'Ship pricing v4', detail: 'visuno.dev/pricing' },
+];
+
+<Agenda title="Today" subtitle="Friday, Oct 23" now="10:42" items={items} defaultOpen="Agent demo" />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [AgendaComponent] -->
+<Agenda title="Today" subtitle="Friday, Oct 23" now="10:42"
+  [items]="items" defaultOpen="Agent demo" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/agenda.dart';
+
+Agenda(
+  title: 'Today',
+  subtitle: 'Friday, Oct 23',
+  now: '10:42',
+  items: const [
+    AgendaItem(time: '09:30', title: 'Pricing review with Maya', detail: '30 min · Zoom', past: true),
+    AgendaItem(time: '11:00', title: 'Agent demo', detail: '45 min · Room 2',
+      notes: ['Latest build is green.', 'Talking points ready.'],
+      action: AgendaAction(label: 'Join in 18 min')),
+  ],
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `items` | `AgendaItem[]` | The events, in order. Each has a `time`, `title`, optional `detail`, `people`, `notes` and `action`. |
+| `title` | `string` | The heading, like `Today`. |
+| `subtitle` | `string` | The quiet line under the title, like `Monday, Oct 19`. |
+| `count` | `string` | The tag in the corner. Defaults to `N events`. |
+| `now` | `string` | The time on the now line, like `10:42`. Leave it out for no line. |
+| `open` / `defaultOpen` | `string \| null` | The item whose notes are open, by key. Leave it out to let each item toggle. |
+| `onOpenChange` | `(key: string \| null) => void` | Fires when the open item changes. |
+
+An `AgendaItem` carries `time`, `title`, `detail?`, `people?`, `past?` (already over — fades back),
+`notes?` (shown when opened) and `action?` (`{ label, onClick }`, a button at the end of the notes).
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The now
+line, event bars and prep-note sparkles take the active theme's accent; avatars use the shared
+`--vo-av-*` palette. All spacing and radii come from the `--vo-*` tokens.
 
 
 # Agent inbox (/docs/components/agent-inbox)
@@ -2246,6 +2336,101 @@ the accent mark and the warning mark past the warning share, and the bar segment
 palette (blue, teal, violet, grey) from the tokens unless a part sets its own color.
 
 
+# Date Picker (/docs/components/date-picker)
+
+A date picker is a field that opens a calendar. Quick picks (**Today**, **Tomorrow**, **In a week**)
+sit under a box that understands plain English — type "next friday" or "in 2 weeks" and it picks the
+day straight away. The arrow keys move the focus a day or a week, across months too.
+
+Pass **`range`** and the same component becomes a range picker: two months side by side with
+ready-made ranges (last 7 days, last 30 days, this quarter), a live preview of the span as you hover,
+and **Apply**.
+
+<Preview>
+  <DatePickerExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { DatePicker } from './date-picker/DatePicker';
+
+const [day, setDay] = useState<Date | null>(null);
+
+// single day
+<DatePicker value={day} onValueChange={setDay} />
+
+// range mode: two months, presets, Apply
+const [range, setRange] = useState({ start: null, end: null });
+<DatePicker range rangeValue={range} onRangeChange={setRange} onApply={r => save(r)} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [DatePickerComponent] -->
+<DatePicker [value]="day" (valueChange)="day = $event" />
+
+<DatePicker range [rangeValue]="range"
+  (rangeChange)="range = $event" (apply)="save($event)" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/date_picker.dart';
+
+DatePicker(
+  value: day,
+  onValueChange: (d) => setState(() => day = d),
+),
+
+DatePicker(
+  range: true,
+  rangeValue: range,
+  onRangeChange: (r) => setState(() => range = r),
+  onApply: (r) => save(r),
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `range` | `boolean` | Pick a start and end across two months instead of a single day. |
+| `value` / `defaultValue` | `Date \| null` | The picked day (single mode). Pass `value` with `onValueChange` for a controlled field. |
+| `onValueChange` | `(date: Date \| null) => void` | Fires with the picked day (single mode). |
+| `rangeValue` / `defaultRangeValue` | `{ start: Date \| null; end: Date \| null }` | The picked range (range mode). |
+| `onRangeChange` | `(range) => void` | Fires with the range as it is built (range mode). |
+| `onApply` | `(range: { start: Date; end: Date }) => void` | Fires when **Apply** is pressed (range mode). |
+| `month` / `defaultMonth` | `Date` | The month on show, as its first day. In range mode this is the left calendar. |
+| `presets` | `{ label: string; days: number }[]` | Quick picks under the text box (single mode). |
+| `rangePresets` | `{ key, label, range }[]` | The side list of ready-made ranges (range mode). |
+| `parse` | `(text, today) => Date \| null` | Turns typed text into a day. Defaults to plain English (single mode). |
+| `today` | `Date` | The day marked with a dot. Pass one when rendering on a server. |
+| `weekStartsOn` | `0 \| 1` | `1` starts weeks on Monday (the default), `0` on Sunday. |
+| `locale` | `string` | Used for the month name, weekday letters and the default format. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The field,
+popover and calendar take the active theme's surface and field-line colors; the picked day and the
+range span use the accent. Field radius follows `--vo-r-field` (squared off in Blueprint, rounder in
+Soft). All driven by the shared `--vo-*` tokens.
+
+
 # Decision prompt (/docs/components/decision-prompt)
 
 The agent asks a few quick questions before it starts — one at a time, with a row of
@@ -3145,6 +3330,103 @@ Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style
 sits on a surface with the card shadow; pass and fail take the `--vo-ok` and `--vo-bad` tokens for
 their glyphs and bar segments, and a failed case tints with `--vo-bad-bg`, so it all reads against
 the stage. In Soft the panel, pills and segmented control are rounder.
+
+
+# Event Calendar (/docs/components/event-calendar)
+
+An event calendar shows a work week as a time grid. Drag an event to another time or day, click free
+time to add one, and open an event for its details card — who is coming, the agent's **prep notes**,
+and **Join**. Ask the agent to **find a time** and it sweeps the week, then suggests open slots; the
+first is the pick and the rest wait behind it. **Book** adds the picked slot as an event.
+
+<Preview>
+  <EventCalendarExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { EventCalendar } from './event-calendar/EventCalendar';
+
+const [events, setEvents] = useState([
+  { id: 'kickoff', title: 'Kickoff with Maya', start: new Date(2026, 9, 19, 10), end: new Date(2026, 9, 19, 11), tone: 'purple' },
+]);
+
+<EventCalendar
+  week={new Date(2026, 9, 19)}
+  now={new Date(2026, 9, 23, 10, 42)}
+  events={events}
+  onEventsChange={setEvents}
+  askLabel="Find 45 min for a design review"
+  onAsk={findSlot}
+  suggestions={suggestions}
+  onBook={book}
+  onPrepNotes={ev => `Context for ${ev.title} is ready.`}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [EventCalendarComponent] -->
+<EventCalendar [week]="week" [now]="now"
+  [events]="events" (eventsChange)="events = $event"
+  askLabel="Find 45 min for a design review" (ask)="findSlot()"
+  [suggestions]="suggestions" (book)="book($event)" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/event_calendar.dart';
+
+EventCalendar(
+  week: DateTime(2026, 10, 19),
+  now: DateTime(2026, 10, 23, 10, 42),
+  events: events,
+  onEventsChange: (e) => setState(() => events = e),
+  askLabel: 'Find 45 min for a design review',
+  onAsk: findSlot,
+  suggestions: suggestions,
+  onBook: book,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `week` | `Date` | The first day shown, like Monday Oct 19. Its time of day is ignored. |
+| `events` / `defaultEvents` | `EventCalendarEvent[]` | The events. Each has `id`, `title`, `start`, `end`, optional `tone` and `people`. |
+| `onEventsChange` | `(events) => void` | Fires when an event is moved, added or removed. |
+| `days` | `number` | How many days to show, from `week`. Defaults to 5. |
+| `startHour` / `hours` | `number` | The first hour and how many hours the grid shows. Defaults to 9am for 8 hours. |
+| `now` | `Date` | Marks today and draws the now line. Leave it out for neither. |
+| `selected` / `defaultSelected` | `string \| null` | The event whose details card is open, by id. |
+| `askLabel` / `onAsk` | `string` / `() => void` | Adds the agent's button to the header. |
+| `finding` | `boolean` | The agent is looking: its button thinks and a scan line sweeps the week. |
+| `suggestions` | `EventCalendarSuggestion[]` | Slots the agent suggests. The first is the pick, the rest wait behind it. |
+| `onBook` / `onSkip` | `(suggestion) => void` | Book the picked slot, or skip to the next. |
+| `onPrepNotes` | `(event) => ReactNode \| Promise` | Adds the agent's prep notes to the details card. |
+| `onJoin` | `(event) => void` | Adds **Join** to the details card. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). Event
+blocks take the eight tone tints (`--vo-pb`, `--vo-pl`, …); the now line and the agent's scan use the
+accent. The grid, times and details card follow the shared `--vo-*` surface, line and spacing tokens.
 
 
 # Feedback sheet (/docs/components/feedback-sheet)
@@ -6828,6 +7110,9 @@ A segmented control picks one of a few options. A white knob slides to the picke
 and pick, and Home and End jump to the ends. The `label` is required and names the group for screen
 readers.
 
+The example below is a "Pricing launch" planner: the control switches the panel beneath it between a
+day agenda, a week list and a month grid, and picking a day in the week or month view opens it.
+
 <Preview>
   <SegmentedControlExample />
 </Preview>
@@ -6841,16 +7126,22 @@ readers.
 ```tsx
 import { SegmentedControl } from './segmented-control/SegmentedControl';
 
-const options = [
+const views = [
   { value: 'day', label: 'Day' },
   { value: 'week', label: 'Week' },
   { value: 'month', label: 'Month' },
 ];
 
-const [range, setRange] = useState('day');
+const [view, setView] = useState('day');
 
-<SegmentedControl label="Range" options={options} value={range} onValueChange={setRange} />
-<SegmentedControl label="Density" as="radio" options={options} defaultValue="week" />
+// tabs (the default): switch the panel below from your own state
+<SegmentedControl id="view" label="View" options={views} value={view} onValueChange={setView} />
+<div id="view-panel" role="tabpanel" aria-labelledby={`view-${view}`}>
+  {view === 'day' ? <DayAgenda /> : view === 'week' ? <WeekList /> : <MonthGrid />}
+</div>
+
+// radio: set an option rather than switch a view
+<SegmentedControl label="Density" as="radio" options={views} defaultValue="week" />
 ```
 
 </Tab>
@@ -6859,9 +7150,17 @@ const [range, setRange] = useState('day');
 
 ```html
 <!-- imports: [SegmentedControlComponent] -->
-<SegmentedControl label="Range" [options]="options"
-  [value]="range" (valueChange)="range = $event" />
-<SegmentedControl label="Density" as="radio" [options]="options" defaultValue="week" />
+<SegmentedControl id="view" label="View" [options]="views"
+  [value]="view" (valueChange)="view = $event" />
+<div id="view-panel" role="tabpanel" [attr.aria-labelledby]="'view-' + view">
+  @switch (view) {
+    @case ('day') { <ex-day-agenda /> }
+    @case ('week') { <ex-week-list /> }
+    @default { <ex-month-grid /> }
+  }
+</div>
+
+<SegmentedControl label="Density" as="radio" [options]="views" defaultValue="week" />
 ```
 
 </Tab>
@@ -6872,15 +7171,19 @@ const [range, setRange] = useState('day');
 import 'components/segmented_control.dart';
 
 SegmentedControl(
-  label: 'Range',
+  label: 'View',
   options: const [
-    SegmentOption('day', label: 'Day'),
-    SegmentOption('week', label: 'Week'),
-    SegmentOption('month', label: 'Month'),
+    SegmentOption(value: 'day', label: 'Day'),
+    SegmentOption(value: 'week', label: 'Week'),
+    SegmentOption(value: 'month', label: 'Month'),
   ],
-  value: range,
-  onValueChange: (v) => setState(() => range = v),
+  value: view,
+  onValueChange: (v) => setState(() => view = v),
 ),
+// switch the panel below from `view`
+if (view == 'day') const DayAgenda()
+else if (view == 'week') const WeekList()
+else const MonthGrid(),
 ```
 
 </Tab>

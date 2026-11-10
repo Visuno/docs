@@ -5,6 +5,10 @@ Component source lives in the [components repository](https://github.com/Visuno/
 
 ## Unreleased [#unreleased]
 
+- **Date picker, Event calendar & Agenda** — three new **Dates** components with live docs pages. The **date picker** opens a calendar with quick picks and a box that understands "next friday", and in `range` mode becomes a two-month range picker with ready-made ranges and Apply. The **event calendar** shows a work week you can add to and open for details, with an agent that finds a free slot and suggests it. The **agenda** lists today's schedule with a live now line and the notes an agent prepared for each event. (React and docs land now; Angular and Flutter to follow.)
+
+- **Segmented control** — the docs example and the Angular/Flutter test benches now show a real "Pricing launch" planner: picking Day, Week or Month switches the panel below between a day agenda, a week list and a month grid, with Today and prev/next steppers. The previous demo had a dead radio group that drove nothing, so clicking appeared to do nothing — now every pick visibly changes the panel.
+
 - **Angular demos** — restored the React demos’ interactive state updates, streamed stories, retries, approvals, replay controls, and reduced-motion behavior. Added missing controlled inputs and copy/disabled button support in the Angular library.
 
 - **Angular** — component selectors now use PascalCase that mirrors the React component names (`<vo-status-pill>` → `<StatusPill>`, `<vo-icon>` → `<Icon>`, `<vo-agent-tree>` → `<AgentTree>`, …). The three selectors that shadowed native HTML elements are prefixed to stay unambiguous: `<VoButton>`, `<VoButtonCopy>`, `<VoProgress>`. The `voGridItem` / `vo-field-zone` directives become `gridItem` / `fieldZone`. The shared `--vo-*` design tokens and `vo-*` CSS classes are unchanged. **Breaking:** update Angular templates to the new tag names.

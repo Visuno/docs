@@ -1,0 +1,84 @@
+# Agenda (/docs/components/agenda)
+
+An agenda lists today's events in order. A live **now line** sits after the last event that is over,
+so you can see at a glance what is next. Past events fade back. Open an event to reveal the notes the
+agent prepared for it and an optional action like **Join**. Events without notes don't open.
+
+<Preview>
+  <AgendaExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { Agenda } from './agenda/Agenda';
+
+const items = [
+  { time: '09:30', title: 'Pricing review with Maya', detail: '30 min · Zoom', past: true },
+  { time: '11:00', title: 'Agent demo', detail: '45 min · Room 2',
+    notes: ['Latest build is green.', 'Talking points ready.'],
+    action: { label: 'Join in 18 min' } },
+  { time: '16:00', title: 'Ship pricing v4', detail: 'visuno.dev/pricing' },
+];
+
+<Agenda title="Today" subtitle="Friday, Oct 23" now="10:42" items={items} defaultOpen="Agent demo" />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [AgendaComponent] -->
+<Agenda title="Today" subtitle="Friday, Oct 23" now="10:42"
+  [items]="items" defaultOpen="Agent demo" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/agenda.dart';
+
+Agenda(
+  title: 'Today',
+  subtitle: 'Friday, Oct 23',
+  now: '10:42',
+  items: const [
+    AgendaItem(time: '09:30', title: 'Pricing review with Maya', detail: '30 min · Zoom', past: true),
+    AgendaItem(time: '11:00', title: 'Agent demo', detail: '45 min · Room 2',
+      notes: ['Latest build is green.', 'Talking points ready.'],
+      action: AgendaAction(label: 'Join in 18 min')),
+  ],
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `items` | `AgendaItem[]` | The events, in order. Each has a `time`, `title`, optional `detail`, `people`, `notes` and `action`. |
+| `title` | `string` | The heading, like `Today`. |
+| `subtitle` | `string` | The quiet line under the title, like `Monday, Oct 19`. |
+| `count` | `string` | The tag in the corner. Defaults to `N events`. |
+| `now` | `string` | The time on the now line, like `10:42`. Leave it out for no line. |
+| `open` / `defaultOpen` | `string \| null` | The item whose notes are open, by key. Leave it out to let each item toggle. |
+| `onOpenChange` | `(key: string \| null) => void` | Fires when the open item changes. |
+
+An `AgendaItem` carries `time`, `title`, `detail?`, `people?`, `past?` (already over — fades back),
+`notes?` (shown when opened) and `action?` (`{ label, onClick }`, a button at the end of the notes).
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The now
+line, event bars and prep-note sparkles take the active theme's accent; avatars use the shared
+`--vo-av-*` palette. All spacing and radii come from the `--vo-*` tokens.
