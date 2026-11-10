@@ -83,6 +83,9 @@ import { ActivityHeatmapExample } from "@/components/examples/activity-heatmap";
 import { StatCardsExample } from "@/components/examples/stat-cards";
 import { AccountTableExample } from "@/components/examples/account-table";
 import { SegmentedControlExample } from "@/components/examples/segmented-control";
+import { DatePickerExample } from "@/components/examples/date-picker";
+import { EventCalendarExample } from "@/components/examples/event-calendar";
+import { AgendaExample } from "@/components/examples/agenda";
 import { ButtonsExample } from "@/components/examples/buttons";
 import { BadgeExample } from "@/components/examples/badge";
 import { IconExample } from "@/components/examples/icon";
@@ -452,11 +455,18 @@ const CATEGORIES: Category[] = [
     title: "Dates",
     blurb: "Switches and ranges for time and selection.",
     items: [
+      { title: "Date picker", slug: "date-picker", demo: <DatePickerExample /> },
       {
         title: "Segmented control",
         slug: "segmented-control",
         demo: <SegmentedControlExample />,
       },
+      {
+        title: "Event calendar",
+        slug: "event-calendar",
+        demo: <EventCalendarExample />,
+      },
+      { title: "Agenda", slug: "agenda", demo: <AgendaExample /> },
     ],
   },
   {
