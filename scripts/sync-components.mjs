@@ -11,7 +11,7 @@
 // Target:  ./visuno
 
 import { cp, rm, stat } from 'node:fs/promises';
-import { dirname, relative, resolve, sep } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const DOCS = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -26,13 +26,5 @@ try {
 }
 
 await rm(DEST, { recursive: true, force: true });
-await cp(SRC, DEST, {
-  recursive: true,
-  // Mirror runtime sources, excluding package build tools and generated output.
-  filter: (path) => {
-    const name = relative(SRC, path);
-    return !['node_modules', 'dist', '.git'].includes(name.split(sep)[0])
-      && !['tsup.config.ts', 'tsconfig.json', 'package.json'].includes(name);
-  },
-});
+await cp(SRC, DEST, { recursive: true });
 console.log(`Synced React components: ${SRC} -> ${DEST}`);

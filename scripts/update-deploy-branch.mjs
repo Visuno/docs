@@ -7,8 +7,6 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const docs = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const siteUrl = new URL(process.env.SITE_URL ?? 'https://visuno.dev/');
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? siteUrl.pathname.replace(/\/$/, '');
 const args = new Set(process.argv.slice(2));
 if (args.has('--help')) {
   console.log('Usage: npm run deploy:branch -- [--skip-build] [--push]');
@@ -45,8 +43,8 @@ async function publish() {
       stdio: 'inherit',
       env: {
         ...process.env,
-        NEXT_PUBLIC_BASE_PATH: basePath,
-        SITE_URL: siteUrl.href,
+        NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH ?? '/docs',
+        SITE_URL: process.env.SITE_URL ?? 'https://visuno.github.io/docs/',
       },
     });
   }
@@ -89,9 +87,6 @@ async function publish() {
       await cp(join(output, entry), join(worktree, entry), { recursive: true });
     }
     await writeFile(join(worktree, '.nojekyll'), '');
-    if (!siteUrl.hostname.endsWith('.github.io') && siteUrl.hostname !== 'localhost') {
-      await writeFile(join(worktree, 'CNAME'), siteUrl.hostname + '\n');
-    }
     git(['add', '--all'], worktree);
     if (git(['status', '--porcelain'], worktree)) {
       git(['commit', '-m', `Deploy docs from ${sourceSha}`], worktree);
