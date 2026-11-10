@@ -1,0 +1,32 @@
+# Docs
+
+- [Introduction](/docs): Native UI components for AI-agent products, in four frameworks.
+- Components
+
+  - **Agent status**
+  - [Status pill](/docs/components/status-pill): One live line for what an agent is doing right now, fading between its states and resizing to fit them.
+  - [Thinking](/docs/components/thinking): The live trace an agent writes as it works, each step turning green as it finishes, then folded away into a summary.
+  - [Thinking States](/docs/components/thinking-states): Six animated indicators, each a small mark beside a status line that steps through what an agent is doing, with an optional elapsed-seconds counter.
+  - [Reasoning trail](/docs/components/reasoning-trail): The agent's plan, notes, sources or edits, under a header it can fold away.
+  - [Agent phases](/docs/components/agent-phases): One line for which phase an agent is in, from thinking to done, that stops to ask, says when it is slow, and folds to how long it took.
+  - [Step Loader](/docs/components/step-loader): A named-steps progress list with a loader beside the running step, a track that fills as steps finish, and an expandable list of every step.
+  - [Action log](/docs/components/action-log): Every tool call the agent makes, as a list that grows while it works, where each row opens to show its output.
+  - [Context meter](/docs/components/context-meter): How full the context is and what fills it, with a Compact action to free room.
+  - [Browser session](/docs/components/browser-session): The agent browsing the web for you step by step, in a small browser frame with the steps it takes, and Pause and Take over.
+  - [Web search](/docs/components/web-search): The agent's web searches as a trail — each query and what came back, each page read, skimmed or skipped and why, and an answer whose citations light their pages.
+  - [Trace view](/docs/components/trace-view): One agent run as an observability waterfall — every span on a shared time axis, nested under the span that started it, with its tokens and latency.
+  - [Run queue](/docs/components/run-queue): A queue of agent jobs in three parts — the one running with its steps and progress, the ones up next, and the ones done — with a compact toggle.
+  - [Run cost](/docs/components/run-cost): Live credit and token spend against a budget, with a cap the agent pauses at.
+  - [Toast](/docs/components/toast): One toast at a time — a new one rises in while the last one slips away.
+
+  - **Charts and tables**
+  - [Stat cards](/docs/components/stat-cards): A row of KPIs, each with its change against the period before and a sparkline, with a period switch that rolls the numbers and redraws the lines.
+
+  - **Dates**
+  - [Segmented Control](/docs/components/segmented-control): One choice from a few views or options, with a white knob that slides to the picked one. Works as tabs or as a radio group, fully keyboard driven.
+
+  - **Forms and inputs**
+  - [Buttons](/docs/components/buttons): A pill button in the library's variants and sizes, with built-in busy, done and pressed states.
+  - [Badge](/docs/components/badge): A small label for a plan, environment, or status, with an optional dot or icon and an optional remove button.
+  - [Progress](/docs/components/progress): A run's progress three ways — a ring for the whole run, segments for its steps and a bar for the step in hand — with controls and an optional meter that warns as it fills.
+  - [Tooltip](/docs/components/tooltip): A toolbar whose labels wait a moment, then follow the pointer instantly between buttons, with a richer hover card for people.

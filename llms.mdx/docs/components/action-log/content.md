@@ -1,0 +1,100 @@
+# Action log (/docs/components/action-log)
+
+An action log is a streaming list of what the agent does: each read, search, edit or command
+lands as a row, running with a spinner, then done with a check and the time it took. A row with
+output opens to show it, like a diff or test run. The header shows a spinner while the run is live
+and a green dot once it finishes.
+
+<Preview>
+  <ActionLogExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + action-log.css -->
+<div class="alg panel">
+  <div class="alg-h">
+    <span class="alg-t">Agent activity</span>
+    <span class="alg-st"><span class="spin"></span><span class="alg-sum">Running</span></span>
+  </div>
+  <ol class="alg-list"></ol>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { ActionLog } from './action-log/ActionLog';
+
+<ActionLog
+  title="Agent activity"
+  running
+  actions={[
+    { icon: 'file-text', title: <>Read <code>Pricing.tsx</code></>, detail: 'src/pages, 212 lines', state: 'done', time: '0.4s' },
+    { icon: 'term', title: <>Ran <code>npm test</code></>, detail: '24 tests passed', state: 'running' },
+  ]}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ActionLogComponent] -->
+<dm-action-log
+  title="Agent activity"
+  [running]="true"
+  [actions]="actions"
+></dm-action-log>
+
+// actions: Action[] = [
+//   { icon: 'file-text', title: 'Read <code>Pricing.tsx</code>', detail: 'src/pages, 212 lines', state: 'done', time: '0.4s' },
+//   { icon: 'term', title: 'Ran <code>npm test</code>', detail: '24 tests passed', state: 'running' },
+// ];
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/action_log.dart';
+
+ActionLog(
+  running: true,
+  actions: const [
+    Action(icon: Icons.description_outlined, title: 'Read Pricing.tsx', detail: 'src/pages, 212 lines', state: ActionState.done, time: '0.4s'),
+    Action(icon: Icons.terminal, title: 'Ran npm test', detail: '24 tests passed', state: ActionState.running),
+  ],
+)
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `actions` | `Action[]` | The tool calls, newest at the end. Each has an `icon`, a `title`, an optional `detail`, a `state` of running or done, an optional `time`, and optional `output`. |
+| `title` | `string` | The header text. Defaults to "Agent activity". |
+| `running` | `boolean` | Shows a spinner in the header while true, and a green dot once false. |
+| `status` | `string` | The words beside the header mark. Defaults to "Running step N", then "N steps, Xs". |
+| `bare` | `boolean` | Sits flat in a chat thread (the default). Set false to give it a card of its own. |
+| `onToggle` / `toggleRow` | `callback` | Fires when a row opens or closes. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). In
+Blueprint the rows and the output panes are squared off with hairline edges; in Soft they are
+rounded chips with soft fills. Added and removed lines in a row's output take the add and remove
+colors from the tokens.

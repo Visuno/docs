@@ -1,0 +1,130 @@
+# Stat cards (/docs/components/stat-cards)
+
+Stat cards are a row of numbers that matter. Each card has an icon, a label, the value in large
+type, its change against the period before (green from zero, red below), and a sparkline in its own
+colour. A `period` switch along the top rolls the numbers to their new values and redraws every
+line.
+
+<Preview>
+  <StatCardsExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + stat-cards.css -->
+<div class="dm-scx">
+  <div class="dm-scx-grid">
+    <div class="dm-scx-c dm-panel">
+      <span class="dm-scx-k">Agent runs</span>
+      <div class="dm-scx-v">
+        <b class="dm-num">1,842</b>
+        <span class="dm-scx-d dm-tag dm-ok dm-up">+12.4%</span>
+      </div>
+      <div class="dm-scx-sp">
+        <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+          <path d="M0 24 L100 4" />
+        </svg>
+      </div>
+    </div>
+    <!-- one .dm-scx-c per stat -->
+  </div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { StatCards } from './stat-cards/StatCards';
+
+const stats = [
+  {
+    icon: 'spark',
+    label: 'Agent runs',
+    values: [
+      { value: 1842, change: 12.4, points: [980, 1120, 1070, 1260, 1410, 1550, 1842] },
+      { value: 7320, change: 8.1, points: [5200, 5600, 5900, 6100, 6600, 6950, 7320] },
+    ],
+  },
+  { icon: 'coins', label: 'Cost', prefix: '$', values: [/* one entry per period */] },
+];
+
+const periods = [
+  { label: '7 days', compare: 'vs previous 7 days' },
+  { label: '30 days', compare: 'vs previous 30 days' },
+];
+
+<StatCards stats={stats} periods={periods} defaultPeriod={0} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [StatCardsComponent] -->
+<dm-stat-cards
+  [stats]="stats"
+  [periods]="periods"
+  [defaultPeriod]="0"
+  (periodChange)="onPeriod($event)"
+></dm-stat-cards>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/stat_cards.dart';
+
+StatCards(
+  stats: [
+    StatCardsStat(
+      icon: IconName.spark,
+      label: 'Agent runs',
+      values: [
+        StatCardsValue(value: 1842, change: 12.4, points: [980, 1120, 1260, 1410, 1842]),
+        StatCardsValue(value: 7320, change: 8.1, points: [5200, 5900, 6600, 6950, 7320]),
+      ],
+    ),
+  ],
+  periods: const [
+    StatCardsPeriod(label: '7 days', compare: 'vs previous 7 days'),
+    StatCardsPeriod(label: '30 days', compare: 'vs previous 30 days'),
+  ],
+  defaultPeriod: 0,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `stats` | `StatCardsStat[]` | The cards. Each has an `icon`, `label`, one `values` entry per period, and optional `prefix`, `suffix` and `color`. |
+| `periods` | `StatCardsPeriod[]` | The switch options. Each has a `label` and an optional `compare` line shown on hover. |
+| `period` | `number` | The period on show, by index. Leave it out to let the switch pick it. |
+| `defaultPeriod` | `number` | The period shown first when uncontrolled. Defaults to `0`. |
+| `onPeriodChange` | `(period: number) => void` | Called with the new index when the switch changes. |
+| `sparkRange` | `[number, number]` | The bottom and top of every sparkline. Defaults to each card's own range. |
+
+Each `StatCardsStat` carries `values: { value, change, points }[]` — one entry per period, in the
+same order as `periods` — where `value` is the number, `change` is the percent against the period
+before, and `points` is the sparkline oldest first.
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). In
+Blueprint the cards are squared off with hairline borders; in Soft they are rounded panels with a
+softer shadow. The sparkline colours fall back to the chart palette (the accent, then violet, green
+and orange) unless a card sets its own `color`.

@@ -1,0 +1,122 @@
+# Trace view (/docs/components/trace-view)
+
+A trace view lays one agent run out as a waterfall. Every span — an LLM call, a tool call, a
+retrieval, a sub-agent — sits on a shared time axis, nested under the span that started it with a
+tree's guides. Each kind has its own colour, counted in the key. While the run streams, a playhead
+marks now and running bars glow at their leading edge; a tool call that runs over its budget turns
+amber and hatched and is tagged slow. Open any span to see where it sat in the run, its input, its
+output, its latency and its tokens.
+
+<Preview>
+  <TraceViewExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + trace-view.css, then the component script -->
+<div class="card wide" data-c="trace-view">
+  <div class="stage-in">
+    <div class="trv panel">
+      <div class="trv-h">
+        <div class="trv-ht"><b>Pricing research</b><span class="muted trv-st" aria-live="polite"></span></div>
+        <span class="trv-tot num">0.00s</span>
+      </div>
+      <div class="trv-lg" role="list" aria-label="Spans by kind"></div>
+      <div class="trv-ax" aria-hidden="true"><span>Span</span><span class="trv-sc"></span><span class="trv-tk">Tokens</span><span class="trv-ms">Time</span></div>
+      <div class="trv-rows" role="group" aria-label="Spans"></div>
+      <div class="fold shut trv-dt" inert><div><div class="trv-dc" role="region" aria-label="Span details"></div></div></div>
+    </div>
+  </div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { TraceView } from './trace-view/TraceView';
+
+const spans = [
+  { id: 'run', name: 'Pricing research', kind: 'agent', start: 0, duration: 4.82, children: [
+    { id: 'plan', name: 'Plan the steps', kind: 'llm', start: 0.04, duration: 0.62, tokens: 1240 },
+    { id: 'fetch', name: 'fetch_page', kind: 'tool', start: 1.12, duration: 2.46, tokens: 3120 },
+  ] },
+];
+
+<TraceView title="Pricing research" spans={spans} axis={5} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [TraceViewComponent] -->
+spans: TraceSpan[] = [
+  { id: 'run', name: 'Pricing research', kind: 'agent', start: 0, duration: 4.82, children: [
+    { id: 'plan', name: 'Plan the steps', kind: 'llm', start: 0.04, duration: 0.62, tokens: 1240 },
+    { id: 'fetch', name: 'fetch_page', kind: 'tool', start: 1.12, duration: 2.46, tokens: 3120 },
+  ] },
+];
+```
+
+```html
+<dm-trace-view
+  title="Pricing research"
+  [spans]="spans"
+  [axis]="5"
+  (selectedChange)="onSelect($event)"
+></dm-trace-view>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/trace_view.dart';
+
+TraceView(
+  title: 'Pricing research',
+  axis: 5,
+  spans: const [
+    TraceSpan(id: 'run', name: 'Pricing research', kind: SpanKind.agent, start: 0, duration: 4.82, children: [
+      TraceSpan(id: 'plan', name: 'Plan the steps', kind: SpanKind.llm, start: 0.04, duration: 0.62, tokens: 1240),
+      TraceSpan(id: 'fetch', name: 'fetch_page', kind: SpanKind.tool, start: 1.12, duration: 2.46, tokens: 3120),
+    ]),
+  ],
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | The run's name, shown over the status line. |
+| `spans` | `TraceSpan[]` | The run's top spans, usually one root with everything nested under it. |
+| `time` | `number` | Seconds into the run while it streams in. Spans that start later stay hidden, running ones reach this far. Leave it out once the run is over. |
+| `axis` | `number` | Seconds the time axis covers. Defaults to the run's length, rounded up to a whole second. |
+| `slowAfter` | `number` | A tool call longer than this many seconds turns amber and is tagged slow. Defaults to 2. |
+| `status` | `string` | Overrides the status line. Defaults to "Running · 4 spans", then "Done · 7 spans, 1 slow". |
+| `selected` | `string` | The id of the open span, whose details show under the waterfall. null closes them. |
+| `onSelectedChange` / `selectedChange` | `callback` | Fires with the id of the span opened, or null when the details close. |
+
+A `TraceSpan` has an `id`, a `name`, a `kind` (agent, llm, tool, or retrieval), a `start` and
+`duration` in seconds, optional `tokens`, optional `input` and `output` strings, and optional
+`children`. An agent span without its own token count adds up every span under it.
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). In
+Blueprint the bars square off and running bars switch from a sweeping sheen to a steady stripe. Each
+kind keeps its colour from the chart palette; a slow bar is amber and hatched in every theme.

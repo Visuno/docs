@@ -1,0 +1,94 @@
+# Agent phases (/docs/components/agent-phases)
+
+Agent phases show which phase the agent is in, in one line: its glyph, its name shimmering while the
+phase lasts, and the seconds so far, with a track of six short segments under it that fills phase by
+phase. When the agent needs you, is slow or fails, a line under the track says so with what to do;
+once it is done the line reads how long it took and opens to the phases it ran through.
+
+<Preview>
+  <AgentPhasesExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + agent-phases.css -->
+<div class="aph" data-p="read">
+  <button class="aph-h" aria-expanded="false" aria-disabled="true">
+    <span class="aph-g"></span><span class="aph-l shim">Reading 3 articles</span>
+    <span class="aph-t num">7s</span><svg class="i xs aph-chev"><use href="#i-chev-d"/></svg>
+  </button>
+  <div class="aph-tr" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="aph-x"></div>
+  <div class="fold shut aph-fold"><div><ol class="aph-list"></ol></div></div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { AgentPhases } from './agent-phases/AgentPhases';
+
+<AgentPhases phase="reading" label="Reading 3 articles" />
+<AgentPhases phase="searching" error={{ text: 'The search timed out', onRetry: retry }} />
+<AgentPhases phase="reading" slow={{ text: 'Still working…', onStop: stop }} />
+<AgentPhases phase="waiting" ask={{ text: 'Offer Maya a refund of $48?', onApprove: approve }} />
+<AgentPhases phase="done" took={{ thinking: 2, searching: 3, reading: 4 }} />
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [AgentPhasesComponent] -->
+<dm-agent-phases phase="reading" label="Reading 3 articles"></dm-agent-phases>
+<dm-agent-phases phase="searching" [error]="searchError"></dm-agent-phases>
+<dm-agent-phases phase="reading" [slow]="slowNote"></dm-agent-phases>
+<dm-agent-phases phase="waiting" [ask]="refundAsk"></dm-agent-phases>
+<dm-agent-phases phase="done" [took]="took"></dm-agent-phases>
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/agent_phases.dart';
+
+const AgentPhases(phase: AgentPhase.reading, label: 'Reading 3 articles'),
+AgentPhases(phase: AgentPhase.searching, error: AgentPhasesError(text: 'The search timed out', onRetry: retry)),
+AgentPhases(phase: AgentPhase.reading, slow: AgentPhasesSlow(text: 'Still working…', onStop: stop)),
+AgentPhases(phase: AgentPhase.waiting, ask: AgentPhasesAsk(text: 'Offer Maya a refund of \$48?', onApprove: approve)),
+const AgentPhases(phase: AgentPhase.done, took: {AgentPhase.thinking: 2, AgentPhase.searching: 3, AgentPhase.reading: 4}),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `phase` | `thinking \| searching \| reading \| waiting \| writing \| done` | Which phase the agent is in. |
+| `label` | `string` | What the line says. Defaults to the phase's name; once done, "Thought for 12s". |
+| `seconds` | `number` | Seconds so far. Counts by itself while left out, and stops while waiting for you. |
+| `error` | `object` | A step that failed: the line turns red and says so, with Retry. Has `text`, optional `detail`, and `onRetry`. |
+| `slow` | `object` | Shown while the phase takes long, with Stop. Has `text` and an optional `onStop`. |
+| `ask` | `object` | What the agent waits for in the waiting phase. Has `text`, optional `approveLabel`, `onApprove` and optional `onDecline`. |
+| `took` | `Record<phase, number>` | Seconds each phase took, for the list a finished line opens to. |
+| `open` / `defaultOpen` | `boolean` | Whether the finished line is open. Leave `open` out to let the header toggle it. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). The glyph
+and the current segment take the phase's colour — the accent while it works, amber while it waits,
+red on an error and green when done. In Blueprint the segments are squared off and the shimmer rests
+on a solid colour.

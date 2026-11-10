@@ -1,0 +1,116 @@
+# Reasoning trail (/docs/components/reasoning-trail)
+
+A reasoning trail is the structured record the agent leaves after it thinks: a plan it works
+through, the notes it took, the sources it read, or the edits it made. Pick what it shows with
+`view`. The header counts the seconds and shimmers while the run is live, folds the trail away, and
+settles on "Reasoned for Ns" once it finishes.
+
+<Preview>
+  <ReasoningTrailExample />
+</Preview>
+
+## Usage [#usage]
+
+<Tabs items={['Vanilla', 'React', 'Angular', 'Flutter']}>
+
+<Tab value="Vanilla">
+
+```html
+<!-- include core.css + reasoning-trail.css -->
+<div class="rtr panel">
+  <button class="rtr-h" aria-expanded="true">
+    <span class="think on rtr-mark"><i></i><i></i><i></i><i></i></span>
+    <span class="rtr-title shim">Reasoning</span>
+    <span class="rtr-time num muted">0s</span>
+    <svg class="i xs rtr-chev"><use href="#i-chev-d"/></svg>
+  </button>
+  <div class="fold rtr-fold"><div><div class="rtr-body"></div></div></div>
+</div>
+```
+
+</Tab>
+
+<Tab value="React">
+
+```tsx
+import { ReasoningTrail } from './reasoning-trail/ReasoningTrail';
+
+<ReasoningTrail
+  running
+  view="plan"
+  plan={[
+    { label: 'Open the onboarding file', detail: '4 frames', state: 'done' },
+    { label: 'Compare with the design system', state: 'now' },
+    { label: 'Draft fixes for review', state: 'next' },
+  ]}
+  sources={[{ label: 'Onboarding.fig', kind: 'figma', tip: '4 frames read' }]}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [ReasoningTrailComponent] -->
+<dm-reasoning-trail
+  [running]="true"
+  view="plan"
+  [plan]="plan"
+  [sources]="sources"
+  (viewChange)="view = $event"
+></dm-reasoning-trail>
+
+// plan: PlanStep[] = [
+//   { label: 'Open the onboarding file', detail: '4 frames', state: 'done' },
+//   { label: 'Compare with the design system', state: 'now' },
+//   { label: 'Draft fixes for review', state: 'next' },
+// ];
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/reasoning_trail.dart';
+
+ReasoningTrail(
+  running: true,
+  view: ReasoningTrailView.plan,
+  plan: const [
+    PlanStep(label: 'Open the onboarding file', detail: '4 frames', state: PlanStepState.done),
+    PlanStep(label: 'Compare with the design system', state: PlanStepState.now),
+    PlanStep(label: 'Draft fixes for review', state: PlanStepState.next),
+  ],
+  sources: const [Source(label: 'Onboarding.fig', kind: SourceKind.figma, tip: '4 frames read')],
+)
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties [#properties]
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `running` | `boolean` | Shimmers the title and counts the seconds while true. |
+| `seconds` | `number` | Seconds to show. Leave it out to let the trail count while it runs. |
+| `title` | `string` | Header text. Defaults to "Reasoning" while running and "Reasoned for Ns" after. |
+| `plan` | `PlanStep[]` | The plan. Each step has a `label`, an optional `detail`, and a `state` of done, now or next. |
+| `notes` | `string[]` | The agent's notes, one per line. |
+| `sources` | `Source[]` | The files and links it read. Each has a `label`, an optional `kind`, and an optional `tip`. |
+| `edits` | `Edit[]` | The changed files. Each has a `file`, an optional `detail`, and `removed` and `added` lines. |
+| `view` | `plan \| notes \| sources \| edits` | Which part to show. Leave it out to start on the first one there is. |
+| `open` | `boolean` | Whether the trail is open. Leave it out to let the header toggle it. |
+| `bare` | `boolean` | Sits flat in a chat thread (the default). Set false to give it a card of its own. |
+| `onViewChange` / `viewChange` | `callback` | Fires when the shown view changes. |
+| `onOpenChange` / `openChange` | `callback` | Fires when the trail opens or folds. |
+
+## Theming [#theming]
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). In
+Blueprint the header, chips and edit blocks are squared off with hairline edges; in Soft they are
+rounded. The timeline rail, the pulse on the current step, and the shimmer on the title all take
+their colors from the tokens; added and removed lines use the add and remove colors.
