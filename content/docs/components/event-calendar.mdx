@@ -1,0 +1,101 @@
+---
+title: Event Calendar
+description: A work week of events you can drag, add to and open for details — and an agent that finds a free slot and suggests it.
+---
+
+import { Preview } from '@/components/preview';
+import { EventCalendarExample } from '@/components/examples/event-calendar';
+
+An event calendar shows a work week as a time grid. Drag an event to another time or day, click free
+time to add one, and open an event for its details card — who is coming, the agent's **prep notes**,
+and **Join**. Ask the agent to **find a time** and it sweeps the week, then suggests open slots; the
+first is the pick and the rest wait behind it. **Book** adds the picked slot as an event.
+
+<Preview>
+  <EventCalendarExample />
+</Preview>
+
+## Usage
+
+<Tabs items={['React', 'Angular', 'Flutter']}>
+
+<Tab value="React">
+
+```tsx
+import { EventCalendar } from './event-calendar/EventCalendar';
+
+const [events, setEvents] = useState([
+  { id: 'kickoff', title: 'Kickoff with Maya', start: new Date(2026, 9, 19, 10), end: new Date(2026, 9, 19, 11), tone: 'purple' },
+]);
+
+<EventCalendar
+  week={new Date(2026, 9, 19)}
+  now={new Date(2026, 9, 23, 10, 42)}
+  events={events}
+  onEventsChange={setEvents}
+  askLabel="Find 45 min for a design review"
+  onAsk={findSlot}
+  suggestions={suggestions}
+  onBook={book}
+  onPrepNotes={ev => `Context for ${ev.title} is ready.`}
+/>
+```
+
+</Tab>
+
+<Tab value="Angular">
+
+```html
+<!-- imports: [EventCalendarComponent] -->
+<EventCalendar [week]="week" [now]="now"
+  [events]="events" (eventsChange)="events = $event"
+  askLabel="Find 45 min for a design review" (ask)="findSlot()"
+  [suggestions]="suggestions" (book)="book($event)" />
+```
+
+</Tab>
+
+<Tab value="Flutter">
+
+```dart
+import 'components/event_calendar.dart';
+
+EventCalendar(
+  week: DateTime(2026, 10, 19),
+  now: DateTime(2026, 10, 23, 10, 42),
+  events: events,
+  onEventsChange: (e) => setState(() => events = e),
+  askLabel: 'Find 45 min for a design review',
+  onAsk: findSlot,
+  suggestions: suggestions,
+  onBook: book,
+),
+```
+
+</Tab>
+
+</Tabs>
+
+## Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `week` | `Date` | The first day shown, like Monday Oct 19. Its time of day is ignored. |
+| `events` / `defaultEvents` | `EventCalendarEvent[]` | The events. Each has `id`, `title`, `start`, `end`, optional `tone` and `people`. |
+| `onEventsChange` | `(events) => void` | Fires when an event is moved, added or removed. |
+| `days` | `number` | How many days to show, from `week`. Defaults to 5. |
+| `startHour` / `hours` | `number` | The first hour and how many hours the grid shows. Defaults to 9am for 8 hours. |
+| `now` | `Date` | Marks today and draws the now line. Leave it out for neither. |
+| `selected` / `defaultSelected` | `string \| null` | The event whose details card is open, by id. |
+| `askLabel` / `onAsk` | `string` / `() => void` | Adds the agent's button to the header. |
+| `finding` | `boolean` | The agent is looking: its button thinks and a scan line sweeps the week. |
+| `suggestions` | `EventCalendarSuggestion[]` | Slots the agent suggests. The first is the pick, the rest wait behind it. |
+| `onBook` / `onSkip` | `(suggestion) => void` | Book the picked slot, or skip to the next. |
+| `onPrepNotes` | `(event) => ReactNode \| Promise` | Adds the agent's prep notes to the details card. |
+| `onJoin` | `(event) => void` | Adds **Join** to the details card. |
+
+## Theming
+
+Works in light and dark (`data-theme="dark"`) and in the Soft style (`data-style="soft"`). Event
+blocks take the eight tone tints (`--vo-pb`, `--vo-pl`, …); the now line and the agent's scan use the
+accent. The grid, times and details card follow the shared `--vo-*` surface, line and spacing tokens.
