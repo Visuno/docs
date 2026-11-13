@@ -9,6 +9,14 @@ Component source lives in the [components repository](https://github.com/Visuno/
 
 ## Unreleased
 
+- **Status pill** — now stays on one line and keeps its action button visible in narrow containers. Before, a tight space clipped the button off the end; now the label truncates first, then the meta/file chip, while the glyph and button never shrink. Fixed across React, Angular and Flutter.
+
+- **Loaders render as true circles again** — the Angular test-bench base stylesheet was missing the "keep round" overrides, so round elements (the **radar** and **ring** step-loaders, dots, avatars, pulses) rendered as squircles under the global squircle corner shape. Restored, so they're proper circles.
+
+- **React ≡ Angular parity** — the cross-framework parity suite now covers **every** shipped component (previously five), with a coverage gate that fails CI if a component ships without a spec. Bringing the whole library under test surfaced and fixed a batch of real Angular drift: `account-table` and `task-table` rendered unprefixed classes so none of the shared styles applied; many components dropped the `vo-sw`/`vo-enter` motion classes or the right icon glyph; and the reduced-motion service reported the wrong value on first read (so animations that should have been instant for people who prefer reduced motion weren't). The components now render the same structure, styles and API surface across both frameworks.
+
+- **Angular build fix** — `@visuno/angular` and the Angular test bench no longer fail to compile: the agent run timeline dropped its `@angular/platform-browser` dependency (it rendered brand logos through `DomSanitizer`, which also broke strict builds) and now renders them directly.
+
 - **Date picker, Event calendar & Agenda** — three new **Dates** components with live docs pages. The **date picker** opens a calendar with quick picks and a box that understands "next friday", and in `range` mode becomes a two-month range picker with ready-made ranges and Apply. The **event calendar** shows a work week you can add to and open for details, with an agent that finds a free slot and suggests it. The **agenda** lists today's schedule with a live now line and the notes an agent prepared for each event. (React and docs land now; Angular and Flutter to follow.)
 
 - **Segmented control** — the docs example and the Angular/Flutter test benches now show a real "Pricing launch" planner: picking Day, Week or Month switches the panel below between a day agenda, a week list and a month grid, with Today and prev/next steppers. The previous demo had a dead radio group that drove nothing, so clicking appeared to do nothing — now every pick visibly changes the panel.
