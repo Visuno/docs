@@ -3,7 +3,7 @@
 :HL["/_next/static/chunks/1bnh8r0-prf7e.css","style"]
 :HL["/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/chunks/3i9_xhkdo2jyu.css","style"]
-:HL["/_next/static/chunks/1u1ojz0cksoij.css","style"]
+:HL["/_next/static/chunks/3lrqxswuae97h.css","style"]
 :HL["/_next/static/chunks/4030htqqvecuj.css","style"]
 :HL["/_next/static/chunks/1ucmt_4b6-30r.css","style"]
 :HL["/_next/static/chunks/3gdjrwgc5cn5-.css","style"]
@@ -15,4 +15,4 @@
 :HL["https://sdkindustries.de/logo.svg","image"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"(home)","h":96,"c":"$Q2"}]]
-0:{"b":"5e1qP5yNrviZkm_d4KwoJ","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"vwyTH6eufPKpACMdHoRFb","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

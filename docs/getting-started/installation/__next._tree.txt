@@ -8,7 +8,7 @@
 :HL["/_next/static/chunks/434e05r00riwm.css","style"]
 :HL["/_next/static/chunks/1ucmt_4b6-30r.css","style"]
 :HL["/_next/static/chunks/4030htqqvecuj.css","style"]
-:HL["/_next/static/chunks/1u1ojz0cksoij.css","style"]
+:HL["/_next/static/chunks/3lrqxswuae97h.css","style"]
 :HL["/_next/static/chunks/1ixktaq1izpmq.css","style"]
 :HL["/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["https://sdkindustries.de/logo-dark.svg","image"]
@@ -16,4 +16,4 @@
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"slug","t":"oc","k":"getting-started/installation","s":[]},"h":64,"c":"$Q3"}]]
 1:[["children",{"s":"docs","h":32,"c":"$Q2"}]]
-0:{"b":"5e1qP5yNrviZkm_d4KwoJ","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"vwyTH6eufPKpACMdHoRFb","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
