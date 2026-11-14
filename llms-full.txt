@@ -5,6 +5,10 @@ Component source lives in the [components repository](https://github.com/Visuno/
 
 ## Unreleased [#unreleased]
 
+- **Live answer (Flutter)** — inline `[n]` citations are small chips in the flow of the sentence again, matching React. The Flutter port stretched each citation into a full-width bar on its own line; now the chip hugs its number (a 17px pill) and sits inline next to the word it cites.
+
+- **Reasoning trail (Flutter)** — the vertical connector line between plan steps and notes is back, matching React and Angular. The Flutter port drew the marks but not the rail joining them; now a 1px rail (the `--vo-rail` token) runs from each step down to the next, except after the last.
+
 - **Status pill** — now stays on one line and keeps its action button visible in narrow containers. Before, a tight space clipped the button off the end; now the label truncates first, then the meta/file chip, while the glyph and button never shrink. Fixed across React, Angular and Flutter.
 
 - **Loaders render as true circles again** — the Angular test-bench base stylesheet was missing the "keep round" overrides, so round elements (the **radar** and **ring** step-loaders, dots, avatars, pulses) rendered as squircles under the global squircle corner shape. Restored, so they're proper circles.
